@@ -18,7 +18,7 @@ public class StatHandler : MonoBehaviour
 
     [Header("Values")]
     public int currentStatValue = 1;
-    private int maxStatValue = 5;
+    private int maxStatValue = 4;
 
     private void Start()
     {
@@ -34,23 +34,22 @@ public class StatHandler : MonoBehaviour
 
     public void IncreaseStat()
     {
-        // 1. Check if we have points left in the bank
-        // 2. Check if we are already at the max 
+
         if (master.pointsRemaining > 0 && currentStatValue < maxStatValue)
         {
             currentStatValue++;
-            master.SpendPoint(); // Tell the master to subtract 1
+            master.SpendPoint();
             UpdateUI();
         }
     }
 
     public void DecreaseStat()
     {
-        // Check if we have at least 1 point spent here
+
         if (currentStatValue > 1)
         {
             currentStatValue--;
-            master.RefundPoint(); // Tell the master to add 1 back
+            master.RefundPoint();
             UpdateUI();
         }
     }
@@ -74,5 +73,16 @@ public class StatHandler : MonoBehaviour
 {
     currentStatValue = 1; 
     UpdateUI();
+}
+public void SaveToData(PlayerStats dataTable)
+{
+    string myName = gameObject.name.ToLower();
+
+    if (myName.Contains("communication")) dataTable.communication = currentStatValue;
+    else if (myName.Contains("critical")) dataTable.criticalThinking = currentStatValue;
+    else if (myName.Contains("adaptability")) dataTable.adaptability = currentStatValue;
+    else if (myName.Contains("emotional")) dataTable.emotionalIntelligence = currentStatValue;
+    else if (myName.Contains("sustainability")) dataTable.sustainability = currentStatValue;
+    else if (myName.Contains("leadership")) dataTable.leadership = currentStatValue;
 }
 }

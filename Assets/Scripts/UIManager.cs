@@ -1,12 +1,16 @@
 using UnityEngine;
 using System.Collections.Generic;
-using System.Linq; // Required for .ToList()
+using System.Linq;
+using UnityEngine.SceneManagement;
 
 public class UIManager : MonoBehaviour 
 {
+    [Header("Data Table")]
+    public PlayerStats playerStats;
     [Header("Panel References")]
     public GameObject startMenuPanel;
-    public GameObject charCreationPanel;
+    public GameObject charStatPanel;
+    public GameObject charTraitPanel;
 
     [Header("Auto-Assigned (Do Not Drag)")]
     public CharCreationManager charMaster;
@@ -15,17 +19,15 @@ public class UIManager : MonoBehaviour
     private void Awake()
     {
         ShowStartUI();
-        // 1. Automatically find the Master script in children
+
         if (charMaster == null)
         {
             charMaster = GetComponentInChildren<CharCreationManager>(true);
         }
 
-        // 2. Automatically find all 6 StatHandler prefabs in children
-        // The 'true' allows it to find them even if the panel is currently hidden
+       
         allStats = GetComponentsInChildren<StatHandler>(true).ToList();
 
-        // 3. Simple Validation Check
         ValidateSetup();
     }
 
@@ -40,7 +42,6 @@ public class UIManager : MonoBehaviour
             Debug.Log($"<color=green>UIManager Success:</color> Found {allStats.Count} stats to manage.");
     }
 
-    // Called by your "Back" button in the Character Creator
     public void BackToStart()
     {
         if (charMaster != null)
@@ -56,19 +57,42 @@ public class UIManager : MonoBehaviour
         ShowStartUI();
     }
 
-    public void ShowCharacterCreation()
+    public void ShowStatPanel()
     {
         startMenuPanel.SetActive(false);
-        charCreationPanel.SetActive(true);
+        charTraitPanel.SetActive(false);
+        charStatPanel.SetActive(true);
     }
 
     public void ShowStartUI()
     {
         startMenuPanel.SetActive(true);
-        charCreationPanel.SetActive(false);
+        charTraitPanel.SetActive(false);
+        charStatPanel.SetActive(false);
+    }
+    public void ShowTraitPanel()
+    {
+        charStatPanel.SetActive(false);
+        startMenuPanel.SetActive(false);
+        charTraitPanel.SetActive(true);
     }
     public void QuitGame()
     {
         Application.Quit();
+    }
+    public void FinalizeAndStartGame()
+    {
+        if (charMaster.pointsRemaining > 0)
+        {
+            Debug.LogWarning("You still have points to spend!");
+            return;
+        }
+
+        foreach (StatHandler stat in allStats)
+        {
+            stat.SaveToData(playerStats);
+        }
+
+        SceneManager.LoadScene("OfficeScene");
     }
 }
