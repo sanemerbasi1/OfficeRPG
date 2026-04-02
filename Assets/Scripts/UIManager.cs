@@ -7,10 +7,9 @@ public class UIManager : MonoBehaviour
 {
     [Header("Data Table")]
     public PlayerStats playerStats;
-    [Header("Panel References")]
-    public GameObject startMenuPanel;
-    public GameObject charStatPanel;
-    public GameObject charTraitPanel;
+
+    [Header("All Menus (Drag all panels here)")]
+    public List<GameObject> allMenus = new List<GameObject>();
 
     [Header("Auto-Assigned (Do Not Drag)")]
     public CharCreationManager charMaster;
@@ -18,14 +17,17 @@ public class UIManager : MonoBehaviour
 
     private void Awake()
     {
-        ShowStartUI();
+       
+        if (playerStats != null) playerStats.ResetToDefaults();
+
+     
+        OpenMenu("StartUI"); 
 
         if (charMaster == null)
         {
             charMaster = GetComponentInChildren<CharCreationManager>(true);
         }
 
-       
         allStats = GetComponentsInChildren<StatHandler>(true).ToList();
 
         ValidateSetup();
@@ -42,47 +44,40 @@ public class UIManager : MonoBehaviour
             Debug.Log($"<color=green>UIManager Success:</color> Found {allStats.Count} stats to manage.");
     }
 
-    public void BackToStart()
+    
+    public void OpenMenu(string menuName)
     {
-        if (charMaster != null)
+        foreach (GameObject menu in allMenus)
         {
-            charMaster.ResetPoints();
+    
+            menu.SetActive(menu.name.ToLower() == menuName.ToLower());
         }
+    }
+
+    public void ResetAndGoHome()
+    {
+        if (charMaster != null) charMaster.ResetPoints();
 
         foreach (StatHandler stat in allStats)
         {
             stat.ResetStat();
         }
 
-        ShowStartUI();
+        OpenMenu("StartUI");
     }
 
-    public void ShowStatPanel()
-    {
-        startMenuPanel.SetActive(false);
-        charTraitPanel.SetActive(false);
-        charStatPanel.SetActive(true);
-    }
-
-    public void ShowStartUI()
-    {
-        startMenuPanel.SetActive(true);
-        charTraitPanel.SetActive(false);
-        charStatPanel.SetActive(false);
-    }
-    public void ShowTraitPanel()
-    {
-        charStatPanel.SetActive(false);
-        startMenuPanel.SetActive(false);
-        charTraitPanel.SetActive(true);
-    }
     public void QuitGame()
     {
         Application.Quit();
+       
+        #if UNITY_EDITOR
+        UnityEditor.EditorApplication.isPlaying = false;
+        #endif
     }
+
     public void FinalizeAndStartGame()
     {
-        if (charMaster.pointsRemaining > 0)
+        if (charMaster != null && charMaster.pointsRemaining > 0)
         {
             Debug.LogWarning("You still have points to spend!");
             return;
@@ -94,5 +89,16 @@ public class UIManager : MonoBehaviour
         }
 
         SceneManager.LoadScene("OfficeScene");
+    }
+    public void GoToTraitMenu()
+    {
+        if (charMaster != null && charMaster.pointsRemaining > 0)
+        {
+            Debug.LogWarning($"<color=orange>UI Blocked:</color> Spend all points ({charMaster.pointsRemaining} left) before picking traits!");
+            
+            return; 
+        }
+
+        OpenMenu("traitUI");
     }
 }
