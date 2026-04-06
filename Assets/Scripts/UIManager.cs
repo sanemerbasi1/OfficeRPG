@@ -77,10 +77,14 @@ public class UIManager : MonoBehaviour
 
     public void FinalizeAndStartGame()
     {
-        if (charMaster != null && charMaster.pointsRemaining > 0)
+        if (charMaster != null && charMaster.traitPointsRemaining > 0)
         {
             Debug.LogWarning("You still have points to spend!");
             return;
+        }
+        else if (charMaster != null && charMaster.traitPointsRemaining == 0)
+        {
+            Debug.Log("All points spent, proceeding to save stats and load game.");
         }
 
         foreach (StatHandler stat in allStats)
@@ -92,13 +96,36 @@ public class UIManager : MonoBehaviour
     }
     public void GoToTraitMenu()
     {
-        if (charMaster != null && charMaster.pointsRemaining > 0)
+        if (charMaster != null && charMaster.statPointsRemaining > 0)
         {
-            Debug.LogWarning($"<color=orange>UI Blocked:</color> Spend all points ({charMaster.pointsRemaining} left) before picking traits!");
+            Debug.LogWarning($"<color=orange>UI Blocked:</color> Spend all points ({charMaster.statPointsRemaining} left) before picking traits!");
             
             return; 
         }
 
         OpenMenu("traitUI");
     }
+public void AddTraitToStats(TraitData trait)
+{
+    if (playerStats.slot1 == null) 
+    {
+        playerStats.slot1 = trait;
+    }
+    else if (playerStats.slot2 == null) 
+    {
+        playerStats.slot2 = trait;
+    }
+}
+
+public void RemoveTraitFromStats(TraitData trait)
+{
+    if (playerStats.slot1 == trait) 
+    {
+        playerStats.slot1 = null;
+    }
+    else if (playerStats.slot2 == trait) 
+    {
+        playerStats.slot2 = null;
+    }
+}
 }

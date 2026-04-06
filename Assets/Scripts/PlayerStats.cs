@@ -10,6 +10,8 @@ public class PlayerStats : ScriptableObject
     public int emotionalIntelligence;
     public int sustainability;
     public int leadership;
+public TraitData slot1;
+public TraitData slot2;
 
     public void ResetToDefaults()
     {
@@ -19,5 +21,7 @@ public class PlayerStats : ScriptableObject
         emotionalIntelligence = 1;
         sustainability = 1;
         leadership = 1;
+        slot1 = null; 
+    slot2 = null;
     }
 }

@@ -35,7 +35,7 @@ public class StatHandler : MonoBehaviour
     public void IncreaseStat()
     {
 
-        if (master.pointsRemaining > 0 && currentStatValue < maxStatValue)
+        if (master.statPointsRemaining > 0 && currentStatValue < maxStatValue)
         {
             currentStatValue++;
             master.SpendPoint();

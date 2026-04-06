@@ -3,37 +3,55 @@ using TMPro;
 
 public class CharCreationManager : MonoBehaviour
 {
-    public int pointsRemaining = 6;
+    public int statPointsRemaining = 6;
+    public int traitPointsRemaining = 2;
     private int startingPoints;
-    public TextMeshProUGUI pointsText;
+    private int startingTraitPoints;
+    public TextMeshProUGUI statPointsText;
+    public TextMeshProUGUI traitPointsText;
 
     private void Start() 
     {
-        startingPoints = pointsRemaining;
+        startingPoints = statPointsRemaining;
+        startingTraitPoints = traitPointsRemaining;
         UpdatePointsUI();
     }
 
-    public bool CanSpendPoint() => pointsRemaining > 0;
+    public bool CanSpendPoint() => statPointsRemaining > 0;
 
     public void SpendPoint()
     {
-        pointsRemaining--;
+        statPointsRemaining--;
         UpdatePointsUI();
     }
 
     public void RefundPoint()
     {
-        pointsRemaining++;
+        statPointsRemaining++;
         UpdatePointsUI();
     }
 
     private void UpdatePointsUI()
     {
-        pointsText.text = "Points Left: " + pointsRemaining;
+        statPointsText.text = "Points Left: " + statPointsRemaining;
+        traitPointsText.text = "Trait Points Left: " + traitPointsRemaining;
     }
     public void ResetPoints()
 {
-    pointsRemaining = startingPoints;
+    statPointsRemaining = startingPoints;
+    traitPointsRemaining = startingTraitPoints;
+    UpdatePointsUI();
+}
+
+public void SpendTraitPoint()
+{
+    traitPointsRemaining--;
+    UpdatePointsUI();
+}
+
+public void RefundTraitPoint()
+{
+    traitPointsRemaining++;
     UpdatePointsUI();
 }
 }
