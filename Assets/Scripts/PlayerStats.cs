@@ -3,6 +3,8 @@ using UnityEngine;
 [CreateAssetMenu(fileName = "NewPlayerStats", menuName = "RPG/Player Stats")]
 public class PlayerStats : ScriptableObject
 {
+    [Header("Character Info")]
+public string playerName;
     [Header("CharacterStats")]
     public int communication;
     public int criticalThinking;
@@ -23,5 +25,6 @@ public TraitData slot2;
         leadership = 1;
         slot1 = null; 
     slot2 = null;
+    playerName = null;
     }
 }

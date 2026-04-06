@@ -1,10 +1,13 @@
 using UnityEngine;
 using System.Collections.Generic;
 using System.Linq;
+using TMPro;
 using UnityEngine.SceneManagement;
 
 public class UIManager : MonoBehaviour 
+
 {
+    public TMP_InputField nameInputField;
     [Header("Data Table")]
     public PlayerStats playerStats;
 
@@ -21,7 +24,7 @@ public class UIManager : MonoBehaviour
         if (playerStats != null) playerStats.ResetToDefaults();
 
      
-        OpenMenu("StartUI"); 
+        OpenMenu("BeginUI"); 
 
         if (charMaster == null)
         {
@@ -45,14 +48,28 @@ public class UIManager : MonoBehaviour
     }
 
     
-    public void OpenMenu(string menuName)
+    public void OpenMenu(string targetMenuName)
+{
+    // 1. FIND THE CURRENT MENU
+    GameObject currentMenu = allMenus.Find(m => m.activeSelf);
+
+    // 2. IF WE ARE LEAVING THE NAME UI...
+    if (currentMenu != null && currentMenu.name == "NameUI") 
     {
-        foreach (GameObject menu in allMenus)
+        if (string.IsNullOrWhiteSpace(nameInputField.text))
         {
-    
-            menu.SetActive(menu.name.ToLower() == menuName.ToLower());
+            Debug.LogWarning("Access Denied: Name cannot be empty!");
+            return; 
         }
+        
+        SavePlayerName();
     }
+
+    foreach (GameObject menu in allMenus)
+    {
+        menu.SetActive(menu.name.ToLower() == targetMenuName.ToLower());
+    }
+}
 
     public void ResetAndGoHome()
     {
@@ -63,7 +80,7 @@ public class UIManager : MonoBehaviour
             stat.ResetStat();
         }
 
-        OpenMenu("StartUI");
+        OpenMenu("BeginUI");
     }
 
     public void QuitGame()
@@ -126,6 +143,14 @@ public void RemoveTraitFromStats(TraitData trait)
     else if (playerStats.slot2 == trait) 
     {
         playerStats.slot2 = null;
+    }
+}
+public void SavePlayerName()
+{
+    if (nameInputField != null)
+    {
+        playerStats.playerName = nameInputField.text;
+        Debug.Log("Player Name Saved: " + playerStats.playerName);
     }
 }
 }

@@ -12,11 +12,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cf114735aac534dcd955f6703237de53, type: 3}
   m_Name: StartingPlayerStats
   m_EditorClassIdentifier: Assembly-CSharp::PlayerStats
+  playerName: sanemm
   communication: 1
   criticalThinking: 1
-  adaptability: 1
-  emotionalIntelligence: 1
+  adaptability: 4
+  emotionalIntelligence: 4
   sustainability: 1
   leadership: 1
-  slot1: {fileID: 0}
-  slot2: {fileID: 0}
+  slot1: {fileID: 11400000, guid: cfd0dc38ce63b49838994f89492b0cf4, type: 2}
+  slot2: {fileID: 11400000, guid: dff61217a9f7d4084a851a8c6ea6b113, type: 2}

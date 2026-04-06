@@ -2,7 +2,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
 
-[RequireComponent(typeof(Outline))] // This ensures the button HAS an outline
+[RequireComponent(typeof(Outline))]
 public class TraitButton : MonoBehaviour
 {
     public TraitData traitData;
@@ -16,17 +16,14 @@ public class TraitButton : MonoBehaviour
 
     [Header("Outline Settings")]
     public Color selectedColor = Color.green;
-    public Color defaultColor = new Color(0, 0, 0, 0.5f); // Semi-transparent black
+    public Color defaultColor = new Color(0, 0, 0, 0.5f);
 
     void Awake()
     {
-        uiManager = Object.FindFirstObjectByType<UIManager>();
-        charMaster = Object.FindFirstObjectByType<CharCreationManager>();
         outlineEffect = GetComponent<Outline>();
-
-        // Set default state
         outlineEffect.effectColor = defaultColor;
-        outlineEffect.enabled = true; // Keep it on, or set to false if you want it hidden
+        
+        RefreshReferences();
 
         if (traitData != null)
         {
@@ -35,8 +32,24 @@ public class TraitButton : MonoBehaviour
         }
     }
 
+    // New Helper function to find managers even if they were inactive earlier
+    private void RefreshReferences()
+    {
+        if (uiManager == null) uiManager = Object.FindFirstObjectByType<UIManager>(FindObjectsInactive.Include);
+        if (charMaster == null) charMaster = Object.FindFirstObjectByType<CharCreationManager>(FindObjectsInactive.Include);
+    }
+
     public void OnTraitButtonClick()
     {
+        // One last check before running logic to prevent the crash
+        RefreshReferences();
+
+        if (charMaster == null)
+        {
+            Debug.LogError($"CharCreationManager is missing in the scene! Cannot process button click on {gameObject.name}");
+            return;
+        }
+
         if (isSelected) Deselect();
         else if (charMaster.traitPointsRemaining > 0) Select();
     }
@@ -45,19 +58,17 @@ public class TraitButton : MonoBehaviour
     {
         isSelected = true;
         outlineEffect.effectColor = selectedColor;
-        outlineEffect.effectDistance = new Vector2(1, -1); // Make it thicker when selected
         
         charMaster.SpendTraitPoint();
-        uiManager.AddTraitToStats(traitData);
+        if (uiManager != null) uiManager.AddTraitToStats(traitData);
     }
 
     private void Deselect()
     {
         isSelected = false;
         outlineEffect.effectColor = defaultColor;
-        outlineEffect.effectDistance = new Vector2(1, -1); // Back to thin
         
         charMaster.RefundTraitPoint();
-        uiManager.RemoveTraitFromStats(traitData);
+        if (uiManager != null) uiManager.RemoveTraitFromStats(traitData);
     }
 }
