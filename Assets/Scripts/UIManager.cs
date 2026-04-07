@@ -25,10 +25,8 @@ public class UIManager : MonoBehaviour
 
         OpenMenu("BeginUI");  // I need to change this if I rename the first menu.
 
-        if (charMaster == null) 
-        {
+        
             charMaster = GetComponentInChildren<CharCreationManager>(true); //It takes the CharMaster reference automatically. 
-        }
 
         allStats = GetComponentsInChildren<StatHandler>(true).ToList(); //It looks for all StatHandler scripts inside the UIManager children and adds them to the list as gameObjects.
 
@@ -36,15 +34,18 @@ public class UIManager : MonoBehaviour
     }
 
     private void ValidateSetup()
+{
+    if (charMaster == null) 
     {
-        if (charMaster == null) 
-            Debug.LogError($"<color=red>UIManager Error:</color> CharCreationManager not found in children of {name}!");
-        
-        if (allStats.Count == 0) 
-            Debug.LogWarning($"<color=yellow>UIManager Warning:</color> No StatHandlers found in children of {name}!");
-        else
-            Debug.Log($"<color=green>UIManager Success:</color> Found {allStats.Count} stats to manage.");
+        // We change Error to Log or Warning. 
+        // This keeps your Console clean and doesn't "break" the execution.
+        Debug.Log("UIManager: CharCreationManager not found yet. (Normal for Main Menu)");
     }
+    else 
+    {
+        Debug.Log("<color=green>UIManager:</color> CharCreationManager linked successfully!");
+    }
+}
 
     public void OpenMenu(string targetMenuName)
 {
@@ -105,7 +106,7 @@ public class UIManager : MonoBehaviour
             stat.SaveToData(playerStats);
         }
 
-        SceneManager.LoadScene("OfficeScene");
+       // SceneManager.LoadScene("OfficeScene");
     }
     public void GoToTraitMenu()
     {
@@ -149,4 +150,10 @@ public void SavePlayerName()
         Debug.Log("Player Name Saved: " + playerStats.playerName);
     }
 }
+public void StartGame(string sceneName)
+{
+    
+    SceneManager.LoadScene("OfficeScene");
+    }
+    
 }
