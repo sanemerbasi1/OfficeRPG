@@ -21,17 +21,16 @@ public class UIManager : MonoBehaviour
     private void Awake()
     {
        
-        if (playerStats != null) playerStats.ResetToDefaults();
+        if (playerStats != null) playerStats.ResetToDefaults(); //Its calling a function from PlayerStats script, I already created a reference for it with the playerStats variable and put the PlayerStats scriptable object in the inspector.
 
-     
-        OpenMenu("BeginUI"); 
+        OpenMenu("BeginUI");  // I need to change this if I rename the first menu.
 
-        if (charMaster == null)
+        if (charMaster == null) 
         {
-            charMaster = GetComponentInChildren<CharCreationManager>(true);
+            charMaster = GetComponentInChildren<CharCreationManager>(true); //It takes the CharMaster reference automatically. 
         }
 
-        allStats = GetComponentsInChildren<StatHandler>(true).ToList();
+        allStats = GetComponentsInChildren<StatHandler>(true).ToList(); //It looks for all StatHandler scripts inside the UIManager children and adds them to the list as gameObjects.
 
         ValidateSetup();
     }
@@ -47,13 +46,10 @@ public class UIManager : MonoBehaviour
             Debug.Log($"<color=green>UIManager Success:</color> Found {allStats.Count} stats to manage.");
     }
 
-    
     public void OpenMenu(string targetMenuName)
 {
-    // 1. FIND THE CURRENT MENU
-    GameObject currentMenu = allMenus.Find(m => m.activeSelf);
+    GameObject currentMenu = allMenus.Find(m => m.activeSelf); //It gives menus a nickname as m and checks if they are checked as active in the inspector to find the current menu. ActiveSelf is an Unity command. 
 
-    // 2. IF WE ARE LEAVING THE NAME UI...
     if (currentMenu != null && currentMenu.name == "NameUI") 
     {
         if (string.IsNullOrWhiteSpace(nameInputField.text))
@@ -65,7 +61,7 @@ public class UIManager : MonoBehaviour
         SavePlayerName();
     }
 
-    foreach (GameObject menu in allMenus)
+    foreach (GameObject menu in allMenus) //It uses foreach to loop through all the menus and checks if the name of the menu is the same as the targetMenuName which is the menu name we written, if it is it opens that menu and closes the others.
     {
         menu.SetActive(menu.name.ToLower() == targetMenuName.ToLower());
     }
