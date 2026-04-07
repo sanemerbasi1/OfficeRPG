@@ -1,5 +1,4 @@
 using UnityEngine;
-using System.Collections;
 
 public class CameraMover : MonoBehaviour
 {
@@ -8,35 +7,26 @@ public class CameraMover : MonoBehaviour
     public Vector3 offset = new Vector3(0, 0, -10);
 
     [Header("Smoothing")]
-    [Range(0, 1)]
-    public float smoothSpeed = 0.125f;
-    
+    [Range(0, 1)] public float smoothSpeed = 0.125f;
     private Vector3 velocity = Vector3.zero;
-
-    void Start()
-    {
-        // If we don't have a player assigned, try to find one by Tag
-        if (playerTransform == null)
-        {
-            GameObject player = GameObject.FindGameObjectWithTag("Player");
-            if (player != null) playerTransform = player.transform;
-        }
-        
-        // Snap immediately to player on start so the camera doesn't "slide" from (0,0)
-        if (playerTransform != null)
-        {
-            transform.position = playerTransform.position + offset;
-        }
-    }
 
     void LateUpdate()
     {
-        if (playerTransform == null) return;
+        // 1. If we don't have a player, look for one every frame
+        if (playerTransform == null)
+        {
+            GameObject player = GameObject.FindGameObjectWithTag("Player");
+            if (player != null) 
+            {
+                playerTransform = player.transform;
+                // Snap immediately to the player's position so the camera doesn't "slide" from (0,0)
+                transform.position = playerTransform.position + offset;
+            }
+            return; // Exit this frame and wait for the next one
+        }
 
-        // Calculate where we want to be
+        // 2. If we HAVE a player, follow them smoothly
         Vector3 targetPosition = playerTransform.position + offset;
-
-        // Smoothly move the Boom to the target
         transform.position = Vector3.SmoothDamp(transform.position, targetPosition, ref velocity, smoothSpeed);
     }
 }
