@@ -47,22 +47,12 @@ public class UIManager : MonoBehaviour
     }
 }
 
-    public void OpenMenu(string targetMenuName)
+public void OpenMenu(string targetMenuName)
 {
-    GameObject currentMenu = allMenus.Find(m => m.activeSelf); //It gives menus a nickname as m and checks if they are checked as active in the inspector to find the current menu. ActiveSelf is an Unity command. 
+    // Remove the if (currentMenu.name == "NameUI") block entirely.
+    // It is safer to let the Button handle the save.
 
-    if (currentMenu != null && currentMenu.name == "NameUI") 
-    {
-        if (string.IsNullOrWhiteSpace(nameInputField.text))
-        {
-            Debug.LogWarning("Access Denied: Name cannot be empty!");
-            return; 
-        }
-        
-        SavePlayerName();
-    }
-
-    foreach (GameObject menu in allMenus) //It uses foreach to loop through all the menus and checks if the name of the menu is the same as the targetMenuName which is the menu name we written, if it is it opens that menu and closes the others.
+    foreach (GameObject menu in allMenus)
     {
         menu.SetActive(menu.name.ToLower() == targetMenuName.ToLower());
     }
@@ -142,12 +132,24 @@ public void RemoveTraitFromStats(TraitData trait)
         playerStats.slot2 = null;
     }
 }
-public void SavePlayerName()
+public void SaveNameAndProceed(string nextMenuName)
 {
     if (nameInputField != null)
     {
-        playerStats.playerName = nameInputField.text;
-        Debug.Log("Player Name Saved: " + playerStats.playerName);
+        string userTypedValue = nameInputField.text; 
+
+        if (!string.IsNullOrWhiteSpace(userTypedValue))
+        {
+            playerStats.playerName = userTypedValue.Trim();
+            Debug.Log($"<color=green>SUCCESS:</color> Saved {playerStats.playerName}");
+            
+            // Now that we ARE SURE it saved, change the menu
+            OpenMenu(nextMenuName); 
+        }
+        else
+        {
+            Debug.LogWarning("Please enter a name!");
+        }
     }
 }
 public void StartGame(string sceneName)
