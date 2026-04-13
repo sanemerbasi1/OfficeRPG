@@ -1,10 +1,10 @@
 fileFormatVersion: 2
-guid: dab3d3fc1ff4a4abb8f0fee1756fe8d7
+guid: 27dd7f22c737947beb0abeae673538c6
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: 2574935058189481457
-    second: tile-export_0
+      213: 2145771898548060954
+    second: GlassWall_0
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -51,7 +51,7 @@ TextureImporter:
   spriteMeshType: 1
   alignment: 0
   spritePivot: {x: 0.5, y: 0.5}
-  spritePixelsToUnits: 64
+  spritePixelsToUnits: 100
   spriteBorder: {x: 0, y: 0, z: 0, w: 0}
   spriteGenerateFallbackPhysicsShape: 1
   alphaUsage: 1
@@ -126,13 +126,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: tile-export_0
+      name: GlassWall_0
       rect:
         serializedVersion: 2
         x: 0
         y: 0
         width: 64
-        height: 64
+        height: 189
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -141,8 +141,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 1f57517fac10cb320800000000000000
-      internalID: 2574935058189481457
+      spriteID: a1309f54c2057cd10800000000000000
+      internalID: 2145771898548060954
       vertices: []
       indices: 
       edges: []
@@ -161,7 +161,7 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      tile-export_0: 2574935058189481457
+      GlassWall_0: 2145771898548060954
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
