@@ -12,6 +12,7 @@ public class GameActions : MonoBehaviour
     public GameObject nameInputPanel;
     public TextMeshProUGUI playerNameText;
     public TextMeshProUGUI dialogueText;
+    public bool nameInputActivated = false;
 
     // --- NEW: THE COMBINED FUNCTION ---
     public void ConfirmNameAndClose()
@@ -43,11 +44,19 @@ public class GameActions : MonoBehaviour
 
     public void ShowNameInputPanel(string message)
     {
+        if (nameInputActivated == false)
+        {
+        
         if (nameInputPanel != null) nameInputPanel.SetActive(true);
         if (playerNameText != null) playerNameText.text = message;
 
         TogglePlayerMovement(false);
+        dialoguePanel.SetActive(false);
         UnityEngine.Debug.Log("<color=green>Player Name Input Shown:</color> " + message);
+
+        nameInputActivated = true;
+    }
+    if (nameInputActivated == true) return;
     }
 
     public void CloseDialogue()
@@ -72,4 +81,5 @@ public class GameActions : MonoBehaviour
             if (rb != null) rb.linearVelocity = Vector2.zero;
         }
     }
+
 }

@@ -44,6 +44,9 @@ TagManager:
   - name: BackgroundUI
     uniqueID: 3091989465
     locked: 0
+  - name: Player
+    uniqueID: 2040613997
+    locked: 0
   - name: FrontUI
     uniqueID: 650553885
     locked: 0
