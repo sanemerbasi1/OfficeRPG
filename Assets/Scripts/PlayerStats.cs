@@ -25,6 +25,6 @@ public TraitData slot2;
         leadership = 1;
         slot1 = null; 
     slot2 = null;
-    playerName = null;
+    playerName = "Employee";
     }
 }

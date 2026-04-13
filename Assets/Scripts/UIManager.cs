@@ -3,16 +3,26 @@ using System.Collections.Generic;
 using System.Linq;
 using TMPro;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
+using UnityEngine.Events;
 
 public class UIManager : MonoBehaviour 
-
 {
     public TMP_InputField nameInputField;
+    
     [Header("Data Table")]
     public PlayerStats playerStats;
 
     [Header("All Menus (Drag all panels here)")]
     public List<GameObject> allMenus = new List<GameObject>();
+
+    [Header("Dialogue & Name Input UI")]
+    public GameObject nameInputPanel;
+    public GameObject dialoguePanel;
+    public TextMeshProUGUI playerNameText;
+    public TextMeshProUGUI dialogueText;
+    public Button dialogueContinueButton; 
+    private bool nameInputActivated = false;
 
     [Header("Auto-Assigned (Do Not Drag)")]
     public CharCreationManager charMaster;
@@ -20,75 +30,91 @@ public class UIManager : MonoBehaviour
 
     private void Awake()
     {
-       
-        if (playerStats != null) playerStats.ResetToDefaults(); //Its calling a function from PlayerStats script, I already created a reference for it with the playerStats variable and put the PlayerStats scriptable object in the inspector.
+        if (playerStats != null) playerStats.ResetToDefaults();
+        OpenMenu("BeginUI");  
+        charMaster = GetComponentInChildren<CharCreationManager>(true); 
+        allStats = GetComponentsInChildren<StatHandler>(true).ToList(); 
+    }
 
-        OpenMenu("BeginUI");  // I need to change this if I rename the first menu.
+    public void OpenMenu(string targetMenuName)
+    {
+        foreach (GameObject menu in allMenus)
+        {
+            menu.SetActive(menu.name.ToLower() == targetMenuName.ToLower());
+        }
+    }
 
+    // --- DIALOGUE SYSTEM ---
+    public void ShowDialogue(string message, UnityAction onContinueAction = null)
+    {
+        if (dialoguePanel != null) dialoguePanel.SetActive(true);
+
+        string processedMessage = message;
+
+        if (playerStats != null && !string.IsNullOrEmpty(playerStats.playerName))
+        {
+            processedMessage = message.Replace("{name}", playerStats.playerName);
+        }
+
+        if (dialogueText != null) dialogueText.text = processedMessage;
+
+        TogglePlayerMovement(false);
+
+        if (dialogueContinueButton != null)
+        {
+            dialogueContinueButton.onClick.RemoveAllListeners();
+            
+            if (onContinueAction != null)
+                dialogueContinueButton.onClick.AddListener(onContinueAction);
+            else
+                dialogueContinueButton.onClick.AddListener(CloseDialogue);
+        }
+    }
+
+    public void CloseDialogue()
+    {
+        if (dialoguePanel != null) dialoguePanel.SetActive(false);
+        if (nameInputPanel != null) nameInputPanel.SetActive(false);
         
-            charMaster = GetComponentInChildren<CharCreationManager>(true); //It takes the CharMaster reference automatically. 
-
-        allStats = GetComponentsInChildren<StatHandler>(true).ToList(); //It looks for all StatHandler scripts inside the UIManager children and adds them to the list as gameObjects.
-
-        ValidateSetup();
-    }
-
-    private void ValidateSetup()
-{
-    if (charMaster == null) 
-    {
-        // We change Error to Log or Warning. 
-        // This keeps your Console clean and doesn't "break" the execution.
-        Debug.Log("UIManager: CharCreationManager not found yet. (Normal for Main Menu)");
-    }
-    else 
-    {
-        Debug.Log("<color=green>UIManager:</color> CharCreationManager linked successfully!");
-    }
-}
-
-public void OpenMenu(string targetMenuName)
-{
-    // Remove the if (currentMenu.name == "NameUI") block entirely.
-    // It is safer to let the Button handle the save.
-
-    foreach (GameObject menu in allMenus)
-    {
-        menu.SetActive(menu.name.ToLower() == targetMenuName.ToLower());
-    }
-}
-
-    public void ResetAndGoHome()
-    {
-        if (charMaster != null) charMaster.ResetPoints();
-
-        foreach (StatHandler stat in allStats)
+        // Also ensure all other panels in allMenus are closed
+        foreach (GameObject menu in allMenus)
         {
-            stat.ResetStat();
+            menu.SetActive(false);
         }
 
-        OpenMenu("BeginUI");
+        TogglePlayerMovement(true);
     }
 
-    public void QuitGame()
+    // --- NAME INPUT ---
+    public void ShowNameInputPanel(string message)
     {
-        Application.Quit();
-       
-        #if UNITY_EDITOR
-        UnityEditor.EditorApplication.isPlaying = false;
-        #endif
+        if (dialoguePanel != null) dialoguePanel.SetActive(false);
+        if (nameInputPanel != null) nameInputPanel.SetActive(true);
+        if (playerNameText != null) playerNameText.text = message;
+        TogglePlayerMovement(false);
     }
 
-    public void FinalizeAndStartGame()
+    public void SaveNameAndProceed(string fallbackMenu)
     {
-        if (charMaster != null && charMaster.traitPointsRemaining > 0)
+        if (nameInputField != null && !string.IsNullOrWhiteSpace(nameInputField.text))
         {
-            Debug.LogWarning("You still have points to spend!");
+            playerStats.playerName = nameInputField.text.Trim();
+            
+            // Clean up the input panel and move to next step
+            CloseDialogue(); 
+
+            CheckForActiveSequence(fallbackMenu);
+        }
+    }
+
+    // --- STATS & TRAITS SEPARATED ---
+
+    public void FinalizeStatSelection(string fallbackMenu)
+    {
+        if (charMaster != null && charMaster.statPointsRemaining > 0)
+        {
+            Debug.LogWarning("Spend all points first!");
             return;
-        }
-        else if (charMaster != null && charMaster.traitPointsRemaining == 0)
-        {
-            Debug.Log("All points spent, proceeding to save stats and load game.");
         }
 
         foreach (StatHandler stat in allStats)
@@ -96,66 +122,74 @@ public void OpenMenu(string targetMenuName)
             stat.SaveToData(playerStats);
         }
 
-       // SceneManager.LoadScene("OfficeScene");
+        // IMPORTANT: Close the menu before proceeding to the next sequence step
+        CloseDialogue(); 
+
+        CheckForActiveSequence(fallbackMenu);
     }
-    public void GoToTraitMenu()
+
+    public void FinalizeTraitSelection(string fallbackMenu)
     {
-        if (charMaster != null && charMaster.statPointsRemaining > 0)
+        if (charMaster != null && charMaster.traitPointsRemaining > 0)
         {
-            Debug.LogWarning($"<color=orange>UI Blocked:</color> Spend all points ({charMaster.statPointsRemaining} left) before picking traits!");
-            
-            return; 
+            Debug.LogWarning("Select all traits first!");
+            return;
         }
 
-        OpenMenu("traitUI");
-    }
-public void AddTraitToStats(TraitData trait)
-{
-    if (playerStats.slot1 == null) 
-    {
-        playerStats.slot1 = trait;
-    }
-    else if (playerStats.slot2 == null) 
-    {
-        playerStats.slot2 = trait;
-    }
-}
+        // IMPORTANT: Close the menu before proceeding to the next sequence step
+        CloseDialogue(); 
 
-public void RemoveTraitFromStats(TraitData trait)
-{
-    if (playerStats.slot1 == trait) 
-    {
-        playerStats.slot1 = null;
+        CheckForActiveSequence(fallbackMenu);
     }
-    else if (playerStats.slot2 == trait) 
-    {
-        playerStats.slot2 = null;
-    }
-}
-public void SaveNameAndProceed(string nextMenuName)
-{
-    if (nameInputField != null)
-    {
-        string userTypedValue = nameInputField.text; 
 
-        if (!string.IsNullOrWhiteSpace(userTypedValue))
+    private void CheckForActiveSequence(string fallbackMenu)
+    {
+        WorldTrigger activeTrigger = Object.FindAnyObjectByType<WorldTrigger>();
+        if (activeTrigger != null)
         {
-            playerStats.playerName = userTypedValue.Trim();
-            Debug.Log($"<color=green>SUCCESS:</color> Saved {playerStats.playerName}");
-            
-            // Now that we ARE SURE it saved, change the menu
-            OpenMenu(nextMenuName); 
+            activeTrigger.RunNextStep();
         }
-        else
+        else if (!string.IsNullOrEmpty(fallbackMenu) && fallbackMenu != "none")
         {
-            Debug.LogWarning("Please enter a name!");
+            OpenMenu(fallbackMenu);
         }
     }
-}
-public void StartGame(string sceneName)
-{
-    
-    SceneManager.LoadScene("OfficeScene");
+
+    public void AddTraitToStats(TraitData trait)
+    {
+        if (playerStats.slot1 == null) playerStats.slot1 = trait;
+        else if (playerStats.slot2 == null) playerStats.slot2 = trait;
     }
-    
+
+    public void RemoveTraitFromStats(TraitData trait)
+    {
+        if (playerStats.slot1 == trait) playerStats.slot1 = null;
+        else if (playerStats.slot2 == trait) playerStats.slot2 = null;
+    }
+
+    // --- UTILS ---
+    private void TogglePlayerMovement(bool canMove)
+    {
+        GameObject player = GameObject.FindGameObjectWithTag("Player");
+        if (player != null)
+        {
+            var controller = player.GetComponent<PlayerController>();
+            if (controller != null) controller.enabled = canMove;
+            var rb = player.GetComponent<Rigidbody2D>();
+            if (rb != null) rb.linearVelocity = Vector2.zero;
+        }
+    }
+
+    public void StartGame(string sceneName)
+    {
+        SceneManager.LoadScene("OfficeScene");
+    }
+
+    public void QuitGame()
+    {
+        Application.Quit();
+        #if UNITY_EDITOR
+        UnityEditor.EditorApplication.isPlaying = false;
+        #endif
+    }
 }
