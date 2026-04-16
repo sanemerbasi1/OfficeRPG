@@ -22,7 +22,6 @@ public class UIManager : MonoBehaviour
     public TextMeshProUGUI playerNameText;
     public TextMeshProUGUI dialogueText;
     public Button dialogueContinueButton; 
-    private bool nameInputActivated = false;
 
     [Header("Auto-Assigned (Do Not Drag)")]
     public CharCreationManager charMaster;
@@ -40,17 +39,18 @@ public class UIManager : MonoBehaviour
     {
         foreach (GameObject menu in allMenus)
         {
-            menu.SetActive(menu.name.ToLower() == targetMenuName.ToLower());
+            if(menu != null)
+                menu.SetActive(menu.name.ToLower() == targetMenuName.ToLower());
         }
     }
 
-    // --- DIALOGUE SYSTEM ---
     public void ShowDialogue(string message, UnityAction onContinueAction = null)
     {
         if (dialoguePanel != null) dialoguePanel.SetActive(true);
 
         string processedMessage = message;
 
+        // Swaps {name} with the player's name (and respects any <b> tags you put in the inspector)
         if (playerStats != null && !string.IsNullOrEmpty(playerStats.playerName))
         {
             processedMessage = message.Replace("{name}", playerStats.playerName);
@@ -64,6 +64,7 @@ public class UIManager : MonoBehaviour
         {
             dialogueContinueButton.onClick.RemoveAllListeners();
             
+            // This links back to the Lambda in WorldTrigger: () => RunNextStep()
             if (onContinueAction != null)
                 dialogueContinueButton.onClick.AddListener(onContinueAction);
             else
@@ -76,10 +77,9 @@ public class UIManager : MonoBehaviour
         if (dialoguePanel != null) dialoguePanel.SetActive(false);
         if (nameInputPanel != null) nameInputPanel.SetActive(false);
         
-        // Also ensure all other panels in allMenus are closed
         foreach (GameObject menu in allMenus)
         {
-            menu.SetActive(false);
+            if (menu != null) menu.SetActive(false);
         }
 
         TogglePlayerMovement(true);
@@ -94,21 +94,19 @@ public class UIManager : MonoBehaviour
         TogglePlayerMovement(false);
     }
 
+    // Link this to your Name Save Button
     public void SaveNameAndProceed(string fallbackMenu)
     {
         if (nameInputField != null && !string.IsNullOrWhiteSpace(nameInputField.text))
         {
             playerStats.playerName = nameInputField.text.Trim();
-            
-            // Clean up the input panel and move to next step
             CloseDialogue(); 
-
             CheckForActiveSequence(fallbackMenu);
         }
     }
 
-    // --- STATS & TRAITS SEPARATED ---
-
+    // --- STATS & TRAITS ---
+    // Link this to your Stat "Done" Button
     public void FinalizeStatSelection(string fallbackMenu)
     {
         if (charMaster != null && charMaster.statPointsRemaining > 0)
@@ -122,12 +120,11 @@ public class UIManager : MonoBehaviour
             stat.SaveToData(playerStats);
         }
 
-        // IMPORTANT: Close the menu before proceeding to the next sequence step
         CloseDialogue(); 
-
         CheckForActiveSequence(fallbackMenu);
     }
 
+    // Link this to your Trait "Done" Button
     public void FinalizeTraitSelection(string fallbackMenu)
     {
         if (charMaster != null && charMaster.traitPointsRemaining > 0)
@@ -136,25 +133,25 @@ public class UIManager : MonoBehaviour
             return;
         }
 
-        // IMPORTANT: Close the menu before proceeding to the next sequence step
         CloseDialogue(); 
-
         CheckForActiveSequence(fallbackMenu);
     }
 
+    // --- THE "UNPAUSE" BUTTON ---
     private void CheckForActiveSequence(string fallbackMenu)
+{
+    // We call the class name directly because ActiveInstance is static
+    if (WorldTrigger.ActiveInstance != null)
     {
-        WorldTrigger activeTrigger = Object.FindAnyObjectByType<WorldTrigger>();
-        if (activeTrigger != null)
-        {
-            activeTrigger.RunNextStep();
-        }
-        else if (!string.IsNullOrEmpty(fallbackMenu) && fallbackMenu != "none")
-        {
-            OpenMenu(fallbackMenu);
-        }
+        WorldTrigger.ActiveInstance.RunNextStep();
     }
+    else if (!string.IsNullOrEmpty(fallbackMenu) && fallbackMenu != "none")
+    {
+        OpenMenu(fallbackMenu);
+    }
+}
 
+    // ... (rest of your Add/Remove trait and movement logic) ...
     public void AddTraitToStats(TraitData trait)
     {
         if (playerStats.slot1 == null) playerStats.slot1 = trait;
@@ -167,7 +164,6 @@ public class UIManager : MonoBehaviour
         else if (playerStats.slot2 == trait) playerStats.slot2 = null;
     }
 
-    // --- UTILS ---
     private void TogglePlayerMovement(bool canMove)
     {
         GameObject player = GameObject.FindGameObjectWithTag("Player");
@@ -182,7 +178,7 @@ public class UIManager : MonoBehaviour
 
     public void StartGame(string sceneName)
     {
-        SceneManager.LoadScene("OfficeScene");
+        SceneManager.LoadScene(sceneName);
     }
 
     public void QuitGame()

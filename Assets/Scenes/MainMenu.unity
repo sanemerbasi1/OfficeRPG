@@ -854,14 +854,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::UIManager
   nameInputField: {fileID: 0}
-  playerStats: {fileID: 11400000, guid: 72e9a13fc8cd64b3bb681c11c6a56036, type: 2}
-  allMenus:
-  - {fileID: 2865303847832247855, guid: aebd0d062f1e0460d8b3efc6f51239f5, type: 3}
-  - {fileID: 1611817660}
-  - {fileID: 1541939567848528532, guid: 7b36f6fd1ee384c90acf0625d7262961, type: 3}
-  - {fileID: 1323366228178713053, guid: 28a2ae5c6547d4168b511599b45263aa, type: 3}
-  - {fileID: 4940812611564692654, guid: e664c486924124761886c34029c22211, type: 3}
-  - {fileID: 9135764923791444011, guid: e5bca74e6cce7417ab12389730463025, type: 3}
+  playerStats: {fileID: 0}
+  allMenus: []
+  nameInputPanel: {fileID: 0}
+  dialoguePanel: {fileID: 0}
+  playerNameText: {fileID: 0}
+  dialogueText: {fileID: 0}
+  dialogueContinueButton: {fileID: 0}
   charMaster: {fileID: 0}
   allStats:
   - {fileID: 0}
@@ -1015,8 +1014,8 @@ RectTransform:
   m_GameObject: {fileID: 1611817660}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1.233854, y: 1.233854, z: 1.233854}
-  m_ConstrainProportionsScale: 0
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 1
   m_Children:
   - {fileID: 313443339}
   - {fileID: 637012949}
@@ -1024,8 +1023,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -20.781494, y: -37.47641}
-  m_SizeDelta: {x: 640.2702, y: 359.84808}
+  m_AnchoredPosition: {x: -17.6374, y: -39.5443}
+  m_SizeDelta: {x: 803.7228, y: 446.7021}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1611817662
 MonoBehaviour:

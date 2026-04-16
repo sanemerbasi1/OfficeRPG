@@ -3,6 +3,7 @@ using System.Collections.Generic;
 
 public class WorldTrigger : MonoBehaviour
 {
+    public static WorldTrigger ActiveInstance;
     public enum StepType { Dialogue, NameInput, OpenMenu, StatMenuManual, TraitMenuManual, StartGame, CloseUI }
 
     [System.Serializable]
@@ -34,6 +35,9 @@ public class WorldTrigger : MonoBehaviour
         if (other.CompareTag("Player"))
         {
             if (triggerOnlyOnce && hasTriggered) return;
+
+            ActiveInstance = this; 
+
             RunNextStep();
             hasTriggered = true;
         }
@@ -44,6 +48,7 @@ public class WorldTrigger : MonoBehaviour
         if (currentStepIndex >= sequence.Count)
         {
             ui.CloseDialogue();
+            if (ActiveInstance == this) ActiveInstance = null;
             return;
         }
 
@@ -63,8 +68,6 @@ public class WorldTrigger : MonoBehaviour
             case StepType.StatMenuManual:
             case StepType.TraitMenuManual:
                 ui.OpenMenu(step.menuOrSceneName); 
-                // We do NOT call RunNextStep here. 
-                // The UI button will call it via UIManager.
                 break;
 
             case StepType.OpenMenu:
