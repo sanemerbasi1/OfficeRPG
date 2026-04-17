@@ -4,7 +4,9 @@ using System.Collections.Generic;
 public class WorldTrigger : MonoBehaviour
 {
     public static WorldTrigger ActiveInstance;
-    public enum StepType { Dialogue, NameInput, OpenMenu, StatMenuManual, TraitMenuManual, StartGame, CloseUI }
+    
+    // Added 'Battle' to the Enum
+    public enum StepType { Dialogue, NameInput, OpenMenu, StatMenuManual, TraitMenuManual, StartGame, CloseUI, Battle }
 
     [System.Serializable]
     public class TriggerStep
@@ -12,6 +14,9 @@ public class WorldTrigger : MonoBehaviour
         public StepType type;
         [TextArea(2, 5)] public string textContent; 
         public string menuOrSceneName; 
+        
+        // Added this so the Level Designer can drag an Encounter SO here
+        public EncounterData encounterData; 
     }
 
     [Header("Settings")]
@@ -24,10 +29,13 @@ public class WorldTrigger : MonoBehaviour
     private int currentStepIndex = 0;
     private bool hasTriggered = false;
     private UIManager ui;
+    private BattleManager battleManager; // Reference to your Battle System
 
     private void Start()
     {
         ui = Object.FindAnyObjectByType<UIManager>();
+        // Assuming your BattleManager is in the scene
+        battleManager = Object.FindAnyObjectByType<BattleManager>();
     }
 
     private void OnTriggerEnter2D(Collider2D other)
@@ -37,7 +45,7 @@ public class WorldTrigger : MonoBehaviour
             if (triggerOnlyOnce && hasTriggered) return;
 
             ActiveInstance = this; 
-
+            currentStepIndex = 0; // Reset index to start from beginning
             RunNextStep();
             hasTriggered = true;
         }
@@ -82,6 +90,21 @@ public class WorldTrigger : MonoBehaviour
             case StepType.CloseUI:
                 ui.CloseDialogue();
                 RunNextStep();
+                break;
+
+            // --- NEW BATTLE CASE ---
+            case StepType.Battle:
+                if (step.encounterData != null)
+                {
+                    // We pass the callback () => RunNextStep() so the battle 
+                    // triggers the next part of the sequence ONLY when it ends.
+                    battleManager.StartBattle(step.encounterData, () => RunNextStep());
+                }
+                else
+                {
+                    Debug.LogWarning("Battle step triggered but no EncounterData assigned!");
+                    RunNextStep();
+                }
                 break;
         }
     }

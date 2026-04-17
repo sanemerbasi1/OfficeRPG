@@ -1221,30 +1221,93 @@ MonoBehaviour:
   - type: 0
     textContent: Welcome new worker. Its nice to meet you!
     menuOrSceneName: 
+    encounterData: {fileID: 0}
   - type: 0
     textContent: Oh, I didn't ask for your name yet.
     menuOrSceneName: 
+    encounterData: {fileID: 0}
   - type: 1
     textContent: What is your name?
     menuOrSceneName: 
+    encounterData: {fileID: 0}
   - type: 0
     textContent: Oh so you are <b>{name}</b>. Its a good name!
     menuOrSceneName: 
+    encounterData: {fileID: 0}
   - type: 0
     textContent: Lets look at your stats now.
     menuOrSceneName: 
+    encounterData: {fileID: 0}
   - type: 3
     textContent: 
     menuOrSceneName: statcreationui
+    encounterData: {fileID: 0}
   - type: 0
     textContent: Now lets look at your traits.
     menuOrSceneName: 
+    encounterData: {fileID: 0}
   - type: 4
     textContent: 
     menuOrSceneName: traitui
-  - type: 0
+    encounterData: {fileID: 0}
+  - type: 7
     textContent: Okay everything is set and ready!
     menuOrSceneName: 
+    encounterData: {fileID: 0}
+--- !u!1 &1036568085
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1036568087}
+  - component: {fileID: 1036568086}
+  m_Layer: 0
+  m_Name: BattleManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1036568086
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1036568085}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dcade719e92a44760a8cf790eb2e0226, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::BattleManager
+  currentState: 0
+  playerPermanentStats: {fileID: 11400000, guid: 72e9a13fc8cd64b3bb681c11c6a56036, type: 2}
+  playerCurrentMH: 0
+  playerMaxMH: 0
+  playerArmor: 0
+  playerShield: 0
+  enemyCurrentMH: 0
+  enemyMaxMH: 0
+  enemyArmor: 0
+  enemyShield: 0
+--- !u!4 &1036568087
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1036568085}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 712.1358, y: 243.23532, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &1049466676
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -3942,3 +4005,4 @@ SceneRoots:
   - {fileID: 114215866}
   - {fileID: 1907568711}
   - {fileID: 502820580}
+  - {fileID: 1036568087}
