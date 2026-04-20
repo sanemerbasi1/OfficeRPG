@@ -12,8 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5a6d794a3dc9e444f9171b4ab9ea721a, type: 3}
   m_Name: TutorialBoss
   m_EditorClassIdentifier: Assembly-CSharp::EncounterData
-  encounterName: TutorialBoss
+  encounterName: Tutorial Boss Man
+  enemySprite: {fileID: 6675052541728665267, guid: ea98f4d4985264d668f70717f069f88d, type: 3}
   type: 3
-  npcStats: {fileID: 0}
+  npcStats: {fileID: 11400000, guid: d299a8ad717b04c2d836bfec31f0d704, type: 2}
   npcSkills: []
-  introText: 
+  introText: I am the Tutorial Boss and I will show you how its done!

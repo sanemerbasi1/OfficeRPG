@@ -1,0 +1,27 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cf114735aac534dcd955f6703237de53, type: 3}
+  m_Name: StartingPlayerStats
+  m_EditorClassIdentifier: Assembly-CSharp::PlayerStats
+  playerName: snem
+  communication: 2
+  criticalThinking: 2
+  adaptability: 2
+  emotionalIntelligence: 3
+  sustainability: 2
+  leadership: 1
+  slot1: {fileID: 11400000, guid: dff61217a9f7d4084a851a8c6ea6b113, type: 2}
+  slot2: {fileID: 11400000, guid: cfd0dc38ce63b49838994f89492b0cf4, type: 2}
+  playerSkills:
+  - {fileID: 11400000, guid: 649cc0863736e441c944940f16ca437f, type: 2}
+  - {fileID: 11400000, guid: 95e03863f4b914b70a116a4766d520d8, type: 2}
+  - {fileID: 11400000, guid: a75cd6ee2d336498a98c8c92bc35509f, type: 2}

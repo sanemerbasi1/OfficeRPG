@@ -5,8 +5,6 @@ public class WorldTrigger : MonoBehaviour
 {
     public static WorldTrigger ActiveInstance;
     
-    // Added 'Battle' to the Enum
-    public enum StepType { Dialogue, NameInput, OpenMenu, StatMenuManual, TraitMenuManual, StartGame, CloseUI, Battle }
 
     [System.Serializable]
     public class TriggerStep

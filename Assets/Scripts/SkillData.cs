@@ -1,29 +1,18 @@
 using UnityEngine;
 
-[CreateAssetMenu(fileName = "NewSkill", menuName = "RPG/SkillData")]
+[CreateAssetMenu(fileName = "NewSkill", menuName = "RPG/Skill")]
 public class SkillData : ScriptableObject
 {
-    [Header("Basic Info")]
     public string skillName;
     public Sprite skillIcon;
-
-    [Header("Combat Stats")]
-    public int baseDamage = 2; 
-    public int cooldownTurns;
+    public SkillType type; 
     
-    [Header("Primary Scaling")]
+    [Header("Values")]
+    public int baseValue; 
+    
+    [Header("Scaling")]
     public StatType primaryStat;
-    [Range(0f, 1f)] public float primaryWeight = 1.0f; // 1.0 = 100% of the stat
-
-    [Header("Secondary Scaling (Optional)")]
+    public float primaryWeight = 1.0f;
     public StatType secondaryStat;
-    [Range(0f, 1f)] public float secondaryWeight = 0.0f; // 0.0 = Disabled/0%
-
-    [Header("Description")]
-    [TextArea(3, 10)]
-    public string description;
-    
-    public string failureEffect; 
+    public float secondaryWeight = 0.5f;
 }
-
-public enum StatType { Communication, CriticalThinking, Adaptability, EmotionalIntelligence, Sustainability, Leadership }

@@ -6,11 +6,14 @@ public class BattleManager : MonoBehaviour
 {
     public static BattleManager Instance;
 
-    public enum BattleState { START, PLAYER_TURN, ENEMY_TURN, WON, LOST }
     public BattleState currentState;
 
     [Header("Data References")]
     [SerializeField] private PlayerStats playerPermanentStats; 
+
+    [Header("UI & Scene References")]
+    public BattleUI battleUI; 
+    public GameObject battleCanvas; 
 
     [Header("Read-Only Live Stats (Inspector Debug)")]
     public int playerCurrentMH, playerMaxMH, playerArmor, playerShield;
@@ -25,102 +28,144 @@ public class BattleManager : MonoBehaviour
         else Destroy(gameObject);
     }
 
-    // Called by WorldTrigger
     public void StartBattle(EncounterData data, Action onComplete)
     {
         currentEncounter = data;
         onBattleComplete = onComplete;
         currentState = BattleState.START;
 
+        if(battleCanvas != null) battleCanvas.SetActive(true);
+
         SetupBattle();
     }
 
     private void SetupBattle()
     {
-        // 1. Initialize Player
-        playerMaxMH = CombatLogic.CalculateMaxMentalHealth(playerPermanentStats.sustainability);
+        // 1. Initial Narrative Log
+        battleUI.UpdateLog(currentEncounter.introText); 
+
+        // 2. Initialize Player Stats
+        int totalSustain = GetTotalStatValue(playerPermanentStats, StatType.Sustainability);
+        playerMaxMH = CombatLogic.CalculateMaxMentalHealth(totalSustain);
         playerCurrentMH = playerMaxMH;
-        playerArmor = playerPermanentStats.emotionalIntelligence;
+        
+        playerArmor = GetTotalStatValue(playerPermanentStats, StatType.EmotionalIntelligence);
         playerShield = 0;
 
-        // 2. Initialize Enemy
+        // 3. Initialize Enemy Stats (FIXED: No longer overwriting playerMaxMH)
         enemyMaxMH = CombatLogic.CalculateMaxMentalHealth(currentEncounter.npcStats.sustainability);
         enemyCurrentMH = enemyMaxMH;
         enemyArmor = currentEncounter.npcStats.emotionalIntelligence;
         enemyShield = 0;
 
-        Debug.Log($"Battle Started: {currentEncounter.encounterName} ({currentEncounter.type})");
-        
-        // 3. Initiative Check
-        if (playerPermanentStats.adaptability >= currentEncounter.npcStats.adaptability)
+        // 4. Update UI Visuals
+        if (battleUI != null)
+        {
+            battleUI.SetupBattleUI(playerPermanentStats.playerName, currentEncounter.encounterName, currentEncounter.enemySprite);
+            battleUI.GenerateSkillButtons(playerPermanentStats.playerSkills);
+            UpdateUI();
+        }
+
+        // 5. Initiative
+        int pAdapt = GetTotalStatValue(playerPermanentStats, StatType.Adaptability);
+        if (pAdapt >= currentEncounter.npcStats.adaptability)
             StartPlayerTurn();
         else
             StartEnemyTurn();
     }
 
+    public void UpdateUI()
+    {
+        if (battleUI != null)
+        {
+            battleUI.UpdateStats(
+                playerCurrentMH, playerMaxMH, playerShield, playerArmor,
+                enemyCurrentMH, enemyMaxMH, enemyShield, enemyArmor
+            );
+        }
+    }
+
     private void StartPlayerTurn()
     {
         currentState = BattleState.PLAYER_TURN;
-        // UI.EnableActionButtons(true); // Placeholder for your UI script
+        battleUI.ToggleActionButtons(true);
+        battleUI.UpdateTurnDisplay("YOUR TURN", Color.green);
     }
 
-    // This is the core logic for your UI Buttons
-    public void ExecutePlayerAction(SkillData skill)
+ public void ExecutePlayerAction(SkillData skill)
+{
+    if (currentState != BattleState.PLAYER_TURN) return;
+    battleUI.ToggleActionButtons(false);
+
+    // Calculate the Power (Damage, Shield, or Heal amount)
+    int val1 = GetTotalStatValue(playerPermanentStats, skill.primaryStat);
+    int val2 = GetTotalStatValue(playerPermanentStats, skill.secondaryStat);
+    float scaledBonus = (val1 * skill.primaryWeight) + (val2 * skill.secondaryWeight);
+    int finalValue = CombatLogic.CalculateRawDamage(skill.baseValue, Mathf.RoundToInt(scaledBonus));
+
+    switch (skill.type)
     {
-        if (currentState != BattleState.PLAYER_TURN) return;
+        case SkillType.Attack:
+            HandleAttack(skill, finalValue);
+            break;
 
-        // 1. Hit Check
-        bool hit = CombatLogic.CheckIfHit(playerPermanentStats.adaptability, currentEncounter.npcStats.adaptability);
+        case SkillType.Defend:
+            playerShield += finalValue;
+            battleUI.UpdateLog($"{playerPermanentStats.playerName} uses {skill.skillName}! (+{finalValue} Shield)");
+            break;
 
-        if (hit)
-        {
-            // 2. Multi-Attribute Scaling Logic
-            int val1 = GetStatValue(playerPermanentStats, skill.primaryStat);
-            int val2 = GetStatValue(playerPermanentStats, skill.secondaryStat);
-
-            // Calculation: (Stat1 * Weight1) + (Stat2 * Weight2)
-            float scaledBonus = (val1 * skill.primaryWeight) + (val2 * skill.secondaryWeight);
-            
-            int finalDamage = CombatLogic.CalculateRawDamage(skill.baseDamage, Mathf.RoundToInt(scaledBonus));
-
-            // 3. Process Damage using our Static CombatLogic
-            CombatLogic.ProcessDamage(finalDamage, false, ref enemyCurrentMH, ref enemyArmor, ref enemyShield);
-            Debug.Log($"Used {skill.skillName}! Enemy MH now: {enemyCurrentMH}");
-        }
-        else
-        {
-            Debug.Log($"{skill.skillName} Missed/Avoided!");
-        }
-
-        CheckWinCondition();
+        case SkillType.Heal:
+            // Recovery Logic: Add health but clamp it to Max
+            int amountHealed = finalValue;
+            playerCurrentMH = Mathf.Min(playerCurrentMH + amountHealed, playerMaxMH);
+            battleUI.UpdateLog($"{playerPermanentStats.playerName} uses {skill.skillName} to recover focus! (+{amountHealed} MH)");
+            break;
     }
+
+    UpdateUI();
+    CheckWinCondition();
+}
+
+private void HandleAttack(SkillData skill, int damage)
+{
+    int pAdapt = GetTotalStatValue(playerPermanentStats, StatType.Adaptability);
+    bool hit = CombatLogic.CheckIfHit(pAdapt, currentEncounter.npcStats.adaptability);
+
+    if (hit)
+    {
+        battleUI.UpdateLog($"{playerPermanentStats.playerName} used {skill.skillName}!");
+        CombatLogic.ProcessDamage(damage, false, ref enemyCurrentMH, ref enemyArmor, ref enemyShield);
+    }
+    else
+    {
+        battleUI.UpdateLog("The action was ignored...");
+    }
+}
 
     private void StartEnemyTurn()
     {
         currentState = BattleState.ENEMY_TURN;
-        Invoke("ExecuteEnemyAction", 1.2f); // Short delay for "thinking"
+        battleUI.ToggleActionButtons(false);
+        battleUI.UpdateTurnDisplay("ENEMY TURN", Color.red);
+        battleUI.UpdateLog($"{currentEncounter.encounterName} is thinking...");
+        
+        Invoke("ExecuteEnemyAction", 1.5f);
     }
 
     private void ExecuteEnemyAction()
     {
-        // Simple NPC logic: Uses their best stat (Communication) for a basic attack
         int damage = 2 + currentEncounter.npcStats.communication;
+        battleUI.UpdateLog($"{currentEncounter.encounterName} attacks!");
         CombatLogic.ProcessDamage(damage, false, ref playerCurrentMH, ref playerArmor, ref playerShield);
         
-        Debug.Log($"NPC attacked! Your MH: {playerCurrentMH}");
+        UpdateUI();
         CheckWinCondition();
     }
 
     private void CheckWinCondition()
     {
-        if (enemyCurrentMH <= 0)
-        {
-            EndBattle(BattleState.WON);
-        }
-        else if (playerCurrentMH <= 0)
-        {
-            EndBattle(BattleState.LOST);
-        }
+        if (enemyCurrentMH <= 0) EndBattle(BattleState.WON);
+        else if (playerCurrentMH <= 0) EndBattle(BattleState.LOST);
         else
         {
             if (currentState == BattleState.PLAYER_TURN) StartEnemyTurn();
@@ -131,22 +176,33 @@ public class BattleManager : MonoBehaviour
     private void EndBattle(BattleState result)
     {
         currentState = result;
-        
         if (result == BattleState.WON)
         {
-            Debug.Log("Victory!");
-            // Resume WorldTrigger Sequence
-            onBattleComplete?.Invoke(); 
+            battleUI.UpdateLog("Success! You handled the situation.");
+            Invoke("FinishBattle", 2f);
         }
         else
         {
-            Debug.Log("Defeat... Burnout achieved.");
-            // You could add a "Game Over" screen call here
+            battleUI.UpdateLog("You've reached your burnout limit...");
+            // Trigger Game Over UI here
         }
     }
 
-    // Helper to grab the correct integer from the PlayerStats SO
-    private int GetStatValue(PlayerStats stats, StatType type)
+    private void FinishBattle()
+    {
+        if(battleCanvas != null) battleCanvas.SetActive(false);
+        onBattleComplete?.Invoke();
+    }
+
+    public int GetTotalStatValue(PlayerStats stats, StatType type)
+    {
+        int total = GetBaseStat(stats, type);
+        if (stats.slot1 != null) total += GetTraitBonus(stats.slot1, type);
+        if (stats.slot2 != null) total += GetTraitBonus(stats.slot2, type);
+        return total;
+    }
+
+    private int GetBaseStat(PlayerStats stats, StatType type)
     {
         return type switch
         {
@@ -156,6 +212,20 @@ public class BattleManager : MonoBehaviour
             StatType.EmotionalIntelligence => stats.emotionalIntelligence,
             StatType.Sustainability => stats.sustainability,
             StatType.Leadership => stats.leadership,
+            _ => 0
+        };
+    }
+
+    private int GetTraitBonus(TraitData trait, StatType type)
+    {
+        return type switch
+        {
+            StatType.Communication => trait.CommunicationBonus,
+            StatType.CriticalThinking => trait.CriticalThinkingBonus,
+            StatType.Adaptability => trait.AdaptabilityBonus,
+            StatType.EmotionalIntelligence => trait.EmotionalIntelligenceBonus,
+            StatType.Sustainability => trait.SustainabilityBonus,
+            StatType.Leadership => trait.LeadershipBonus,
             _ => 0
         };
     }

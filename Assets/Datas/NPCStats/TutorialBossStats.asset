@@ -10,14 +10,16 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: cf114735aac534dcd955f6703237de53, type: 3}
-  m_Name: StartingPlayerStats
+  m_Name: TutorialBossStats
   m_EditorClassIdentifier: Assembly-CSharp::PlayerStats
-  playerName: 
+  playerName: TutorialBoss
   communication: 1
-  criticalThinking: 1
+  criticalThinking: 2
   adaptability: 1
-  emotionalIntelligence: 1
+  emotionalIntelligence: 2
   sustainability: 1
-  leadership: 1
+  leadership: 2
   slot1: {fileID: 0}
   slot2: {fileID: 0}
+  playerSkills:
+  - {fileID: 0}
