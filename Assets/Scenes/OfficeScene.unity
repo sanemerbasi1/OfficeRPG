@@ -172,7 +172,7 @@ RectTransform:
   m_AnchorMin: {x: 1, y: 1}
   m_AnchorMax: {x: 1, y: 1}
   m_AnchoredPosition: {x: -482, y: -201}
-  m_SizeDelta: {x: 300, y: 50}
+  m_SizeDelta: {x: 318.057, y: 50}
   m_Pivot: {x: 0, y: 1}
 --- !u!114 &93900746
 MonoBehaviour:
@@ -3768,8 +3768,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0.25}
   m_AnchorMax: {x: 1, y: 0.75}
-  m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 0, y: 0}
+  m_AnchoredPosition: {x: -5, y: 0}
+  m_SizeDelta: {x: -10, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &972304984
 MonoBehaviour:
@@ -3846,7 +3846,7 @@ RectTransform:
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
   m_AnchoredPosition: {x: 180, y: -201}
-  m_SizeDelta: {x: 300, y: 50}
+  m_SizeDelta: {x: 312.034, y: 50}
   m_Pivot: {x: 0, y: 1}
 --- !u!114 &980611776
 MonoBehaviour:
@@ -4056,6 +4056,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::BattleManager
   currentState: 0
+  combatData: {fileID: 11400000, guid: 1d9cf6b6a604e49aca43b7b27d790d25, type: 2}
   playerPermanentStats: {fileID: 11400000, guid: 72e9a13fc8cd64b3bb681c11c6a56036, type: 2}
   battleUI: {fileID: 768027411}
   battleCanvas: {fileID: 160142075}
@@ -5058,8 +5059,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 4.8370056, y: 0}
-  m_SizeDelta: {x: 19.673, y: 0}
+  m_AnchoredPosition: {x: -4.258, y: 0}
+  m_SizeDelta: {x: 1.483, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1136435213
 MonoBehaviour:
@@ -5270,8 +5271,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 10, y: 0}
+  m_AnchoredPosition: {x: -2.800003, y: 0}
+  m_SizeDelta: {x: -0.43, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1295537720
 MonoBehaviour:
@@ -6476,8 +6477,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0.25}
   m_AnchorMax: {x: 1, y: 0.75}
-  m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 0, y: 0}
+  m_AnchoredPosition: {x: -9.095, y: 0}
+  m_SizeDelta: {x: -18.19, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1556325759
 MonoBehaviour:

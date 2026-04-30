@@ -5,37 +5,46 @@ public static class CombatLogic
     // --- HIT CHANCE LOGIC ---
     // GDD: Hit Chance = 80% + (Attacker Adaptability − Target Adaptability) × 5%
     // Min 60%, Max 95%
-    public static bool CheckIfHit(int attackerAdapt, int targetAdapt)
+    public static bool CheckIfHit(int attackerAdapt, int targetAdapt, CombatData data)
     {
-        float baseHit = 0.80f;
-        float differenceMod = (attackerAdapt - targetAdapt) * 0.05f;
-        float finalHitChance = Mathf.Clamp(baseHit + differenceMod, 0.60f, 0.95f);
-
-        // Roll a random value between 0 and 1
+        float differenceMod = (attackerAdapt - targetAdapt) * data.hitChancePerAdaptability;
+        float finalHitChance = Mathf.Clamp(data.baseHitChance + differenceMod, data.minHitChance, data.maxHitChance);
         return Random.value <= finalHitChance;
+    }
+
+    // --- SKILL VALUE CALCULATION ---
+    // GDD: Skill Power = Base Value + (PrimaryStat × PrimaryWeight) + (SecondaryStat × SecondaryWeight)
+    // baseValue     → skill.baseValue from SkillData ScriptableObject
+    // val1 / val2   → player stats fetched by BattleManager via GetTotalStatValue
+    public static int CalculateSkillValue(int baseValue, int val1, float primaryWeight, int val2, float secondaryWeight, CombatData data)
+    {
+        float scaledBonus = (val1 * primaryWeight) + (val2 * secondaryWeight);
+        return CalculateRawDamage(baseValue, Mathf.RoundToInt(scaledBonus), data);
     }
 
     // --- DAMAGE CALCULATION ---
     // GDD: Damage = Base Damage + Stat Scaling + Trait Modifier (Simplified for now)
     // GDD: Minimum Damage = 1
-    public static int CalculateRawDamage(int baseDamage, int scalingStatValue, int traitMod = 0)
+    // baseDamage       → skill.baseValue from SkillData ScriptableObject
+    // scalingStatValue → calculated scaled bonus from CalculateSkillValue
+    // traitMod         → will come from TraitSystem, default 0 if no trait applies
+    public static int CalculateRawDamage(int baseDamage, int scalingStatValue, CombatData data, int traitMod = 0)
     {
         int total = baseDamage + scalingStatValue + traitMod;
-        return Mathf.Max(1, total); // Ensures damage never goes below 1
+        return Mathf.Max(data.minDamage, total);
     }
 
     // --- MENTAL HEALTH FORMULA ---
     // GDD: Mental Health = Sustainability × 3
-    public static int CalculateMaxMentalHealth(int sustainability)
+    public static int CalculateMaxMentalHealth(int sustainability, CombatData data)
     {
-        return sustainability * 3;
+        return sustainability * data.mentalHealthPerSustainability;
     }
 
     // --- DAMAGE APPLICATION LOGIC (The Layers) ---
     // GDD Order: Shield → Mental Armor → Mental Health
-    // Returns the remaining Health, Armor, and Shield after a hit
-    public static void ProcessDamage(int incomingDamage, bool isTrueDamage, 
-                                    ref int currentHealth, ref int currentArmor, ref int currentShield)
+    public static void ProcessDamage(int incomingDamage, bool isTrueDamage, CombatData data,
+                                     ref int currentHealth, ref int currentArmor, ref int currentShield)
     {
         if (isTrueDamage)
         {
@@ -55,18 +64,13 @@ public static class CombatLogic
             }
 
             // 2. Armor Layer (Mental Armor = Emotional Intelligence)
-            // Note: Per GDD, Armor reduces damage. 
-            // Usually, this means Armor subtracts from the remaining hit.
             if (remainingDamage > 0)
             {
-                // Simple reduction logic: Damage = Damage - Armor
-                // Ensuring even with high armor, at least 1 damage is dealt if Shield is gone
-                int damageAfterArmor = Mathf.Max(1, remainingDamage - currentArmor);
+                int damageAfterArmor = Mathf.Max(data.minDamageAfterArmor, remainingDamage - currentArmor);
                 currentHealth -= damageAfterArmor;
             }
         }
 
-        // Clamp health so it doesn't go negative in the UI
         currentHealth = Mathf.Max(0, currentHealth);
     }
 }

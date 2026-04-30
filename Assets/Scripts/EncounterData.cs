@@ -13,6 +13,9 @@ public class EncounterData : ScriptableObject
     public PlayerStats npcStats; 
     public List<SkillData> npcSkills;
 
+    [Header("Combat")]
+    public int enemyBaseDamage = 2;
+
     [Header("Narrative Context")]
     [TextArea(3, 10)]
     public string introText; 

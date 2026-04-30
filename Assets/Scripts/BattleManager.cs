@@ -1,6 +1,5 @@
 using UnityEngine;
 using System;
-using System.Collections.Generic;
 
 public class BattleManager : MonoBehaviour
 {
@@ -9,18 +8,19 @@ public class BattleManager : MonoBehaviour
     public BattleState currentState;
 
     [Header("Data References")]
-    [SerializeField] private PlayerStats playerPermanentStats; 
+    [SerializeField] private CombatData combatData;
+    [SerializeField] private PlayerStats playerPermanentStats;
 
     [Header("UI & Scene References")]
-    public BattleUI battleUI; 
-    public GameObject battleCanvas; 
+    public BattleUI battleUI;
+    public GameObject battleCanvas;
 
     [Header("Read-Only Live Stats (Inspector Debug)")]
     public int playerCurrentMH, playerMaxMH, playerArmor, playerShield;
     public int enemyCurrentMH, enemyMaxMH, enemyArmor, enemyShield;
 
     private EncounterData currentEncounter;
-    private Action onBattleComplete; 
+    private Action onBattleComplete;
 
     private void Awake()
     {
@@ -34,7 +34,7 @@ public class BattleManager : MonoBehaviour
         onBattleComplete = onComplete;
         currentState = BattleState.START;
 
-        if(battleCanvas != null) battleCanvas.SetActive(true);
+        if (battleCanvas != null) battleCanvas.SetActive(true);
 
         SetupBattle();
     }
@@ -42,18 +42,17 @@ public class BattleManager : MonoBehaviour
     private void SetupBattle()
     {
         // 1. Initial Narrative Log
-        battleUI.UpdateLog(currentEncounter.introText); 
+        battleUI.UpdateLog(currentEncounter.introText);
 
         // 2. Initialize Player Stats
         int totalSustain = GetTotalStatValue(playerPermanentStats, StatType.Sustainability);
-        playerMaxMH = CombatLogic.CalculateMaxMentalHealth(totalSustain);
+        playerMaxMH = CombatLogic.CalculateMaxMentalHealth(totalSustain, combatData);
         playerCurrentMH = playerMaxMH;
-        
         playerArmor = GetTotalStatValue(playerPermanentStats, StatType.EmotionalIntelligence);
         playerShield = 0;
 
-        // 3. Initialize Enemy Stats (FIXED: No longer overwriting playerMaxMH)
-        enemyMaxMH = CombatLogic.CalculateMaxMentalHealth(currentEncounter.npcStats.sustainability);
+        // 3. Initialize Enemy Stats
+        enemyMaxMH = CombatLogic.CalculateMaxMentalHealth(currentEncounter.npcStats.sustainability, combatData);
         enemyCurrentMH = enemyMaxMH;
         enemyArmor = currentEncounter.npcStats.emotionalIntelligence;
         enemyShield = 0;
@@ -92,55 +91,52 @@ public class BattleManager : MonoBehaviour
         battleUI.UpdateTurnDisplay("YOUR TURN", Color.green);
     }
 
- public void ExecutePlayerAction(SkillData skill)
-{
-    if (currentState != BattleState.PLAYER_TURN) return;
-    battleUI.ToggleActionButtons(false);
-
-    // Calculate the Power (Damage, Shield, or Heal amount)
-    int val1 = GetTotalStatValue(playerPermanentStats, skill.primaryStat);
-    int val2 = GetTotalStatValue(playerPermanentStats, skill.secondaryStat);
-    float scaledBonus = (val1 * skill.primaryWeight) + (val2 * skill.secondaryWeight);
-    int finalValue = CombatLogic.CalculateRawDamage(skill.baseValue, Mathf.RoundToInt(scaledBonus));
-
-    switch (skill.type)
+    public void ExecutePlayerAction(SkillData skill)
     {
-        case SkillType.Attack:
-            HandleAttack(skill, finalValue);
-            break;
+        if (currentState != BattleState.PLAYER_TURN) return;
+        battleUI.ToggleActionButtons(false);
 
-        case SkillType.Defend:
-            playerShield += finalValue;
-            battleUI.UpdateLog($"{playerPermanentStats.playerName} uses {skill.skillName}! (+{finalValue} Shield)");
-            break;
+        // Fetch stats, CombatLogic handles the math
+        int val1 = GetTotalStatValue(playerPermanentStats, skill.primaryStat);
+        int val2 = GetTotalStatValue(playerPermanentStats, skill.secondaryStat);
+        int finalValue = CombatLogic.CalculateSkillValue(skill.baseValue, val1, skill.primaryWeight, val2, skill.secondaryWeight, combatData);
 
-        case SkillType.Heal:
-            // Recovery Logic: Add health but clamp it to Max
-            int amountHealed = finalValue;
-            playerCurrentMH = Mathf.Min(playerCurrentMH + amountHealed, playerMaxMH);
-            battleUI.UpdateLog($"{playerPermanentStats.playerName} uses {skill.skillName} to recover focus! (+{amountHealed} MH)");
-            break;
+        switch (skill.type)
+        {
+            case SkillType.Attack:
+                HandleAttack(skill, finalValue);
+                break;
+
+            case SkillType.Defend:
+                playerShield += finalValue;
+                battleUI.UpdateLog($"{playerPermanentStats.playerName} uses {skill.skillName}! (+{finalValue} Shield)");
+                break;
+
+            case SkillType.Heal:
+                playerCurrentMH = Mathf.Min(playerCurrentMH + finalValue, playerMaxMH);
+                battleUI.UpdateLog($"{playerPermanentStats.playerName} uses {skill.skillName} to recover focus! (+{finalValue} MH)");
+                break;
+        }
+
+        UpdateUI();
+        CheckWinCondition();
     }
 
-    UpdateUI();
-    CheckWinCondition();
-}
-
-private void HandleAttack(SkillData skill, int damage)
-{
-    int pAdapt = GetTotalStatValue(playerPermanentStats, StatType.Adaptability);
-    bool hit = CombatLogic.CheckIfHit(pAdapt, currentEncounter.npcStats.adaptability);
-
-    if (hit)
+    private void HandleAttack(SkillData skill, int damage)
     {
-        battleUI.UpdateLog($"{playerPermanentStats.playerName} used {skill.skillName}!");
-        CombatLogic.ProcessDamage(damage, false, ref enemyCurrentMH, ref enemyArmor, ref enemyShield);
+        int pAdapt = GetTotalStatValue(playerPermanentStats, StatType.Adaptability);
+        bool hit = CombatLogic.CheckIfHit(pAdapt, currentEncounter.npcStats.adaptability, combatData);
+
+        if (hit)
+        {
+            battleUI.UpdateLog($"{playerPermanentStats.playerName} used {skill.skillName}!");
+            CombatLogic.ProcessDamage(damage, false, combatData, ref enemyCurrentMH, ref enemyArmor, ref enemyShield);
+        }
+        else
+        {
+            battleUI.UpdateLog("The action was ignored...");
+        }
     }
-    else
-    {
-        battleUI.UpdateLog("The action was ignored...");
-    }
-}
 
     private void StartEnemyTurn()
     {
@@ -148,16 +144,16 @@ private void HandleAttack(SkillData skill, int damage)
         battleUI.ToggleActionButtons(false);
         battleUI.UpdateTurnDisplay("ENEMY TURN", Color.red);
         battleUI.UpdateLog($"{currentEncounter.encounterName} is thinking...");
-        
         Invoke("ExecuteEnemyAction", 1.5f);
     }
 
     private void ExecuteEnemyAction()
     {
-        int damage = 2 + currentEncounter.npcStats.communication;
+        // enemyBaseDamage → comes from EncounterData ScriptableObject
+        int damage = currentEncounter.enemyBaseDamage + currentEncounter.npcStats.communication;
         battleUI.UpdateLog($"{currentEncounter.encounterName} attacks!");
-        CombatLogic.ProcessDamage(damage, false, ref playerCurrentMH, ref playerArmor, ref playerShield);
-        
+        CombatLogic.ProcessDamage(damage, false, combatData, ref playerCurrentMH, ref playerArmor, ref playerShield);
+
         UpdateUI();
         CheckWinCondition();
     }
@@ -184,13 +180,13 @@ private void HandleAttack(SkillData skill, int damage)
         else
         {
             battleUI.UpdateLog("You've reached your burnout limit...");
-            // Trigger Game Over UI here
+            // TODO: Trigger Game Over UI here
         }
     }
 
     private void FinishBattle()
     {
-        if(battleCanvas != null) battleCanvas.SetActive(false);
+        if (battleCanvas != null) battleCanvas.SetActive(false);
         onBattleComplete?.Invoke();
     }
 
