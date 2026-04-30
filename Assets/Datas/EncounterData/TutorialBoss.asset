@@ -16,5 +16,9 @@ MonoBehaviour:
   enemySprite: {fileID: 6675052541728665267, guid: ea98f4d4985264d668f70717f069f88d, type: 3}
   type: 3
   npcStats: {fileID: 11400000, guid: d299a8ad717b04c2d836bfec31f0d704, type: 2}
-  npcSkills: []
+  npcSkills:
+  - {fileID: 11400000, guid: 649cc0863736e441c944940f16ca437f, type: 2}
+  - {fileID: 11400000, guid: 95e03863f4b914b70a116a4766d520d8, type: 2}
+  - {fileID: 11400000, guid: a75cd6ee2d336498a98c8c92bc35509f, type: 2}
+  enemyBaseDamage: 2
   introText: I am the Tutorial Boss and I will show you how its done!

@@ -15,4 +15,9 @@ public class CombatData : ScriptableObject
 
     [Header("Mental Health")]
     public int mentalHealthPerSustainability = 3;
+
+    [Header("Enemy AI Thresholds")]
+    public float enemyLowHealthThreshold = 0.35f;   
+    public float enemyAggressiveThreshold = 0.25f;  
+    public float enemyActionDelay = 1.5f;            
 }

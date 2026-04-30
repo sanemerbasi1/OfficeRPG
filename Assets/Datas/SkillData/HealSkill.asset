@@ -15,8 +15,9 @@ MonoBehaviour:
   skillName: Treat Yourself
   skillIcon: {fileID: -1150480250553796642, guid: 1a101fd02ee80429397956d1d7a66ad4, type: 3}
   type: 2
-  baseValue: 1
+  baseDamageValue: 0
   primaryStat: 0
   primaryWeight: 1
   secondaryStat: 0
   secondaryWeight: 0
+  cooldownTurns: 3

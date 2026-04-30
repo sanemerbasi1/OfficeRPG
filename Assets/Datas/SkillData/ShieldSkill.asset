@@ -15,8 +15,9 @@ MonoBehaviour:
   skillName: Resist
   skillIcon: {fileID: -6395016670076421558, guid: 8c6637819dcb944c0a0f14d114b9c669, type: 3}
   type: 1
-  baseValue: 2
+  baseDamageValue: 0
   primaryStat: 0
   primaryWeight: 1
   secondaryStat: 0
   secondaryWeight: 0
+  cooldownTurns: 3

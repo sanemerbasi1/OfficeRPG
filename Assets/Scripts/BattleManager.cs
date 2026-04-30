@@ -11,6 +11,9 @@ public class BattleManager : MonoBehaviour
     [SerializeField] private CombatData combatData;
     [SerializeField] private PlayerStats playerPermanentStats;
 
+    [Header("Systems")]
+    [SerializeField] private EnemyBattleBrain enemyBrain;
+
     [Header("UI & Scene References")]
     public BattleUI battleUI;
     public GameObject battleCanvas;
@@ -41,6 +44,7 @@ public class BattleManager : MonoBehaviour
 
     private void SetupBattle()
     {
+        enemyBrain.InitializeCooldowns(currentEncounter);
         // 1. Initial Narrative Log
         battleUI.UpdateLog(currentEncounter.introText);
 
@@ -87,6 +91,7 @@ public class BattleManager : MonoBehaviour
     private void StartPlayerTurn()
     {
         currentState = BattleState.PLAYER_TURN;
+        battleUI.TickAllCooldowns();
         battleUI.ToggleActionButtons(true);
         battleUI.UpdateTurnDisplay("YOUR TURN", Color.green);
     }
@@ -95,16 +100,16 @@ public class BattleManager : MonoBehaviour
     {
         if (currentState != BattleState.PLAYER_TURN) return;
         battleUI.ToggleActionButtons(false);
+        battleUI.NotifySkillUsed(skill);
 
-        // Fetch stats, CombatLogic handles the math
         int val1 = GetTotalStatValue(playerPermanentStats, skill.primaryStat);
         int val2 = GetTotalStatValue(playerPermanentStats, skill.secondaryStat);
-        int finalValue = CombatLogic.CalculateSkillValue(skill.baseValue, val1, skill.primaryWeight, val2, skill.secondaryWeight, combatData);
+        int finalValue = CombatLogic.CalculateSkillValue(skill.baseDamageValue, val1, skill.primaryWeight, val2, skill.secondaryWeight, combatData);
 
         switch (skill.type)
         {
             case SkillType.Attack:
-                HandleAttack(skill, finalValue);
+                HandlePlayerAttack(skill, finalValue);
                 break;
 
             case SkillType.Defend:
@@ -122,7 +127,7 @@ public class BattleManager : MonoBehaviour
         CheckWinCondition();
     }
 
-    private void HandleAttack(SkillData skill, int damage)
+    private void HandlePlayerAttack(SkillData skill, int damage)
     {
         int pAdapt = GetTotalStatValue(playerPermanentStats, StatType.Adaptability);
         bool hit = CombatLogic.CheckIfHit(pAdapt, currentEncounter.npcStats.adaptability, combatData);
@@ -139,24 +144,49 @@ public class BattleManager : MonoBehaviour
     }
 
     private void StartEnemyTurn()
-    {
-        currentState = BattleState.ENEMY_TURN;
-        battleUI.ToggleActionButtons(false);
-        battleUI.UpdateTurnDisplay("ENEMY TURN", Color.red);
-        battleUI.UpdateLog($"{currentEncounter.encounterName} is thinking...");
-        Invoke("ExecuteEnemyAction", 1.5f);
-    }
+{
+    currentState = BattleState.ENEMY_TURN;
+    enemyBrain.TickCooldowns();
+    battleUI.ToggleActionButtons(false);
+    battleUI.UpdateTurnDisplay("ENEMY TURN", Color.red);
+    battleUI.UpdateLog($"{currentEncounter.encounterName} is thinking...");
+    Invoke("ExecuteEnemyAction", combatData.enemyActionDelay);
+}
 
     private void ExecuteEnemyAction()
-    {
-        // enemyBaseDamage → comes from EncounterData ScriptableObject
-        int damage = currentEncounter.enemyBaseDamage + currentEncounter.npcStats.communication;
-        battleUI.UpdateLog($"{currentEncounter.encounterName} attacks!");
-        CombatLogic.ProcessDamage(damage, false, combatData, ref playerCurrentMH, ref playerArmor, ref playerShield);
+{
+    int playerAdapt = GetTotalStatValue(playerPermanentStats, StatType.Adaptability); 
 
-        UpdateUI();
-        CheckWinCondition();
+    EnemyActionResult action = enemyBrain.DecideAction(
+        currentEncounter, combatData,
+        enemyCurrentMH, enemyMaxMH,
+        playerCurrentMH, playerMaxMH,
+        playerAdapt 
+    );
+
+    battleUI.UpdateLog(action.logMessage);
+
+    if (action.hit)
+    {
+        switch (action.skillUsed != null ? action.skillUsed.type : SkillType.Attack)
+        {
+            case SkillType.Attack:
+                CombatLogic.ProcessDamage(action.value, false, combatData, ref playerCurrentMH, ref playerArmor, ref playerShield);
+                break;
+
+            case SkillType.Defend:
+                enemyShield += action.value;
+                break;
+
+            case SkillType.Heal:
+                enemyCurrentMH = Mathf.Min(enemyCurrentMH + action.value, enemyMaxMH);
+                break;
+        }
     }
+
+    UpdateUI();
+    CheckWinCondition();
+}
 
     private void CheckWinCondition()
     {
@@ -202,12 +232,12 @@ public class BattleManager : MonoBehaviour
     {
         return type switch
         {
-            StatType.Communication => stats.communication,
-            StatType.CriticalThinking => stats.criticalThinking,
-            StatType.Adaptability => stats.adaptability,
+            StatType.Communication         => stats.communication,
+            StatType.CriticalThinking      => stats.criticalThinking,
+            StatType.Adaptability          => stats.adaptability,
             StatType.EmotionalIntelligence => stats.emotionalIntelligence,
-            StatType.Sustainability => stats.sustainability,
-            StatType.Leadership => stats.leadership,
+            StatType.Sustainability        => stats.sustainability,
+            StatType.Leadership            => stats.leadership,
             _ => 0
         };
     }
@@ -216,12 +246,12 @@ public class BattleManager : MonoBehaviour
     {
         return type switch
         {
-            StatType.Communication => trait.CommunicationBonus,
-            StatType.CriticalThinking => trait.CriticalThinkingBonus,
-            StatType.Adaptability => trait.AdaptabilityBonus,
+            StatType.Communication         => trait.CommunicationBonus,
+            StatType.CriticalThinking      => trait.CriticalThinkingBonus,
+            StatType.Adaptability          => trait.AdaptabilityBonus,
             StatType.EmotionalIntelligence => trait.EmotionalIntelligenceBonus,
-            StatType.Sustainability => trait.SustainabilityBonus,
-            StatType.Leadership => trait.LeadershipBonus,
+            StatType.Sustainability        => trait.SustainabilityBonus,
+            StatType.Leadership            => trait.LeadershipBonus,
             _ => 0
         };
     }
