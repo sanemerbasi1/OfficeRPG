@@ -1,5 +1,5 @@
 using UnityEngine;
-using UnityEngine.InputSystem; // You need this namespace!
+using UnityEngine.InputSystem; 
 
 [RequireComponent(typeof(Rigidbody2D))]
 public class PlayerController : MonoBehaviour
@@ -47,4 +47,10 @@ public class PlayerController : MonoBehaviour
     {
         rb.MovePosition(rb.position + movement.normalized * moveSpeed * Time.fixedDeltaTime);
     }
+    public void TeleportTo(Vector3 position)
+{
+    rb.position = position;
+    // Reset movement so they don't slide into the new level
+    movement = Vector2.zero; 
+}
 }

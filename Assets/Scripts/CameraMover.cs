@@ -12,7 +12,6 @@ public class CameraMover : MonoBehaviour
 
     void LateUpdate()
     {
-        // 1. If we don't have a player, look for one every frame
         if (playerTransform == null)
         {
             GameObject player = GameObject.FindGameObjectWithTag("Player");
