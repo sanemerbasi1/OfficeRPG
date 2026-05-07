@@ -19,5 +19,5 @@ public class CombatData : ScriptableObject
     [Header("Enemy AI Thresholds")]
     public float enemyLowHealthThreshold = 0.35f;   
     public float enemyAggressiveThreshold = 0.25f;  
-    public float enemyActionDelay = 1.5f;            
+    public float enemyActionDelay = 1.0f;            
 }

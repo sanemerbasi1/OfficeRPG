@@ -1,5 +1,6 @@
 using UnityEngine;
 using UnityEngine.UI;
+using System.Collections;
 using TMPro;
 using System.Collections.Generic;
 
@@ -28,6 +29,10 @@ public class BattleUI : MonoBehaviour
     [Header("Status Text References")]
     public TextMeshProUGUI turnIndicatorText; 
     public TextMeshProUGUI contextLogText;
+    public TMP_Text fullLogText; 
+    public GameObject fullLogPanel;
+    [SerializeField] private ScrollRect logScrollRect;
+    [SerializeField] private RectTransform logContent;
 
     // Tracks all active skill buttons for cooldown management
     private List<SkillButton> activeSkillButtons = new List<SkillButton>();
@@ -107,9 +112,33 @@ public class BattleUI : MonoBehaviour
             turnIndicatorText.color = color;
         }
     }
+    public void ToggleLogPanel()
+{
+    if (fullLogPanel != null)
+        fullLogPanel.SetActive(!fullLogPanel.activeSelf);
+}
+public void ClearLog()
+{
+    if (contextLogText != null) contextLogText.text = "";
+    if (fullLogText != null) fullLogText.text = "";
+}
 
-    public void UpdateLog(string message)
-    {
-        if (contextLogText != null) contextLogText.text = message;
+   public void UpdateLog(string message)
+{
+    if (contextLogText != null)
+        contextLogText.text = message;
+
+    if (fullLogText != null)
+       {
+        fullLogText.text += "\n\n" + message;
+        StartCoroutine(ScrollToBottom());
     }
+    
+}
+IEnumerator ScrollToBottom()
+{
+    yield return new WaitForEndOfFrame();
+    LayoutRebuilder.ForceRebuildLayoutImmediate(logContent);
+    logScrollRect.verticalNormalizedPosition = 0f;
+}
 }

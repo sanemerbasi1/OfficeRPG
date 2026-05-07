@@ -103,9 +103,9 @@ public class EnemyBattleBrain : MonoBehaviour
         SkillType.Attack => hit
             ? $"{encounter.encounterName} uses {skill.skillName}!"
             : $"{encounter.encounterName} tries {skill.skillName} but misses!",
-        SkillType.Defend => $"{encounter.encounterName} braces with {skill.skillName}! (+{value} Shield)",
-        SkillType.Heal   => $"{encounter.encounterName} uses {skill.skillName} to recover! (+{value} MH)",
-        _                => $"{encounter.encounterName} does something unexpected..."
+        SkillType.Defend => $"<b>{encounter.encounterName}</b> braces with <b>{skill.skillName}</b>! (+{value} Shield)",
+        SkillType.Heal   => $"<b>{encounter.encounterName}</b> uses <b>{skill.skillName}</b> to recover! (+{value} MH)",
+        _                => $"<b>{encounter.encounterName}</b> missed!..."
     };
 
     return new EnemyActionResult
@@ -125,7 +125,7 @@ public class EnemyBattleBrain : MonoBehaviour
             skillUsed  = null,
             value      = damage,
             hit        = true,
-            logMessage = $"{encounter.encounterName} attacks!"
+            logMessage = $"<b>{encounter.encounterName}</b> attacks!"
         };
     }
 

@@ -15,8 +15,9 @@ MonoBehaviour:
   skillName: Oppose
   skillIcon: {fileID: 6423251990513538551, guid: 6aa760a6af98447d78efdec297999d6a, type: 3}
   type: 0
-  baseValue: 1
+  baseDamageValue: 2
   primaryStat: 0
   primaryWeight: 1
   secondaryStat: 0
   secondaryWeight: 0
+  cooldownTurns: 0

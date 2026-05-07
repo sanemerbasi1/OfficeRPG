@@ -17,6 +17,7 @@ public class BattleManager : MonoBehaviour
     [Header("UI & Scene References")]
     public BattleUI battleUI;
     public GameObject battleCanvas;
+    public GameObject gameOverUI;
 
     [Header("Read-Only Live Stats (Inspector Debug)")]
     public int playerCurrentMH, playerMaxMH, playerArmor, playerShield;
@@ -38,6 +39,7 @@ public class BattleManager : MonoBehaviour
         currentState = BattleState.START;
 
         if (battleCanvas != null) battleCanvas.SetActive(true);
+        battleUI.ToggleLogPanel();
 
         SetupBattle();
     }
@@ -114,12 +116,12 @@ public class BattleManager : MonoBehaviour
 
             case SkillType.Defend:
                 playerShield += finalValue;
-                battleUI.UpdateLog($"{playerPermanentStats.playerName} uses {skill.skillName}! (+{finalValue} Shield)");
+                battleUI.UpdateLog($"<b>{playerPermanentStats.playerName}</b> uses <b>{skill.skillName}</b>! (+{finalValue} Shield)");
                 break;
 
             case SkillType.Heal:
                 playerCurrentMH = Mathf.Min(playerCurrentMH + finalValue, playerMaxMH);
-                battleUI.UpdateLog($"{playerPermanentStats.playerName} uses {skill.skillName} to recover focus! (+{finalValue} MH)");
+                battleUI.UpdateLog($"<b>{playerPermanentStats.playerName}</b> uses <b>{skill.skillName}</b> to recover focus! (+{finalValue} MH)");
                 break;
         }
 
@@ -134,12 +136,12 @@ public class BattleManager : MonoBehaviour
 
         if (hit)
         {
-            battleUI.UpdateLog($"{playerPermanentStats.playerName} used {skill.skillName}!");
+            battleUI.UpdateLog($"<b>{playerPermanentStats.playerName}</b> used <b>{skill.skillName}</b>!");
             CombatLogic.ProcessDamage(damage, false, combatData, ref enemyCurrentMH, ref enemyArmor, ref enemyShield);
         }
         else
         {
-            battleUI.UpdateLog("The action was ignored...");
+            battleUI.UpdateLog($"<b>{currentEncounter.encounterName}</b> has dodged!");
         }
     }
 
@@ -147,9 +149,9 @@ public class BattleManager : MonoBehaviour
 {
     currentState = BattleState.ENEMY_TURN;
     enemyBrain.TickCooldowns();
-    battleUI.ToggleActionButtons(false);
+    battleUI.ToggleActionButtons(true);
     battleUI.UpdateTurnDisplay("ENEMY TURN", Color.red);
-    battleUI.UpdateLog($"{currentEncounter.encounterName} is thinking...");
+    battleUI.UpdateLog($"<b>{currentEncounter.encounterName}</b> is thinking...");
     Invoke("ExecuteEnemyAction", combatData.enemyActionDelay);
 }
 
@@ -210,7 +212,7 @@ public class BattleManager : MonoBehaviour
         else
         {
             battleUI.UpdateLog("You've reached your burnout limit...");
-            // TODO: Trigger Game Over UI here
+            if (gameOverUI != null) gameOverUI.SetActive(true);
         }
     }
 
