@@ -26,16 +26,8 @@ public class WorldTrigger : MonoBehaviour
 
     private int currentStepIndex = 0;
     private bool hasTriggered = false;
-    private UIManager ui;
-    private BattleManager battleManager; // Reference to your Battle System
-
-    private void Start()
-    {
-        ui = Object.FindAnyObjectByType<UIManager>();
-        // Assuming your BattleManager is in the scene
-        battleManager = Object.FindAnyObjectByType<BattleManager>();
-    }
-
+    [SerializeField] private UIManager ui;
+    [SerializeField] private BattleManager battleManager;
     private void OnTriggerEnter2D(Collider2D other)
     {
         if (other.CompareTag("Player"))
@@ -43,7 +35,7 @@ public class WorldTrigger : MonoBehaviour
             if (triggerOnlyOnce && hasTriggered) return;
 
             ActiveInstance = this; 
-            currentStepIndex = 0; // Reset index to start from beginning
+            currentStepIndex = 0;
             RunNextStep();
             hasTriggered = true;
         }

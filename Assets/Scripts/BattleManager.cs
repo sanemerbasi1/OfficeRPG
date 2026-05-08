@@ -10,6 +10,7 @@ public class BattleManager : MonoBehaviour
     [Header("Data References")]
     [SerializeField] private CombatData combatData;
     [SerializeField] private PlayerStats playerPermanentStats;
+    [SerializeField] private UIManager ui;
 
     [Header("Systems")]
     [SerializeField] private EnemyBattleBrain enemyBrain;
@@ -213,6 +214,7 @@ public class BattleManager : MonoBehaviour
         {
             battleUI.UpdateLog("You've reached your burnout limit...");
             if (gameOverUI != null) gameOverUI.SetActive(true);
+            ui.TogglePlayerMovement(true);
         }
     }
 

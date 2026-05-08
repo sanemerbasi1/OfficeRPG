@@ -33,7 +33,6 @@ public class SceneLoader : MonoBehaviour
         SceneManager.UnloadSceneAsync("MainMenu");
         currentFloor = "Floor_01";
 
-        // --- RESET PLAYER POSITION TO 0,0,0 ---
         ResetPlayerTransform();
     }
 

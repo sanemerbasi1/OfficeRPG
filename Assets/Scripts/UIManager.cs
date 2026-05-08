@@ -166,7 +166,7 @@ public class UIManager : MonoBehaviour
         else if (playerStats.slot2 == trait) playerStats.slot2 = null;
     }
 
-    private void TogglePlayerMovement(bool canMove)
+    public void TogglePlayerMovement(bool canMove)
     {
         GameObject player = GameObject.FindGameObjectWithTag("Player");
         if (player != null)
