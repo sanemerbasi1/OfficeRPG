@@ -10,10 +10,10 @@ public class WorldTrigger : MonoBehaviour
     public class TriggerStep
     {
         public StepType type;
+        public string speakerName;
         [TextArea(2, 5)] public string textContent; 
         public string menuOrSceneName; 
         
-        // Added this so the Level Designer can drag an Encounter SO here
         public EncounterData encounterData; 
     }
 
@@ -64,7 +64,7 @@ public class WorldTrigger : MonoBehaviour
         switch (step.type)
         {
             case StepType.Dialogue:
-                ui.ShowDialogue(step.textContent, () => RunNextStep());
+                ui.ShowDialogue(step.textContent, step.speakerName, () => RunNextStep());
                 break;
 
             case StepType.NameInput:
@@ -79,10 +79,6 @@ public class WorldTrigger : MonoBehaviour
             case StepType.OpenMenu:
                 ui.OpenMenu(step.menuOrSceneName);
                 RunNextStep(); 
-                break;
-
-            case StepType.StartGame:
-                ui.StartGame(step.menuOrSceneName);
                 break;
 
             case StepType.CloseUI:

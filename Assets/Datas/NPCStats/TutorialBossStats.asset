@@ -13,12 +13,12 @@ MonoBehaviour:
   m_Name: TutorialBossStats
   m_EditorClassIdentifier: Assembly-CSharp::PlayerStats
   playerName: TutorialBoss
-  communication: 3
-  criticalThinking: 3
-  adaptability: 3
-  emotionalIntelligence: 3
-  sustainability: 3
-  leadership: 3
+  communication: 1
+  criticalThinking: 1
+  adaptability: 1
+  emotionalIntelligence: 1
+  sustainability: 1
+  leadership: 1
   slot1: {fileID: 0}
   slot2: {fileID: 0}
   playerSkills:

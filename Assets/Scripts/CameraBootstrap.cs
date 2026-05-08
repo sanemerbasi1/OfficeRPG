@@ -1,30 +1,49 @@
-using System.Diagnostics;
 using UnityEngine;
+using UnityEngine.EventSystems;
+// 1. Add this namespace for the new Input System UI module
+using UnityEngine.InputSystem.UI; 
 
 public class GameBootstrap
 {
     [RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.BeforeSceneLoad)]
     static void InitializeGameSystem()
     {
-        // 1. Setup Camera System (Your existing logic)
+        // --- CAMERA ---
         GameObject boom = new GameObject("CameraBoom_System");
         CameraMover mover = boom.AddComponent<CameraMover>();
 
         GameObject camObj = new GameObject("Main Camera");
         camObj.transform.SetParent(boom.transform);
         camObj.tag = "MainCamera";
-    
+
         Camera cam = camObj.AddComponent<Camera>();
         cam.orthographic = false;
-        //cam.fieldOfView = 5f; 
         cam.nearClipPlane = 0.3f;
         cam.farClipPlane = 1000f;
-        camObj.transform.localPosition = new Vector3(0, 0, 0);
+        camObj.transform.localPosition = Vector3.zero;
+        
+        // Ensure we don't have multiple audio listeners
+        if (Object.FindAnyObjectByType<AudioListener>() == null)
+        {
+            camObj.AddComponent<AudioListener>();
+        }
 
         Object.DontDestroyOnLoad(boom);
 
-        // 2. Setup Persistent Player
-        // Note: Put your Player prefab in Assets/Resources/Prefabs/Player
+        // --- EVENT SYSTEM ---
+        // Check if an EventSystem already exists in the scene
+        if (Object.FindAnyObjectByType<EventSystem>() == null)
+        {
+            GameObject eventSystem = new GameObject("EventSystem");
+            eventSystem.AddComponent<EventSystem>();
+            
+            // 2. FIX: Add InputSystemUIInputModule instead of StandaloneInputModule
+            eventSystem.AddComponent<InputSystemUIInputModule>();
+            
+            Object.DontDestroyOnLoad(eventSystem);
+        }
+
+        // --- PLAYER ---
         GameObject playerPrefab = Resources.Load<GameObject>("Prefabs/Player");
 
         if (playerPrefab != null)
@@ -40,6 +59,6 @@ public class GameBootstrap
             Debug.LogError("<color=red>Bootstrap Error:</color> Player Prefab not found in Resources!");
         }
 
-        Debug.Log("<color=cyan>Game Systems:</color> Camera and Player Persistent.");
+        Debug.Log("<color=cyan>Game Systems:</color> Camera and Player Persistent (Input System Ready).");
     }
 }

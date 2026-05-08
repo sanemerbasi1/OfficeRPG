@@ -19,8 +19,9 @@ public class UIManager : MonoBehaviour
     [Header("Dialogue & Name Input UI")]
     public GameObject nameInputPanel;
     public GameObject dialoguePanel;
-    public TextMeshProUGUI playerNameText;
+    public TextMeshProUGUI nameInputText;
     public TextMeshProUGUI dialogueText;
+    public TextMeshProUGUI speakerNameText;
     public Button dialogueContinueButton; 
 
     [Header("Auto-Assigned (Do Not Drag)")]
@@ -44,16 +45,17 @@ public class UIManager : MonoBehaviour
         }
     }
 
-    public void ShowDialogue(string message, UnityAction onContinueAction = null)
+    public void ShowDialogue(string message, string speakerName = " ", UnityAction onContinueAction = null)
     {
         if (dialoguePanel != null) dialoguePanel.SetActive(true);
+        
+        if (speakerNameText != null)
+        speakerNameText.text = speakerName;
 
         string processedMessage = message;
 
-        // Swaps {name} with the player's name (and respects any <b> tags you put in the inspector)
-        if (playerStats != null && !string.IsNullOrEmpty(playerStats.playerName))
-        {
-            processedMessage = message.Replace("{name}", playerStats.playerName);
+        if (nameInputText != null && !string.IsNullOrEmpty(nameInputText.text))        {
+        processedMessage = message.Replace("{name}", nameInputText.text);
         }
 
         if (dialogueText != null) dialogueText.text = processedMessage;
@@ -90,7 +92,7 @@ public class UIManager : MonoBehaviour
     {
         if (dialoguePanel != null) dialoguePanel.SetActive(false);
         if (nameInputPanel != null) nameInputPanel.SetActive(true);
-        if (playerNameText != null) playerNameText.text = message;
+        if (nameInputText != null) nameInputText.text = message;
         TogglePlayerMovement(false);
     }
 
@@ -176,16 +178,4 @@ public class UIManager : MonoBehaviour
         }
     }
 
-    public void StartGame(string sceneName)
-    {
-        SceneManager.LoadScene(sceneName);
-    }
-
-    public void QuitGame()
-    {
-        Application.Quit();
-        #if UNITY_EDITOR
-        UnityEditor.EditorApplication.isPlaying = false;
-        #endif
-    }
 }
