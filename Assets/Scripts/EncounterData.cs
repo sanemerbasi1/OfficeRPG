@@ -6,11 +6,12 @@ public class EncounterData : ScriptableObject
 {
     [Header("Visuals & Identity")]
     public string encounterName; 
-    public Sprite enemySprite;  
     public EncounterType type;
 
     [Header("NPC Stats & Skills")]
     public PlayerStats npcStats; 
+    public Sprite enemyPortrait;
+
     public List<SkillData> npcSkills;
 
     [Header("Combat")]

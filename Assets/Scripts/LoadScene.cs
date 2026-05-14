@@ -6,6 +6,8 @@ public class SceneLoader : MonoBehaviour
 {
     private string currentFloor;
 
+    [SerializeField] private UIManager uiManager;
+
     public void GoToFloor(string nextFloor)
     {
         StartCoroutine(TransitionFloor(nextFloor));
@@ -17,11 +19,13 @@ public class SceneLoader : MonoBehaviour
             SceneManager.UnloadSceneAsync(currentFloor);
 
         SceneManager.LoadScene("MainMenu");
+        
     }
 
     public void StartGame()
     {
         StartCoroutine(StartGameRoutine());
+        uiManager.TogglePlayerMovement(true);
     }
 
     IEnumerator StartGameRoutine()

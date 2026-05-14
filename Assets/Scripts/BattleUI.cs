@@ -34,6 +34,16 @@ public class BattleUI : MonoBehaviour
     [SerializeField] private ScrollRect logScrollRect;
     [SerializeField] private RectTransform logContent;
 
+    [Header("Turn Order Display")]
+    [SerializeField] private Image slotPrev2;
+    [SerializeField] private Image slotPrev1;
+    [SerializeField] private Image slotCurrent;
+    [SerializeField] private Image slotNext1;
+    [SerializeField] private Image slotNext2;
+
+    private List<Sprite> turnSequence = new List<Sprite>();
+    private int turnIndex = 0;
+
     // Tracks all active skill buttons for cooldown management
     private List<SkillButton> activeSkillButtons = new List<SkillButton>();
 
@@ -140,5 +150,49 @@ IEnumerator ScrollToBottom()
     yield return new WaitForEndOfFrame();
     LayoutRebuilder.ForceRebuildLayoutImmediate(logContent);
     logScrollRect.verticalNormalizedPosition = 0f;
+}
+
+public void InitializeTurnDisplay(Sprite player, Sprite enemy, bool playerFirst)
+{
+    turnSequence.Clear();
+    Sprite enemySprite = playerFirst ? player : enemy;
+    Sprite playerSprite = playerFirst ? enemy : player;
+    for (int i = 0; i < 20; i++)
+        turnSequence.Add(i % 2 == 0 ? playerSprite : enemySprite);
+
+    turnIndex = 2;
+    RefreshTurnSlots();
+}
+
+public void AdvanceTurnDisplay()
+{
+    turnIndex++;
+    if (turnIndex + 3 >= turnSequence.Count)
+    {
+        Sprite last = turnSequence[turnSequence.Count - 1];
+        Sprite next = last == turnSequence[0] ? turnSequence[1] : turnSequence[0];
+        for (int i = 0; i < 10; i++)
+            turnSequence.Add(i % 2 == 0 ? next : last);
+    }
+    RefreshTurnSlots();
+}
+private void RefreshTurnSlots()
+{
+    SetSlot(slotPrev2,   turnIndex - 2, 0.35f);
+    SetSlot(slotPrev1,   turnIndex - 1, 0.5f);
+    SetSlot(slotCurrent, turnIndex,     1f);
+    SetSlot(slotNext1,   turnIndex + 1, 0.5f);
+    SetSlot(slotNext2,   turnIndex + 2, 0.35f);
+}
+
+private void SetSlot(Image slot, int index, float alpha)
+{
+    if (slot == null) return;
+    bool valid = index >= 0 && index < turnSequence.Count;
+    slot.gameObject.SetActive(valid);
+    if (!valid) return;
+
+    slot.sprite = turnSequence[index];
+    Color c = slot.color; c.a = alpha; slot.color = c;
 }
 }

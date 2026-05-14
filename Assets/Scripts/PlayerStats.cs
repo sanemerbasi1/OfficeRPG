@@ -6,6 +6,8 @@ public class PlayerStats : ScriptableObject
 {
     [Header("Character Info")]
     public string playerName;
+    public Sprite portrait;
+
 
     [Header("Base Stats")]
     public int communication;

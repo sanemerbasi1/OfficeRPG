@@ -13,6 +13,7 @@ MonoBehaviour:
   m_Name: TutorialBossStats
   m_EditorClassIdentifier: Assembly-CSharp::PlayerStats
   playerName: TutorialBoss
+  portrait: {fileID: 0}
   communication: 1
   criticalThinking: 1
   adaptability: 1

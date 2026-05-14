@@ -68,17 +68,17 @@ public class BattleManager : MonoBehaviour
         // 4. Update UI Visuals
         if (battleUI != null)
         {
-            battleUI.SetupBattleUI(playerPermanentStats.playerName, currentEncounter.encounterName, currentEncounter.enemySprite);
+            battleUI.SetupBattleUI(playerPermanentStats.playerName, currentEncounter.encounterName, currentEncounter.enemyPortrait);
             battleUI.GenerateSkillButtons(playerPermanentStats.playerSkills);
             UpdateUI();
         }
 
         // 5. Initiative
         int pAdapt = GetTotalStatValue(playerPermanentStats, StatType.Adaptability);
-        if (pAdapt >= currentEncounter.npcStats.adaptability)
-            StartPlayerTurn();
-        else
-            StartEnemyTurn();
+        bool playerFirst = pAdapt >= currentEncounter.npcStats.adaptability;
+        battleUI.InitializeTurnDisplay(playerPermanentStats.portrait, currentEncounter.enemyPortrait, playerFirst);
+        if (playerFirst) StartPlayerTurn();
+        else             StartEnemyTurn();
     }
 
     public void UpdateUI()
@@ -98,6 +98,7 @@ public class BattleManager : MonoBehaviour
         battleUI.TickAllCooldowns();
         battleUI.ToggleActionButtons(true);
         battleUI.UpdateTurnDisplay("YOUR TURN", Color.green);
+        battleUI.AdvanceTurnDisplay(); 
     }
 
     public void ExecutePlayerAction(SkillData skill)
@@ -153,6 +154,7 @@ public class BattleManager : MonoBehaviour
     enemyBrain.TickCooldowns();
     battleUI.ToggleActionButtons(true);
     battleUI.UpdateTurnDisplay("ENEMY TURN", Color.red);
+    battleUI.AdvanceTurnDisplay(); 
     battleUI.UpdateLog($"<b>{currentEncounter.encounterName}</b> is thinking...");
     Invoke("ExecuteEnemyAction", combatData.enemyActionDelay);
 }
@@ -199,6 +201,7 @@ public class BattleManager : MonoBehaviour
         else
         {
             if (currentState == BattleState.PLAYER_TURN) StartEnemyTurn();
+            
             else StartPlayerTurn();
         }
     }
