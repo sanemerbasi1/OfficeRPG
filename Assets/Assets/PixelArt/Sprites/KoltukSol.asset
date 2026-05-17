@@ -10,9 +10,9 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 13312, guid: 0000000000000000e000000000000000, type: 0}
-  m_Name: koltuka_0
+  m_Name: KoltukSol
   m_EditorClassIdentifier: UnityEngine.dll::UnityEngine.Tilemaps.Tile
-  m_Sprite: {fileID: 900307596314835172, guid: 548d49894fc33465c9b4a55b8dd63710, type: 3}
+  m_Sprite: {fileID: 7499098489314234039, guid: 3e13885f33a9040f187ccc6c48062b52, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_Transform:
     e00: 1

@@ -1,10 +1,10 @@
 fileFormatVersion: 2
-guid: 548d49894fc33465c9b4a55b8dd63710
+guid: 3e13885f33a9040f187ccc6c48062b52
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: 900307596314835172
-    second: koltuka_0
+      213: 7499098489314234039
+    second: koltuky (1)_0
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -72,7 +72,7 @@ TextureImporter:
   platformSettings:
   - serializedVersion: 4
     buildTarget: DefaultTexturePlatform
-    maxTextureSize: 128
+    maxTextureSize: 2048
     resizeAlgorithm: 0
     textureFormat: -1
     textureCompression: 0
@@ -126,13 +126,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: koltuka_0
+      name: koltuky (1)_0
       rect:
         serializedVersion: 2
-        x: 54
-        y: 24
-        width: 65
-        height: 77
+        x: 33
+        y: 19
+        width: 70
+        height: 76
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -141,8 +141,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 4e87ee22df88e7c00800000000000000
-      internalID: 900307596314835172
+      spriteID: 7be4e371856221860800000000000000
+      internalID: 7499098489314234039
       vertices: []
       indices: 
       edges: []
@@ -161,7 +161,7 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      koltuka_0: 900307596314835172
+      koltuky (1)_0: 7499098489314234039
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

@@ -1,10 +1,10 @@
 fileFormatVersion: 2
-guid: 97bf22d1db8b74394a795397e08022eb
+guid: 6340cb964fdb4496da2f4551011ad19c
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: 4976625858448304161
-    second: koltuky_0
+      213: -628329157305009960
+    second: koltuk (1)_0
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -126,13 +126,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: koltuky_0
+      name: koltuk (1)_0
       rect:
         serializedVersion: 2
-        x: 57
-        y: 24
-        width: 62
-        height: 77
+        x: 25
+        y: 19
+        width: 70
+        height: 76
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -141,8 +141,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 128a5d8d9d6801540800000000000000
-      internalID: 4976625858448304161
+      spriteID: 8d870d0e5f9b747f0800000000000000
+      internalID: -628329157305009960
       vertices: []
       indices: 
       edges: []
@@ -161,7 +161,7 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      koltuky_0: 4976625858448304161
+      koltuk (1)_0: -628329157305009960
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

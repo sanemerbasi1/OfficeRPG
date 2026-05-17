@@ -12,9 +12,10 @@ public class WorldTrigger : MonoBehaviour
         public StepType type;
         public string speakerName;
         [TextArea(2, 5)] public string textContent; 
-        public string menuOrSceneName; 
+        public string menuName; 
         
         public EncounterData encounterData; 
+        public Transform enemyTransform;
     }
 
     [Header("Settings")]
@@ -65,11 +66,11 @@ public class WorldTrigger : MonoBehaviour
 
             case StepType.StatMenuManual:
             case StepType.TraitMenuManual:
-                ui.OpenMenu(step.menuOrSceneName); 
+                ui.OpenMenu(step.menuName); 
                 break;
 
             case StepType.OpenMenu:
-                ui.OpenMenu(step.menuOrSceneName);
+                ui.OpenMenu(step.menuName);
                 RunNextStep(); 
                 break;
 
@@ -78,13 +79,10 @@ public class WorldTrigger : MonoBehaviour
                 RunNextStep();
                 break;
 
-            // --- NEW BATTLE CASE ---
             case StepType.Battle:
                 if (step.encounterData != null)
                 {
-                    // We pass the callback () => RunNextStep() so the battle 
-                    // triggers the next part of the sequence ONLY when it ends.
-                    battleManager.StartBattle(step.encounterData, () => RunNextStep());
+                    battleManager.StartBattle(step.encounterData, step.enemyTransform, () => RunNextStep());
                 }
                 else
                 {

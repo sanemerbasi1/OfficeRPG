@@ -1,4 +1,5 @@
 using UnityEngine;
+using System.Collections;
 using System;
 
 public class BattleManager : MonoBehaviour
@@ -20,6 +21,12 @@ public class BattleManager : MonoBehaviour
     public GameObject battleCanvas;
     public GameObject gameOverUI;
 
+    [Header("Animation")]
+    [SerializeField] private Transform playerTransform;
+    [SerializeField] private Transform enemyTransform;
+    [SerializeField] private float attackMoveSpeed = 8f;
+    [SerializeField] private float attackMoveDistance = 1.5f;
+
     [Header("Read-Only Live Stats (Inspector Debug)")]
     public int playerCurrentMH, playerMaxMH, playerArmor, playerShield;
     public int enemyCurrentMH, enemyMaxMH, enemyArmor, enemyShield;
@@ -33,8 +40,10 @@ public class BattleManager : MonoBehaviour
         else Destroy(gameObject);
     }
 
-    public void StartBattle(EncounterData data, Action onComplete)
+    public void StartBattle(EncounterData data, Transform enemy, Action onComplete)
     {
+        playerTransform = GameObject.FindWithTag("Player").transform;
+        enemyTransform = enemy;
         currentEncounter = data;
         onBattleComplete = onComplete;
         currentState = BattleState.START;
@@ -146,6 +155,8 @@ public class BattleManager : MonoBehaviour
         {
             battleUI.UpdateLog($"<b>{currentEncounter.encounterName}</b> has dodged!");
         }
+        
+        PlaySkillAnimation(true);
     }
 
     private void StartEnemyTurn()
@@ -177,6 +188,7 @@ public class BattleManager : MonoBehaviour
         switch (action.skillUsed != null ? action.skillUsed.type : SkillType.Attack)
         {
             case SkillType.Attack:
+                PlaySkillAnimation(false);
                 CombatLogic.ProcessDamage(action.value, false, combatData, ref playerCurrentMH, ref playerArmor, ref playerShield);
                 break;
 
@@ -264,4 +276,33 @@ public class BattleManager : MonoBehaviour
             _ => 0
         };
     }
+    private void PlaySkillAnimation(bool isPlayer)
+{
+    if (isPlayer)
+        StartCoroutine(MoveAndReturn(playerTransform, enemyTransform.position));
+    else
+        StartCoroutine(MoveAndReturn(enemyTransform, playerTransform.position));
+}
+private IEnumerator MoveAndReturn(Transform mover, Vector3 targetPos)
+{
+    Vector3 originalPos = mover.position;
+    Vector3 direction = (targetPos - originalPos).normalized;
+    Vector3 attackPos = originalPos + direction * attackMoveDistance;
+
+    // Move toward enemy
+    while (Vector3.Distance(mover.position, attackPos) > 0.05f)
+    {
+        mover.position = Vector3.MoveTowards(mover.position, attackPos, attackMoveSpeed * Time.deltaTime);
+        yield return null;
+    }
+
+    // Move back to original
+    while (Vector3.Distance(mover.position, originalPos) > 0.05f)
+    {
+        mover.position = Vector3.MoveTowards(mover.position, originalPos, attackMoveSpeed * Time.deltaTime);
+        yield return null;
+    }
+
+    mover.position = originalPos; // snap to exact position
+}
 }
