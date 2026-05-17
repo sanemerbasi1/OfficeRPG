@@ -6,12 +6,7 @@ using System.Collections.Generic;
 
 public class BattleUI : MonoBehaviour
 {
-    [Header("Player Visuals")]
-    public TextMeshProUGUI playerNameText;
-    public Slider playerMHBar;
-    public TextMeshProUGUI playerMHValueText; 
-    public TextMeshProUGUI playerShieldText; 
-    public Slider playerShieldBar;
+    public PlayerCanvasItems playerCanvas;
 
     [Header("Enemy Visuals")]
     public TextMeshProUGUI enemyNameText;
@@ -49,7 +44,7 @@ public class BattleUI : MonoBehaviour
 
     public void SetupBattleUI(string pName, string eName, Sprite eSprite)
     {
-        playerNameText.text = pName;
+        playerCanvas.playerNameText.text = pName;
         enemyNameText.text = eName;
         enemyImage.sprite = eSprite;
     }
@@ -71,14 +66,12 @@ public class BattleUI : MonoBehaviour
         }
     }
 
-    // Call this when the player uses a skill to start its cooldown
     public void NotifySkillUsed(SkillData skill)
     {
         SkillButton btn = activeSkillButtons.Find(b => b.skill == skill);
         if (btn != null) btn.OnSkillUsed();
     }
 
-    // Call this at the start of each player turn to count down all cooldowns
     public void TickAllCooldowns()
     {
         foreach (SkillButton btn in activeSkillButtons)
@@ -88,15 +81,15 @@ public class BattleUI : MonoBehaviour
     public void UpdateStats(int pMH, int pMax, int pShield, int pArmor, 
                             int eMH, int eMax, int eShield, int eArmor)
     {
-        playerMHBar.maxValue = pMax;
-        playerMHBar.value = pMH;
+        playerCanvas.playerMHBar.maxValue = pMax;
+        playerCanvas.playerMHBar.value = pMH;
 
-        playerShieldBar.maxValue = pMax; 
-        playerShieldBar.value = pShield; 
-        playerShieldBar.gameObject.SetActive(pShield > 0); 
+        playerCanvas.playerShieldBar.maxValue = pMax; 
+        playerCanvas.playerShieldBar.value = pShield; 
+        playerCanvas.playerShieldBar.gameObject.SetActive(pShield > 0); 
 
-        playerMHValueText.text = $"{pMH} / {pMax} MH";
-        playerShieldText.text = $"ARM: {pShield}"; 
+        playerCanvas.playerMHValueText.text = $"{pMH} / {pMax} MH";
+        playerCanvas.playerShieldText.text = $"ARM: {pShield}"; 
 
         enemyMHBar.maxValue = eMax;
         enemyMHBar.value = eMH;
@@ -194,5 +187,9 @@ private void SetSlot(Image slot, int index, float alpha)
 
     slot.sprite = turnSequence[index];
     Color c = slot.color; c.a = alpha; slot.color = c;
+}
+public void SetPlayerCanvas(PlayerCanvasItems healthUI)
+{
+    playerCanvas = healthUI;
 }
 }

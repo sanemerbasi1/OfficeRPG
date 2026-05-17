@@ -19,11 +19,13 @@ public class BattleManager : MonoBehaviour
     [Header("UI & Scene References")]
     public BattleUI battleUI;
     public GameObject battleCanvas;
+    public GameObject enemyCanvas;
+    private PlayerCanvasItems playerCanvas;
     public GameObject gameOverUI;
 
     [Header("Animation")]
-    [SerializeField] private Transform playerTransform;
-    [SerializeField] private Transform enemyTransform;
+    private Transform playerTransform;
+    private Transform enemyTransform;
     [SerializeField] private float attackMoveSpeed = 8f;
     [SerializeField] private float attackMoveDistance = 1.5f;
 
@@ -43,12 +45,17 @@ public class BattleManager : MonoBehaviour
     public void StartBattle(EncounterData data, Transform enemy, Action onComplete)
     {
         playerTransform = GameObject.FindWithTag("Player").transform;
+        playerCanvas = playerTransform.GetComponentInChildren<PlayerCanvasItems>(true);
+        battleUI.SetPlayerCanvas(playerCanvas);
+
         enemyTransform = enemy;
         currentEncounter = data;
         onBattleComplete = onComplete;
         currentState = BattleState.START;
 
         if (battleCanvas != null) battleCanvas.SetActive(true);
+        if (enemyCanvas != null) enemyCanvas.SetActive(true);
+        if (playerCanvas != null) playerCanvas.healthCanvas.gameObject.SetActive(true);
         if (MainUI != null) MainUI.dialoguePanel.SetActive(false);
         battleUI.fullLogPanel.SetActive(false);
 
@@ -237,6 +244,8 @@ public class BattleManager : MonoBehaviour
     private void FinishBattle()
     {
         if (battleCanvas != null) battleCanvas.SetActive(false);
+        if (enemyCanvas != null) enemyCanvas.SetActive(false);
+        if (playerCanvas != null) playerCanvas.healthCanvas.gameObject.SetActive(false);
         if (MainUI != null) MainUI.dialoguePanel.SetActive(true);
         onBattleComplete?.Invoke();
     }
@@ -304,5 +313,11 @@ private IEnumerator MoveAndReturn(Transform mover, Vector3 targetPos)
     }
 
     mover.position = originalPos; // snap to exact position
+}
+public void ForceEndBattle()
+{
+    if (battleCanvas != null) battleCanvas.SetActive(false);
+    if (playerCanvas != null) playerCanvas.healthCanvas.gameObject.SetActive(false);
+    currentState = BattleState.START;
 }
 }

@@ -15,6 +15,9 @@ public class SceneLoader : MonoBehaviour
 
     public void GoToMainMenu()
     {
+        if (BattleManager.Instance != null)
+        BattleManager.Instance.ForceEndBattle();
+        
         if (currentFloor != null)
             SceneManager.UnloadSceneAsync(currentFloor);
 
