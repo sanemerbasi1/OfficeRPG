@@ -19,13 +19,11 @@ public class BattleManager : MonoBehaviour
     [Header("UI & Scene References")]
     public BattleUI battleUI;
     public GameObject battleCanvas;
-    public GameObject enemyCanvas;
-    private PlayerCanvasItems playerCanvas;
     public GameObject gameOverUI;
 
     [Header("Animation")]
-    private Transform playerTransform;
-    private Transform enemyTransform;
+    public RectTransform playerTransform;
+    public RectTransform enemyTransform;
     [SerializeField] private float attackMoveSpeed = 8f;
     [SerializeField] private float attackMoveDistance = 1.5f;
 
@@ -42,20 +40,13 @@ public class BattleManager : MonoBehaviour
         else Destroy(gameObject);
     }
 
-    public void StartBattle(EncounterData data, Transform enemy, Action onComplete)
+    public void StartBattle(EncounterData data, Action onComplete)
     {
-        playerTransform = GameObject.FindWithTag("Player").transform;
-        playerCanvas = playerTransform.GetComponentInChildren<PlayerCanvasItems>(true);
-        battleUI.SetPlayerCanvas(playerCanvas);
-
-        enemyTransform = enemy;
         currentEncounter = data;
         onBattleComplete = onComplete;
         currentState = BattleState.START;
 
         if (battleCanvas != null) battleCanvas.SetActive(true);
-        if (enemyCanvas != null) enemyCanvas.SetActive(true);
-        if (playerCanvas != null) playerCanvas.healthCanvas.gameObject.SetActive(true);
         if (MainUI != null) MainUI.dialoguePanel.SetActive(false);
         battleUI.fullLogPanel.SetActive(false);
 
@@ -244,8 +235,6 @@ public class BattleManager : MonoBehaviour
     private void FinishBattle()
     {
         if (battleCanvas != null) battleCanvas.SetActive(false);
-        if (enemyCanvas != null) enemyCanvas.SetActive(false);
-        if (playerCanvas != null) playerCanvas.healthCanvas.gameObject.SetActive(false);
         if (MainUI != null) MainUI.dialoguePanel.SetActive(true);
         onBattleComplete?.Invoke();
     }
@@ -288,36 +277,35 @@ public class BattleManager : MonoBehaviour
     private void PlaySkillAnimation(bool isPlayer)
 {
     if (isPlayer)
-        StartCoroutine(MoveAndReturn(playerTransform, enemyTransform.position));
+        StartCoroutine(MoveAndReturn(playerTransform, attackMoveDistance));   // player moves right
     else
-        StartCoroutine(MoveAndReturn(enemyTransform, playerTransform.position));
+        StartCoroutine(MoveAndReturn(enemyTransform, -attackMoveDistance));   // enemy moves left
 }
-private IEnumerator MoveAndReturn(Transform mover, Vector3 targetPos)
+
+private IEnumerator MoveAndReturn(RectTransform mover, float xOffset)
 {
-    Vector3 originalPos = mover.position;
-    Vector3 direction = (targetPos - originalPos).normalized;
-    Vector3 attackPos = originalPos + direction * attackMoveDistance;
+    Vector2 originalPos = mover.anchoredPosition;
+    Vector2 attackPos = originalPos + new Vector2(xOffset, 0f);
 
     // Move toward enemy
-    while (Vector3.Distance(mover.position, attackPos) > 0.05f)
+    while (Vector2.Distance(mover.anchoredPosition, attackPos) > 0.5f)
     {
-        mover.position = Vector3.MoveTowards(mover.position, attackPos, attackMoveSpeed * Time.deltaTime);
+        mover.anchoredPosition = Vector2.MoveTowards(mover.anchoredPosition, attackPos, attackMoveSpeed * Time.deltaTime);
         yield return null;
     }
 
-    // Move back to original
-    while (Vector3.Distance(mover.position, originalPos) > 0.05f)
+    // Move back
+    while (Vector2.Distance(mover.anchoredPosition, originalPos) > 0.5f)
     {
-        mover.position = Vector3.MoveTowards(mover.position, originalPos, attackMoveSpeed * Time.deltaTime);
+        mover.anchoredPosition = Vector2.MoveTowards(mover.anchoredPosition, originalPos, attackMoveSpeed * Time.deltaTime);
         yield return null;
     }
 
-    mover.position = originalPos; // snap to exact position
+    mover.anchoredPosition = originalPos;
 }
 public void ForceEndBattle()
 {
     if (battleCanvas != null) battleCanvas.SetActive(false);
-    if (playerCanvas != null) playerCanvas.healthCanvas.gameObject.SetActive(false);
     currentState = BattleState.START;
 }
 }

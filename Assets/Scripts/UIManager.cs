@@ -18,8 +18,9 @@ public class UIManager : MonoBehaviour
 
     [Header("Dialogue & Name Input UI")]
     public GameObject nameInputPanel;
-    public GameObject dialoguePanel;
     public TextMeshProUGUI nameInputText;
+    public TextMeshProUGUI inputSpeakerNameText;
+    public GameObject dialoguePanel;
     public TextMeshProUGUI dialogueText;
     public TextMeshProUGUI speakerNameText;
     public Button dialogueContinueButton; 
@@ -49,8 +50,7 @@ public class UIManager : MonoBehaviour
     {
         if (dialoguePanel != null) dialoguePanel.SetActive(true);
         
-        if (speakerNameText != null)
-        speakerNameText.text = speakerName;
+        if (speakerNameText != null) speakerNameText.text = speakerName;
 
         string processedMessage = message;
 
@@ -79,7 +79,7 @@ public class UIManager : MonoBehaviour
         if (dialoguePanel != null) dialoguePanel.SetActive(false);
         if (nameInputPanel != null) nameInputPanel.SetActive(false);
         
-        foreach (GameObject menu in allMenus)
+        foreach (GameObject menu in allMenus) 
         {
             if (menu != null) menu.SetActive(false);
         }
@@ -87,12 +87,12 @@ public class UIManager : MonoBehaviour
         TogglePlayerMovement(true);
     }
 
-    // --- NAME INPUT ---
-    public void ShowNameInputPanel(string message)
+    public void ShowNameInputPanel(string message, string speakerName = " ")
     {
         if (dialoguePanel != null) dialoguePanel.SetActive(false);
         if (nameInputPanel != null) nameInputPanel.SetActive(true);
         if (nameInputText != null) nameInputText.text = message;
+        if (inputSpeakerNameText != null) inputSpeakerNameText.text = speakerName;
         TogglePlayerMovement(false);
     }
 

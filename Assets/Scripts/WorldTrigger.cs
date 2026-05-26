@@ -15,7 +15,6 @@ public class WorldTrigger : MonoBehaviour
         public string menuName; 
         
         public EncounterData encounterData; 
-        public Transform enemyTransform;
     }
 
     [Header("Settings")]
@@ -61,7 +60,7 @@ public class WorldTrigger : MonoBehaviour
                 break;
 
             case StepType.NameInput:
-                ui.ShowNameInputPanel(step.textContent);
+                ui.ShowNameInputPanel(step.textContent, step.speakerName);
                 break;
 
             case StepType.StatMenuManual:
@@ -82,7 +81,7 @@ public class WorldTrigger : MonoBehaviour
             case StepType.Battle:
                 if (step.encounterData != null)
                 {
-                    battleManager.StartBattle(step.encounterData, step.enemyTransform, () => RunNextStep());
+                    battleManager.StartBattle(step.encounterData, () => RunNextStep());
                 }
                 else
                 {
