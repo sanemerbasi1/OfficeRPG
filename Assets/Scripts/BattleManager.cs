@@ -2,11 +2,16 @@ using UnityEngine;
 using System.Collections;
 using System;
 
+public enum TimeOfDay { Day, Afternoon, Night }
+
 public class BattleManager : MonoBehaviour
 {
+    [Header("Time of Day")]
+    public TimeOfDay currentTime = TimeOfDay.Day;
     public static BattleManager Instance;
-
     public BattleState currentState;
+    
+    private bool isFirstTurn;
 
     [Header("Data References")]
     [SerializeField] private CombatData combatData;
@@ -36,26 +41,40 @@ public class BattleManager : MonoBehaviour
 
     private void Awake()
     {
-        if (Instance == null) Instance = this;
-        else Destroy(gameObject);
+        Instance = this;
     }
 
     public void StartBattle(EncounterData data, Action onComplete)
     {
+        CancelInvoke(); 
+        Instance = this;
         currentEncounter = data;
         onBattleComplete = onComplete;
         currentState = BattleState.START;
 
+        // FIXED: Now correctly accesses the UI manager and player data array
+        if (battleUI != null && playerPermanentStats != null)
+        {
+            battleUI.GenerateSkillButtons(playerPermanentStats.playerSkills);
+        }
+
         if (battleCanvas != null) battleCanvas.SetActive(true);
         if (MainUI != null) MainUI.dialoguePanel.SetActive(false);
-        battleUI.fullLogPanel.SetActive(false);
+        if (battleUI != null && battleUI.fullLogPanel != null) battleUI.fullLogPanel.SetActive(false);
 
+        if (battleUI != null)
+        {
+            battleUI.ClearLog();
+            battleUI.SetTimeOfDay(currentTime);
+        }
+        
         SetupBattle();
     }
 
     private void SetupBattle()
     {
         enemyBrain.InitializeCooldowns(currentEncounter);
+        
         // 1. Initial Narrative Log
         battleUI.UpdateLog(currentEncounter.introText);
 
@@ -72,11 +91,10 @@ public class BattleManager : MonoBehaviour
         enemyArmor = currentEncounter.npcStats.emotionalIntelligence;
         enemyShield = 0;
 
-        // 4. Update UI Visuals
+        // 4. Update UI Visuals (REMOVED redundant button generation here)
         if (battleUI != null)
         {
             battleUI.SetupBattleUI(playerPermanentStats.playerName, currentEncounter.encounterName, currentEncounter.enemyPortrait);
-            battleUI.GenerateSkillButtons(playerPermanentStats.playerSkills);
             UpdateUI();
         }
 
@@ -84,6 +102,8 @@ public class BattleManager : MonoBehaviour
         int pAdapt = GetTotalStatValue(playerPermanentStats, StatType.Adaptability);
         bool playerFirst = pAdapt >= currentEncounter.npcStats.adaptability;
         battleUI.InitializeTurnDisplay(playerPermanentStats.portrait, currentEncounter.enemyPortrait, playerFirst);
+        
+        isFirstTurn = true;
         if (playerFirst) StartPlayerTurn();
         else             StartEnemyTurn();
     }
@@ -102,7 +122,8 @@ public class BattleManager : MonoBehaviour
     private void StartPlayerTurn()
     {
         currentState = BattleState.PLAYER_TURN;
-        battleUI.TickAllCooldowns();
+        if (!isFirstTurn) battleUI.TickAllCooldowns();
+        isFirstTurn = false;
         battleUI.ToggleActionButtons(true);
         battleUI.UpdateTurnDisplay("YOUR TURN", Color.green);
         battleUI.AdvanceTurnDisplay(); 
@@ -110,6 +131,7 @@ public class BattleManager : MonoBehaviour
 
     public void ExecutePlayerAction(SkillData skill)
     {
+        Debug.Log($"[BATTLE DIAGNOSTIC] Skill Clicked: {skill.skillName} | Current State: {currentState}");
         if (currentState != BattleState.PLAYER_TURN) return;
         battleUI.ToggleActionButtons(false);
         battleUI.NotifySkillUsed(skill);
@@ -158,51 +180,51 @@ public class BattleManager : MonoBehaviour
     }
 
     private void StartEnemyTurn()
-{
-    currentState = BattleState.ENEMY_TURN;
-    enemyBrain.TickCooldowns();
-    battleUI.ToggleActionButtons(true);
-    battleUI.UpdateTurnDisplay("ENEMY TURN", Color.red);
-    battleUI.AdvanceTurnDisplay(); 
-    battleUI.UpdateLog($"<b>{currentEncounter.encounterName}</b> is thinking...");
-    Invoke("ExecuteEnemyAction", combatData.enemyActionDelay);
-}
-
-    private void ExecuteEnemyAction()
-{
-    int playerAdapt = GetTotalStatValue(playerPermanentStats, StatType.Adaptability); 
-
-    EnemyActionResult action = enemyBrain.DecideAction(
-        currentEncounter, combatData,
-        enemyCurrentMH, enemyMaxMH,
-        playerCurrentMH, playerMaxMH,
-        playerAdapt 
-    );
-
-    battleUI.UpdateLog(action.logMessage);
-
-    if (action.hit)
     {
-        switch (action.skillUsed != null ? action.skillUsed.type : SkillType.Attack)
-        {
-            case SkillType.Attack:
-                PlaySkillAnimation(false);
-                CombatLogic.ProcessDamage(action.value, false, combatData, ref playerCurrentMH, ref playerArmor, ref playerShield);
-                break;
-
-            case SkillType.Defend:
-                enemyShield += action.value;
-                break;
-
-            case SkillType.Heal:
-                enemyCurrentMH = Mathf.Min(enemyCurrentMH + action.value, enemyMaxMH);
-                break;
-        }
+        currentState = BattleState.ENEMY_TURN;
+        enemyBrain.TickCooldowns();
+        battleUI.ToggleActionButtons(false);
+        battleUI.UpdateTurnDisplay("ENEMY TURN", Color.red);
+        battleUI.AdvanceTurnDisplay(); 
+        battleUI.UpdateLog($"<b>{currentEncounter.encounterName}</b> is thinking...");
+        Invoke("ExecuteEnemyAction", combatData.enemyActionDelay);
     }
 
-    UpdateUI();
-    CheckWinCondition();
-}
+    private void ExecuteEnemyAction()
+    {
+        int playerAdapt = GetTotalStatValue(playerPermanentStats, StatType.Adaptability); 
+
+        EnemyActionResult action = enemyBrain.DecideAction(
+            currentEncounter, combatData,
+            enemyCurrentMH, enemyMaxMH,
+            playerCurrentMH, playerMaxMH,
+            playerAdapt 
+        );
+
+        battleUI.UpdateLog(action.logMessage);
+
+        if (action.hit)
+        {
+            switch (action.skillUsed != null ? action.skillUsed.type : SkillType.Attack)
+            {
+                case SkillType.Attack:
+                    PlaySkillAnimation(false);
+                    CombatLogic.ProcessDamage(action.value, false, combatData, ref playerCurrentMH, ref playerArmor, ref playerShield);
+                    break;
+
+                case SkillType.Defend:
+                    enemyShield += action.value;
+                    break;
+
+                case SkillType.Heal:
+                    enemyCurrentMH = Mathf.Min(enemyCurrentMH + action.value, enemyMaxMH);
+                    break;
+            }
+        }
+
+        UpdateUI();
+        CheckWinCondition();
+    }
 
     private void CheckWinCondition()
     {
@@ -211,7 +233,6 @@ public class BattleManager : MonoBehaviour
         else
         {
             if (currentState == BattleState.PLAYER_TURN) StartEnemyTurn();
-            
             else StartPlayerTurn();
         }
     }
@@ -234,6 +255,15 @@ public class BattleManager : MonoBehaviour
 
     private void FinishBattle()
     {
+        currentTime = currentTime switch
+        {
+            TimeOfDay.Day       => TimeOfDay.Afternoon,
+            TimeOfDay.Afternoon => TimeOfDay.Night,
+            TimeOfDay.Night     => TimeOfDay.Day, 
+            _ => TimeOfDay.Day
+        };
+        battleUI.SetTimeOfDay(currentTime);
+
         if (battleCanvas != null) battleCanvas.SetActive(false);
         if (MainUI != null) MainUI.dialoguePanel.SetActive(true);
         onBattleComplete?.Invoke();
@@ -274,38 +304,38 @@ public class BattleManager : MonoBehaviour
             _ => 0
         };
     }
+
     private void PlaySkillAnimation(bool isPlayer)
-{
-    if (isPlayer)
-        StartCoroutine(MoveAndReturn(playerTransform, attackMoveDistance));   // player moves right
-    else
-        StartCoroutine(MoveAndReturn(enemyTransform, -attackMoveDistance));   // enemy moves left
-}
-
-private IEnumerator MoveAndReturn(RectTransform mover, float xOffset)
-{
-    Vector2 originalPos = mover.anchoredPosition;
-    Vector2 attackPos = originalPos + new Vector2(xOffset, 0f);
-
-    // Move toward enemy
-    while (Vector2.Distance(mover.anchoredPosition, attackPos) > 0.5f)
     {
-        mover.anchoredPosition = Vector2.MoveTowards(mover.anchoredPosition, attackPos, attackMoveSpeed * Time.deltaTime);
-        yield return null;
+        if (isPlayer)
+            StartCoroutine(MoveAndReturn(playerTransform, attackMoveDistance));   
+        else
+            StartCoroutine(MoveAndReturn(enemyTransform, -attackMoveDistance));   
     }
 
-    // Move back
-    while (Vector2.Distance(mover.anchoredPosition, originalPos) > 0.5f)
+    private IEnumerator MoveAndReturn(RectTransform mover, float xOffset)
     {
-        mover.anchoredPosition = Vector2.MoveTowards(mover.anchoredPosition, originalPos, attackMoveSpeed * Time.deltaTime);
-        yield return null;
+        Vector2 originalPos = mover.anchoredPosition;
+        Vector2 attackPos = originalPos + new Vector2(xOffset, 0f);
+
+        while (Vector2.Distance(mover.anchoredPosition, attackPos) > 0.5f)
+        {
+            mover.anchoredPosition = Vector2.MoveTowards(mover.anchoredPosition, attackPos, attackMoveSpeed * Time.deltaTime);
+            yield return null;
+        }
+
+        while (Vector2.Distance(mover.anchoredPosition, originalPos) > 0.5f)
+        {
+            mover.anchoredPosition = Vector2.MoveTowards(mover.anchoredPosition, originalPos, attackMoveSpeed * Time.deltaTime);
+            yield return null;
+        }
+
+        mover.anchoredPosition = originalPos;
     }
 
-    mover.anchoredPosition = originalPos;
-}
-public void ForceEndBattle()
-{
-    if (battleCanvas != null) battleCanvas.SetActive(false);
-    currentState = BattleState.START;
-}
+    public void ForceEndBattle()
+    {
+        if (battleCanvas != null) battleCanvas.SetActive(false);
+        currentState = BattleState.START;
+    }
 }

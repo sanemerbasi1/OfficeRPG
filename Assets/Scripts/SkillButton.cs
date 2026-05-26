@@ -6,22 +6,20 @@ public class SkillButton : MonoBehaviour
 {
     public TextMeshProUGUI skillNameText;
     public GameObject cooldownPanel; 
-    private TextMeshProUGUI cooldownText; 
     public Image iconImage;
 
+    private TextMeshProUGUI cooldownText; 
     private SkillData assignedSkill;
     private Button btn;
     private int remainingCooldown = 0;
 
-    // Expose skill for BattleUI to find via Find()
     public SkillData skill => assignedSkill;
 
     private void Awake()
     {
         btn = GetComponent<Button>();
-        
         if (cooldownPanel != null)
-        cooldownText = cooldownPanel.GetComponentInChildren<TextMeshProUGUI>();
+            cooldownText = cooldownPanel.GetComponentInChildren<TextMeshProUGUI>();
     }
 
     public void Setup(SkillData skill)
@@ -34,16 +32,12 @@ public class SkillButton : MonoBehaviour
 
         if (iconImage != null)
         {
-            if (skill.skillIcon != null)
-            {
-                iconImage.sprite = skill.skillIcon;
-                iconImage.gameObject.SetActive(true);
-            }
-            else
-            {
-                iconImage.gameObject.SetActive(false);
-            }
+            iconImage.sprite = skill.skillIcon;
+            iconImage.gameObject.SetActive(skill.skillIcon != null);
         }
+
+        // Lazy initialization safeguard
+        if (btn == null) btn = GetComponent<Button>();
 
         if (btn != null)
         {
@@ -72,24 +66,24 @@ public class SkillButton : MonoBehaviour
     private void RefreshUI()
     {
         bool onCooldown = remainingCooldown > 0;
-        if (btn != null) btn.interactable = !onCooldown;
+        
+        if (btn != null) 
+            btn.interactable = !onCooldown;
 
-        if (cooldownText != null)
-        {
-            cooldownText.gameObject.SetActive(onCooldown);
-            if (onCooldown) cooldownText.text = remainingCooldown.ToString();
-        }
+        // Optimization: Toggles the whole panel background, not just text mesh
+        if (cooldownPanel != null) 
+            cooldownPanel.SetActive(onCooldown);
+
+        if (cooldownText != null && onCooldown) 
+            cooldownText.text = remainingCooldown.ToString();
     }
 
     private void OnButtonClick()
     {
+        // Safe, clean execution statement without debugging bloat
         if (assignedSkill != null && BattleManager.Instance != null)
         {
             BattleManager.Instance.ExecutePlayerAction(assignedSkill);
-        }
-        else
-        {
-            Debug.LogWarning("SkillButton: Assigned skill or BattleManager.Instance is missing!");
         }
     }
 }
