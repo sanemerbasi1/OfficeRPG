@@ -6,8 +6,6 @@ public enum TimeOfDay { Day, Afternoon, Night }
 
 public class BattleManager : MonoBehaviour
 {
-    [Header("Time of Day")]
-    public TimeOfDay currentTime = TimeOfDay.Day;
     public static BattleManager Instance;
     public BattleState currentState;
     
@@ -33,7 +31,10 @@ public class BattleManager : MonoBehaviour
     [SerializeField] private float attackMoveDistance = 1.5f;
 
     [Header("Read-Only Live Stats (Inspector Debug)")]
-    public int playerCurrentMH, playerMaxMH, playerArmor, playerShield;
+    public int playerCurrentMH;
+    public int playerMaxMH;
+    public int playerArmor;
+    public int playerShield;
     public int enemyCurrentMH, enemyMaxMH, enemyArmor, enemyShield;
 
     private EncounterData currentEncounter;
@@ -45,31 +46,50 @@ public class BattleManager : MonoBehaviour
     }
 
     public void StartBattle(EncounterData data, Action onComplete)
+{
+    CancelInvoke(); 
+    Instance = this;
+    currentEncounter = data;
+    onBattleComplete = onComplete;
+    currentState = BattleState.START;
+
+    // Safety Check: Make sure we actually have a BattleUI script linked
+    if (battleUI == null)
     {
-        CancelInvoke(); 
-        Instance = this;
-        currentEncounter = data;
-        onBattleComplete = onComplete;
-        currentState = BattleState.START;
-
-        // FIXED: Now correctly accesses the UI manager and player data array
-        if (battleUI != null && playerPermanentStats != null)
-        {
-            battleUI.GenerateSkillButtons(playerPermanentStats.playerSkills);
-        }
-
-        if (battleCanvas != null) battleCanvas.SetActive(true);
-        if (MainUI != null) MainUI.dialoguePanel.SetActive(false);
-        if (battleUI != null && battleUI.fullLogPanel != null) battleUI.fullLogPanel.SetActive(false);
-
-        if (battleUI != null)
-        {
-            battleUI.ClearLog();
-            battleUI.SetTimeOfDay(currentTime);
-        }
-        
-        SetupBattle();
+        Debug.LogError("[BATTLE MANAGER ERROR] The 'BattleUI' slot is empty on the BattleManager script component!");
+        return;
     }
+
+    if (playerPermanentStats != null)
+    {
+        battleUI.GenerateSkillButtons(playerPermanentStats.playerSkills);
+    }
+    else
+    {
+        Debug.LogError("[BATTLE MANAGER ERROR] 'PlayerPermanentStats' scriptable object reference is missing!");
+    }
+
+    if (battleCanvas != null) battleCanvas.SetActive(true);
+    if (MainUI != null) MainUI.dialoguePanel.SetActive(false);
+    if (battleUI.fullLogPanel != null) battleUI.fullLogPanel.SetActive(false);
+
+    battleUI.ClearLog();
+    
+    // --- UPDATED SMART FALLBACK LOGIC ---
+    if (DayManager.Instance != null)
+    {
+        // Perfect scenario: Use global time
+        battleUI.SetTimeOfDay(DayManager.Instance.currentTime);
+    }
+    else
+    {
+        // Fallback scenario: DayManager is disconnected/missing, use local time so the UI still works!
+        Debug.LogWarning("[BATTLE MANAGER] DayManager.Instance is NULL. Automatically falling back to local BattleManager time.");
+        battleUI.SetTimeOfDay(TimeOfDay.Day);
+    }
+    
+    SetupBattle();
+}
 
     private void SetupBattle()
     {
@@ -78,12 +98,17 @@ public class BattleManager : MonoBehaviour
         // 1. Initial Narrative Log
         battleUI.UpdateLog(currentEncounter.introText);
 
-        // 2. Initialize Player Stats
-        int totalSustain = GetTotalStatValue(playerPermanentStats, StatType.Sustainability);
-        playerMaxMH = CombatLogic.CalculateMaxMentalHealth(totalSustain, combatData);
-        playerCurrentMH = playerMaxMH;
-        playerArmor = GetTotalStatValue(playerPermanentStats, StatType.EmotionalIntelligence);
-        playerShield = 0;
+        // 2. Initialize Player Stats via ScriptableObject
+        int totalSustain = playerPermanentStats.GetTotalStatValue(StatType.Sustainability);
+        playerPermanentStats.maxMH = CombatLogic.CalculateMaxMentalHealth(totalSustain, combatData);
+        playerArmor = playerPermanentStats.GetTotalStatValue(StatType.EmotionalIntelligence);  
+
+        // If it's a fresh game run or player recovered from 0, set up defaults
+        if (playerPermanentStats.currentMH <= 0)
+        {
+            playerPermanentStats.currentMH = playerPermanentStats.maxMH;
+            playerPermanentStats.currentShield = 0;
+        }
 
         // 3. Initialize Enemy Stats
         enemyMaxMH = CombatLogic.CalculateMaxMentalHealth(currentEncounter.npcStats.sustainability, combatData);
@@ -91,7 +116,6 @@ public class BattleManager : MonoBehaviour
         enemyArmor = currentEncounter.npcStats.emotionalIntelligence;
         enemyShield = 0;
 
-        // 4. Update UI Visuals (REMOVED redundant button generation here)
         if (battleUI != null)
         {
             battleUI.SetupBattleUI(playerPermanentStats.playerName, currentEncounter.encounterName, currentEncounter.enemyPortrait);
@@ -99,7 +123,7 @@ public class BattleManager : MonoBehaviour
         }
 
         // 5. Initiative
-        int pAdapt = GetTotalStatValue(playerPermanentStats, StatType.Adaptability);
+        int pAdapt = playerPermanentStats.GetTotalStatValue(StatType.Adaptability);
         bool playerFirst = pAdapt >= currentEncounter.npcStats.adaptability;
         battleUI.InitializeTurnDisplay(playerPermanentStats.portrait, currentEncounter.enemyPortrait, playerFirst);
         
@@ -110,6 +134,14 @@ public class BattleManager : MonoBehaviour
 
     public void UpdateUI()
     {
+        // Synchronize values to inspector fields for real-time tracking
+        if (playerPermanentStats != null)
+        {
+            playerCurrentMH = playerPermanentStats.currentMH;
+            playerMaxMH = playerPermanentStats.maxMH;
+            playerShield = playerPermanentStats.currentShield;
+        }
+
         if (battleUI != null)
         {
             battleUI.UpdateStats(
@@ -136,8 +168,8 @@ public class BattleManager : MonoBehaviour
         battleUI.ToggleActionButtons(false);
         battleUI.NotifySkillUsed(skill);
 
-        int val1 = GetTotalStatValue(playerPermanentStats, skill.primaryStat);
-        int val2 = GetTotalStatValue(playerPermanentStats, skill.secondaryStat);
+        int val1 = playerPermanentStats.GetTotalStatValue(skill.primaryStat);
+        int val2 = playerPermanentStats.GetTotalStatValue(skill.secondaryStat);
         int finalValue = CombatLogic.CalculateSkillValue(skill.baseDamageValue, val1, skill.primaryWeight, val2, skill.secondaryWeight, combatData);
 
         switch (skill.type)
@@ -147,12 +179,12 @@ public class BattleManager : MonoBehaviour
                 break;
 
             case SkillType.Defend:
-                playerShield += finalValue;
+                playerPermanentStats.currentShield += finalValue;
                 battleUI.UpdateLog($"<b>{playerPermanentStats.playerName}</b> uses <b>{skill.skillName}</b>! (+{finalValue} Shield)");
                 break;
 
             case SkillType.Heal:
-                playerCurrentMH = Mathf.Min(playerCurrentMH + finalValue, playerMaxMH);
+                playerPermanentStats.currentMH = Mathf.Min(playerPermanentStats.currentMH + finalValue, playerPermanentStats.maxMH);
                 battleUI.UpdateLog($"<b>{playerPermanentStats.playerName}</b> uses <b>{skill.skillName}</b> to recover focus! (+{finalValue} MH)");
                 break;
         }
@@ -163,7 +195,7 @@ public class BattleManager : MonoBehaviour
 
     private void HandlePlayerAttack(SkillData skill, int damage)
     {
-        int pAdapt = GetTotalStatValue(playerPermanentStats, StatType.Adaptability);
+        int pAdapt = playerPermanentStats.GetTotalStatValue(StatType.Adaptability);
         bool hit = CombatLogic.CheckIfHit(pAdapt, currentEncounter.npcStats.adaptability, combatData);
 
         if (hit)
@@ -192,12 +224,12 @@ public class BattleManager : MonoBehaviour
 
     private void ExecuteEnemyAction()
     {
-        int playerAdapt = GetTotalStatValue(playerPermanentStats, StatType.Adaptability); 
+        int playerAdapt = playerPermanentStats.GetTotalStatValue(StatType.Adaptability); 
 
         EnemyActionResult action = enemyBrain.DecideAction(
             currentEncounter, combatData,
             enemyCurrentMH, enemyMaxMH,
-            playerCurrentMH, playerMaxMH,
+            playerPermanentStats.currentMH, playerPermanentStats.maxMH,
             playerAdapt 
         );
 
@@ -209,7 +241,7 @@ public class BattleManager : MonoBehaviour
             {
                 case SkillType.Attack:
                     PlaySkillAnimation(false);
-                    CombatLogic.ProcessDamage(action.value, false, combatData, ref playerCurrentMH, ref playerArmor, ref playerShield);
+                    CombatLogic.ProcessDamage(action.value, false, combatData, ref playerPermanentStats.currentMH, ref playerArmor, ref playerPermanentStats.currentShield);
                     break;
 
                 case SkillType.Defend:
@@ -229,7 +261,7 @@ public class BattleManager : MonoBehaviour
     private void CheckWinCondition()
     {
         if (enemyCurrentMH <= 0) EndBattle(BattleState.WON);
-        else if (playerCurrentMH <= 0) EndBattle(BattleState.LOST);
+        else if (playerPermanentStats.currentMH <= 0) EndBattle(BattleState.LOST);
         else
         {
             if (currentState == BattleState.PLAYER_TURN) StartEnemyTurn();
@@ -255,54 +287,17 @@ public class BattleManager : MonoBehaviour
 
     private void FinishBattle()
     {
-        currentTime = currentTime switch
-        {
-            TimeOfDay.Day       => TimeOfDay.Afternoon,
-            TimeOfDay.Afternoon => TimeOfDay.Night,
-            TimeOfDay.Night     => TimeOfDay.Day, 
-            _ => TimeOfDay.Day
-        };
-        battleUI.SetTimeOfDay(currentTime);
-
+        // 1. Pack away the combat scene assets
         if (battleCanvas != null) battleCanvas.SetActive(false);
-        if (MainUI != null) MainUI.dialoguePanel.SetActive(true);
+
+        // 2. Hand control off to the DayManager to update time, clocks, and day-cycles
+        if (DayManager.Instance != null)
+        {
+            DayManager.Instance.ProcessPostBattleState();
+        }
+
+        // 3. Execute core post-battle logic triggers
         onBattleComplete?.Invoke();
-    }
-
-    public int GetTotalStatValue(PlayerStats stats, StatType type)
-    {
-        int total = GetBaseStat(stats, type);
-        if (stats.slot1 != null) total += GetTraitBonus(stats.slot1, type);
-        if (stats.slot2 != null) total += GetTraitBonus(stats.slot2, type);
-        return total;
-    }
-
-    private int GetBaseStat(PlayerStats stats, StatType type)
-    {
-        return type switch
-        {
-            StatType.Communication         => stats.communication,
-            StatType.CriticalThinking      => stats.criticalThinking,
-            StatType.Adaptability          => stats.adaptability,
-            StatType.EmotionalIntelligence => stats.emotionalIntelligence,
-            StatType.Sustainability        => stats.sustainability,
-            StatType.Leadership            => stats.leadership,
-            _ => 0
-        };
-    }
-
-    private int GetTraitBonus(TraitData trait, StatType type)
-    {
-        return type switch
-        {
-            StatType.Communication         => trait.CommunicationBonus,
-            StatType.CriticalThinking      => trait.CriticalThinkingBonus,
-            StatType.Adaptability          => trait.AdaptabilityBonus,
-            StatType.EmotionalIntelligence => trait.EmotionalIntelligenceBonus,
-            StatType.Sustainability        => trait.SustainabilityBonus,
-            StatType.Leadership            => trait.LeadershipBonus,
-            _ => 0
-        };
     }
 
     private void PlaySkillAnimation(bool isPlayer)

@@ -12,8 +12,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 45ede9863d59d40dcb3dae27e60b648b, type: 3}
   m_Name: LeadershipTrait
   m_EditorClassIdentifier: Assembly-CSharp::TraitData
-  traitName: Leadership
+  traitName: Assertive
   traitIcon: {fileID: -1639518222187130885, guid: 951f52a31c195479880be764f8458658, type: 3}
   description: This is the leadership trait.
-  speedBonus: 1
-  charismaBonus: 1
+  CommunicationBonus: 0
+  CriticalThinkingBonus: 0
+  AdaptabilityBonus: 0
+  EmotionalIntelligenceBonus: 0
+  SustainabilityBonus: 0
+  LeadershipBonus: 0

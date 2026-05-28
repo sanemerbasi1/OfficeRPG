@@ -1,6 +1,5 @@
 using UnityEngine;
 using UnityEngine.EventSystems;
-// 1. Add this namespace for the new Input System UI module
 using UnityEngine.InputSystem.UI; 
 
 public class GameBootstrap
