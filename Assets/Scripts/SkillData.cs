@@ -10,6 +10,8 @@ public class SkillData : ScriptableObject
     
     [Header("Values")]
     public int baseDamageValue; 
+    public int actionPointCost = 1;
+    public int attackRange = 1;
     
     [Header("Scaling")]
     public StatType primaryStat;

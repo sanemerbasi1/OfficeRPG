@@ -23,6 +23,7 @@ public class PlayerStats : ScriptableObject
     public int currentMH;
     public int maxMH;
     public int currentShield;
+    public int actionPoints = 4;
 
     [Header("Equipment Slots")]
     public TraitData slot1;

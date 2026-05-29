@@ -16,6 +16,8 @@ MonoBehaviour:
   skillIcon: {fileID: 293477771514721185, guid: 95b6030b417d646aabdb08b65e979102, type: 3}
   type: 0
   baseDamageValue: 2
+  actionPointCost: 1
+  attackRange: 2
   primaryStat: 0
   primaryWeight: 3
   secondaryStat: 0

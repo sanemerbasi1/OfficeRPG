@@ -1,8 +1,8 @@
 using UnityEngine;
 using System.Collections;
+using System.Collections.Generic;
 using System;
-
-public enum TimeOfDay { Day, Afternoon, Night }
+using UnityEngine.InputSystem;
 
 public class BattleManager : MonoBehaviour
 {
@@ -24,11 +24,10 @@ public class BattleManager : MonoBehaviour
     public GameObject battleCanvas;
     public GameObject gameOverUI;
 
-    [Header("Animation")]
-    public RectTransform playerTransform;
-    public RectTransform enemyTransform;
-    [SerializeField] private float attackMoveSpeed = 8f;
-    [SerializeField] private float attackMoveDistance = 1.5f;
+    [Header("Grid Units (Assigned Dynamically)")]
+    private GridUnit playerGridUnit;
+    private GridUnit enemyGridUnit;
+    private List<Vector2Int> validMoveTiles = new List<Vector2Int>();
 
     [Header("Read-Only Live Stats (Inspector Debug)")]
     public int playerCurrentMH;
@@ -45,76 +44,117 @@ public class BattleManager : MonoBehaviour
         Instance = this;
     }
 
-    public void StartBattle(EncounterData data, Action onComplete)
+    private void Update()
+    {
+        // Every frame during the player's tactical turn, watch for tile selection clicks
+        if (currentState == BattleState.PLAYER_TURN)
+        {
+            HandlePlayerGridInput();
+        }
+    }
+
+    private bool isEnemyLocked = false; // Add this field
+    public void StartBattle(EncounterData data, GridUnit enemyUnit, Action onComplete)
+    {
+        CancelInvoke(); 
+        Instance = this;
+        currentEncounter = data;
+        enemyGridUnit = enemyUnit;
+        onBattleComplete = onComplete;
+        currentState = BattleState.START;
+
+        if (battleUI == null)
+        {
+            Debug.LogError("[BATTLE MANAGER ERROR] The 'BattleUI' slot is empty on the BattleManager script component!");
+            return;
+        }
+
+        // Dynamically find the physical actors on the field layout
+        LocateGridUnits();
+        isEnemyLocked = true;
+
+        if (playerPermanentStats != null)
+        {
+            battleUI.GenerateSkillButtons(playerPermanentStats.playerSkills);
+        }
+        else
+        {
+            Debug.LogError("[BATTLE MANAGER ERROR] 'PlayerPermanentStats' scriptable object reference is missing!");
+        }
+
+        if (battleCanvas != null) battleCanvas.SetActive(true);
+        if (MainUI != null) MainUI.dialoguePanel.SetActive(false);
+        if (battleUI.fullLogPanel != null) battleUI.fullLogPanel.SetActive(false);
+
+        battleUI.ClearLog();
+        
+        if (DayManager.Instance != null)
+        {
+            battleUI.SetTimeOfDay(DayManager.Instance.currentTime);
+        }
+        else
+        {
+            Debug.LogWarning("[BATTLE MANAGER] DayManager.Instance is NULL. Automatically falling back to local BattleManager time.");
+            battleUI.SetTimeOfDay(TimeOfDay.Day);
+        }
+        
+        SetupBattle();
+    }
+
+    private void LocateGridUnits()
 {
-    CancelInvoke(); 
-    Instance = this;
-    currentEncounter = data;
-    onBattleComplete = onComplete;
-    currentState = BattleState.START;
+    if (isEnemyLocked) return;
+    // Clear references
+    playerGridUnit = null;
+    enemyGridUnit = null;
 
-    // Safety Check: Make sure we actually have a BattleUI script linked
-    if (battleUI == null)
-    {
-        Debug.LogError("[BATTLE MANAGER ERROR] The 'BattleUI' slot is empty on the BattleManager script component!");
-        return;
-    }
-
-    if (playerPermanentStats != null)
-    {
-        battleUI.GenerateSkillButtons(playerPermanentStats.playerSkills);
-    }
-    else
-    {
-        Debug.LogError("[BATTLE MANAGER ERROR] 'PlayerPermanentStats' scriptable object reference is missing!");
-    }
-
-    if (battleCanvas != null) battleCanvas.SetActive(true);
-    if (MainUI != null) MainUI.dialoguePanel.SetActive(false);
-    if (battleUI.fullLogPanel != null) battleUI.fullLogPanel.SetActive(false);
-
-    battleUI.ClearLog();
+    // Use a robust search for all GridUnits
+    GridUnit[] allUnits = UnityEngine.Object.FindObjectsByType<GridUnit>(FindObjectsSortMode.None);
     
-    // --- UPDATED SMART FALLBACK LOGIC ---
-    if (DayManager.Instance != null)
+    foreach (GridUnit unit in allUnits)
     {
-        // Perfect scenario: Use global time
-        battleUI.SetTimeOfDay(DayManager.Instance.currentTime);
+        // IMPORTANT: Ensure the unit is part of the battle and not a destroyed ghost
+        if (unit == null || !unit.gameObject.activeInHierarchy) continue;
+
+        if (unit.isPlayer)
+        {
+            playerGridUnit = unit;
+        }
+        else
+        {
+            // Specifically look for the enemy that is actually initialized
+            enemyGridUnit = unit;
+            Debug.Log($"[BATTLE MANAGER] Found active enemy at: {enemyGridUnit.gridPosition}");
+        }
     }
-    else
-    {
-        // Fallback scenario: DayManager is disconnected/missing, use local time so the UI still works!
-        Debug.LogWarning("[BATTLE MANAGER] DayManager.Instance is NULL. Automatically falling back to local BattleManager time.");
-        battleUI.SetTimeOfDay(TimeOfDay.Day);
-    }
-    
-    SetupBattle();
 }
 
     private void SetupBattle()
     {
         enemyBrain.InitializeCooldowns(currentEncounter);
-        
-        // 1. Initial Narrative Log
         battleUI.UpdateLog(currentEncounter.introText);
 
-        // 2. Initialize Player Stats via ScriptableObject
+        PositionUnitsOnGrid();
+
+        // Calculate and set up focus pools
         int totalSustain = playerPermanentStats.GetTotalStatValue(StatType.Sustainability);
         playerPermanentStats.maxMH = CombatLogic.CalculateMaxMentalHealth(totalSustain, combatData);
         playerArmor = playerPermanentStats.GetTotalStatValue(StatType.EmotionalIntelligence);  
 
-        // If it's a fresh game run or player recovered from 0, set up defaults
         if (playerPermanentStats.currentMH <= 0)
         {
             playerPermanentStats.currentMH = playerPermanentStats.maxMH;
             playerPermanentStats.currentShield = 0;
         }
 
-        // 3. Initialize Enemy Stats
         enemyMaxMH = CombatLogic.CalculateMaxMentalHealth(currentEncounter.npcStats.sustainability, combatData);
         enemyCurrentMH = enemyMaxMH;
         enemyArmor = currentEncounter.npcStats.emotionalIntelligence;
         enemyShield = 0;
+
+        // Pass scriptable object profiles into the physical grid token actors to drive dynamic stats
+        if (playerGridUnit != null) playerGridUnit.Initialize(playerPermanentStats);
+        if (enemyGridUnit != null)  enemyGridUnit.Initialize(currentEncounter.npcStats);
 
         if (battleUI != null)
         {
@@ -122,7 +162,6 @@ public class BattleManager : MonoBehaviour
             UpdateUI();
         }
 
-        // 5. Initiative
         int pAdapt = playerPermanentStats.GetTotalStatValue(StatType.Adaptability);
         bool playerFirst = pAdapt >= currentEncounter.npcStats.adaptability;
         battleUI.InitializeTurnDisplay(playerPermanentStats.portrait, currentEncounter.enemyPortrait, playerFirst);
@@ -134,7 +173,6 @@ public class BattleManager : MonoBehaviour
 
     public void UpdateUI()
     {
-        // Synchronize values to inspector fields for real-time tracking
         if (playerPermanentStats != null)
         {
             playerCurrentMH = playerPermanentStats.currentMH;
@@ -148,6 +186,12 @@ public class BattleManager : MonoBehaviour
                 playerCurrentMH, playerMaxMH, playerShield, playerArmor,
                 enemyCurrentMH, enemyMaxMH, enemyShield, enemyArmor
             );
+
+            // Keep AP layout in sync when UI refresh calls run
+            if (playerGridUnit != null)
+            {
+                battleUI.UpdateAPDisplay(playerGridUnit.currentAP, playerGridUnit.maxAP);
+            }
         }
     }
 
@@ -156,17 +200,126 @@ public class BattleManager : MonoBehaviour
         currentState = BattleState.PLAYER_TURN;
         if (!isFirstTurn) battleUI.TickAllCooldowns();
         isFirstTurn = false;
+        
         battleUI.ToggleActionButtons(true);
         battleUI.UpdateTurnDisplay("YOUR TURN", Color.green);
         battleUI.AdvanceTurnDisplay(); 
+
+        // Reset your action point budget and refresh tile calculations
+        if (playerGridUnit != null)
+        {
+            playerGridUnit.ResetAP();
+            
+            if (battleUI != null) battleUI.UpdateAPDisplay(playerGridUnit.currentAP, playerGridUnit.maxAP);
+            
+            CalculateAndShowWalkableRange();
+        }
     }
+
+   private void CalculateAndShowWalkableRange()
+{
+    if (playerGridUnit == null || enemyGridUnit == null || BattleGrid.Instance == null) return;
+
+    BattleGrid.Instance.ClearAllHighlights();
+
+    // 1. MOVEMENT: Blue Tiles
+    validMoveTiles = BattleGrid.Instance.GetReachableTiles(playerGridUnit.gridPosition, playerGridUnit.currentAP);
+    BattleGrid.Instance.HighlightMovementTiles(validMoveTiles);
+
+    // 2. ATTACK: Red Tiles
+    int distanceToEnemy = playerGridUnit.GetDistanceTo(enemyGridUnit);
+    bool canAttackEnemy = false;
+
+    if (playerPermanentStats != null && playerPermanentStats.playerSkills != null)
+    {
+        foreach (SkillData skill in playerPermanentStats.playerSkills)
+        {
+            if (skill.type != SkillType.Attack) continue;
+            if (battleUI != null && battleUI.IsSkillOnCooldown(skill)) continue;
+
+            // FIX: Ensure range defaults to at least 1 tile if config field reads 0
+            int skillRange = skill.attackRange;
+            if (skillRange <= 0) skillRange = 1; 
+            
+            if (distanceToEnemy <= skillRange)
+            {
+                canAttackEnemy = true;
+                break; 
+            }
+        }
+    }
+
+    if (canAttackEnemy)
+    {
+        List<Vector2Int> enemyTileList = new List<Vector2Int> { enemyGridUnit.gridPosition };
+        BattleGrid.Instance.HighlightFightTiles(enemyTileList);
+    }
+}
+
+  private void HandlePlayerGridInput()
+{
+    if (Mouse.current == null) return;
+
+    if (Mouse.current.leftButton.wasPressedThisFrame) 
+    {
+        Debug.Log("[Grid Click] Mouse click detected!"); 
+
+        // 1. Read the 2D screen position (X, Y)
+        Vector2 screenPos2D = Mouse.current.position.ReadValue();
+        
+        // 2. Convert it to a Vector3 and set Z to the absolute distance to your gameplay plane
+        Vector3 mouseScreenPosition = new Vector3(screenPos2D.x, screenPos2D.y, Mathf.Abs(Camera.main.transform.position.z));
+
+        // 3. Now translate it safely
+        Vector3 mouseWorld = Camera.main.ScreenToWorldPoint(mouseScreenPosition);
+        Vector2Int clickedTile = BattleGrid.Instance.WorldToGrid(mouseWorld);
+
+        Debug.Log($"[Grid Click] Screen Pos: {screenPos2D} | World Pos: {mouseWorld} | Calculated Tile: {clickedTile}");
+        
+        string validTilesList = string.Join(", ", validMoveTiles);
+        Debug.Log($"[Grid Click] Current Valid Tiles: [{validTilesList}]");
+
+        if (validMoveTiles.Contains(clickedTile))
+        {
+            Debug.Log("[Grid Click] Success! Clicked a valid tile. Moving player...");
+            int apCost = BattleGrid.Instance.GetManhattanDistance(playerGridUnit.gridPosition, clickedTile);
+            
+            playerGridUnit.MoveToGridPosition(clickedTile, apCost);
+            BattleGrid.Instance.RegisterUnitPosition(playerGridUnit);
+            BattleGrid.Instance.ClearAllHighlights();
+
+            if (battleUI != null) battleUI.UpdateAPDisplay(playerGridUnit.currentAP, playerGridUnit.maxAP);
+
+            // UPDATED: Hand control over to your win/turn manager evaluation sequence
+            CheckWinCondition();
+        }
+        else
+        {
+            Debug.LogWarning("[Grid Click] Click registered, but this tile is NOT in your validMoveTiles list!");
+        }
+    } 
+}
 
     public void ExecutePlayerAction(SkillData skill)
     {
-        Debug.Log($"[BATTLE DIAGNOSTIC] Skill Clicked: {skill.skillName} | Current State: {currentState}");
-        if (currentState != BattleState.PLAYER_TURN) return;
+        if (currentState != BattleState.PLAYER_TURN || playerGridUnit == null) return;
+
+        // --- GRID COMBAT AP ACTION CHECK ---
+        int baseActionCost = 1; 
+        if (playerGridUnit.currentAP < baseActionCost)
+        {
+            battleUI.UpdateLog("<color=orange>Not enough Action Points remaining to act!</color>");
+            return;
+        }
+
         battleUI.ToggleActionButtons(false);
         battleUI.NotifySkillUsed(skill);
+        playerGridUnit.UseAP(baseActionCost); // Subtract the tactical cost
+        
+        // Update AP UI text right after spending point on an action card
+        if (battleUI != null) battleUI.UpdateAPDisplay(playerGridUnit.currentAP, playerGridUnit.maxAP);
+        
+        BattleGrid.Instance.ClearAllHighlights();
 
         int val1 = playerPermanentStats.GetTotalStatValue(skill.primaryStat);
         int val2 = playerPermanentStats.GetTotalStatValue(skill.secondaryStat);
@@ -194,21 +347,40 @@ public class BattleManager : MonoBehaviour
     }
 
     private void HandlePlayerAttack(SkillData skill, int damage)
-    {
-        int pAdapt = playerPermanentStats.GetTotalStatValue(StatType.Adaptability);
-        bool hit = CombatLogic.CheckIfHit(pAdapt, currentEncounter.npcStats.adaptability, combatData);
+{
+    if (playerGridUnit == null || enemyGridUnit == null || BattleGrid.Instance == null) return;
 
-        if (hit)
+    // FIX: Pull directly from the SkillData asset config rather than a hardcoded 2
+    int currentDistance = playerGridUnit.GetDistanceTo(enemyGridUnit);
+    int skillRange = skill.attackRange; 
+
+    if (currentDistance > skillRange)
+    {
+        battleUI.UpdateLog($"<b>{skill.skillName}</b> failed! Target is out of range. (Distance: {currentDistance}/{skillRange})");
+        return;
+    }
+
+    int pAdapt = playerPermanentStats.GetTotalStatValue(StatType.Adaptability);
+    bool hit = CombatLogic.CheckIfHit(pAdapt, currentEncounter.npcStats.adaptability, combatData);
+
+    if (hit)
+    {
+        battleUI.UpdateLog($"<b>{playerPermanentStats.playerName}</b> used <b>{skill.skillName}</b>!");
+        CombatLogic.ProcessDamage(damage, false, combatData, ref enemyCurrentMH, ref enemyArmor, ref enemyShield);
+    }
+    else
+    {
+        battleUI.UpdateLog($"<b>{currentEncounter.encounterName}</b> has dodged!");
+    }
+}
+
+    public void EndTurnButtonPressed()
+    {
+        if (currentState == BattleState.PLAYER_TURN)
         {
-            battleUI.UpdateLog($"<b>{playerPermanentStats.playerName}</b> used <b>{skill.skillName}</b>!");
-            CombatLogic.ProcessDamage(damage, false, combatData, ref enemyCurrentMH, ref enemyArmor, ref enemyShield);
+            BattleGrid.Instance.ClearAllHighlights();
+            StartEnemyTurn();
         }
-        else
-        {
-            battleUI.UpdateLog($"<b>{currentEncounter.encounterName}</b> has dodged!");
-        }
-        
-        PlaySkillAnimation(true);
     }
 
     private void StartEnemyTurn()
@@ -219,6 +391,9 @@ public class BattleManager : MonoBehaviour
         battleUI.UpdateTurnDisplay("ENEMY TURN", Color.red);
         battleUI.AdvanceTurnDisplay(); 
         battleUI.UpdateLog($"<b>{currentEncounter.encounterName}</b> is thinking...");
+        
+        if (enemyGridUnit != null) enemyGridUnit.ResetAP();
+        
         Invoke("ExecuteEnemyAction", combatData.enemyActionDelay);
     }
 
@@ -240,7 +415,6 @@ public class BattleManager : MonoBehaviour
             switch (action.skillUsed != null ? action.skillUsed.type : SkillType.Attack)
             {
                 case SkillType.Attack:
-                    PlaySkillAnimation(false);
                     CombatLogic.ProcessDamage(action.value, false, combatData, ref playerPermanentStats.currentMH, ref playerArmor, ref playerPermanentStats.currentShield);
                     break;
 
@@ -264,8 +438,17 @@ public class BattleManager : MonoBehaviour
         else if (playerPermanentStats.currentMH <= 0) EndBattle(BattleState.LOST);
         else
         {
-            if (currentState == BattleState.PLAYER_TURN) StartEnemyTurn();
-            else StartPlayerTurn();
+            // If the player still has AP available, don't force turn progression automatically
+            if (currentState == BattleState.PLAYER_TURN && playerGridUnit.currentAP > 0)
+            {
+                CalculateAndShowWalkableRange();
+                battleUI.ToggleActionButtons(true);
+            }
+            else
+            {
+                if (currentState == BattleState.PLAYER_TURN) StartEnemyTurn();
+                else StartPlayerTurn();
+            }
         }
     }
 
@@ -287,50 +470,58 @@ public class BattleManager : MonoBehaviour
 
     private void FinishBattle()
     {
-        // 1. Pack away the combat scene assets
         if (battleCanvas != null) battleCanvas.SetActive(false);
 
-        // 2. Hand control off to the DayManager to update time, clocks, and day-cycles
         if (DayManager.Instance != null)
         {
             DayManager.Instance.ProcessPostBattleState();
         }
 
-        // 3. Execute core post-battle logic triggers
         onBattleComplete?.Invoke();
-    }
-
-    private void PlaySkillAnimation(bool isPlayer)
-    {
-        if (isPlayer)
-            StartCoroutine(MoveAndReturn(playerTransform, attackMoveDistance));   
-        else
-            StartCoroutine(MoveAndReturn(enemyTransform, -attackMoveDistance));   
-    }
-
-    private IEnumerator MoveAndReturn(RectTransform mover, float xOffset)
-    {
-        Vector2 originalPos = mover.anchoredPosition;
-        Vector2 attackPos = originalPos + new Vector2(xOffset, 0f);
-
-        while (Vector2.Distance(mover.anchoredPosition, attackPos) > 0.5f)
-        {
-            mover.anchoredPosition = Vector2.MoveTowards(mover.anchoredPosition, attackPos, attackMoveSpeed * Time.deltaTime);
-            yield return null;
-        }
-
-        while (Vector2.Distance(mover.anchoredPosition, originalPos) > 0.5f)
-        {
-            mover.anchoredPosition = Vector2.MoveTowards(mover.anchoredPosition, originalPos, attackMoveSpeed * Time.deltaTime);
-            yield return null;
-        }
-
-        mover.anchoredPosition = originalPos;
     }
 
     public void ForceEndBattle()
     {
         if (battleCanvas != null) battleCanvas.SetActive(false);
         currentState = BattleState.START;
+    }
+
+    private void PositionUnitsOnGrid()
+    {
+        if (BattleGrid.Instance == null)
+        {
+            Debug.LogError("[BATTLE MANAGER] Cannot position units because BattleGrid.Instance is missing!");
+            return;
+        }
+
+        // --- FIXED: THE GRID IS STATIC, DO NOT MOVE BattleGrid.Instance.transform.position ---
+
+        // 1. Handle the player's dynamic positioning based on the existing grid
+        if (playerGridUnit != null)
+        {
+            // Read exactly where the player is currently standing in world space relative to the scene's static grid
+            Vector2Int playerSnappedTile = BattleGrid.Instance.WorldToGrid(playerGridUnit.transform.position);
+            
+            playerGridUnit.gridPosition = playerSnappedTile;
+            playerGridUnit.SnapToGridPosition(playerSnappedTile); 
+            BattleGrid.Instance.RegisterUnitPosition(playerGridUnit);
+        }
+
+        // 2. Handle the enemy's dynamic positioning based on the existing grid
+        if (enemyGridUnit != null)
+        {
+            // Convert the enemy's current free-roam position to the closest cell coordinate
+            Vector2Int enemySnappedTile = BattleGrid.Instance.WorldToGrid(enemyGridUnit.transform.position);
+
+            // Safety check: Prevent them from pinning down on the exact same tile if they overlapped in free-roam
+            if (playerGridUnit != null && enemySnappedTile == playerGridUnit.gridPosition)
+            {
+                enemySnappedTile += Vector2Int.right; 
+            }
+
+            enemyGridUnit.gridPosition = enemySnappedTile;
+            enemyGridUnit.SnapToGridPosition(enemySnappedTile);
+            BattleGrid.Instance.RegisterUnitPosition(enemyGridUnit);
+        }
     }
 }

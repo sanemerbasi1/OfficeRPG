@@ -14,6 +14,9 @@ public class SkillButton : MonoBehaviour
     private int remainingCooldown = 0;
 
     public SkillData skill => assignedSkill;
+    
+    // ADDED: Allows BattleUI to check if this specific button is currently locked out
+    public bool IsOnCooldown => remainingCooldown > 0;
 
     private void Awake()
     {
