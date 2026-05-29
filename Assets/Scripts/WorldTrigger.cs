@@ -12,7 +12,6 @@ public class WorldTrigger : MonoBehaviour
         public string speakerName;
         [TextArea(2, 5)] public string textContent; 
         public string menuName; 
-        
         public EncounterData encounterData; 
     }
 
@@ -34,19 +33,18 @@ public class WorldTrigger : MonoBehaviour
     [SerializeField] private UIManager ui;
     [SerializeField] private BattleManager battleManager;
 
-  private void OnTriggerEnter2D(Collider2D other)
-{
-    // Back to basics: Directly checks the tag of the parent object that hit it
-    if (other.CompareTag("Player"))
+    private void OnTriggerEnter2D(Collider2D other)
     {
-        if (triggerOnlyOnce && hasTriggered) return;
+        if (other.CompareTag("Player"))
+        {
+            if (triggerOnlyOnce && hasTriggered) return;
 
-        ActiveInstance = this; 
-        currentStepIndex = 0;
-        RunNextStep();
-        hasTriggered = true;
+            ActiveInstance = this; 
+            currentStepIndex = 0;
+            RunNextStep();
+            hasTriggered = true;
+        }
     }
-}
 
     public void RunNextStep()
     {
@@ -88,14 +86,10 @@ public class WorldTrigger : MonoBehaviour
             case StepType.Battle:
                 if (step.encounterData != null)
                 {
-                    // --- GRID COMBAT TRANSITION LOGIC ---
-                    
-                    // 1. Freeze WASD inputs via your PlayerController instance
                     if (PlayerController.Instance != null)
                     {
                         PlayerController.Instance.isInBattle = true;
 
-                        // 2. Locate the Player's Grid Unit and snap them to the nearest tile coordinates
                         GridUnit playerGridUnit = PlayerController.Instance.GetComponent<GridUnit>();
                         if (playerGridUnit != null && BattleGrid.Instance != null)
                         {
@@ -105,7 +99,6 @@ public class WorldTrigger : MonoBehaviour
                         }
                     }
 
-                    // 3. Snap the designated overworld enemy onto the grid layout
                     if (fieldEnemyUnit != null && BattleGrid.Instance != null)
                     {
                         Vector2Int enemySnappedGrid = BattleGrid.Instance.WorldToGrid(fieldEnemyUnit.transform.position);
@@ -113,24 +106,18 @@ public class WorldTrigger : MonoBehaviour
                         BattleGrid.Instance.RegisterUnitPosition(fieldEnemyUnit);
                     }
 
-                    // 4. Fire up BattleManager, wrapping our clean-up code inside the callback wrapper
                     battleManager.StartBattle(step.encounterData, fieldEnemyUnit, () => 
                     {
-                        // This block runs automatically when the battle is won/finished!
-                        
-                        // Release the WASD movement lock
                         if (PlayerController.Instance != null)
                         {
                             PlayerController.Instance.isInBattle = false;
                         }
 
-                        // Wipe any residual blue or red grid overlay markings
                         if (BattleGrid.Instance != null)
                         {
                             BattleGrid.Instance.ClearAllHighlights();
                         }
 
-                        // Continue right along to the next step in your sequence list (e.g., Post-battle dialogue)
                         RunNextStep();
                     });
                 }

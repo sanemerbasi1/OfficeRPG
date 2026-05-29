@@ -24,7 +24,7 @@ public class BattleManager : MonoBehaviour
     public GameObject battleCanvas;
     public GameObject gameOverUI;
 
-    [Header("Grid Units (Assigned Dynamically)")]
+    [Header("Grid Units")]
     private GridUnit playerGridUnit;
     private GridUnit enemyGridUnit;
     private List<Vector2Int> validMoveTiles = new List<Vector2Int>();
@@ -46,22 +46,22 @@ public class BattleManager : MonoBehaviour
 
     private void Update()
     {
-        // Every frame during the player's tactical turn, watch for tile selection clicks
         if (currentState == BattleState.PLAYER_TURN)
         {
             HandlePlayerGridInput();
         }
     }
 
-    private bool isEnemyLocked = false; // Add this field
     public void StartBattle(EncounterData data, GridUnit enemyUnit, Action onComplete)
     {
         CancelInvoke(); 
         Instance = this;
         currentEncounter = data;
-        enemyGridUnit = enemyUnit;
         onBattleComplete = onComplete;
         currentState = BattleState.START;
+
+        // Directly assign the injected enemy unit reference. No scene searching!
+        enemyGridUnit = enemyUnit;
 
         if (battleUI == null)
         {
@@ -69,9 +69,11 @@ public class BattleManager : MonoBehaviour
             return;
         }
 
-        // Dynamically find the physical actors on the field layout
-        LocateGridUnits();
-        isEnemyLocked = true;
+        // Locate the persistent player unit instance dynamically
+        if (PlayerController.Instance != null)
+        {
+            playerGridUnit = PlayerController.Instance.GetComponent<GridUnit>();
+        }
 
         if (playerPermanentStats != null)
         {
@@ -79,7 +81,7 @@ public class BattleManager : MonoBehaviour
         }
         else
         {
-            Debug.LogError("[BATTLE MANAGER ERROR] 'PlayerPermanentStats' scriptable object reference is missing!");
+            Debug.LogError("[BATTLE MANAGER ERROR] 'PlayerPermanentStats' reference is missing!");
         }
 
         if (battleCanvas != null) battleCanvas.SetActive(true);
@@ -94,49 +96,23 @@ public class BattleManager : MonoBehaviour
         }
         else
         {
-            Debug.LogWarning("[BATTLE MANAGER] DayManager.Instance is NULL. Automatically falling back to local BattleManager time.");
             battleUI.SetTimeOfDay(TimeOfDay.Day);
         }
         
         SetupBattle();
     }
 
-    private void LocateGridUnits()
-{
-    if (isEnemyLocked) return;
-    // Clear references
-    playerGridUnit = null;
-    enemyGridUnit = null;
-
-    // Use a robust search for all GridUnits
-    GridUnit[] allUnits = UnityEngine.Object.FindObjectsByType<GridUnit>(FindObjectsSortMode.None);
-    
-    foreach (GridUnit unit in allUnits)
-    {
-        // IMPORTANT: Ensure the unit is part of the battle and not a destroyed ghost
-        if (unit == null || !unit.gameObject.activeInHierarchy) continue;
-
-        if (unit.isPlayer)
-        {
-            playerGridUnit = unit;
-        }
-        else
-        {
-            // Specifically look for the enemy that is actually initialized
-            enemyGridUnit = unit;
-            Debug.Log($"[BATTLE MANAGER] Found active enemy at: {enemyGridUnit.gridPosition}");
-        }
-    }
-}
-
     private void SetupBattle()
     {
-        enemyBrain.InitializeCooldowns(currentEncounter);
+        if (enemyBrain != null)
+        {
+            enemyBrain.InitializeCooldowns(currentEncounter);
+        }
+        
         battleUI.UpdateLog(currentEncounter.introText);
 
         PositionUnitsOnGrid();
 
-        // Calculate and set up focus pools
         int totalSustain = playerPermanentStats.GetTotalStatValue(StatType.Sustainability);
         playerPermanentStats.maxMH = CombatLogic.CalculateMaxMentalHealth(totalSustain, combatData);
         playerArmor = playerPermanentStats.GetTotalStatValue(StatType.EmotionalIntelligence);  
@@ -152,7 +128,6 @@ public class BattleManager : MonoBehaviour
         enemyArmor = currentEncounter.npcStats.emotionalIntelligence;
         enemyShield = 0;
 
-        // Pass scriptable object profiles into the physical grid token actors to drive dynamic stats
         if (playerGridUnit != null) playerGridUnit.Initialize(playerPermanentStats);
         if (enemyGridUnit != null)  enemyGridUnit.Initialize(currentEncounter.npcStats);
 
@@ -187,7 +162,6 @@ public class BattleManager : MonoBehaviour
                 enemyCurrentMH, enemyMaxMH, enemyShield, enemyArmor
             );
 
-            // Keep AP layout in sync when UI refresh calls run
             if (playerGridUnit != null)
             {
                 battleUI.UpdateAPDisplay(playerGridUnit.currentAP, playerGridUnit.maxAP);
@@ -205,106 +179,80 @@ public class BattleManager : MonoBehaviour
         battleUI.UpdateTurnDisplay("YOUR TURN", Color.green);
         battleUI.AdvanceTurnDisplay(); 
 
-        // Reset your action point budget and refresh tile calculations
         if (playerGridUnit != null)
         {
             playerGridUnit.ResetAP();
-            
             if (battleUI != null) battleUI.UpdateAPDisplay(playerGridUnit.currentAP, playerGridUnit.maxAP);
-            
             CalculateAndShowWalkableRange();
         }
     }
 
-   private void CalculateAndShowWalkableRange()
-{
-    if (playerGridUnit == null || enemyGridUnit == null || BattleGrid.Instance == null) return;
-
-    BattleGrid.Instance.ClearAllHighlights();
-
-    // 1. MOVEMENT: Blue Tiles
-    validMoveTiles = BattleGrid.Instance.GetReachableTiles(playerGridUnit.gridPosition, playerGridUnit.currentAP);
-    BattleGrid.Instance.HighlightMovementTiles(validMoveTiles);
-
-    // 2. ATTACK: Red Tiles
-    int distanceToEnemy = playerGridUnit.GetDistanceTo(enemyGridUnit);
-    bool canAttackEnemy = false;
-
-    if (playerPermanentStats != null && playerPermanentStats.playerSkills != null)
+    private void CalculateAndShowWalkableRange()
     {
-        foreach (SkillData skill in playerPermanentStats.playerSkills)
-        {
-            if (skill.type != SkillType.Attack) continue;
-            if (battleUI != null && battleUI.IsSkillOnCooldown(skill)) continue;
+        if (playerGridUnit == null || enemyGridUnit == null || BattleGrid.Instance == null) return;
 
-            // FIX: Ensure range defaults to at least 1 tile if config field reads 0
-            int skillRange = skill.attackRange;
-            if (skillRange <= 0) skillRange = 1; 
-            
-            if (distanceToEnemy <= skillRange)
+        BattleGrid.Instance.ClearAllHighlights();
+
+        validMoveTiles = BattleGrid.Instance.GetReachableTiles(playerGridUnit.gridPosition, playerGridUnit.currentAP);
+        BattleGrid.Instance.HighlightMovementTiles(validMoveTiles);
+
+        int distanceToEnemy = playerGridUnit.GetDistanceTo(enemyGridUnit);
+        bool canAttackEnemy = false;
+
+        if (playerPermanentStats != null && playerPermanentStats.playerSkills != null)
+        {
+            foreach (SkillData skill in playerPermanentStats.playerSkills)
             {
-                canAttackEnemy = true;
-                break; 
+                if (skill.type != SkillType.Attack) continue;
+                if (battleUI != null && battleUI.IsSkillOnCooldown(skill)) continue;
+
+                int skillRange = skill.attackRange <= 0 ? 1 : skill.attackRange;
+                
+                if (distanceToEnemy <= skillRange)
+                {
+                    canAttackEnemy = true;
+                    break; 
+                }
             }
         }
+
+        if (canAttackEnemy)
+        {
+            List<Vector2Int> enemyTileList = new List<Vector2Int> { enemyGridUnit.gridPosition };
+            BattleGrid.Instance.HighlightFightTiles(enemyTileList);
+        }
     }
 
-    if (canAttackEnemy)
+    private void HandlePlayerGridInput()
     {
-        List<Vector2Int> enemyTileList = new List<Vector2Int> { enemyGridUnit.gridPosition };
-        BattleGrid.Instance.HighlightFightTiles(enemyTileList);
+        if (Mouse.current == null) return;
+
+        if (Mouse.current.leftButton.wasPressedThisFrame) 
+        {
+            Vector2 screenPos2D = Mouse.current.position.ReadValue();
+            Vector3 mouseScreenPosition = new Vector3(screenPos2D.x, screenPos2D.y, Mathf.Abs(Camera.main.transform.position.z));
+            Vector3 mouseWorld = Camera.main.ScreenToWorldPoint(mouseScreenPosition);
+            Vector2Int clickedTile = BattleGrid.Instance.WorldToGrid(mouseWorld);
+
+            if (validMoveTiles.Contains(clickedTile))
+            {
+                int apCost = BattleGrid.Instance.GetManhattanDistance(playerGridUnit.gridPosition, clickedTile);
+                
+                playerGridUnit.MoveToGridPosition(clickedTile, apCost);
+                BattleGrid.Instance.RegisterUnitPosition(playerGridUnit);
+                BattleGrid.Instance.ClearAllHighlights();
+
+                if (battleUI != null) battleUI.UpdateAPDisplay(playerGridUnit.currentAP, playerGridUnit.maxAP);
+
+                CheckWinCondition();
+            }
+        } 
     }
-}
-
-  private void HandlePlayerGridInput()
-{
-    if (Mouse.current == null) return;
-
-    if (Mouse.current.leftButton.wasPressedThisFrame) 
-    {
-        Debug.Log("[Grid Click] Mouse click detected!"); 
-
-        // 1. Read the 2D screen position (X, Y)
-        Vector2 screenPos2D = Mouse.current.position.ReadValue();
-        
-        // 2. Convert it to a Vector3 and set Z to the absolute distance to your gameplay plane
-        Vector3 mouseScreenPosition = new Vector3(screenPos2D.x, screenPos2D.y, Mathf.Abs(Camera.main.transform.position.z));
-
-        // 3. Now translate it safely
-        Vector3 mouseWorld = Camera.main.ScreenToWorldPoint(mouseScreenPosition);
-        Vector2Int clickedTile = BattleGrid.Instance.WorldToGrid(mouseWorld);
-
-        Debug.Log($"[Grid Click] Screen Pos: {screenPos2D} | World Pos: {mouseWorld} | Calculated Tile: {clickedTile}");
-        
-        string validTilesList = string.Join(", ", validMoveTiles);
-        Debug.Log($"[Grid Click] Current Valid Tiles: [{validTilesList}]");
-
-        if (validMoveTiles.Contains(clickedTile))
-        {
-            Debug.Log("[Grid Click] Success! Clicked a valid tile. Moving player...");
-            int apCost = BattleGrid.Instance.GetManhattanDistance(playerGridUnit.gridPosition, clickedTile);
-            
-            playerGridUnit.MoveToGridPosition(clickedTile, apCost);
-            BattleGrid.Instance.RegisterUnitPosition(playerGridUnit);
-            BattleGrid.Instance.ClearAllHighlights();
-
-            if (battleUI != null) battleUI.UpdateAPDisplay(playerGridUnit.currentAP, playerGridUnit.maxAP);
-
-            // UPDATED: Hand control over to your win/turn manager evaluation sequence
-            CheckWinCondition();
-        }
-        else
-        {
-            Debug.LogWarning("[Grid Click] Click registered, but this tile is NOT in your validMoveTiles list!");
-        }
-    } 
-}
 
     public void ExecutePlayerAction(SkillData skill)
     {
         if (currentState != BattleState.PLAYER_TURN || playerGridUnit == null) return;
 
-        // --- GRID COMBAT AP ACTION CHECK ---
         int baseActionCost = 1; 
         if (playerGridUnit.currentAP < baseActionCost)
         {
@@ -314,9 +262,8 @@ public class BattleManager : MonoBehaviour
 
         battleUI.ToggleActionButtons(false);
         battleUI.NotifySkillUsed(skill);
-        playerGridUnit.UseAP(baseActionCost); // Subtract the tactical cost
+        playerGridUnit.UseAP(baseActionCost);
         
-        // Update AP UI text right after spending point on an action card
         if (battleUI != null) battleUI.UpdateAPDisplay(playerGridUnit.currentAP, playerGridUnit.maxAP);
         
         BattleGrid.Instance.ClearAllHighlights();
@@ -347,32 +294,31 @@ public class BattleManager : MonoBehaviour
     }
 
     private void HandlePlayerAttack(SkillData skill, int damage)
-{
-    if (playerGridUnit == null || enemyGridUnit == null || BattleGrid.Instance == null) return;
-
-    // FIX: Pull directly from the SkillData asset config rather than a hardcoded 2
-    int currentDistance = playerGridUnit.GetDistanceTo(enemyGridUnit);
-    int skillRange = skill.attackRange; 
-
-    if (currentDistance > skillRange)
     {
-        battleUI.UpdateLog($"<b>{skill.skillName}</b> failed! Target is out of range. (Distance: {currentDistance}/{skillRange})");
-        return;
-    }
+        if (playerGridUnit == null || enemyGridUnit == null || BattleGrid.Instance == null) return;
 
-    int pAdapt = playerPermanentStats.GetTotalStatValue(StatType.Adaptability);
-    bool hit = CombatLogic.CheckIfHit(pAdapt, currentEncounter.npcStats.adaptability, combatData);
+        int currentDistance = playerGridUnit.GetDistanceTo(enemyGridUnit);
+        int skillRange = skill.attackRange; 
 
-    if (hit)
-    {
-        battleUI.UpdateLog($"<b>{playerPermanentStats.playerName}</b> used <b>{skill.skillName}</b>!");
-        CombatLogic.ProcessDamage(damage, false, combatData, ref enemyCurrentMH, ref enemyArmor, ref enemyShield);
+        if (currentDistance > skillRange)
+        {
+            battleUI.UpdateLog($"<b>{skill.skillName}</b> failed! Target is out of range. (Distance: {currentDistance}/{skillRange})");
+            return;
+        }
+
+        int pAdapt = playerPermanentStats.GetTotalStatValue(StatType.Adaptability);
+        bool hit = CombatLogic.CheckIfHit(pAdapt, currentEncounter.npcStats.adaptability, combatData);
+
+        if (hit)
+        {
+            battleUI.UpdateLog($"<b>{playerPermanentStats.playerName}</b> used <b>{skill.skillName}</b>!");
+            CombatLogic.ProcessDamage(damage, false, combatData, ref enemyCurrentMH, ref enemyArmor, ref enemyShield);
+        }
+        else
+        {
+            battleUI.UpdateLog($"<b>{currentEncounter.encounterName}</b> has dodged!");
+        }
     }
-    else
-    {
-        battleUI.UpdateLog($"<b>{currentEncounter.encounterName}</b> has dodged!");
-    }
-}
 
     public void EndTurnButtonPressed()
     {
@@ -438,7 +384,6 @@ public class BattleManager : MonoBehaviour
         else if (playerPermanentStats.currentMH <= 0) EndBattle(BattleState.LOST);
         else
         {
-            // If the player still has AP available, don't force turn progression automatically
             if (currentState == BattleState.PLAYER_TURN && playerGridUnit.currentAP > 0)
             {
                 CalculateAndShowWalkableRange();
@@ -488,32 +433,20 @@ public class BattleManager : MonoBehaviour
 
     private void PositionUnitsOnGrid()
     {
-        if (BattleGrid.Instance == null)
-        {
-            Debug.LogError("[BATTLE MANAGER] Cannot position units because BattleGrid.Instance is missing!");
-            return;
-        }
+        if (BattleGrid.Instance == null) return;
 
-        // --- FIXED: THE GRID IS STATIC, DO NOT MOVE BattleGrid.Instance.transform.position ---
-
-        // 1. Handle the player's dynamic positioning based on the existing grid
         if (playerGridUnit != null)
         {
-            // Read exactly where the player is currently standing in world space relative to the scene's static grid
             Vector2Int playerSnappedTile = BattleGrid.Instance.WorldToGrid(playerGridUnit.transform.position);
-            
             playerGridUnit.gridPosition = playerSnappedTile;
             playerGridUnit.SnapToGridPosition(playerSnappedTile); 
             BattleGrid.Instance.RegisterUnitPosition(playerGridUnit);
         }
 
-        // 2. Handle the enemy's dynamic positioning based on the existing grid
         if (enemyGridUnit != null)
         {
-            // Convert the enemy's current free-roam position to the closest cell coordinate
             Vector2Int enemySnappedTile = BattleGrid.Instance.WorldToGrid(enemyGridUnit.transform.position);
 
-            // Safety check: Prevent them from pinning down on the exact same tile if they overlapped in free-roam
             if (playerGridUnit != null && enemySnappedTile == playerGridUnit.gridPosition)
             {
                 enemySnappedTile += Vector2Int.right; 
