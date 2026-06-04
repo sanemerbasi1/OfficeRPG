@@ -3,18 +3,21 @@ using System.Collections.Generic;
 
 public class EnemyBattleBrain : MonoBehaviour
 {
-    // Tracks remaining cooldown turns per skill
     private Dictionary<SkillData, int> skillCooldowns = new Dictionary<SkillData, int>();
-    
-    // Cached reference to this unit's grid movement component
     private GridUnit selfGridUnit;
 
     private void Awake()
     {
+        // Fallback in case it is attached directly to the prefab
         selfGridUnit = GetComponent<GridUnit>();
     }
 
-    // Call this when battle starts to wipe any leftover cooldown state
+    // Explicitly bind the active enemy token from the BattleManager
+    public void SetUnitReference(GridUnit unit)
+    {
+        selfGridUnit = unit;
+    }
+
     public void InitializeCooldowns(EncounterData encounter)
     {
         skillCooldowns.Clear();
@@ -23,15 +26,23 @@ public class EnemyBattleBrain : MonoBehaviour
         foreach (SkillData skill in encounter.npcSkills)
             skillCooldowns[skill] = 0;
 
-        // SAFE FIX: Directly assign the AP values to avoid running player-only initialization logic!
-        if (selfGridUnit != null && encounter.npcStats != null)
+        // Bulletproof AP Initialization
+        if (selfGridUnit != null)
         {
-            selfGridUnit.maxAP = encounter.npcStats.actionPoints;
+            // Try to pull from stats; if it's missing or 0, check the inspector, or default to 3
+            if (encounter.npcStats != null && encounter.npcStats.actionPoints > 0)
+            {
+                selfGridUnit.maxAP = encounter.npcStats.actionPoints;
+            }
+            else if (selfGridUnit.maxAP <= 0)
+            {
+                selfGridUnit.maxAP = 3; // Safe default value if everything else is unassigned
+            }
+
             selfGridUnit.currentAP = selfGridUnit.maxAP;
         }
     }
 
-    // Call this at the start of every enemy turn to tick down all cooldowns
     public void TickCooldowns()
     {
         List<SkillData> keys = new List<SkillData>(skillCooldowns.Keys);
@@ -41,7 +52,6 @@ public class EnemyBattleBrain : MonoBehaviour
                 skillCooldowns[skill]--;
         }
 
-        // SAFE FIX: Directly refresh the enemy's AP pool using their maxAP variable
         if (selfGridUnit != null)
         {
             selfGridUnit.currentAP = selfGridUnit.maxAP;
@@ -59,13 +69,18 @@ public class EnemyBattleBrain : MonoBehaviour
             skillCooldowns[skill] = skill.cooldownTurns;
     }
 
-    public EnemyActionResult DecideAction(
+public EnemyActionResult DecideAction(
         EncounterData encounter, CombatData combatData,
         int enemyCurrentMH, int enemyMaxMH,
         int playerCurrentMH, int playerMaxMH,
         int playerAdaptability)
     {
-        // 1. Locate the Player GridUnit on the battlefield
+        // If the enemy has no AP left at the start of this evaluation, force turn end immediately
+        if (selfGridUnit == null || selfGridUnit.currentAP <= 0)
+        {
+            return new EnemyActionResult { isTurnEnd = true, logMessage = "" };
+        }
+
         GridUnit playerGridUnit = null;
         foreach (var unit in Object.FindObjectsByType<GridUnit>(FindObjectsSortMode.None))
         {
@@ -76,85 +91,108 @@ public class EnemyBattleBrain : MonoBehaviour
             }
         }
 
-        // 2. Use your exact priority rules to choose the best intent/skill
         SkillData chosenSkill = PickSkill(encounter, combatData, enemyCurrentMH, enemyMaxMH, playerCurrentMH, playerMaxMH);
         
         bool isFallback = (chosenSkill == null);
         bool needsRangeCheck = isFallback || (chosenSkill != null && chosenSkill.type == SkillType.Attack);
-        int attackRange = 2; // Default range for standard attacks (can change to fit your balance)
+        int attackRange = isFallback ? 1 : chosenSkill.attackRange; 
 
-        // 3. SPATIAL GRID CHECK: Only process distance rules if the action is targeted at the player
+        // SPATIAL GRID CHECK
         if (playerGridUnit != null && selfGridUnit != null && BattleGrid.Instance != null && needsRangeCheck)
         {
             int distanceToPlayer = BattleGrid.Instance.GetManhattanDistance(selfGridUnit.gridPosition, playerGridUnit.gridPosition);
 
-            // If the target is too far away, spend available AP to move closer!
-            if (distanceToPlayer > attackRange && selfGridUnit.currentAP > 0)
-            {
-                MoveCloserToTarget(playerGridUnit.gridPosition);
-                // Recalculate true distance after physical token slide animation starts
-                distanceToPlayer = BattleGrid.Instance.GetManhattanDistance(selfGridUnit.gridPosition, playerGridUnit.gridPosition);
-            }
-
-            // If the enemy exhausted its AP and STILL cannot reach the player, it forfeits the attack to reposition
             if (distanceToPlayer > attackRange)
             {
-                return new EnemyActionResult
+                if (selfGridUnit.currentAP > 0)
                 {
-                    skillUsed = null,
-                    value = 0,
-                    hit = false,
-                    logMessage = $"<b>{encounter.encounterName}</b> spends AP to reposition across the grid, closing in on your position!"
-                };
+                    MoveCloserToTarget(playerGridUnit.gridPosition);
+                    int newDistance = BattleGrid.Instance.GetManhattanDistance(selfGridUnit.gridPosition, playerGridUnit.gridPosition);
+
+                    if (newDistance > attackRange && selfGridUnit.currentAP <= 0)
+                    {
+                        return new EnemyActionResult
+                        {
+                            skillUsed = null,
+                            value = 0,
+                            hit = false,
+                            isTurnEnd = true,
+                            logMessage = $"<b>{encounter.encounterName}</b> spent its remaining AP trying to reposition!"
+                        };
+                    }
+
+                    // Return clean movement action (AP subtraction happens inside MoveCloserToTarget)
+                    return new EnemyActionResult
+                    {
+                        skillUsed = null,
+                        value = 0,
+                        hit = false,
+                        isTurnEnd = (selfGridUnit.currentAP <= 0),
+                        logMessage = $"<b>{encounter.encounterName}</b> advances across the grid."
+                    };
+                }
+                else
+                {
+                    return new EnemyActionResult { isTurnEnd = true, logMessage = "" };
+                }
             }
         }
 
-        // 4. EXECUTE COMBAT (In range or self-targeted skill)
+        // EXECUTE COMBAT
         if (isFallback)
-            return FallbackAction(encounter, combatData);
-
-        PutOnCooldown(chosenSkill);
-        return BuildActionResult(chosenSkill, encounter, combatData, playerAdaptability);
-    }
-
-    /// <summary>
-    /// TACTICAL PATHFINDING MATH: Chooses the optimal walkable grid tile that gets closest to the player coordinates.
-    /// </summary>
-   private void MoveCloserToTarget(Vector2Int playerGridPos)
-{
-    if (BattleGrid.Instance == null || selfGridUnit == null) return;
-
-    List<Vector2Int> walkableTiles = BattleGrid.Instance.GetReachableTiles(selfGridUnit.gridPosition, selfGridUnit.currentAP);
-    if (walkableTiles == null || walkableTiles.Count == 0) return;
-
-    Vector2Int bestTile = selfGridUnit.gridPosition;
-    int closestDistance = BattleGrid.Instance.GetManhattanDistance(selfGridUnit.gridPosition, playerGridPos);
-
-    foreach (Vector2Int tile in walkableTiles)
-    {
-        int dist = BattleGrid.Instance.GetManhattanDistance(tile, playerGridPos);
-        if (dist < closestDistance)
         {
-            closestDistance = dist;
-            bestTile = tile;
+            if (selfGridUnit.currentAP < 1) 
+                return new EnemyActionResult { isTurnEnd = true, logMessage = "" };
+
+            // RESTORED: Spend exactly 1 AP for basic strike
+            selfGridUnit.currentAP -= 1; 
+            EnemyActionResult fallbackResult = FallbackAction(encounter, combatData, playerAdaptability);
+            fallbackResult.isTurnEnd = (selfGridUnit.currentAP <= 0); 
+            return fallbackResult;
         }
+
+        // RESTORED: Spend exactly the skill's cost
+        selfGridUnit.currentAP -= chosenSkill.actionPointCost;
+        PutOnCooldown(chosenSkill);
+        
+        EnemyActionResult result = BuildActionResult(chosenSkill, encounter, combatData, playerAdaptability);
+        result.isTurnEnd = (selfGridUnit.currentAP <= 0); 
+        return result;
     }
 
-    int apCost = BattleGrid.Instance.GetManhattanDistance(selfGridUnit.gridPosition, bestTile);
-    if (apCost > 0)
-    {
-        // 1. UPDATE THE VARIABLE IMMEDIATELY
-        selfGridUnit.gridPosition = bestTile; 
-        
-        // 2. MOVE THE TOKEN
-        selfGridUnit.MoveToGridPosition(bestTile, apCost);
-        
-        // 3. REGISTER IN DICTIONARY
-        BattleGrid.Instance.RegisterUnitPosition(selfGridUnit);
-        
-        Debug.Log($"[AI] Enemy moved to {bestTile}. Variable updated.");
-    }
-}
+   private void MoveCloserToTarget(Vector2Int playerGridPos)
+   {
+        if (BattleGrid.Instance == null || selfGridUnit == null) return;
+
+        List<Vector2Int> walkableTiles = BattleGrid.Instance.GetReachableTiles(selfGridUnit.gridPosition, selfGridUnit.currentAP);
+        if (walkableTiles == null || walkableTiles.Count == 0) return;
+
+        Vector2Int bestTile = selfGridUnit.gridPosition;
+        int closestDistance = BattleGrid.Instance.GetManhattanDistance(selfGridUnit.gridPosition, playerGridPos);
+
+        foreach (Vector2Int tile in walkableTiles)
+        {
+            int dist = BattleGrid.Instance.GetManhattanDistance(tile, playerGridPos);
+            if (dist < closestDistance)
+            {
+                closestDistance = dist;
+                bestTile = tile;
+            }
+        }
+
+        int apCost = BattleGrid.Instance.GetManhattanDistance(selfGridUnit.gridPosition, bestTile);
+        if (apCost > 0)
+        {
+            selfGridUnit.gridPosition = bestTile; 
+            selfGridUnit.MoveToGridPosition(bestTile, apCost); 
+            
+            // RESTORED: Deduct exactly the tiles traveled from the brain's pool
+            selfGridUnit.currentAP -= apCost; 
+            
+            BattleGrid.Instance.RegisterUnitPosition(selfGridUnit);
+            Debug.Log($"[AI] Enemy moved to {bestTile}. AP Left: {selfGridUnit.currentAP}");
+        }
+   }
 
     private SkillData PickSkill(
         EncounterData encounter, CombatData combatData,
@@ -167,23 +205,28 @@ public class EnemyBattleBrain : MonoBehaviour
         float enemyHealthRatio = (float)enemyCurrentMH / enemyMaxMH;
         float playerHealthRatio = (float)playerCurrentMH / playerMaxMH;
 
-        // Priority 1: Low health → try to find an available heal skill
+        // Added AP checks so AI only picks what it can afford
         if (enemyHealthRatio < combatData.enemyLowHealthThreshold)
         {
             bool notFullHealth = enemyCurrentMH < enemyMaxMH;
-            SkillData healSkill = encounter.npcSkills.Find(s => s.type == SkillType.Heal && !IsOnCooldown(s));
+            SkillData healSkill = encounter.npcSkills.Find(s => s.type == SkillType.Heal && !IsOnCooldown(s) && s.actionPointCost <= selfGridUnit.currentAP);
             if (healSkill != null && notFullHealth) return healSkill;
         }
 
-        // Priority 2: Player is low → find an available attack skill
         if (playerHealthRatio < combatData.enemyAggressiveThreshold)
         {
-            SkillData attackSkill = encounter.npcSkills.Find(s => s.type == SkillType.Attack && !IsOnCooldown(s));
+            SkillData attackSkill = encounter.npcSkills.Find(s => s.type == SkillType.Attack && !IsOnCooldown(s) && s.actionPointCost <= selfGridUnit.currentAP);
             if (attackSkill != null) return attackSkill;
         }
 
-        // Priority 3: Pick a random skill that is not on cooldown
-        List<SkillData> availableSkills = encounter.npcSkills.FindAll(s => !IsOnCooldown(s));
+        // Get all available options that fit current AP budget
+        List<SkillData> availableSkills = encounter.npcSkills.FindAll(s => !IsOnCooldown(s) && s.actionPointCost <= selfGridUnit.currentAP);
+        
+        if (enemyCurrentMH >= enemyMaxMH)
+        {
+            availableSkills.RemoveAll(s => s.type == SkillType.Heal);
+        }
+
         if (availableSkills.Count > 0)
             return availableSkills[Random.Range(0, availableSkills.Count)];
 
@@ -219,15 +262,21 @@ public class EnemyBattleBrain : MonoBehaviour
         };
     }
 
-    private EnemyActionResult FallbackAction(EncounterData encounter, CombatData combatData)
+    private EnemyActionResult FallbackAction(EncounterData encounter, CombatData combatData, int playerAdaptability)
     {
         int damage = encounter.enemyBaseDamage + encounter.npcStats.communication;
+        bool hit = CombatLogic.CheckIfHit(encounter.npcStats.adaptability, playerAdaptability, combatData);
+
+        string log = hit 
+            ? $"<b>{encounter.encounterName}</b> attacks!" 
+            : $"<b>{encounter.encounterName}</b> tries to attack but misses!";
+
         return new EnemyActionResult
         {
             skillUsed  = null,
-            value      = damage,
-            hit        = true,
-            logMessage = $"<b>{encounter.encounterName}</b> attacks!"
+            value      = hit ? damage : 0,
+            hit        = hit,
+            logMessage = log
         };
     }
 

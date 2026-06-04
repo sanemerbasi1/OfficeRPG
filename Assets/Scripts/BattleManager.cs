@@ -60,7 +60,6 @@ public class BattleManager : MonoBehaviour
         onBattleComplete = onComplete;
         currentState = BattleState.START;
 
-        // Directly assign the injected enemy unit reference. No scene searching!
         enemyGridUnit = enemyUnit;
 
         if (battleUI == null)
@@ -69,7 +68,6 @@ public class BattleManager : MonoBehaviour
             return;
         }
 
-        // Locate the persistent player unit instance dynamically
         if (PlayerController.Instance != null)
         {
             playerGridUnit = PlayerController.Instance.GetComponent<GridUnit>();
@@ -106,6 +104,7 @@ public class BattleManager : MonoBehaviour
     {
         if (enemyBrain != null)
         {
+            enemyBrain.SetUnitReference(enemyGridUnit);
             enemyBrain.InitializeCooldowns(currentEncounter);
         }
         
@@ -253,7 +252,7 @@ public class BattleManager : MonoBehaviour
     {
         if (currentState != BattleState.PLAYER_TURN || playerGridUnit == null) return;
 
-        int baseActionCost = 1; 
+        int baseActionCost = skill.actionPointCost; 
         if (playerGridUnit.currentAP < baseActionCost)
         {
             battleUI.UpdateLog("<color=orange>Not enough Action Points remaining to act!</color>");
@@ -272,10 +271,16 @@ public class BattleManager : MonoBehaviour
         int val2 = playerPermanentStats.GetTotalStatValue(skill.secondaryStat);
         int finalValue = CombatLogic.CalculateSkillValue(skill.baseDamageValue, val1, skill.primaryWeight, val2, skill.secondaryWeight, combatData);
 
+        // FIX: Wrap inside a small sequence to let player attack animations finish smoothly
+        StartCoroutine(PlayerActionSequence(skill, finalValue));
+    }
+
+    private IEnumerator PlayerActionSequence(SkillData skill, int finalValue)
+    {
         switch (skill.type)
         {
             case SkillType.Attack:
-                HandlePlayerAttack(skill, finalValue);
+                yield return StartCoroutine(HandlePlayerAttackRoutine(skill, finalValue));
                 break;
 
             case SkillType.Defend:
@@ -293,9 +298,9 @@ public class BattleManager : MonoBehaviour
         CheckWinCondition();
     }
 
-    private void HandlePlayerAttack(SkillData skill, int damage)
+    private IEnumerator HandlePlayerAttackRoutine(SkillData skill, int damage)
     {
-        if (playerGridUnit == null || enemyGridUnit == null || BattleGrid.Instance == null) return;
+        if (playerGridUnit == null || enemyGridUnit == null || BattleGrid.Instance == null) yield break;
 
         int currentDistance = playerGridUnit.GetDistanceTo(enemyGridUnit);
         int skillRange = skill.attackRange; 
@@ -303,7 +308,7 @@ public class BattleManager : MonoBehaviour
         if (currentDistance > skillRange)
         {
             battleUI.UpdateLog($"<b>{skill.skillName}</b> failed! Target is out of range. (Distance: {currentDistance}/{skillRange})");
-            return;
+            yield break;
         }
 
         int pAdapt = playerPermanentStats.GetTotalStatValue(StatType.Adaptability);
@@ -312,11 +317,16 @@ public class BattleManager : MonoBehaviour
         if (hit)
         {
             battleUI.UpdateLog($"<b>{playerPermanentStats.playerName}</b> used <b>{skill.skillName}</b>!");
+            
+            // JUICE FIX: Play physical dash/bump step forward animation towards enemy
+            yield return StartCoroutine(AnimateAttackBump(playerGridUnit.transform, enemyGridUnit.transform));
+
             CombatLogic.ProcessDamage(damage, false, combatData, ref enemyCurrentMH, ref enemyArmor, ref enemyShield);
         }
         else
         {
             battleUI.UpdateLog($"<b>{currentEncounter.encounterName}</b> has dodged!");
+            yield return StartCoroutine(AnimateAttackBump(playerGridUnit.transform, enemyGridUnit.transform));
         }
     }
 
@@ -340,42 +350,116 @@ public class BattleManager : MonoBehaviour
         
         if (enemyGridUnit != null) enemyGridUnit.ResetAP();
         
-        Invoke("ExecuteEnemyAction", combatData.enemyActionDelay);
+        // FIX: Switch from single-shot 'Invoke' to sequential evaluation loop Coroutine
+        StartCoroutine(EnemyTurnLoopRoutine());
     }
 
-    private void ExecuteEnemyAction()
+    // FIX: Core architecture implementation loop. Processes ALL enemy AP consecutively.
+    private IEnumerator EnemyTurnLoopRoutine()
     {
-        int playerAdapt = playerPermanentStats.GetTotalStatValue(StatType.Adaptability); 
+        yield return new WaitForSeconds(combatData.enemyActionDelay);
 
-        EnemyActionResult action = enemyBrain.DecideAction(
-            currentEncounter, combatData,
-            enemyCurrentMH, enemyMaxMH,
-            playerPermanentStats.currentMH, playerPermanentStats.maxMH,
-            playerAdapt 
-        );
+        bool parsingTurn = true;
+        int safetyLoopGuard = 0; 
 
-        battleUI.UpdateLog(action.logMessage);
-
-        if (action.hit)
+        while (parsingTurn && currentState == BattleState.ENEMY_TURN && safetyLoopGuard < 10)
         {
-            switch (action.skillUsed != null ? action.skillUsed.type : SkillType.Attack)
+            safetyLoopGuard++;
+            int playerAdapt = playerPermanentStats.GetTotalStatValue(StatType.Adaptability); 
+
+            EnemyActionResult action = enemyBrain.DecideAction(
+                currentEncounter, combatData,
+                enemyCurrentMH, enemyMaxMH,
+                playerPermanentStats.currentMH, playerPermanentStats.maxMH,
+                playerAdapt 
+            );
+
+            // FIX A: If it's a completely empty turn-end signal (0 AP at start), exit immediately
+            if (action.isTurnEnd && string.IsNullOrEmpty(action.logMessage) && action.skillUsed == null && !action.hit)
             {
-                case SkillType.Attack:
-                    CombatLogic.ProcessDamage(action.value, false, combatData, ref playerPermanentStats.currentMH, ref playerArmor, ref playerPermanentStats.currentShield);
-                    break;
-
-                case SkillType.Defend:
-                    enemyShield += action.value;
-                    break;
-
-                case SkillType.Heal:
-                    enemyCurrentMH = Mathf.Min(enemyCurrentMH + action.value, enemyMaxMH);
-                    break;
+                parsingTurn = false;
+                break;
             }
+
+            if (!string.IsNullOrEmpty(action.logMessage)) 
+                battleUI.UpdateLog(action.logMessage);
+
+            // Process the action effects and animations normally
+            if (action.hit)
+            {
+                SkillType actionType = action.skillUsed != null ? action.skillUsed.type : SkillType.Attack;
+
+                if (actionType == SkillType.Attack)
+                {
+                    yield return StartCoroutine(AnimateAttackBump(enemyGridUnit.transform, playerGridUnit.transform));
+                    CombatLogic.ProcessDamage(action.value, false, combatData, ref playerPermanentStats.currentMH, ref playerArmor, ref playerPermanentStats.currentShield);
+                }
+                else if (actionType == SkillType.Defend)
+                {
+                    enemyShield += action.value;
+                }
+                else if (actionType == SkillType.Heal)
+                {
+                    enemyCurrentMH = Mathf.Min(enemyCurrentMH + action.value, enemyMaxMH);
+                }
+            }
+            else if (action.skillUsed != null && action.skillUsed.type == SkillType.Attack)
+            {
+                yield return StartCoroutine(AnimateAttackBump(enemyGridUnit.transform, playerGridUnit.transform));
+            }
+
+            UpdateUI();
+
+            if (enemyCurrentMH <= 0 || playerPermanentStats.currentMH <= 0)
+            {
+                parsingTurn = false;
+                break;
+            }
+
+            // FIX B: Check for turn expiration down here AFTER damage and animations have finished processing
+            if (action.isTurnEnd)
+            {
+                parsingTurn = false;
+                break;
+            }
+
+            yield return new WaitForSeconds(combatData.enemyActionDelay);
         }
 
-        UpdateUI();
         CheckWinCondition();
+    }
+
+    // FIX: Programmatic Attack Animation Bump sequence
+    private IEnumerator AnimateAttackBump(Transform attacker, Transform target)
+    {
+        Vector3 originalPosition = attacker.position;
+        // Direction step towards target vector layout map
+        Vector3 direction = (target.position - attacker.position).normalized;
+        Vector3 peakBumpPosition = originalPosition + (direction * 0.5f); // Lean forward 0.5 units
+
+        float elapsedTime = 0f;
+        float animationSpeed = 0.12f; // Fast dash speed rate snap
+
+        // Lerp Forward Dash Outward
+        while (elapsedTime < animationSpeed)
+        {
+            attacker.position = Vector3.Lerp(originalPosition, peakBumpPosition, elapsedTime / animationSpeed);
+            elapsedTime += Time.deltaTime;
+            yield return null;
+        }
+        attacker.position = peakBumpPosition;
+
+        yield return new WaitForSeconds(0.04f); // Frame impact freeze pause timing
+
+        // Lerp Back Return Inward
+        elapsedTime = 0f;
+        while (elapsedTime < animationSpeed)
+        {
+            attacker.position = Vector3.Lerp(peakBumpPosition, originalPosition, elapsedTime / animationSpeed);
+            elapsedTime += Time.deltaTime;
+            yield return null;
+        }
+        attacker.position = originalPosition;
     }
 
     private void CheckWinCondition()
@@ -384,21 +468,29 @@ public class BattleManager : MonoBehaviour
         else if (playerPermanentStats.currentMH <= 0) EndBattle(BattleState.LOST);
         else
         {
-            if (currentState == BattleState.PLAYER_TURN && playerGridUnit.currentAP > 0)
+            if (currentState == BattleState.PLAYER_TURN)
             {
-                CalculateAndShowWalkableRange();
-                battleUI.ToggleActionButtons(true);
+                if (playerGridUnit.currentAP > 0)
+                {
+                    CalculateAndShowWalkableRange();
+                    battleUI.ToggleActionButtons(true);
+                }
+                else
+                {
+                    StartEnemyTurn();
+                }
             }
-            else
+            else if (currentState == BattleState.ENEMY_TURN)
             {
-                if (currentState == BattleState.PLAYER_TURN) StartEnemyTurn();
-                else StartPlayerTurn();
+                // FIX: Hand control back cleanly ONLY after the enemy loop coroutine concludes naturally
+                StartPlayerTurn();
             }
         }
     }
 
     private void EndBattle(BattleState result)
     {
+        StopAllCoroutines(); // Safe cleanup boundary safety catch feature
         currentState = result;
         if (result == BattleState.WON)
         {
