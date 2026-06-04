@@ -840,8 +840,8 @@ MonoBehaviour:
   objectsTilemap: {fileID: 56773274}
   movementHighlightTilemap: {fileID: 1832860195}
   fightHighlightTilemap: {fileID: 1862066686}
-  movementHighlightTile: {fileID: 11400000, guid: f2903a9134d90406cb313b3d9ca04a64, type: 2}
-  fightHighlightTile: {fileID: 11400000, guid: 78319a922673f443f8e4d65228a7be28, type: 2}
+  movementHighlightTile: {fileID: 11400000, guid: b1afea50195d64a239de48090feddc53, type: 2}
+  fightHighlightTile: {fileID: 11400000, guid: ff3d87cae732a4335ab1f428c52acafe, type: 2}
 --- !u!1 &121193258
 GameObject:
   m_ObjectHideFlags: 0
