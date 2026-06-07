@@ -31,6 +31,10 @@ public class UIManager : MonoBehaviour
     public TextMeshProUGUI speakerNameText;
     public Button dialogueContinueButton; 
 
+    [Header("Persistent Time & Day Display")]
+    public TextMeshProUGUI timeOfDayText;
+    public TextMeshProUGUI dayCountText;
+
     [Header("Auto-Assigned (Do Not Drag)")]
     public CharCreationManager charMaster;
     public List<StatHandler> allStats = new List<StatHandler>();
@@ -232,5 +236,26 @@ public class UIManager : MonoBehaviour
 
         if (newDayCanvasGroup != null) newDayCanvasGroup.alpha = 0f;
         newDayPanel.SetActive(false);
+    }
+
+    public void UpdateTimeAndDayDisplay(TimeOfDay time)
+    {
+        // 1. Handle Time of Day Translation
+        if (timeOfDayText != null)
+        {
+            timeOfDayText.text = time switch
+            {
+                TimeOfDay.Day       => "Morning",
+                TimeOfDay.Afternoon => "Afternoon",
+                TimeOfDay.Night     => "Night",
+                _ => ""
+            };
+        }
+
+        if (dayCountText != null)
+        {
+            int currentDay = (playerStats != null) ? playerStats.currentDay : 1;
+            dayCountText.text = $"Day: {currentDay}";
+        }
     }
 }

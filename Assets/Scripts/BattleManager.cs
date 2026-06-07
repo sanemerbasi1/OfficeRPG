@@ -23,6 +23,7 @@ public class BattleManager : MonoBehaviour
     public BattleUI battleUI;
     public GameObject battleCanvas;
     public GameObject gameOverUI;
+    public GameObject mainCanvas;
 
     [Header("Grid Units")]
     private GridUnit playerGridUnit;
@@ -82,19 +83,24 @@ public class BattleManager : MonoBehaviour
             Debug.LogError("[BATTLE MANAGER ERROR] 'PlayerPermanentStats' reference is missing!");
         }
 
+        // --- CLEANUP: HIDE MAIN UI ---
         if (battleCanvas != null) battleCanvas.SetActive(true);
-        if (MainUI != null) MainUI.dialoguePanel.SetActive(false);
+        if (mainCanvas != null) mainCanvas.SetActive(false); 
         if (battleUI.fullLogPanel != null) battleUI.fullLogPanel.SetActive(false);
 
         battleUI.ClearLog();
         
+        // --- TIME & DAY SETUP ---
+        int currentDay = playerPermanentStats != null ? playerPermanentStats.currentDay : 1;
+
         if (DayManager.Instance != null)
         {
-            battleUI.SetTimeOfDay(DayManager.Instance.currentTime);
+            DayManager.Instance.RefreshAllHUDs();
+            battleUI.SetTimeOfDay(DayManager.Instance.currentTime, currentDay);
         }
         else
         {
-            battleUI.SetTimeOfDay(TimeOfDay.Day);
+            battleUI.SetTimeOfDay(TimeOfDay.Day, currentDay); 
         }
         
         SetupBattle();
@@ -271,7 +277,6 @@ public class BattleManager : MonoBehaviour
         int val2 = playerPermanentStats.GetTotalStatValue(skill.secondaryStat);
         int finalValue = CombatLogic.CalculateSkillValue(skill.baseDamageValue, val1, skill.primaryWeight, val2, skill.secondaryWeight, combatData);
 
-        // FIX: Wrap inside a small sequence to let player attack animations finish smoothly
         StartCoroutine(PlayerActionSequence(skill, finalValue));
     }
 
@@ -318,7 +323,6 @@ public class BattleManager : MonoBehaviour
         {
             battleUI.UpdateLog($"<b>{playerPermanentStats.playerName}</b> used <b>{skill.skillName}</b>!");
             
-            // JUICE FIX: Play physical dash/bump step forward animation towards enemy
             yield return StartCoroutine(AnimateAttackBump(playerGridUnit.transform, enemyGridUnit.transform));
 
             CombatLogic.ProcessDamage(damage, false, combatData, ref enemyCurrentMH, ref enemyArmor, ref enemyShield);
@@ -350,11 +354,9 @@ public class BattleManager : MonoBehaviour
         
         if (enemyGridUnit != null) enemyGridUnit.ResetAP();
         
-        // FIX: Switch from single-shot 'Invoke' to sequential evaluation loop Coroutine
         StartCoroutine(EnemyTurnLoopRoutine());
     }
 
-    // FIX: Core architecture implementation loop. Processes ALL enemy AP consecutively.
     private IEnumerator EnemyTurnLoopRoutine()
     {
         yield return new WaitForSeconds(combatData.enemyActionDelay);
@@ -374,7 +376,6 @@ public class BattleManager : MonoBehaviour
                 playerAdapt 
             );
 
-            // FIX A: If it's a completely empty turn-end signal (0 AP at start), exit immediately
             if (action.isTurnEnd && string.IsNullOrEmpty(action.logMessage) && action.skillUsed == null && !action.hit)
             {
                 parsingTurn = false;
@@ -384,7 +385,6 @@ public class BattleManager : MonoBehaviour
             if (!string.IsNullOrEmpty(action.logMessage)) 
                 battleUI.UpdateLog(action.logMessage);
 
-            // Process the action effects and animations normally
             if (action.hit)
             {
                 SkillType actionType = action.skillUsed != null ? action.skillUsed.type : SkillType.Attack;
@@ -416,7 +416,6 @@ public class BattleManager : MonoBehaviour
                 break;
             }
 
-            // FIX B: Check for turn expiration down here AFTER damage and animations have finished processing
             if (action.isTurnEnd)
             {
                 parsingTurn = false;
@@ -429,18 +428,15 @@ public class BattleManager : MonoBehaviour
         CheckWinCondition();
     }
 
-    // FIX: Programmatic Attack Animation Bump sequence
     private IEnumerator AnimateAttackBump(Transform attacker, Transform target)
     {
         Vector3 originalPosition = attacker.position;
-        // Direction step towards target vector layout map
         Vector3 direction = (target.position - attacker.position).normalized;
-        Vector3 peakBumpPosition = originalPosition + (direction * 0.5f); // Lean forward 0.5 units
+        Vector3 peakBumpPosition = originalPosition + (direction * 0.5f); 
 
         float elapsedTime = 0f;
-        float animationSpeed = 0.12f; // Fast dash speed rate snap
+        float animationSpeed = 0.12f; 
 
-        // Lerp Forward Dash Outward
         while (elapsedTime < animationSpeed)
         {
             attacker.position = Vector3.Lerp(originalPosition, peakBumpPosition, elapsedTime / animationSpeed);
@@ -449,9 +445,8 @@ public class BattleManager : MonoBehaviour
         }
         attacker.position = peakBumpPosition;
 
-        yield return new WaitForSeconds(0.04f); // Frame impact freeze pause timing
+        yield return new WaitForSeconds(0.04f); 
 
-        // Lerp Back Return Inward
         elapsedTime = 0f;
         while (elapsedTime < animationSpeed)
         {
@@ -482,7 +477,6 @@ public class BattleManager : MonoBehaviour
             }
             else if (currentState == BattleState.ENEMY_TURN)
             {
-                // FIX: Hand control back cleanly ONLY after the enemy loop coroutine concludes naturally
                 StartPlayerTurn();
             }
         }
@@ -490,7 +484,7 @@ public class BattleManager : MonoBehaviour
 
     private void EndBattle(BattleState result)
     {
-        StopAllCoroutines(); // Safe cleanup boundary safety catch feature
+        StopAllCoroutines(); 
         currentState = result;
         if (result == BattleState.WON)
         {
@@ -501,6 +495,7 @@ public class BattleManager : MonoBehaviour
         {
             battleUI.UpdateLog("You've reached your burnout limit...");
             if (gameOverUI != null) gameOverUI.SetActive(true);
+            if (mainCanvas != null) mainCanvas.SetActive(true); // Bring UI back for movement/gameover
             MainUI.TogglePlayerMovement(true);
         }
     }
@@ -508,6 +503,7 @@ public class BattleManager : MonoBehaviour
     private void FinishBattle()
     {
         if (battleCanvas != null) battleCanvas.SetActive(false);
+        if (mainCanvas != null) mainCanvas.SetActive(true); // <--- RESTORE MAIN UI
 
         if (DayManager.Instance != null)
         {
@@ -520,6 +516,7 @@ public class BattleManager : MonoBehaviour
     public void ForceEndBattle()
     {
         if (battleCanvas != null) battleCanvas.SetActive(false);
+        if (mainCanvas != null) mainCanvas.SetActive(true); // <--- RESTORE MAIN UI
         currentState = BattleState.START;
     }
 

@@ -11,6 +11,7 @@ public class BattleUI : MonoBehaviour
     public Image afternoonImage;
     public Image nightImage;
     public TextMeshProUGUI timeOfDayText;
+    public TextMeshProUGUI dayCountText; // Added: Day count field
 
     [Header("Player Visuals")]
     public TextMeshProUGUI playerNameText;
@@ -18,7 +19,7 @@ public class BattleUI : MonoBehaviour
     public TextMeshProUGUI playerMHValueText;
     public TextMeshProUGUI playerShieldText;
     public Slider playerShieldBar;  
-    public TextMeshProUGUI playerAPText; // Added: AP text field
+    public TextMeshProUGUI playerAPText; 
 
     [Header("Enemy Visuals")]
     public TextMeshProUGUI enemyNameText;
@@ -61,7 +62,6 @@ public class BattleUI : MonoBehaviour
 
     public void GenerateSkillButtons(List<SkillData> playerSkills)
     {
-        // Safe backward deletion loop
         for (int i = skillContainer.childCount - 1; i >= 0; i--)
         {
             Destroy(skillContainer.GetChild(i).gameObject); 
@@ -88,18 +88,11 @@ public class BattleUI : MonoBehaviour
         if (btn != null) btn.OnSkillUsed();
     }
 
-    /// <summary>
-    /// Checks if a specific skill is currently locked behind a active cooldown tracker loop.
-    /// Used by BattleManager to decide if the enemy tile should highlight red.
-    /// </summary>
     public bool IsSkillOnCooldown(SkillData skill)
     {
         SkillButton btn = activeSkillButtons.Find(b => b.skill == skill);
         if (btn != null) 
         {
-            // Note: This assumes your SkillButton.cs component has a way to check its state.
-            // If SkillButton tracks it using an integer timer variable (like currentCooldown), 
-            // you can change this line to: return btn.currentCooldown > 0;
             return btn.IsOnCooldown; 
         }
         return false;
@@ -133,16 +126,11 @@ public class BattleUI : MonoBehaviour
         enemyShieldText.text = $"ARM: {eShield}";
     }
 
-    /// <summary>
-    /// Added: Call this to visually update the player's Action Points layout.
-    /// </summary>
     public void UpdateAPDisplay(int currentAP, int maxAP)
     {
         if (playerAPText == null) return;
 
         playerAPText.text = $"AP: {currentAP} / {maxAP}";
-
-        // Changes font color to clear dark red when empty to signal exhaustion
         playerAPText.color = (currentAP <= 0) ? new Color(0.8f, 0.1f, 0.1f) : Color.white;
     }
 
@@ -236,7 +224,8 @@ public class BattleUI : MonoBehaviour
         Color c = slot.color; c.a = alpha; slot.color = c;
     }
 
-    public void SetTimeOfDay(TimeOfDay time)
+    // UPDATED: Now requires the day integer parameter
+    public void SetTimeOfDay(TimeOfDay time, int currentDay)
     {
         dayImage.gameObject.SetActive(time == TimeOfDay.Day);
         afternoonImage.gameObject.SetActive(time == TimeOfDay.Afternoon);
@@ -249,5 +238,10 @@ public class BattleUI : MonoBehaviour
             TimeOfDay.Night     => "Night",
             _ => ""
         };
+
+        if (dayCountText != null)
+        {
+            dayCountText.text = $"Day: {currentDay}";
+        }
     }
 }

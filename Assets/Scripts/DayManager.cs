@@ -6,7 +6,8 @@ public class DayManager : MonoBehaviour
 
     [Header("Dependencies")]
     [SerializeField] private PlayerStats playerPermanentStats;
-    [SerializeField] private UIManager mainUI; // Your MainUI script
+    [SerializeField] private UIManager mainUI;   
+    [SerializeField] private BattleUI battleUI; 
 
     [Header("Timeline Tracking")]
     public TimeOfDay currentTime = TimeOfDay.Day;
@@ -14,24 +15,32 @@ public class DayManager : MonoBehaviour
 
     private void Awake()
     {
-        if (Instance == null)
+        if (Instance == null) Instance = this;
+        else Destroy(gameObject);
+    }
+
+    private void Start()
+    {
+        RefreshAllHUDs(); 
+    }
+
+    public void RefreshAllHUDs()
+    {
+        // 1. Tell UIManager to pull the latest values directly from PlayerStats
+        if (mainUI != null)
         {
-            Instance = this;
-            // Optional: Uncomment if this manager persists across scenes
-            // DontDestroyOnLoad(gameObject); 
+            mainUI.UpdateTimeAndDayDisplay(currentTime);
         }
-        else
+
+        // 2. BattleUI keeps its original direct setup
+        if (battleUI != null)
         {
-            Destroy(gameObject);
+            battleUI.SetTimeOfDay(currentTime, playerPermanentStats.currentDay); 
         }
     }
 
-    /// <summary>
-    /// Progresses the time of day after combat. Called by BattleManager.
-    /// </summary>
     public void ProcessPostBattleState()
     {
-        // 1. Check if the night is ending BEFORE advancing the enum
         dayChangeQueued = (currentTime == TimeOfDay.Night);
 
         currentTime = currentTime switch
@@ -42,55 +51,45 @@ public class DayManager : MonoBehaviour
             _ => TimeOfDay.Day
         };
 
-        // 2. Refresh the UI elements
-        if (mainUI != null)
-        {
-            mainUI.dialoguePanel.SetActive(true); // Bring back dialogue for post-fight chat
-        }
+        RefreshAllHUDs(); 
 
-        // Safety Fallback: If no conversation popped up, instantly trigger the roll over
+        if (mainUI != null) mainUI.dialoguePanel.SetActive(true); 
+
         if (dayChangeQueued && (mainUI == null || !mainUI.dialoguePanel.activeSelf))
         {
             CompleteDayChange();
         }
     }
 
-    /// <summary>
-    /// Executes the full day-end sequence. Called when post-battle dialogue finishes.
-    /// </summary>
     public void CompleteDayChange()
     {
         if (!dayChangeQueued) return;
-        dayChangeQueued = false; // Reset tracking flag
+        dayChangeQueued = false; 
 
+        // SAVING DATA DIRECTLY TO SCRIPTABLE OBJECT
         if (playerPermanentStats != null)
         {
             playerPermanentStats.currentDay++;
         }
 
+        RefreshAllHUDs(); 
+
         ApplyOvernightEffects();
 
-        if (mainUI != null)
+        if (mainUI != null && playerPermanentStats != null)
         {
-            // Transition screen plays, then teleports the player safely out of sight
             mainUI.ShowNewDayTransition(playerPermanentStats.currentDay, TeleportPlayerToStart);
         }
     }
 
     private void ApplyOvernightEffects()
     {
-        Debug.Log($"[DayManager] Morning of Day {playerPermanentStats.currentDay}. Resetting temporary stats.");
-        // This is where we will hook up your future overnight status restorations!
+        Debug.Log($"[DayManager] Resetting stats for Day {playerPermanentStats.currentDay}.");
     }
 
     private void TeleportPlayerToStart()
     {
-        Debug.Log("[DayManager] Relocating player to starting zone.");
         GameObject player = GameObject.FindWithTag("Player");
-        if (player != null)
-        {
-            // Reset player coordinates to your level spawn point
-            player.transform.position = Vector3.zero; 
-        }
+        if (player != null) player.transform.position = Vector3.zero; 
     }
 }
