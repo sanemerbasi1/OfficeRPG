@@ -24,7 +24,7 @@ MonoBehaviour:
   currentMH: 0
   maxMH: 0
   currentShield: 0
-  actionPoints: 2
+  actionPoints: 3
   slot1: {fileID: 0}
   slot2: {fileID: 0}
   playerSkills: []
