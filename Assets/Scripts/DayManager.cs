@@ -26,13 +26,11 @@ public class DayManager : MonoBehaviour
 
     public void RefreshAllHUDs()
     {
-        // 1. Tell UIManager to pull the latest values directly from PlayerStats
         if (mainUI != null)
         {
             mainUI.UpdateTimeAndDayDisplay(currentTime);
         }
 
-        // 2. BattleUI keeps its original direct setup
         if (battleUI != null)
         {
             battleUI.SetTimeOfDay(currentTime, playerPermanentStats.currentDay); 
@@ -66,7 +64,6 @@ public class DayManager : MonoBehaviour
         if (!dayChangeQueued) return;
         dayChangeQueued = false; 
 
-        // SAVING DATA DIRECTLY TO SCRIPTABLE OBJECT
         if (playerPermanentStats != null)
         {
             playerPermanentStats.currentDay++;
