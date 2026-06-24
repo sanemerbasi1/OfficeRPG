@@ -1,0 +1,533 @@
+fileFormatVersion: 2
+guid: 9f9f68d94b4624921acaeb335495a707
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: 623491474126763738
+    second: office lady front-back-Sheet_0
+  - first:
+      213: 1595284934407796505
+    second: office lady front-back-Sheet_1
+  - first:
+      213: -4588631548415024033
+    second: office lady front-back-Sheet_2
+  - first:
+      213: 70191871085668905
+    second: office lady front-back-Sheet_3
+  - first:
+      213: -2280029667979815316
+    second: office lady front-back-Sheet_4
+  - first:
+      213: 1897682085533155685
+    second: office lady front-back-Sheet_5
+  - first:
+      213: 5734021935783726814
+    second: office lady front-back-Sheet_6
+  - first:
+      213: 1330643224209257178
+    second: office lady front-back-Sheet_7
+  - first:
+      213: -4311133936671123236
+    second: office lady front-back-Sheet_8
+  - first:
+      213: 2657382776620481255
+    second: office lady front-back-Sheet_9
+  - first:
+      213: -1722395585775348135
+    second: office lady front-back-Sheet_10
+  - first:
+      213: 8129958473305577782
+    second: office lady front-back-Sheet_11
+  - first:
+      213: -6635888951613113877
+    second: office lady front-back-Sheet_12
+  - first:
+      213: -5741978820344291513
+    second: office lady front-back-Sheet_13
+  - first:
+      213: -8709756835896548391
+    second: office lady front-back-Sheet_14
+  externalObjects: {}
+  serializedVersion: 13
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+    flipGreenChannel: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMipmapLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 1
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 100
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  swizzle: 50462976
+  cookieLightType: 0
+  platformSettings:
+  - serializedVersion: 4
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Android
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: iOS
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: office lady front-back-Sheet_0
+      rect:
+        serializedVersion: 2
+        x: 20
+        y: 124
+        width: 24
+        height: 53
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: ad67fcb313617a800800000000000000
+      internalID: 623491474126763738
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: office lady front-back-Sheet_1
+      rect:
+        serializedVersion: 2
+        x: 80
+        y: 124
+        width: 24
+        height: 53
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 917b8e61237932610800000000000000
+      internalID: 1595284934407796505
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: office lady front-back-Sheet_2
+      rect:
+        serializedVersion: 2
+        x: 140
+        y: 124
+        width: 24
+        height: 53
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: f5462971be7e150c0800000000000000
+      internalID: -4588631548415024033
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: office lady front-back-Sheet_3
+      rect:
+        serializedVersion: 2
+        x: 200
+        y: 124
+        width: 24
+        height: 53
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 92a6e26822f59f000800000000000000
+      internalID: 70191871085668905
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: office lady front-back-Sheet_4
+      rect:
+        serializedVersion: 2
+        x: 260
+        y: 124
+        width: 24
+        height: 53
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: c6616bad815bb50e0800000000000000
+      internalID: -2280029667979815316
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: office lady front-back-Sheet_5
+      rect:
+        serializedVersion: 2
+        x: 20
+        y: 64
+        width: 24
+        height: 53
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 56183dc6dcbe55a10800000000000000
+      internalID: 1897682085533155685
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: office lady front-back-Sheet_6
+      rect:
+        serializedVersion: 2
+        x: 80
+        y: 64
+        width: 24
+        height: 53
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: edecfa80296539f40800000000000000
+      internalID: 5734021935783726814
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: office lady front-back-Sheet_7
+      rect:
+        serializedVersion: 2
+        x: 140
+        y: 64
+        width: 24
+        height: 53
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: ad2f5cd56f4677210800000000000000
+      internalID: 1330643224209257178
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: office lady front-back-Sheet_8
+      rect:
+        serializedVersion: 2
+        x: 200
+        y: 64
+        width: 24
+        height: 53
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: cd81695a686cb24c0800000000000000
+      internalID: -4311133936671123236
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: office lady front-back-Sheet_9
+      rect:
+        serializedVersion: 2
+        x: 260
+        y: 64
+        width: 24
+        height: 53
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 7ea74b05e8be0e420800000000000000
+      internalID: 2657382776620481255
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: office lady front-back-Sheet_10
+      rect:
+        serializedVersion: 2
+        x: 20
+        y: 4
+        width: 24
+        height: 53
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 956d8232752d818e0800000000000000
+      internalID: -1722395585775348135
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: office lady front-back-Sheet_11
+      rect:
+        serializedVersion: 2
+        x: 80
+        y: 4
+        width: 24
+        height: 53
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 6395e08382a63d070800000000000000
+      internalID: 8129958473305577782
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: office lady front-back-Sheet_12
+      rect:
+        serializedVersion: 2
+        x: 140
+        y: 4
+        width: 24
+        height: 53
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: be9392e282698e3a0800000000000000
+      internalID: -6635888951613113877
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: office lady front-back-Sheet_13
+      rect:
+        serializedVersion: 2
+        x: 200
+        y: 4
+        width: 24
+        height: 53
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 74fdf896fa46050b0800000000000000
+      internalID: -5741978820344291513
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: office lady front-back-Sheet_14
+      rect:
+        serializedVersion: 2
+        x: 260
+        y: 4
+        width: 24
+        height: 53
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 9d32b54dd4ab02780800000000000000
+      internalID: -8709756835896548391
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    customData: 
+    physicsShape: []
+    bones: []
+    spriteID: 
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    spriteCustomMetadata:
+      entries: []
+    nameFileIdTable:
+      office lady front-back-Sheet_0: 623491474126763738
+      office lady front-back-Sheet_1: 1595284934407796505
+      office lady front-back-Sheet_10: -1722395585775348135
+      office lady front-back-Sheet_11: 8129958473305577782
+      office lady front-back-Sheet_12: -6635888951613113877
+      office lady front-back-Sheet_13: -5741978820344291513
+      office lady front-back-Sheet_14: -8709756835896548391
+      office lady front-back-Sheet_2: -4588631548415024033
+      office lady front-back-Sheet_3: 70191871085668905
+      office lady front-back-Sheet_4: -2280029667979815316
+      office lady front-back-Sheet_5: 1897682085533155685
+      office lady front-back-Sheet_6: 5734021935783726814
+      office lady front-back-Sheet_7: 1330643224209257178
+      office lady front-back-Sheet_8: -4311133936671123236
+      office lady front-back-Sheet_9: 2657382776620481255
+  mipmapLimitGroupName: 
+  pSDRemoveMatte: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
