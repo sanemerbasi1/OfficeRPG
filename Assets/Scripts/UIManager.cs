@@ -62,32 +62,36 @@ public class UIManager : MonoBehaviour
     }
 
     public void ShowDialogue(string message, string speakerName = " ", UnityAction onContinueAction = null)
-{
-    if (dialoguePanel != null) dialoguePanel.SetActive(true);
-    
-    if (speakerNameText != null) speakerNameText.text = speakerName;
-
-    string processedMessage = message;
-
-    if (playerStats != null && !string.IsNullOrEmpty(playerStats.playerName))        
     {
-        processedMessage = message.Replace("{name}", $"<b>{playerStats.playerName}</b>");
-    }
-
-    if (dialogueText != null) dialogueText.text = processedMessage;
-
-    TogglePlayerMovement(false);
-
-    if (dialogueContinueButton != null)
-    {
-        dialogueContinueButton.onClick.RemoveAllListeners();
+        if (dialoguePanel != null) dialoguePanel.SetActive(true);
         
-        if (onContinueAction != null)
-            dialogueContinueButton.onClick.AddListener(onContinueAction);
-        else
-            dialogueContinueButton.onClick.AddListener(CloseDialogue);
+        if (speakerNameText != null) speakerNameText.text = speakerName;
+
+        string processedMessage = message;
+
+        if (playerStats != null && !string.IsNullOrEmpty(playerStats.playerName))        
+        {
+            processedMessage = message.Replace("{name}", $"<b>{playerStats.playerName}</b>");
+        }
+
+        if (dialogueText != null) dialogueText.text = processedMessage;
+
+        TogglePlayerMovement(false);
+
+        if (dialogueContinueButton != null)
+        {
+            // --- NEW: Ensure the continue button is turned back on for normal dialogue! ---
+            dialogueContinueButton.gameObject.SetActive(true);
+            // ------------------------------------------------------------------------------
+
+            dialogueContinueButton.onClick.RemoveAllListeners();
+            
+            if (onContinueAction != null)
+                dialogueContinueButton.onClick.AddListener(onContinueAction);
+            else
+                dialogueContinueButton.onClick.AddListener(CloseDialogue);
+        }
     }
-}
 
     public void CloseDialogue()
     {
@@ -278,28 +282,30 @@ public class UIManager : MonoBehaviour
     {
         if (choicePanel != null) choicePanel.SetActive(true);
 
+        // --- NEW: Hide the continue button so they cannot skip the choice! ---
+        if (dialogueContinueButton != null) 
+            dialogueContinueButton.gameObject.SetActive(false);
+        // ---------------------------------------------------------------------
+
         // Loop through our 4 available buttons
         for (int i = 0; i < choiceButtons.Length; i++)
         {
-            // If we have a choice for this button slot, turn it on!
             if (i < choices.Count)
             {
                 choiceButtons[i].gameObject.SetActive(true);
                 choiceTexts[i].text = choices[i].choiceText;
 
-                // Cache the current choice so the button remembers exactly which one it is
                 WorldTrigger.DialogueChoice currentChoice = choices[i];
 
                 choiceButtons[i].onClick.RemoveAllListeners();
                 choiceButtons[i].onClick.AddListener(() => 
                 {
                     if (choicePanel != null) choicePanel.SetActive(false);
-                    onChoiceSelected(currentChoice); // Send the exact choice back to the sequence
+                    onChoiceSelected(currentChoice); 
                 });
             }
             else
             {
-                // If we only gave the player 2 choices, turn off buttons 3 and 4
                 choiceButtons[i].gameObject.SetActive(false); 
             }
         }
