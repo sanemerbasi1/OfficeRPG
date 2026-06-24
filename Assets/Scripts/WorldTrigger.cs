@@ -6,13 +6,39 @@ public class WorldTrigger : MonoBehaviour
     public static WorldTrigger ActiveInstance;
 
     [System.Serializable]
+    public class DialogueChoice
+    {
+        [TextArea(1, 2)] 
+        public string choiceText = "New Choice";
+        
+        [Header("Reward")]
+        public StatType statReward; 
+        public int rewardAmount = 0; 
+
+        [Header("Branching")]
+        [Tooltip("Leave empty to go to the next step. Enter a Step ID to jump to a specific branch.")]
+        public string targetStepID = ""; 
+    }
+
+    [System.Serializable]
     public class TriggerStep
     {
+        [Header("Branching Identifiers")]
+        [Tooltip("Assign an ID here if you want a choice button (or another step) to jump directly to this step.")]
+        public string stepID = "";
+
+        [Tooltip("NEW: After this specific step finishes playing, jump directly to this destination Step ID. Perfect for merging back to the main path!")]
+        public string jumpToAfterStep = "";
+
+        [Header("Step Settings")]
         public StepType type;
         public string speakerName;
         [TextArea(2, 5)] public string textContent; 
         public string menuName; 
         public EncounterData encounterData; 
+        
+        [Header("For Choice Menus Only")]
+        public List<DialogueChoice> choices = new List<DialogueChoice>();
     }
 
     [Header("Settings")]
@@ -61,7 +87,18 @@ public class WorldTrigger : MonoBehaviour
         switch (step.type)
         {
             case StepType.Dialogue:
-                ui.ShowDialogue(step.textContent, step.speakerName, () => RunNextStep());
+                // MODIFIED: The continue button callback now checks if it needs to merge/jump somewhere else!
+                ui.ShowDialogue(step.textContent, step.speakerName, () => 
+                {
+                    if (!string.IsNullOrEmpty(step.jumpToAfterStep))
+                    {
+                        JumpToStep(step.jumpToAfterStep);
+                    }
+                    else
+                    {
+                        RunNextStep();
+                    }
+                });
                 break;
 
             case StepType.NameInput:
@@ -75,12 +112,40 @@ public class WorldTrigger : MonoBehaviour
 
             case StepType.OpenMenu:
                 ui.OpenMenu(step.menuName);
-                RunNextStep(); 
+                // Can also use jump logic here if needed
+                if (!string.IsNullOrEmpty(step.jumpToAfterStep)) JumpToStep(step.jumpToAfterStep);
+                else RunNextStep(); 
                 break;
 
             case StepType.CloseUI:
                 ui.CloseDialogue();
-                RunNextStep();
+                if (!string.IsNullOrEmpty(step.jumpToAfterStep)) JumpToStep(step.jumpToAfterStep);
+                else RunNextStep();
+                break;
+
+            case StepType.UpdateQuest:
+                ui.UpdateQuestText(step.textContent); 
+                if (!string.IsNullOrEmpty(step.jumpToAfterStep)) JumpToStep(step.jumpToAfterStep);
+                else RunNextStep(); 
+                break;
+
+            case StepType.ChoiceMenu:
+                ui.ShowChoices(step.choices, (selectedChoice) => 
+                {
+                    if (selectedChoice.rewardAmount > 0)
+                    {
+                        ui.playerStats.AddStat(selectedChoice.statReward, selectedChoice.rewardAmount);
+                    }
+
+                    if (!string.IsNullOrEmpty(selectedChoice.targetStepID))
+                    {
+                        JumpToStep(selectedChoice.targetStepID);
+                    }
+                    else
+                    {
+                        RunNextStep(); 
+                    }
+                });
                 break;
 
             case StepType.Battle:
@@ -118,15 +183,33 @@ public class WorldTrigger : MonoBehaviour
                             BattleGrid.Instance.ClearAllHighlights();
                         }
 
-                        RunNextStep();
+                        if (!string.IsNullOrEmpty(step.jumpToAfterStep)) JumpToStep(step.jumpToAfterStep);
+                        else RunNextStep();
                     });
                 }
                 else
                 {
                     Debug.LogWarning($"[TRIGGER: {triggerName}] Battle step reached but no EncounterData assigned!");
-                    RunNextStep();
+                    if (!string.IsNullOrEmpty(step.jumpToAfterStep)) JumpToStep(step.jumpToAfterStep);
+                    else RunNextStep();
                 }
                 break;
         }
+    }
+
+    private void JumpToStep(string targetID)
+    {
+        for (int i = 0; i < sequence.Count; i++)
+        {
+            if (sequence[i].stepID == targetID)
+            {
+                currentStepIndex = i; 
+                RunNextStep();        
+                return;
+            }
+        }
+
+        Debug.LogWarning($"[WorldTrigger: {triggerName}] Jump failed! Could not find a step matching Step ID: '{targetID}'. Exiting sequence.");
+        ui.CloseDialogue();
     }
 }

@@ -34,7 +34,7 @@ public class PlayerStats : ScriptableObject
 
     public void ResetToDefaults()
     {
-        playerName = "Employee";
+        playerName = "Applicant";
         communication = 1;
         criticalThinking = 1;
         adaptability = 1;
@@ -84,5 +84,19 @@ public class PlayerStats : ScriptableObject
             StatType.Leadership            => trait.LeadershipBonus,
             _ => 0
         };
+    }
+    public void AddStat(StatType type, int amount)
+    {
+        switch (type)
+        {
+            case StatType.Communication: communication += amount; break;
+            case StatType.CriticalThinking: criticalThinking += amount; break;
+            case StatType.Adaptability: adaptability += amount; break;
+            case StatType.EmotionalIntelligence: emotionalIntelligence += amount; break;
+            case StatType.Sustainability: sustainability += amount; break;
+            case StatType.Leadership: leadership += amount; break;
+        }
+        
+        Debug.Log($"[PlayerStats] {type} increased by {amount}!");
     }
 }

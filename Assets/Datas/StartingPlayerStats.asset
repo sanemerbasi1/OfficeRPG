@@ -12,16 +12,21 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cf114735aac534dcd955f6703237de53, type: 3}
   m_Name: StartingPlayerStats
   m_EditorClassIdentifier: Assembly-CSharp::PlayerStats
-  playerName: Employee
+  currentDay: 1
+  playerName: asd
   portrait: {fileID: -1556092918280230627, guid: 1cfd6679c33a6474e8e63590170c336d, type: 3}
   communication: 1
   criticalThinking: 1
-  adaptability: 1
-  emotionalIntelligence: 1
+  adaptability: 4
+  emotionalIntelligence: 4
   sustainability: 1
   leadership: 1
-  slot1: {fileID: 0}
-  slot2: {fileID: 0}
+  currentMH: 0
+  maxMH: 0
+  currentShield: 0
+  actionPoints: 4
+  slot1: {fileID: 11400000, guid: dff61217a9f7d4084a851a8c6ea6b113, type: 2}
+  slot2: {fileID: 11400000, guid: cfd0dc38ce63b49838994f89492b0cf4, type: 2}
   playerSkills:
   - {fileID: 11400000, guid: 649cc0863736e441c944940f16ca437f, type: 2}
   - {fileID: 11400000, guid: 95e03863f4b914b70a116a4766d520d8, type: 2}

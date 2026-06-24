@@ -10,6 +10,8 @@ using UnityEngine.Events;
 public class UIManager : MonoBehaviour 
 {
     public TMP_InputField nameInputField;
+    [Header("Quest UI")]
+    public TextMeshProUGUI questObjectiveText; 
     
     [Header("Data Table")]
     public PlayerStats playerStats;
@@ -38,7 +40,10 @@ public class UIManager : MonoBehaviour
     [Header("Auto-Assigned (Do Not Drag)")]
     public CharCreationManager charMaster;
     public List<StatHandler> allStats = new List<StatHandler>();
-
+    [Header("Dialogue Choices UI")]
+    public GameObject choicePanel; 
+    public Button[] choiceButtons;
+    public TextMeshProUGUI[] choiceTexts;
     private void Awake()
     {
         if (playerStats != null) playerStats.ResetToDefaults();
@@ -64,9 +69,9 @@ public class UIManager : MonoBehaviour
 
         string processedMessage = message;
 
-        if (nameInputText != null && !string.IsNullOrEmpty(nameInputText.text))        
+        if (playerStats != null && !string.IsNullOrEmpty(playerStats.playerName))        
         {
-            processedMessage = message.Replace("{name}", nameInputText.text);
+            processedMessage = message.Replace("{name}", $"<b>{playerStats.playerName}</b>");
         }
 
         if (dialogueText != null) dialogueText.text = processedMessage;
@@ -75,6 +80,10 @@ public class UIManager : MonoBehaviour
 
         if (dialogueContinueButton != null)
         {
+            // --- NEW: Ensure the continue button is turned back on for normal dialogue! ---
+            dialogueContinueButton.gameObject.SetActive(true);
+            // ------------------------------------------------------------------------------
+
             dialogueContinueButton.onClick.RemoveAllListeners();
             
             if (onContinueAction != null)
@@ -256,6 +265,49 @@ public class UIManager : MonoBehaviour
         {
             int currentDay = (playerStats != null) ? playerStats.currentDay : 1;
             dayCountText.text = $"Day: {currentDay}";
+        }
+    }
+    public void UpdateQuestText(string newQuestText)
+    {
+        if (questObjectiveText != null)
+        {
+            questObjectiveText.text = newQuestText;
+        }
+        else
+        {
+            Debug.LogWarning("[UIManager] Quest Objective Text is not assigned in the inspector!");
+        }
+    }
+    public void ShowChoices(List<WorldTrigger.DialogueChoice> choices, System.Action<WorldTrigger.DialogueChoice> onChoiceSelected)
+    {
+        if (choicePanel != null) choicePanel.SetActive(true);
+
+        // --- NEW: Hide the continue button so they cannot skip the choice! ---
+        if (dialogueContinueButton != null) 
+            dialogueContinueButton.gameObject.SetActive(false);
+        // ---------------------------------------------------------------------
+
+        // Loop through our 4 available buttons
+        for (int i = 0; i < choiceButtons.Length; i++)
+        {
+            if (i < choices.Count)
+            {
+                choiceButtons[i].gameObject.SetActive(true);
+                choiceTexts[i].text = choices[i].choiceText;
+
+                WorldTrigger.DialogueChoice currentChoice = choices[i];
+
+                choiceButtons[i].onClick.RemoveAllListeners();
+                choiceButtons[i].onClick.AddListener(() => 
+                {
+                    if (choicePanel != null) choicePanel.SetActive(false);
+                    onChoiceSelected(currentChoice); 
+                });
+            }
+            else
+            {
+                choiceButtons[i].gameObject.SetActive(false); 
+            }
         }
     }
 }
