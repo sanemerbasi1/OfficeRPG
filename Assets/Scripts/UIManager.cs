@@ -10,6 +10,8 @@ using UnityEngine.Events;
 public class UIManager : MonoBehaviour 
 {
     public TMP_InputField nameInputField;
+    [Header("Quest UI")]
+    public TextMeshProUGUI questObjectiveText; 
     
     [Header("Data Table")]
     public PlayerStats playerStats;
@@ -38,7 +40,10 @@ public class UIManager : MonoBehaviour
     [Header("Auto-Assigned (Do Not Drag)")]
     public CharCreationManager charMaster;
     public List<StatHandler> allStats = new List<StatHandler>();
-
+    [Header("Dialogue Choices UI")]
+    public GameObject choicePanel; 
+    public Button[] choiceButtons;
+    public TextMeshProUGUI[] choiceTexts;
     private void Awake()
     {
         if (playerStats != null) playerStats.ResetToDefaults();
@@ -57,32 +62,32 @@ public class UIManager : MonoBehaviour
     }
 
     public void ShowDialogue(string message, string speakerName = " ", UnityAction onContinueAction = null)
+{
+    if (dialoguePanel != null) dialoguePanel.SetActive(true);
+    
+    if (speakerNameText != null) speakerNameText.text = speakerName;
+
+    string processedMessage = message;
+
+    if (playerStats != null && !string.IsNullOrEmpty(playerStats.playerName))        
     {
-        if (dialoguePanel != null) dialoguePanel.SetActive(true);
-        
-        if (speakerNameText != null) speakerNameText.text = speakerName;
-
-        string processedMessage = message;
-
-        if (nameInputText != null && !string.IsNullOrEmpty(nameInputText.text))        
-        {
-            processedMessage = message.Replace("{name}", nameInputText.text);
-        }
-
-        if (dialogueText != null) dialogueText.text = processedMessage;
-
-        TogglePlayerMovement(false);
-
-        if (dialogueContinueButton != null)
-        {
-            dialogueContinueButton.onClick.RemoveAllListeners();
-            
-            if (onContinueAction != null)
-                dialogueContinueButton.onClick.AddListener(onContinueAction);
-            else
-                dialogueContinueButton.onClick.AddListener(CloseDialogue);
-        }
+        processedMessage = message.Replace("{name}", $"<b>{playerStats.playerName}</b>");
     }
+
+    if (dialogueText != null) dialogueText.text = processedMessage;
+
+    TogglePlayerMovement(false);
+
+    if (dialogueContinueButton != null)
+    {
+        dialogueContinueButton.onClick.RemoveAllListeners();
+        
+        if (onContinueAction != null)
+            dialogueContinueButton.onClick.AddListener(onContinueAction);
+        else
+            dialogueContinueButton.onClick.AddListener(CloseDialogue);
+    }
+}
 
     public void CloseDialogue()
     {
@@ -256,6 +261,47 @@ public class UIManager : MonoBehaviour
         {
             int currentDay = (playerStats != null) ? playerStats.currentDay : 1;
             dayCountText.text = $"Day: {currentDay}";
+        }
+    }
+    public void UpdateQuestText(string newQuestText)
+    {
+        if (questObjectiveText != null)
+        {
+            questObjectiveText.text = newQuestText;
+        }
+        else
+        {
+            Debug.LogWarning("[UIManager] Quest Objective Text is not assigned in the inspector!");
+        }
+    }
+    public void ShowChoices(List<WorldTrigger.DialogueChoice> choices, System.Action<WorldTrigger.DialogueChoice> onChoiceSelected)
+    {
+        if (choicePanel != null) choicePanel.SetActive(true);
+
+        // Loop through our 4 available buttons
+        for (int i = 0; i < choiceButtons.Length; i++)
+        {
+            // If we have a choice for this button slot, turn it on!
+            if (i < choices.Count)
+            {
+                choiceButtons[i].gameObject.SetActive(true);
+                choiceTexts[i].text = choices[i].choiceText;
+
+                // Cache the current choice so the button remembers exactly which one it is
+                WorldTrigger.DialogueChoice currentChoice = choices[i];
+
+                choiceButtons[i].onClick.RemoveAllListeners();
+                choiceButtons[i].onClick.AddListener(() => 
+                {
+                    if (choicePanel != null) choicePanel.SetActive(false);
+                    onChoiceSelected(currentChoice); // Send the exact choice back to the sequence
+                });
+            }
+            else
+            {
+                // If we only gave the player 2 choices, turn off buttons 3 and 4
+                choiceButtons[i].gameObject.SetActive(false); 
+            }
         }
     }
 }

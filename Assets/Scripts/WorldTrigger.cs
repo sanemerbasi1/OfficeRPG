@@ -6,6 +6,17 @@ public class WorldTrigger : MonoBehaviour
     public static WorldTrigger ActiveInstance;
 
     [System.Serializable]
+    public class DialogueChoice
+    {
+        [TextArea(1, 2)] 
+        public string choiceText = "New Choice";
+        
+        [Header("Reward")]
+        public StatType statReward; 
+        public int rewardAmount = 0; 
+    }
+
+    [System.Serializable]
     public class TriggerStep
     {
         public StepType type;
@@ -13,6 +24,8 @@ public class WorldTrigger : MonoBehaviour
         [TextArea(2, 5)] public string textContent; 
         public string menuName; 
         public EncounterData encounterData; 
+        [Header("For Choice Menus Only")]
+        public List<DialogueChoice> choices = new List<DialogueChoice>();
     }
 
     [Header("Settings")]
@@ -81,6 +94,23 @@ public class WorldTrigger : MonoBehaviour
             case StepType.CloseUI:
                 ui.CloseDialogue();
                 RunNextStep();
+                break;
+
+            case StepType.UpdateQuest:
+                ui.UpdateQuestText(step.textContent); 
+                
+                RunNextStep(); 
+                break;
+            case StepType.ChoiceMenu:
+                ui.ShowChoices(step.choices, (selectedChoice) => 
+                {
+                    if (selectedChoice.rewardAmount > 0)
+                    {
+                        ui.playerStats.AddStat(selectedChoice.statReward, selectedChoice.rewardAmount);
+                    }
+
+                    RunNextStep(); 
+                });
                 break;
 
             case StepType.Battle:
