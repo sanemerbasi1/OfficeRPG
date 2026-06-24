@@ -1,10 +1,10 @@
 fileFormatVersion: 2
-guid: a91eef33e3fd142158e75411366033b3
+guid: d6825f2bfc3ca49c4baaeeb1869a8a71
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: 5454274090374010429
-    second: uyuyo_0
+      213: -6274726439156374416
+    second: tuvaletler_0
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -126,13 +126,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: uyuyo_0
+      name: tuvaletler_0
       rect:
         serializedVersion: 2
-        x: 12
-        y: 9
-        width: 51
-        height: 46
+        x: 0
+        y: 0
+        width: 37
+        height: 64
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -141,8 +141,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: d361c50236971bb40800000000000000
-      internalID: 5454274090374010429
+      spriteID: 074255b6c81bbe8a0800000000000000
+      internalID: -6274726439156374416
       vertices: []
       indices: 
       edges: []
@@ -161,7 +161,7 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      uyuyo_0: 5454274090374010429
+      tuvaletler_0: -6274726439156374416
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

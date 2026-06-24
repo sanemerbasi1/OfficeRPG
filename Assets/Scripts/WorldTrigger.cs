@@ -24,10 +24,7 @@ public class WorldTrigger : MonoBehaviour
     public class TriggerStep
     {
         [Header("Branching Identifiers")]
-        [Tooltip("Assign an ID here if you want a choice button (or another step) to jump directly to this step.")]
         public string stepID = "";
-
-        [Tooltip("NEW: After this specific step finishes playing, jump directly to this destination Step ID. Perfect for merging back to the main path!")]
         public string jumpToAfterStep = "";
 
         [Header("Step Settings")]
@@ -37,6 +34,22 @@ public class WorldTrigger : MonoBehaviour
         public string menuName; 
         public EncounterData encounterData; 
         
+        [Header("For Toggle UI Elements Only")]
+        [Tooltip("Drag all the UI GameObjects you want to affect into this list.")]
+        public List<GameObject> targetUIElements = new List<GameObject>();
+        
+        [Tooltip("True = Turn On. False = Turn Off.")]
+        public bool targetUIState = true; 
+        
+        [Tooltip("Check this if you want the UI to revert back after a few seconds.")]
+        public bool isTemporary = false;
+        
+        [Tooltip("How many seconds before reverting?")]
+        public float activeDuration = 3f;
+
+        [Tooltip("Should the sequence WAIT for the timer to finish before moving to the next step?")]
+        public bool waitToFinish = true;
+
         [Header("For Choice Menus Only")]
         public List<DialogueChoice> choices = new List<DialogueChoice>();
     }
@@ -87,7 +100,6 @@ public class WorldTrigger : MonoBehaviour
         switch (step.type)
         {
             case StepType.Dialogue:
-                // MODIFIED: The continue button callback now checks if it needs to merge/jump somewhere else!
                 ui.ShowDialogue(step.textContent, step.speakerName, () => 
                 {
                     if (!string.IsNullOrEmpty(step.jumpToAfterStep))
@@ -112,7 +124,6 @@ public class WorldTrigger : MonoBehaviour
 
             case StepType.OpenMenu:
                 ui.OpenMenu(step.menuName);
-                // Can also use jump logic here if needed
                 if (!string.IsNullOrEmpty(step.jumpToAfterStep)) JumpToStep(step.jumpToAfterStep);
                 else RunNextStep(); 
                 break;
@@ -146,6 +157,37 @@ public class WorldTrigger : MonoBehaviour
                         RunNextStep(); 
                     }
                 });
+                break;
+
+            case StepType.ToggleUIElement:
+                if (ui != null)
+                {
+                    ui.CloseDialogue();
+                }
+
+                if (step.targetUIElements.Count > 0)
+                {
+                    if (step.isTemporary)
+                    {
+                        StartCoroutine(HandleTemporaryUIGroup(step));
+                    }
+                    else
+                    {
+                        // Apply PERMANENTLY
+                        foreach (GameObject uiElement in step.targetUIElements)
+                        {
+                            if (uiElement != null) uiElement.SetActive(step.targetUIState);
+                        }
+
+                        if (!string.IsNullOrEmpty(step.jumpToAfterStep)) JumpToStep(step.jumpToAfterStep);
+                        else RunNextStep();
+                    }
+                }
+                else
+                {
+                    Debug.LogWarning($"[WorldTrigger: {triggerName}] ToggleUIElement step has an empty UI list!");
+                    RunNextStep(); 
+                }
                 break;
 
             case StepType.Battle:
@@ -211,5 +253,37 @@ public class WorldTrigger : MonoBehaviour
 
         Debug.LogWarning($"[WorldTrigger: {triggerName}] Jump failed! Could not find a step matching Step ID: '{targetID}'. Exiting sequence.");
         ui.CloseDialogue();
+    }
+
+    private System.Collections.IEnumerator HandleTemporaryUIGroup(TriggerStep step)
+    {
+        // 1. Turn the temporary UI ON
+        foreach (GameObject uiElement in step.targetUIElements)
+        {
+            if (uiElement != null) uiElement.SetActive(step.targetUIState);
+        }
+        
+        // 2. If unchecked, let the sequence keep moving immediately
+        if (!step.waitToFinish)
+        {
+            if (!string.IsNullOrEmpty(step.jumpToAfterStep)) JumpToStep(step.jumpToAfterStep);
+            else RunNextStep();
+        }
+
+        // 3. Sit and hold the screen for the duration
+        yield return new WaitForSeconds(step.activeDuration);
+        
+        // 4. Turn the temporary UI OFF
+        foreach (GameObject uiElement in step.targetUIElements)
+        {
+            if (uiElement != null) uiElement.SetActive(!step.targetUIState); 
+        }
+
+        // 5. If checked, fire the next step ONLY NOW that it disappeared
+        if (step.waitToFinish)
+        {
+            if (!string.IsNullOrEmpty(step.jumpToAfterStep)) JumpToStep(step.jumpToAfterStep);
+            else RunNextStep();
+        }
     }
 }
