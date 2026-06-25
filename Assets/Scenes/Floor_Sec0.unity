@@ -1100,10 +1100,11 @@ MonoBehaviour:
   - stepID: 
     jumpToAfterStep: 
     type: 0
-    speakerName: NARRATOR
-    textContent: It is 8.45 AM.
+    speakerName: <color=#0953BA>NARRATOR
+    textContent: <i>It is 8.45 AM.
     menuName: 
     encounterData: {fileID: 0}
+    npcAnimator: {fileID: 0}
     targetUIElements: []
     targetUIState: 1
     isTemporary: 0
@@ -1113,10 +1114,11 @@ MonoBehaviour:
   - stepID: 
     jumpToAfterStep: 
     type: 0
-    speakerName: NARRATOR
-    textContent: The interview starts in fifteen minutes.
+    speakerName: <color=#0953BA>NARRATOR
+    textContent: <i>The interview starts in fifteen minutes.
     menuName: 
     encounterData: {fileID: 0}
+    npcAnimator: {fileID: 0}
     targetUIElements: []
     targetUIState: 1
     isTemporary: 0
@@ -1126,12 +1128,13 @@ MonoBehaviour:
   - stepID: 
     jumpToAfterStep: 
     type: 0
-    speakerName: NARRATOR
-    textContent: "The Applicant has done the reasonable things. Arrived early. Dressed
-      carefully. Learned the company\u2019s language well enough to repeat it back
-      with confidence.\n"
+    speakerName: <color=#0953BA>NARRATOR
+    textContent: "<i>The Applicant has done the reasonable things. Arrived early.
+      Dressed carefully. Learned the company\u2019s language well enough to repeat
+      it back with confidence.\n"
     menuName: 
     encounterData: {fileID: 0}
+    npcAnimator: {fileID: 0}
     targetUIElements: []
     targetUIState: 1
     isTemporary: 0
@@ -1141,11 +1144,12 @@ MonoBehaviour:
   - stepID: 
     jumpToAfterStep: 
     type: 0
-    speakerName: NARRATOR
-    textContent: There is still time to breathe, but not enough time to become someone
-      else.
+    speakerName: <color=#0953BA>NARRATOR
+    textContent: <i>There is still time to breathe, but not enough time to become
+      someone else.
     menuName: 
     encounterData: {fileID: 0}
+    npcAnimator: {fileID: 0}
     targetUIElements: []
     targetUIState: 1
     isTemporary: 0
@@ -1155,12 +1159,13 @@ MonoBehaviour:
   - stepID: 
     jumpToAfterStep: 
     type: 0
-    speakerName: NARRATOR
-    textContent: The lobby is quiet. The Reception desk waits at the center of it,
-      clean and deliberate, as if every person who enters this building is expected
+    speakerName: <color=#0953BA>NARRATOR
+    textContent: <i>The lobby is quiet. The Reception desk waits at the center of
+      it, clean and deliberate, as if every person who enters this building is expected
       to stand in exactly this place.
     menuName: 
     encounterData: {fileID: 0}
+    npcAnimator: {fileID: 0}
     targetUIElements: []
     targetUIState: 1
     isTemporary: 0
@@ -1170,10 +1175,11 @@ MonoBehaviour:
   - stepID: 
     jumpToAfterStep: 
     type: 0
-    speakerName: NARRATOR
-    textContent: Your first task is simple.
+    speakerName: <color=#0953BA>NARRATOR
+    textContent: <i>Your first task is simple.
     menuName: 
     encounterData: {fileID: 0}
+    npcAnimator: {fileID: 0}
     targetUIElements: []
     targetUIState: 1
     isTemporary: 0
@@ -1183,10 +1189,11 @@ MonoBehaviour:
   - stepID: 
     jumpToAfterStep: 
     type: 0
-    speakerName: NARRATOR
-    textContent: Be seen. Be cleared. Be sent forward.
+    speakerName: <color=#0953BA>NARRATOR
+    textContent: <i>Be seen. Be cleared. Be sent forward.
     menuName: 
     encounterData: {fileID: 0}
+    npcAnimator: {fileID: 0}
     targetUIElements: []
     targetUIState: 1
     isTemporary: 0
@@ -1200,6 +1207,7 @@ MonoBehaviour:
     textContent: 'OBJECTIVE UPDATED: Check in at Reception.'
     menuName: 
     encounterData: {fileID: 0}
+    npcAnimator: {fileID: 0}
     targetUIElements: []
     targetUIState: 1
     isTemporary: 0
@@ -1242,7 +1250,7 @@ BoxCollider2D:
   m_UsedByEffector: 0
   m_CompositeOperation: 0
   m_CompositeOrder: 0
-  m_Offset: {x: 0.12688684, y: -0.22568387}
+  m_Offset: {x: -0.011290789, y: 0.22339344}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0, y: 0}
@@ -1252,7 +1260,7 @@ BoxCollider2D:
     drawMode: 0
     adaptiveTiling: 0
   m_AutoTiling: 0
-  m_Size: {x: 8.105634, y: 1.4513677}
+  m_Size: {x: 7.069302, y: 0.5532131}
   m_EdgeRadius: 0
 --- !u!4 &141954062
 Transform:
@@ -1474,6 +1482,7 @@ GameObject:
   - component: {fileID: 162715610}
   - component: {fileID: 162715609}
   - component: {fileID: 162715611}
+  - component: {fileID: 162715612}
   m_Layer: 0
   m_Name: HR_Person
   m_TagString: Untagged
@@ -1528,7 +1537,7 @@ SpriteRenderer:
   m_GlobalIlluminationMeshLod: 0
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 1
+  m_SortingOrder: 2
   m_MaskInteraction: 0
   m_Sprite: {fileID: -7949446582266806286, guid: 0af4fc95d85204b258eea6b0e9ce1693, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -1549,8 +1558,8 @@ Transform:
   m_GameObject: {fileID: 162715608}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -0.18, y: 19.81, z: -0.03}
-  m_LocalScale: {x: 4, y: 4, z: 4}
+  m_LocalPosition: {x: -0.14, y: 19.75, z: -0.03}
+  m_LocalScale: {x: 3.5, y: 3.5, z: 3.5}
   m_ConstrainProportionsScale: 1
   m_Children:
   - {fileID: 1588038725}
@@ -1602,6 +1611,28 @@ BoxCollider2D:
   m_AutoTiling: 0
   m_Size: {x: 0.24, y: 0.53}
   m_EdgeRadius: 0
+--- !u!95 &162715612
+Animator:
+  serializedVersion: 7
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 162715608}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 3bfa3f645aef946ddaf0ed6283ea4d2c, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_AnimatePhysics: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
 --- !u!1 &173153794
 GameObject:
   m_ObjectHideFlags: 0
@@ -2027,7 +2058,7 @@ GameObject:
   - component: {fileID: 212823895}
   - component: {fileID: 212823896}
   m_Layer: 0
-  m_Name: EncounterNPC1
+  m_Name: Rival_NPC
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2048,7 +2079,6 @@ Transform:
   m_Children:
   - {fileID: 330239000}
   - {fileID: 1376746748}
-  - {fileID: 300049435}
   m_Father: {fileID: 724049768}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &212823895
@@ -7630,12 +7660,12 @@ Transform:
   m_GameObject: {fileID: 300049434}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 7.92, y: 6.2, z: -0.03}
-  m_LocalScale: {x: 0.4, y: 0.4, z: 0.4}
+  m_LocalPosition: {x: 17.64, y: 16.52, z: -0.03}
+  m_LocalScale: {x: 0.35, y: 0.35, z: 0.35}
   m_ConstrainProportionsScale: 1
   m_Children:
   - {fileID: 1569761172}
-  m_Father: {fileID: 212823894}
+  m_Father: {fileID: 724049768}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!212 &300049436
 SpriteRenderer:
@@ -7686,9 +7716,9 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 1
   m_MaskInteraction: 0
-  m_Sprite: {fileID: 6675052541728665267, guid: ea98f4d4985264d668f70717f069f88d, type: 3}
+  m_Sprite: {fileID: -1556092918280230627, guid: 1cfd6679c33a6474e8e63590170c336d, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_FlipX: 0
+  m_FlipX: 1
   m_FlipY: 0
   m_DrawMode: 0
   m_Size: {x: 1.73, y: 3.16}
@@ -7792,6 +7822,7 @@ MonoBehaviour:
     textContent: You are <b>{name}</b>, right?
     menuName: 
     encounterData: {fileID: 0}
+    npcAnimator: {fileID: 1376746750}
     targetUIElements: []
     targetUIState: 1
     isTemporary: 0
@@ -7805,6 +7836,7 @@ MonoBehaviour:
     textContent: The one they just hired.
     menuName: 
     encounterData: {fileID: 0}
+    npcAnimator: {fileID: 1376746750}
     targetUIElements: []
     targetUIState: 1
     isTemporary: 0
@@ -7818,6 +7850,7 @@ MonoBehaviour:
     textContent: 
     menuName: 
     encounterData: {fileID: 0}
+    npcAnimator: {fileID: 0}
     targetUIElements: []
     targetUIState: 1
     isTemporary: 0
@@ -7847,6 +7880,7 @@ MonoBehaviour:
     textContent: I checked your Linked profile, you know.
     menuName: 
     encounterData: {fileID: 0}
+    npcAnimator: {fileID: 1376746750}
     targetUIElements: []
     targetUIState: 1
     isTemporary: 0
@@ -7860,6 +7894,7 @@ MonoBehaviour:
     textContent: I am not impressed.
     menuName: 
     encounterData: {fileID: 0}
+    npcAnimator: {fileID: 1376746750}
     targetUIElements: []
     targetUIState: 1
     isTemporary: 0
@@ -7873,6 +7908,7 @@ MonoBehaviour:
     textContent: I have experience in three of the departments they listed.
     menuName: 
     encounterData: {fileID: 0}
+    npcAnimator: {fileID: 1376746750}
     targetUIElements: []
     targetUIState: 1
     isTemporary: 0
@@ -7887,6 +7923,7 @@ MonoBehaviour:
       changed the requirements.
     menuName: 
     encounterData: {fileID: 0}
+    npcAnimator: {fileID: 1376746750}
     targetUIElements: []
     targetUIState: 1
     isTemporary: 0
@@ -7900,6 +7937,7 @@ MonoBehaviour:
     textContent: And then you showed up.
     menuName: 
     encounterData: {fileID: 0}
+    npcAnimator: {fileID: 1376746750}
     targetUIElements: []
     targetUIState: 1
     isTemporary: 0
@@ -7913,6 +7951,7 @@ MonoBehaviour:
     textContent: 
     menuName: 
     encounterData: {fileID: 0}
+    npcAnimator: {fileID: 0}
     targetUIElements: []
     targetUIState: 1
     isTemporary: 0
@@ -7942,6 +7981,7 @@ MonoBehaviour:
     textContent: People keep saying that.
     menuName: 
     encounterData: {fileID: 0}
+    npcAnimator: {fileID: 1376746750}
     targetUIElements: []
     targetUIState: 1
     isTemporary: 0
@@ -7955,6 +7995,7 @@ MonoBehaviour:
     textContent: No one makes the decision. Everyone just happens to stand near it.
     menuName: 
     encounterData: {fileID: 0}
+    npcAnimator: {fileID: 1376746750}
     targetUIElements: []
     targetUIState: 1
     isTemporary: 0
@@ -7968,6 +8009,7 @@ MonoBehaviour:
     textContent: The stranger is not entirely wrong.
     menuName: 
     encounterData: {fileID: 0}
+    npcAnimator: {fileID: 1376746750}
     targetUIElements: []
     targetUIState: 1
     isTemporary: 0
@@ -7977,11 +8019,12 @@ MonoBehaviour:
   - stepID: 
     jumpToAfterStep: 
     type: 0
-    speakerName: NARRATOR
-    textContent: A fair system would have made the comparison clear. An honest system
-      would have explained the decision.
+    speakerName: <color=#0953BA>NARRATOR
+    textContent: <i>A fair system would have made the comparison clear. An honest
+      system would have explained the decision.
     menuName: 
     encounterData: {fileID: 0}
+    npcAnimator: {fileID: 0}
     targetUIElements: []
     targetUIState: 1
     isTemporary: 0
@@ -7991,11 +8034,12 @@ MonoBehaviour:
   - stepID: 
     jumpToAfterStep: 
     type: 0
-    speakerName: NARRATOR
-    textContent: This one produced a winner and left the rest of the room to interpret
+    speakerName: <color=#0953BA>NARRATOR
+    textContent: <i>This one produced a winner and left the rest of the room to interpret
       the damage.
     menuName: 
     encounterData: {fileID: 0}
+    npcAnimator: {fileID: 0}
     targetUIElements: []
     targetUIState: 1
     isTemporary: 0
@@ -8009,6 +8053,7 @@ MonoBehaviour:
     textContent: Do you know what they told me?
     menuName: 
     encounterData: {fileID: 0}
+    npcAnimator: {fileID: 1376746750}
     targetUIElements: []
     targetUIState: 1
     isTemporary: 0
@@ -8023,6 +8068,7 @@ MonoBehaviour:
       but your profile remains under consideration for future opportunities.\u201D"
     menuName: 
     encounterData: {fileID: 0}
+    npcAnimator: {fileID: 1376746750}
     targetUIElements: []
     targetUIState: 1
     isTemporary: 0
@@ -8036,6 +8082,7 @@ MonoBehaviour:
     textContent: At least seven different companies e-mailed that sentence to me.
     menuName: 
     encounterData: {fileID: 0}
+    npcAnimator: {fileID: 1376746750}
     targetUIElements: []
     targetUIState: 1
     isTemporary: 0
@@ -8049,6 +8096,7 @@ MonoBehaviour:
     textContent: Now I get to meet this said candidate.
     menuName: 
     encounterData: {fileID: 0}
+    npcAnimator: {fileID: 1376746750}
     targetUIElements: []
     targetUIState: 1
     isTemporary: 0
@@ -8062,6 +8110,7 @@ MonoBehaviour:
     textContent: A rare opportunity, really.
     menuName: 
     encounterData: {fileID: 0}
+    npcAnimator: {fileID: 1376746750}
     targetUIElements: []
     targetUIState: 1
     isTemporary: 0
@@ -8075,6 +8124,7 @@ MonoBehaviour:
     textContent: Why do they choose you and not me?
     menuName: 
     encounterData: {fileID: 0}
+    npcAnimator: {fileID: 1376746750}
     targetUIElements: []
     targetUIState: 1
     isTemporary: 0
@@ -8088,6 +8138,7 @@ MonoBehaviour:
     textContent: 
     menuName: 
     encounterData: {fileID: 0}
+    npcAnimator: {fileID: 0}
     targetUIElements: []
     targetUIState: 1
     isTemporary: 0
@@ -8117,6 +8168,7 @@ MonoBehaviour:
     textContent: Exactly.
     menuName: 
     encounterData: {fileID: 0}
+    npcAnimator: {fileID: 1376746750}
     targetUIElements: []
     targetUIState: 1
     isTemporary: 0
@@ -8130,6 +8182,7 @@ MonoBehaviour:
     textContent: You do not know.
     menuName: 
     encounterData: {fileID: 0}
+    npcAnimator: {fileID: 1376746750}
     targetUIElements: []
     targetUIState: 1
     isTemporary: 0
@@ -8143,6 +8196,7 @@ MonoBehaviour:
     textContent: And still, you are the one they chose.
     menuName: 
     encounterData: {fileID: 0}
+    npcAnimator: {fileID: 1376746750}
     targetUIElements: []
     targetUIState: 1
     isTemporary: 0
@@ -8156,6 +8210,7 @@ MonoBehaviour:
     textContent: Convenient.
     menuName: 
     encounterData: {fileID: 0}
+    npcAnimator: {fileID: 1376746750}
     targetUIElements: []
     targetUIState: 1
     isTemporary: 0
@@ -8169,6 +8224,7 @@ MonoBehaviour:
     textContent: A requirement no one can see until after it has excluded someone.
     menuName: 
     encounterData: {fileID: 0}
+    npcAnimator: {fileID: 1376746750}
     targetUIElements: []
     targetUIState: 1
     isTemporary: 0
@@ -8182,6 +8238,7 @@ MonoBehaviour:
     textContent: So did I.
     menuName: 
     encounterData: {fileID: 0}
+    npcAnimator: {fileID: 1376746750}
     targetUIElements: []
     targetUIState: 1
     isTemporary: 0
@@ -8195,6 +8252,7 @@ MonoBehaviour:
     textContent: That is the part you are supposed to understand.
     menuName: 
     encounterData: {fileID: 0}
+    npcAnimator: {fileID: 1376746750}
     targetUIElements: []
     targetUIState: 1
     isTemporary: 0
@@ -8208,6 +8266,7 @@ MonoBehaviour:
     textContent: It became between us when they put you ahead of me.
     menuName: 
     encounterData: {fileID: 0}
+    npcAnimator: {fileID: 1376746750}
     targetUIElements: []
     targetUIState: 1
     isTemporary: 0
@@ -8217,11 +8276,12 @@ MonoBehaviour:
   - stepID: mainstory
     jumpToAfterStep: 
     type: 0
-    speakerName: NARRATOR
-    textContent: "This conversation doesn\u2019t seem to go anywhere productive for
-      you."
+    speakerName: <color=#0953BA>NARRATOR
+    textContent: "<i>This conversation doesn\u2019t seem to go anywhere productive
+      for you."
     menuName: 
     encounterData: {fileID: 0}
+    npcAnimator: {fileID: 0}
     targetUIElements: []
     targetUIState: 1
     isTemporary: 0
@@ -8231,10 +8291,11 @@ MonoBehaviour:
   - stepID: 
     jumpToAfterStep: 
     type: 0
-    speakerName: NARRATOR
-    textContent: You better find a way to shut it down.
+    speakerName: <color=#0953BA>NARRATOR
+    textContent: <i>You better find a way to shut it down.
     menuName: 
     encounterData: {fileID: 0}
+    npcAnimator: {fileID: 0}
     targetUIElements: []
     targetUIState: 1
     isTemporary: 0
@@ -8248,6 +8309,7 @@ MonoBehaviour:
     textContent: I should have gotten this position.
     menuName: 
     encounterData: {fileID: 0}
+    npcAnimator: {fileID: 1376746750}
     targetUIElements: []
     targetUIState: 1
     isTemporary: 0
@@ -8262,6 +8324,7 @@ MonoBehaviour:
       to stay in the loop even after countless rejections. '
     menuName: 
     encounterData: {fileID: 0}
+    npcAnimator: {fileID: 1376746750}
     targetUIElements: []
     targetUIState: 1
     isTemporary: 0
@@ -8275,6 +8338,7 @@ MonoBehaviour:
     textContent: If they will not explain why it is you, then you can.
     menuName: 
     encounterData: {fileID: 0}
+    npcAnimator: {fileID: 1376746750}
     targetUIElements: []
     targetUIState: 1
     isTemporary: 0
@@ -8288,6 +8352,7 @@ MonoBehaviour:
     textContent: 
     menuName: 
     encounterData: {fileID: 0}
+    npcAnimator: {fileID: 0}
     targetUIElements: []
     targetUIState: 1
     isTemporary: 0
@@ -8317,6 +8382,7 @@ MonoBehaviour:
     textContent: No. You are not leaving.
     menuName: 
     encounterData: {fileID: 0}
+    npcAnimator: {fileID: 1376746750}
     targetUIElements: []
     targetUIState: 1
     isTemporary: 0
@@ -8330,6 +8396,7 @@ MonoBehaviour:
     textContent: Not until I see what they apparently saw.
     menuName: 
     encounterData: {fileID: 0}
+    npcAnimator: {fileID: 1376746750}
     targetUIElements: []
     targetUIState: 1
     isTemporary: 0
@@ -8343,6 +8410,7 @@ MonoBehaviour:
     textContent: Maybe not.
     menuName: 
     encounterData: {fileID: 0}
+    npcAnimator: {fileID: 1376746750}
     targetUIElements: []
     targetUIState: 1
     isTemporary: 0
@@ -8356,6 +8424,7 @@ MonoBehaviour:
     textContent: But you are going to give me one anyway.
     menuName: 
     encounterData: {fileID: 0}
+    npcAnimator: {fileID: 1376746750}
     targetUIElements: []
     targetUIState: 1
     isTemporary: 0
@@ -8369,6 +8438,7 @@ MonoBehaviour:
     textContent: Maybe.
     menuName: 
     encounterData: {fileID: 0}
+    npcAnimator: {fileID: 1376746750}
     targetUIElements: []
     targetUIState: 1
     isTemporary: 0
@@ -8382,6 +8452,7 @@ MonoBehaviour:
     textContent: But today, it gave you my place.
     menuName: 
     encounterData: {fileID: 0}
+    npcAnimator: {fileID: 1376746750}
     targetUIElements: []
     targetUIState: 1
     isTemporary: 0
@@ -8395,6 +8466,7 @@ MonoBehaviour:
     textContent: So today, you are the system to me.
     menuName: 
     encounterData: {fileID: 0}
+    npcAnimator: {fileID: 1376746750}
     targetUIElements: []
     targetUIState: 1
     isTemporary: 0
@@ -8408,6 +8480,7 @@ MonoBehaviour:
     textContent: Oh, but you already are.
     menuName: 
     encounterData: {fileID: 0}
+    npcAnimator: {fileID: 1376746750}
     targetUIElements: []
     targetUIState: 1
     isTemporary: 0
@@ -8417,10 +8490,11 @@ MonoBehaviour:
   - stepID: mainstorytwo
     jumpToAfterStep: 
     type: 0
-    speakerName: NARRATOR
-    textContent: The Rival steps closer.
+    speakerName: <color=#0953BA>NARRATOR
+    textContent: <i>The Rival steps closer.
     menuName: 
     encounterData: {fileID: 0}
+    npcAnimator: {fileID: 0}
     targetUIElements: []
     targetUIState: 1
     isTemporary: 0
@@ -8430,23 +8504,11 @@ MonoBehaviour:
   - stepID: 
     jumpToAfterStep: 
     type: 0
-    speakerName: NARRATOR
-    textContent: 'This is no longer a conversation. '
+    speakerName: <color=#0953BA>NARRATOR
+    textContent: '<i>This is no longer a conversation. '
     menuName: 
     encounterData: {fileID: 0}
-    targetUIElements: []
-    targetUIState: 1
-    isTemporary: 0
-    activeDuration: 0
-    waitToFinish: 1
-    choices: []
-  - stepID: 
-    jumpToAfterStep: 
-    type: 0
-    speakerName: NARRATOR
-    textContent: 'This is no longer a conversation. '
-    menuName: 
-    encounterData: {fileID: 0}
+    npcAnimator: {fileID: 0}
     targetUIElements: []
     targetUIState: 1
     isTemporary: 0
@@ -8460,6 +8522,7 @@ MonoBehaviour:
     textContent: RIVAL ATTACKS!
     menuName: 
     encounterData: {fileID: 11400000, guid: 7ceb77b91c7294b8e9df2dd28d2026d4, type: 2}
+    npcAnimator: {fileID: 0}
     targetUIElements: []
     targetUIState: 1
     isTemporary: 0
@@ -8469,10 +8532,11 @@ MonoBehaviour:
   - stepID: 
     jumpToAfterStep: 
     type: 0
-    speakerName: NARRATOR
-    textContent: The stranger takes a step back.
+    speakerName: <color=#0953BA>NARRATOR
+    textContent: <i>The stranger takes a step back.
     menuName: 
     encounterData: {fileID: 0}
+    npcAnimator: {fileID: 0}
     targetUIElements: []
     targetUIState: 1
     isTemporary: 0
@@ -8486,6 +8550,7 @@ MonoBehaviour:
     textContent: Fine.
     menuName: 
     encounterData: {fileID: 0}
+    npcAnimator: {fileID: 1376746750}
     targetUIElements: []
     targetUIState: 1
     isTemporary: 0
@@ -8499,6 +8564,7 @@ MonoBehaviour:
     textContent: Go ahead, then.
     menuName: 
     encounterData: {fileID: 0}
+    npcAnimator: {fileID: 1376746750}
     targetUIElements: []
     targetUIState: 1
     isTemporary: 0
@@ -8512,6 +8578,7 @@ MonoBehaviour:
     textContent: See how far being chosen gets you.
     menuName: 
     encounterData: {fileID: 0}
+    npcAnimator: {fileID: 1376746750}
     targetUIElements: []
     targetUIState: 1
     isTemporary: 0
@@ -8521,10 +8588,11 @@ MonoBehaviour:
   - stepID: 
     jumpToAfterStep: 
     type: 0
-    speakerName: NARRATOR
-    textContent: Congratulations on your victory.
+    speakerName: <color=#0953BA>NARRATOR
+    textContent: <i>Congratulations on your victory.
     menuName: 
     encounterData: {fileID: 0}
+    npcAnimator: {fileID: 0}
     targetUIElements: []
     targetUIState: 1
     isTemporary: 0
@@ -8534,10 +8602,11 @@ MonoBehaviour:
   - stepID: 
     jumpToAfterStep: 
     type: 0
-    speakerName: NARRATOR
-    textContent: But you better move on now.
+    speakerName: <color=#0953BA>NARRATOR
+    textContent: <i>But you better move on now.
     menuName: 
     encounterData: {fileID: 0}
+    npcAnimator: {fileID: 0}
     targetUIElements: []
     targetUIState: 1
     isTemporary: 0
@@ -8551,6 +8620,7 @@ MonoBehaviour:
     textContent: 'OBJECTIVE UPDATED: Find someone who can complete your orientation'
     menuName: 
     encounterData: {fileID: 0}
+    npcAnimator: {fileID: 0}
     targetUIElements: []
     targetUIState: 1
     isTemporary: 0
@@ -10206,7 +10276,7 @@ SpriteRenderer:
   m_GlobalIlluminationMeshLod: 0
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 1
+  m_SortingOrder: 3
   m_MaskInteraction: 0
   m_Sprite: {fileID: 7620300260919119781, guid: 83f472de03a054433b410cc4d77a5b4f, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -11280,6 +11350,7 @@ Transform:
   - {fileID: 2049897660}
   - {fileID: 162715610}
   - {fileID: 212823894}
+  - {fileID: 300049435}
   - {fileID: 1610239408}
   - {fileID: 985362344}
   m_Father: {fileID: 0}
@@ -13129,10 +13200,11 @@ MonoBehaviour:
   - stepID: 
     jumpToAfterStep: 
     type: 0
-    speakerName: NARRATOR
-    textContent: 'The door closes with a small mechanical click. '
+    speakerName: <color=#0953BA>NARRATOR
+    textContent: '<i>The door closes with a small mechanical click. '
     menuName: 
     encounterData: {fileID: 0}
+    npcAnimator: {fileID: 0}
     targetUIElements: []
     targetUIState: 1
     isTemporary: 0
@@ -13142,10 +13214,11 @@ MonoBehaviour:
   - stepID: 
     jumpToAfterStep: 
     type: 0
-    speakerName: NARRATOR
-    textContent: For the first time since entering the building, there is no surveillance.
+    speakerName: <color=#0953BA>NARRATOR
+    textContent: <i>For the first time since entering the building, there is no surveillance.
     menuName: 
     encounterData: {fileID: 0}
+    npcAnimator: {fileID: 0}
     targetUIElements: []
     targetUIState: 1
     isTemporary: 0
@@ -13155,11 +13228,12 @@ MonoBehaviour:
   - stepID: 
     jumpToAfterStep: 
     type: 0
-    speakerName: NARRATOR
-    textContent: There is only the restroom stall, the muted sound of ventilation,
+    speakerName: <color=#0953BA>NARRATOR
+    textContent: <i>There is only the restroom stall, the muted sound of ventilation,
       and the brief privacy granted between procedures.
     menuName: 
     encounterData: {fileID: 0}
+    npcAnimator: {fileID: 0}
     targetUIElements: []
     targetUIState: 1
     isTemporary: 0
@@ -13169,10 +13243,11 @@ MonoBehaviour:
   - stepID: 
     jumpToAfterStep: 
     type: 0
-    speakerName: NARRATOR
-    textContent: But hold on, there is one more thing.
+    speakerName: <color=#0953BA>NARRATOR
+    textContent: <i>But hold on, there is one more thing.
     menuName: 
     encounterData: {fileID: 0}
+    npcAnimator: {fileID: 0}
     targetUIElements: []
     targetUIState: 1
     isTemporary: 0
@@ -13182,10 +13257,11 @@ MonoBehaviour:
   - stepID: 
     jumpToAfterStep: 
     type: 0
-    speakerName: NARRATOR
+    speakerName: <color=#0953BA>NARRATOR
     textContent: <color=#8B0000>Blood.</color>
     menuName: 
     encounterData: {fileID: 0}
+    npcAnimator: {fileID: 0}
     targetUIElements: []
     targetUIState: 1
     isTemporary: 0
@@ -13195,10 +13271,11 @@ MonoBehaviour:
   - stepID: 
     jumpToAfterStep: 
     type: 0
-    speakerName: NARRATOR
-    textContent: 4 days earlier than what the application predicted.
+    speakerName: <color=#0953BA>NARRATOR
+    textContent: <i>4 days earlier than what the application predicted.
     menuName: 
     encounterData: {fileID: 0}
+    npcAnimator: {fileID: 0}
     targetUIElements: []
     targetUIState: 1
     isTemporary: 0
@@ -13208,11 +13285,12 @@ MonoBehaviour:
   - stepID: 
     jumpToAfterStep: 
     type: 0
-    speakerName: NARRATOR
-    textContent: Although not alarming, it is enough to make the morning feel slightly
-      less controlled than it did five minutes ago.
+    speakerName: <color=#0953BA>NARRATOR
+    textContent: <i>Although not alarming, it is enough to make the morning feel
+      slightly less controlled than it did five minutes ago.
     menuName: 
     encounterData: {fileID: 0}
+    npcAnimator: {fileID: 0}
     targetUIElements: []
     targetUIState: 1
     isTemporary: 0
@@ -13226,6 +13304,7 @@ MonoBehaviour:
     textContent: 
     menuName: 
     encounterData: {fileID: 0}
+    npcAnimator: {fileID: 0}
     targetUIElements: []
     targetUIState: 1
     isTemporary: 0
@@ -13251,10 +13330,11 @@ MonoBehaviour:
   - stepID: first
     jumpToAfterStep: 
     type: 0
-    speakerName: NARRATOR
-    textContent: Not a long one though. You are now running on company time.
+    speakerName: <color=#0953BA>NARRATOR
+    textContent: <i>Not a long one though. You are now running on company time.
     menuName: 
     encounterData: {fileID: 0}
+    npcAnimator: {fileID: 0}
     targetUIElements: []
     targetUIState: 1
     isTemporary: 0
@@ -13264,10 +13344,11 @@ MonoBehaviour:
   - stepID: 
     jumpToAfterStep: mainstory
     type: 0
-    speakerName: NARRATOR
-    textContent: Still, even a short pause can become useful to adapt.
+    speakerName: <color=#0953BA>NARRATOR
+    textContent: <i>Still, even a short pause can become useful to adapt.
     menuName: 
     encounterData: {fileID: 0}
+    npcAnimator: {fileID: 0}
     targetUIElements: []
     targetUIState: 1
     isTemporary: 0
@@ -13277,10 +13358,11 @@ MonoBehaviour:
   - stepID: second
     jumpToAfterStep: 
     type: 0
-    speakerName: NARRATOR
-    textContent: There is still time before the next stage.
+    speakerName: <color=#0953BA>NARRATOR
+    textContent: <i>There is still time before the next stage.
     menuName: 
     encounterData: {fileID: 0}
+    npcAnimator: {fileID: 0}
     targetUIElements: []
     targetUIState: 1
     isTemporary: 0
@@ -13290,10 +13372,11 @@ MonoBehaviour:
   - stepID: 
     jumpToAfterStep: mainstory
     type: 0
-    speakerName: NARRATOR
-    textContent: "But you can\u2019t hide in here forever."
+    speakerName: <color=#0953BA>NARRATOR
+    textContent: "<i>But you can\u2019t hide in here forever."
     menuName: 
     encounterData: {fileID: 0}
+    npcAnimator: {fileID: 0}
     targetUIElements: []
     targetUIState: 1
     isTemporary: 0
@@ -13303,10 +13386,11 @@ MonoBehaviour:
   - stepID: third
     jumpToAfterStep: 
     type: 0
-    speakerName: NARRATOR
-    textContent: There are supplies.
+    speakerName: <color=#0953BA>NARRATOR
+    textContent: <i>There are supplies.
     menuName: 
     encounterData: {fileID: 0}
+    npcAnimator: {fileID: 0}
     targetUIElements: []
     targetUIState: 1
     isTemporary: 0
@@ -13316,10 +13400,11 @@ MonoBehaviour:
   - stepID: 
     jumpToAfterStep: mainstory
     type: 0
-    speakerName: NARRATOR
-    textContent: "You don\u2019t need to get creative this time."
+    speakerName: <color=#0953BA>NARRATOR
+    textContent: "<i>You don\u2019t need to get creative this time."
     menuName: 
     encounterData: {fileID: 0}
+    npcAnimator: {fileID: 0}
     targetUIElements: []
     targetUIState: 1
     isTemporary: 0
@@ -13329,10 +13414,11 @@ MonoBehaviour:
   - stepID: fourth
     jumpToAfterStep: 
     type: 0
-    speakerName: NARRATOR
-    textContent: Manageable is not the same as irrelevant.
+    speakerName: <color=#0953BA>NARRATOR
+    textContent: <i>Manageable is not the same as irrelevant.
     menuName: 
     encounterData: {fileID: 0}
+    npcAnimator: {fileID: 0}
     targetUIElements: []
     targetUIState: 1
     isTemporary: 0
@@ -13342,11 +13428,12 @@ MonoBehaviour:
   - stepID: 
     jumpToAfterStep: mainstory
     type: 0
-    speakerName: NARRATOR
-    textContent: "But it is often the word people use when they simply \u201Chave
+    speakerName: <color=#0953BA>NARRATOR
+    textContent: "<i>But it is often the word people use when they simply \u201Chave
       to\u201D manage."
     menuName: 
     encounterData: {fileID: 0}
+    npcAnimator: {fileID: 0}
     targetUIElements: []
     targetUIState: 1
     isTemporary: 0
@@ -13356,10 +13443,11 @@ MonoBehaviour:
   - stepID: mainstory
     jumpToAfterStep: 
     type: 0
-    speakerName: NARRATOR
-    textContent: Menstrual cycle tracker is now active.
+    speakerName: <color=#0953BA>NARRATOR
+    textContent: <i>Menstrual cycle tracker is now active.
     menuName: 
     encounterData: {fileID: 0}
+    npcAnimator: {fileID: 0}
     targetUIElements: []
     targetUIState: 1
     isTemporary: 0
@@ -13373,6 +13461,7 @@ MonoBehaviour:
     textContent: 
     menuName: 
     encounterData: {fileID: 0}
+    npcAnimator: {fileID: 0}
     targetUIElements:
     - {fileID: 432294781}
     targetUIState: 1
@@ -13387,6 +13476,7 @@ MonoBehaviour:
     textContent: 
     menuName: 
     encounterData: {fileID: 0}
+    npcAnimator: {fileID: 0}
     targetUIElements:
     - {fileID: 1482113918}
     - {fileID: 100159665}
@@ -13398,10 +13488,11 @@ MonoBehaviour:
   - stepID: 
     jumpToAfterStep: 
     type: 0
-    speakerName: NARRATOR
-    textContent: Still, orientation remains ahead.
+    speakerName: <color=#0953BA>NARRATOR
+    textContent: <i>Still, orientation remains ahead.
     menuName: 
     encounterData: {fileID: 0}
+    npcAnimator: {fileID: 0}
     targetUIElements:
     - {fileID: 1482113918}
     - {fileID: 100159665}
@@ -13413,11 +13504,12 @@ MonoBehaviour:
   - stepID: 
     jumpToAfterStep: 
     type: 0
-    speakerName: NARRATOR
-    textContent: The difference is that you will now move through the day with one
-      more variable accounted for.
+    speakerName: <color=#0953BA>NARRATOR
+    textContent: <i>The difference is that you will now move through the day with
+      one more variable accounted for.
     menuName: 
     encounterData: {fileID: 0}
+    npcAnimator: {fileID: 0}
     targetUIElements:
     - {fileID: 1482113918}
     - {fileID: 100159665}
@@ -13433,6 +13525,7 @@ MonoBehaviour:
     textContent: 'OBJECTIVE UPDATED: Return to the Main Corridor'
     menuName: 
     encounterData: {fileID: 0}
+    npcAnimator: {fileID: 0}
     targetUIElements:
     - {fileID: 1482113918}
     - {fileID: 100159665}
@@ -13602,10 +13695,11 @@ MonoBehaviour:
   - stepID: 
     jumpToAfterStep: 
     type: 0
-    speakerName: NARRATOR
-    textContent: The employee in the corner does not respond.
+    speakerName: <color=#0953BA>NARRATOR
+    textContent: <i>The employee in the corner does not respond.
     menuName: 
     encounterData: {fileID: 0}
+    npcAnimator: {fileID: 0}
     targetUIElements: []
     targetUIState: 1
     isTemporary: 0
@@ -14281,6 +14375,7 @@ MonoBehaviour:
     textContent: Fight me!
     menuName: 
     encounterData: {fileID: 0}
+    npcAnimator: {fileID: 0}
     targetUIElements: []
     targetUIState: 1
     isTemporary: 0
@@ -14294,6 +14389,7 @@ MonoBehaviour:
     textContent: BATTLE TIME!
     menuName: 
     encounterData: {fileID: 11400000, guid: 7ceb77b91c7294b8e9df2dd28d2026d4, type: 2}
+    npcAnimator: {fileID: 0}
     targetUIElements: []
     targetUIState: 1
     isTemporary: 0
@@ -14307,6 +14403,7 @@ MonoBehaviour:
     textContent: You beat me!
     menuName: 
     encounterData: {fileID: 0}
+    npcAnimator: {fileID: 0}
     targetUIElements: []
     targetUIState: 1
     isTemporary: 0
@@ -14430,6 +14527,7 @@ MonoBehaviour:
     textContent: Fight me!
     menuName: 
     encounterData: {fileID: 0}
+    npcAnimator: {fileID: 0}
     targetUIElements: []
     targetUIState: 1
     isTemporary: 0
@@ -14443,6 +14541,7 @@ MonoBehaviour:
     textContent: BATTLE TIME!
     menuName: 
     encounterData: {fileID: 11400000, guid: 7ceb77b91c7294b8e9df2dd28d2026d4, type: 2}
+    npcAnimator: {fileID: 0}
     targetUIElements: []
     targetUIState: 1
     isTemporary: 0
@@ -14456,6 +14555,7 @@ MonoBehaviour:
     textContent: You beat me!
     menuName: 
     encounterData: {fileID: 0}
+    npcAnimator: {fileID: 0}
     targetUIElements: []
     targetUIState: 1
     isTemporary: 0
@@ -15188,8 +15288,9 @@ GameObject:
   m_Component:
   - component: {fileID: 1376746748}
   - component: {fileID: 1376746749}
+  - component: {fileID: 1376746750}
   m_Layer: 0
-  m_Name: Sprite
+  m_Name: Rival_Sprite
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -15205,7 +15306,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0.5, z: 0}
-  m_LocalScale: {x: 0.4, y: 0.4, z: 0.4}
+  m_LocalScale: {x: 3.5, y: 3.5, z: 3.5}
   m_ConstrainProportionsScale: 1
   m_Children: []
   m_Father: {fileID: 212823894}
@@ -15259,7 +15360,7 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 2
   m_MaskInteraction: 0
-  m_Sprite: {fileID: 6675052541728665267, guid: ea98f4d4985264d668f70717f069f88d, type: 3}
+  m_Sprite: {fileID: -8460066740494448593, guid: 6cfcb87b585c04cdfaf27f7fd4277595, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -15269,6 +15370,28 @@ SpriteRenderer:
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
   m_SpriteSortPoint: 0
+--- !u!95 &1376746750
+Animator:
+  serializedVersion: 7
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1376746747}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 7657c8fe17e12486cb33eecfb0e11a4d, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_AnimatePhysics: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
 --- !u!1 &1377345040
 GameObject:
   m_ObjectHideFlags: 0
@@ -16415,10 +16538,11 @@ MonoBehaviour:
   - stepID: 
     jumpToAfterStep: 
     type: 0
-    speakerName: NARRATOR
+    speakerName: <color=#0953BA>NARRATOR
     textContent: <i>The Co-worker notices you before you speak.</i>
     menuName: 
     encounterData: {fileID: 0}
+    npcAnimator: {fileID: 0}
     targetUIElements: []
     targetUIState: 0
     isTemporary: 0
@@ -16428,10 +16552,11 @@ MonoBehaviour:
   - stepID: 
     jumpToAfterStep: 
     type: 0
-    speakerName: NARRATOR
+    speakerName: <color=#0953BA>NARRATOR
     textContent: <i>There is no surprise in their expression.</i>
     menuName: 
     encounterData: {fileID: 0}
+    npcAnimator: {fileID: 0}
     targetUIElements: []
     targetUIState: 0
     isTemporary: 0
@@ -16445,6 +16570,7 @@ MonoBehaviour:
     textContent: You are the new one.
     menuName: 
     encounterData: {fileID: 0}
+    npcAnimator: {fileID: 0}
     targetUIElements: []
     targetUIState: 0
     isTemporary: 0
@@ -16458,6 +16584,7 @@ MonoBehaviour:
     textContent: <b>{name}</b>, right?
     menuName: 
     encounterData: {fileID: 0}
+    npcAnimator: {fileID: 0}
     targetUIElements: []
     targetUIState: 0
     isTemporary: 0
@@ -16471,6 +16598,7 @@ MonoBehaviour:
     textContent: 
     menuName: 
     encounterData: {fileID: 0}
+    npcAnimator: {fileID: 0}
     targetUIElements: []
     targetUIState: 0
     isTemporary: 0
@@ -16500,6 +16628,7 @@ MonoBehaviour:
     textContent: Yes.
     menuName: 
     encounterData: {fileID: 0}
+    npcAnimator: {fileID: 0}
     targetUIElements: []
     targetUIState: 0
     isTemporary: 0
@@ -16513,6 +16642,7 @@ MonoBehaviour:
     textContent: Orientation.
     menuName: 
     encounterData: {fileID: 0}
+    npcAnimator: {fileID: 0}
     targetUIElements: []
     targetUIState: 0
     isTemporary: 0
@@ -16526,6 +16656,7 @@ MonoBehaviour:
     textContent: Good.
     menuName: 
     encounterData: {fileID: 0}
+    npcAnimator: {fileID: 0}
     targetUIElements: []
     targetUIState: 0
     isTemporary: 0
@@ -16539,6 +16670,7 @@ MonoBehaviour:
     textContent: You noticed early.
     menuName: 
     encounterData: {fileID: 0}
+    npcAnimator: {fileID: 0}
     targetUIElements: []
     targetUIState: 0
     isTemporary: 0
@@ -16552,6 +16684,7 @@ MonoBehaviour:
     textContent: Most people just ignore the feeling.
     menuName: 
     encounterData: {fileID: 0}
+    npcAnimator: {fileID: 0}
     targetUIElements: []
     targetUIState: 0
     isTemporary: 0
@@ -16565,6 +16698,7 @@ MonoBehaviour:
     textContent: Most people just ignore the feeling.
     menuName: 
     encounterData: {fileID: 0}
+    npcAnimator: {fileID: 0}
     targetUIElements: []
     targetUIState: 0
     isTemporary: 0
@@ -16574,10 +16708,11 @@ MonoBehaviour:
   - stepID: mainstory
     jumpToAfterStep: 
     type: 0
-    speakerName: NARRATOR
+    speakerName: <color=#0953BA>NARRATOR
     textContent: <i>The Co-worker lowers their voice.</i>
     menuName: 
     encounterData: {fileID: 0}
+    npcAnimator: {fileID: 0}
     targetUIElements: []
     targetUIState: 0
     isTemporary: 0
@@ -16591,6 +16726,7 @@ MonoBehaviour:
     textContent: Listen carefully.
     menuName: 
     encounterData: {fileID: 0}
+    npcAnimator: {fileID: 0}
     targetUIElements: []
     targetUIState: 0
     isTemporary: 0
@@ -16604,6 +16740,7 @@ MonoBehaviour:
     textContent: It is not too late for you.
     menuName: 
     encounterData: {fileID: 0}
+    npcAnimator: {fileID: 0}
     targetUIElements: []
     targetUIState: 0
     isTemporary: 0
@@ -16617,6 +16754,7 @@ MonoBehaviour:
     textContent: That is the only reason I am speaking to you this plainly.
     menuName: 
     encounterData: {fileID: 0}
+    npcAnimator: {fileID: 0}
     targetUIElements: []
     targetUIState: 0
     isTemporary: 0
@@ -16630,6 +16768,7 @@ MonoBehaviour:
     textContent: 
     menuName: 
     encounterData: {fileID: 0}
+    npcAnimator: {fileID: 0}
     targetUIElements: []
     targetUIState: 0
     isTemporary: 0
@@ -16659,6 +16798,7 @@ MonoBehaviour:
     textContent: For becoming part of it.
     menuName: 
     encounterData: {fileID: 0}
+    npcAnimator: {fileID: 0}
     targetUIElements: []
     targetUIState: 0
     isTemporary: 0
@@ -16672,6 +16812,7 @@ MonoBehaviour:
     textContent: You become useful.
     menuName: 
     encounterData: {fileID: 0}
+    npcAnimator: {fileID: 0}
     targetUIElements: []
     targetUIState: 0
     isTemporary: 0
@@ -16685,6 +16826,7 @@ MonoBehaviour:
     textContent: Then usefulness starts replacing the rest of you.
     menuName: 
     encounterData: {fileID: 0}
+    npcAnimator: {fileID: 0}
     targetUIElements: []
     targetUIState: 0
     isTemporary: 0
@@ -16698,6 +16840,7 @@ MonoBehaviour:
     textContent: Because they chose you quickly.
     menuName: 
     encounterData: {fileID: 0}
+    npcAnimator: {fileID: 0}
     targetUIElements: []
     targetUIState: 0
     isTemporary: 0
@@ -16711,6 +16854,7 @@ MonoBehaviour:
     textContent: That usually means they saw something in you that they could shape.
     menuName: 
     encounterData: {fileID: 0}
+    npcAnimator: {fileID: 0}
     targetUIElements: []
     targetUIState: 0
     isTemporary: 0
@@ -16724,6 +16868,7 @@ MonoBehaviour:
     textContent: Or something they believed would not fight back.
     menuName: 
     encounterData: {fileID: 0}
+    npcAnimator: {fileID: 0}
     targetUIElements: []
     targetUIState: 0
     isTemporary: 0
@@ -16737,6 +16882,7 @@ MonoBehaviour:
     textContent: That is when it works best.
     menuName: 
     encounterData: {fileID: 0}
+    npcAnimator: {fileID: 0}
     targetUIElements: []
     targetUIState: 0
     isTemporary: 0
@@ -16750,6 +16896,7 @@ MonoBehaviour:
     textContent: Before you know what to resist.
     menuName: 
     encounterData: {fileID: 0}
+    npcAnimator: {fileID: 0}
     targetUIElements: []
     targetUIState: 0
     isTemporary: 0
@@ -16763,6 +16910,7 @@ MonoBehaviour:
     textContent: DIYU Group does not hire the strongest people.
     menuName: 
     encounterData: {fileID: 0}
+    npcAnimator: {fileID: 0}
     targetUIElements: []
     targetUIState: 0
     isTemporary: 0
@@ -16776,6 +16924,7 @@ MonoBehaviour:
     textContent: It hires people who can be made reliable.
     menuName: 
     encounterData: {fileID: 0}
+    npcAnimator: {fileID: 0}
     targetUIElements: []
     targetUIState: 0
     isTemporary: 0
@@ -16789,6 +16938,7 @@ MonoBehaviour:
     textContent: People who want to do well, people who follow instructions.
     menuName: 
     encounterData: {fileID: 0}
+    npcAnimator: {fileID: 0}
     targetUIElements: []
     targetUIState: 0
     isTemporary: 0
@@ -16802,6 +16952,7 @@ MonoBehaviour:
     textContent: People who can be convinced that obedience is professionalism.
     menuName: 
     encounterData: {fileID: 0}
+    npcAnimator: {fileID: 0}
     targetUIElements: []
     targetUIState: 0
     isTemporary: 0
@@ -16815,6 +16966,7 @@ MonoBehaviour:
     textContent: 
     menuName: 
     encounterData: {fileID: 0}
+    npcAnimator: {fileID: 0}
     targetUIElements: []
     targetUIState: 0
     isTemporary: 0
@@ -16844,6 +16996,7 @@ MonoBehaviour:
     textContent: Perhaps, it is.
     menuName: 
     encounterData: {fileID: 0}
+    npcAnimator: {fileID: 0}
     targetUIElements: []
     targetUIState: 0
     isTemporary: 0
@@ -16858,6 +17011,7 @@ MonoBehaviour:
       profit."
     menuName: 
     encounterData: {fileID: 0}
+    npcAnimator: {fileID: 0}
     targetUIElements: []
     targetUIState: 0
     isTemporary: 0
@@ -16871,6 +17025,7 @@ MonoBehaviour:
     textContent: You will see soon.
     menuName: 
     encounterData: {fileID: 0}
+    npcAnimator: {fileID: 0}
     targetUIElements: []
     targetUIState: 0
     isTemporary: 0
@@ -16884,6 +17039,7 @@ MonoBehaviour:
     textContent: I am saying they believe you might.
     menuName: 
     encounterData: {fileID: 0}
+    npcAnimator: {fileID: 0}
     targetUIElements: []
     targetUIState: 0
     isTemporary: 0
@@ -16897,6 +17053,7 @@ MonoBehaviour:
     textContent: That difference is why you still have a chance.
     menuName: 
     encounterData: {fileID: 0}
+    npcAnimator: {fileID: 0}
     targetUIElements: []
     targetUIState: 0
     isTemporary: 0
@@ -16910,6 +17067,7 @@ MonoBehaviour:
     textContent: Maybe.
     menuName: 
     encounterData: {fileID: 0}
+    npcAnimator: {fileID: 0}
     targetUIElements: []
     targetUIState: 0
     isTemporary: 0
@@ -16923,6 +17081,7 @@ MonoBehaviour:
     textContent: Hold on to that.
     menuName: 
     encounterData: {fileID: 0}
+    npcAnimator: {fileID: 0}
     targetUIElements: []
     targetUIState: 0
     isTemporary: 0
@@ -16936,6 +17095,7 @@ MonoBehaviour:
     textContent: This place has a way of making resistance feel immature.
     menuName: 
     encounterData: {fileID: 0}
+    npcAnimator: {fileID: 0}
     targetUIElements: []
     targetUIState: 0
     isTemporary: 0
@@ -16949,6 +17109,7 @@ MonoBehaviour:
     textContent: Some did try.
     menuName: 
     encounterData: {fileID: 0}
+    npcAnimator: {fileID: 0}
     targetUIElements: []
     targetUIState: 0
     isTemporary: 0
@@ -16963,6 +17124,7 @@ MonoBehaviour:
       for something they could not abandon.
     menuName: 
     encounterData: {fileID: 0}
+    npcAnimator: {fileID: 0}
     targetUIElements: []
     targetUIState: 0
     isTemporary: 0
@@ -16972,10 +17134,11 @@ MonoBehaviour:
   - stepID: mainstorythree
     jumpToAfterStep: 
     type: 0
-    speakerName: NARRATOR
+    speakerName: <color=#0953BA>NARRATOR
     textContent: "<i>The Co-worker\u2019s hand moves to the edge of the desk.</i>"
     menuName: 
     encounterData: {fileID: 0}
+    npcAnimator: {fileID: 0}
     targetUIElements: []
     targetUIState: 0
     isTemporary: 0
@@ -16985,11 +17148,12 @@ MonoBehaviour:
   - stepID: 
     jumpToAfterStep: 
     type: 0
-    speakerName: NARRATOR
+    speakerName: <color=#0953BA>NARRATOR
     textContent: <i>A small photograph is half-hidden beneath a stack of compliance
       forms.</i>
     menuName: 
     encounterData: {fileID: 0}
+    npcAnimator: {fileID: 0}
     targetUIElements: []
     targetUIState: 0
     isTemporary: 0
@@ -16999,10 +17163,11 @@ MonoBehaviour:
   - stepID: 
     jumpToAfterStep: 
     type: 0
-    speakerName: NARRATOR
+    speakerName: <color=#0953BA>NARRATOR
     textContent: <i>A photo of two children, smiling.</i>
     menuName: 
     encounterData: {fileID: 0}
+    npcAnimator: {fileID: 0}
     targetUIElements: []
     targetUIState: 0
     isTemporary: 0
@@ -17016,6 +17181,7 @@ MonoBehaviour:
     textContent: I cannot be the one who breaks it.
     menuName: 
     encounterData: {fileID: 0}
+    npcAnimator: {fileID: 0}
     targetUIElements: []
     targetUIState: 0
     isTemporary: 0
@@ -17029,6 +17195,7 @@ MonoBehaviour:
     textContent: "It is not an excuse\u2026"
     menuName: 
     encounterData: {fileID: 0}
+    npcAnimator: {fileID: 0}
     targetUIElements: []
     targetUIState: 0
     isTemporary: 0
@@ -17042,6 +17209,7 @@ MonoBehaviour:
     textContent: But it is the chain that binds me.
     menuName: 
     encounterData: {fileID: 0}
+    npcAnimator: {fileID: 0}
     targetUIElements: []
     targetUIState: 0
     isTemporary: 0
@@ -17055,6 +17223,7 @@ MonoBehaviour:
     textContent: 
     menuName: 
     encounterData: {fileID: 0}
+    npcAnimator: {fileID: 0}
     targetUIElements: []
     targetUIState: 0
     isTemporary: 0
@@ -17084,6 +17253,7 @@ MonoBehaviour:
     textContent: I hope you do not.
     menuName: 
     encounterData: {fileID: 0}
+    npcAnimator: {fileID: 0}
     targetUIElements: []
     targetUIState: 0
     isTemporary: 0
@@ -17097,6 +17267,7 @@ MonoBehaviour:
     textContent: Sympathizing too much is why people stay.
     menuName: 
     encounterData: {fileID: 0}
+    npcAnimator: {fileID: 0}
     targetUIElements: []
     targetUIState: 0
     isTemporary: 0
@@ -17110,6 +17281,7 @@ MonoBehaviour:
     textContent: No.
     menuName: 
     encounterData: {fileID: 0}
+    npcAnimator: {fileID: 0}
     targetUIElements: []
     targetUIState: 0
     isTemporary: 0
@@ -17123,6 +17295,7 @@ MonoBehaviour:
     textContent: It is not.
     menuName: 
     encounterData: {fileID: 0}
+    npcAnimator: {fileID: 0}
     targetUIElements: []
     targetUIState: 0
     isTemporary: 0
@@ -17137,6 +17310,7 @@ MonoBehaviour:
       my voice.
     menuName: 
     encounterData: {fileID: 0}
+    npcAnimator: {fileID: 0}
     targetUIElements: []
     targetUIState: 0
     isTemporary: 0
@@ -17150,6 +17324,7 @@ MonoBehaviour:
     textContent: And because you are not gone yet.
     menuName: 
     encounterData: {fileID: 0}
+    npcAnimator: {fileID: 0}
     targetUIElements: []
     targetUIState: 0
     isTemporary: 0
@@ -17163,6 +17338,7 @@ MonoBehaviour:
     textContent: Reach the top.
     menuName: 
     encounterData: {fileID: 0}
+    npcAnimator: {fileID: 0}
     targetUIElements: []
     targetUIState: 0
     isTemporary: 0
@@ -17176,6 +17352,7 @@ MonoBehaviour:
     textContent: Not metaphorically. Literally.
     menuName: 
     encounterData: {fileID: 0}
+    npcAnimator: {fileID: 0}
     targetUIElements: []
     targetUIState: 0
     isTemporary: 0
@@ -17190,6 +17367,7 @@ MonoBehaviour:
       one.
     menuName: 
     encounterData: {fileID: 0}
+    npcAnimator: {fileID: 0}
     targetUIElements: []
     targetUIState: 0
     isTemporary: 0
@@ -17203,6 +17381,7 @@ MonoBehaviour:
     textContent: Every floor protects the one above it.
     menuName: 
     encounterData: {fileID: 0}
+    npcAnimator: {fileID: 0}
     targetUIElements: []
     targetUIState: 0
     isTemporary: 0
@@ -17217,6 +17396,7 @@ MonoBehaviour:
       own the consequences without ever being held responsible.
     menuName: 
     encounterData: {fileID: 0}
+    npcAnimator: {fileID: 0}
     targetUIElements: []
     targetUIState: 0
     isTemporary: 0
@@ -17231,6 +17411,7 @@ MonoBehaviour:
       the floors.
     menuName: 
     encounterData: {fileID: 0}
+    npcAnimator: {fileID: 0}
     targetUIElements: []
     targetUIState: 0
     isTemporary: 0
@@ -17244,6 +17425,7 @@ MonoBehaviour:
     textContent: You have to reach the people in power.
     menuName: 
     encounterData: {fileID: 0}
+    npcAnimator: {fileID: 0}
     targetUIElements: []
     targetUIState: 0
     isTemporary: 0
@@ -17257,6 +17439,7 @@ MonoBehaviour:
     textContent: 
     menuName: 
     encounterData: {fileID: 0}
+    npcAnimator: {fileID: 0}
     targetUIElements: []
     targetUIState: 0
     isTemporary: 0
@@ -17286,6 +17469,7 @@ MonoBehaviour:
     textContent: Eventually.
     menuName: 
     encounterData: {fileID: 0}
+    npcAnimator: {fileID: 0}
     targetUIElements: []
     targetUIState: 0
     isTemporary: 0
@@ -17300,6 +17484,7 @@ MonoBehaviour:
       feel reasonable.
     menuName: 
     encounterData: {fileID: 0}
+    npcAnimator: {fileID: 0}
     targetUIElements: []
     targetUIState: 0
     isTemporary: 0
@@ -17313,6 +17498,7 @@ MonoBehaviour:
     textContent: Yes.
     menuName: 
     encounterData: {fileID: 0}
+    npcAnimator: {fileID: 0}
     targetUIElements: []
     targetUIState: 0
     isTemporary: 0
@@ -17326,6 +17512,7 @@ MonoBehaviour:
     textContent: The people furthest from the work and closest to the decision.
     menuName: 
     encounterData: {fileID: 0}
+    npcAnimator: {fileID: 0}
     targetUIElements: []
     targetUIState: 0
     isTemporary: 0
@@ -17339,6 +17526,7 @@ MonoBehaviour:
     textContent: Yes.
     menuName: 
     encounterData: {fileID: 0}
+    npcAnimator: {fileID: 0}
     targetUIElements: []
     targetUIState: 0
     isTemporary: 0
@@ -17352,6 +17540,7 @@ MonoBehaviour:
     textContent: "If that\u2019s what it comes to."
     menuName: 
     encounterData: {fileID: 0}
+    npcAnimator: {fileID: 0}
     targetUIElements: []
     targetUIState: 0
     isTemporary: 0
@@ -17365,6 +17554,7 @@ MonoBehaviour:
     textContent: Then you will be given work.
     menuName: 
     encounterData: {fileID: 0}
+    npcAnimator: {fileID: 0}
     targetUIElements: []
     targetUIState: 0
     isTemporary: 0
@@ -17378,6 +17568,7 @@ MonoBehaviour:
     textContent: Then more work.
     menuName: 
     encounterData: {fileID: 0}
+    npcAnimator: {fileID: 0}
     targetUIElements: []
     targetUIState: 0
     isTemporary: 0
@@ -17391,6 +17582,7 @@ MonoBehaviour:
     textContent: 'Then a version of yourself that can handle it. '
     menuName: 
     encounterData: {fileID: 0}
+    npcAnimator: {fileID: 0}
     targetUIElements: []
     targetUIState: 0
     isTemporary: 0
@@ -17404,6 +17596,7 @@ MonoBehaviour:
     textContent: Eventually, you may even be grateful.
     menuName: 
     encounterData: {fileID: 0}
+    npcAnimator: {fileID: 0}
     targetUIElements: []
     targetUIState: 0
     isTemporary: 0
@@ -17413,10 +17606,11 @@ MonoBehaviour:
   - stepID: mainstoryfive
     jumpToAfterStep: 
     type: 0
-    speakerName: NARRATOR
+    speakerName: <color=#0953BA>NARRATOR
     textContent: <i>The words settle into the room.</i>
     menuName: 
     encounterData: {fileID: 0}
+    npcAnimator: {fileID: 0}
     targetUIElements: []
     targetUIState: 0
     isTemporary: 0
@@ -17426,10 +17620,11 @@ MonoBehaviour:
   - stepID: 
     jumpToAfterStep: 
     type: 0
-    speakerName: NARRATOR
+    speakerName: <color=#0953BA>NARRATOR
     textContent: <i>Around them, the office continues.</i>
     menuName: 
     encounterData: {fileID: 0}
+    npcAnimator: {fileID: 0}
     targetUIElements: []
     targetUIState: 0
     isTemporary: 0
@@ -17439,10 +17634,11 @@ MonoBehaviour:
   - stepID: 
     jumpToAfterStep: 
     type: 0
-    speakerName: NARRATOR
+    speakerName: <color=#0953BA>NARRATOR
     textContent: <i>Forms move, keys press, screens glow.</i>
     menuName: 
     encounterData: {fileID: 0}
+    npcAnimator: {fileID: 0}
     targetUIElements: []
     targetUIState: 0
     isTemporary: 0
@@ -17456,6 +17652,7 @@ MonoBehaviour:
     textContent: Your orientation is officially complete.
     menuName: 
     encounterData: {fileID: 0}
+    npcAnimator: {fileID: 0}
     targetUIElements: []
     targetUIState: 0
     isTemporary: 0
@@ -17469,6 +17666,7 @@ MonoBehaviour:
     textContent: Unofficially, you need supplies.
     menuName: 
     encounterData: {fileID: 0}
+    npcAnimator: {fileID: 0}
     targetUIElements: []
     targetUIState: 0
     isTemporary: 0
@@ -17482,6 +17680,7 @@ MonoBehaviour:
     textContent: There is a Supply Room near the stairs. Take what you can carry.
     menuName: 
     encounterData: {fileID: 0}
+    npcAnimator: {fileID: 0}
     targetUIElements: []
     targetUIState: 0
     isTemporary: 0
@@ -17495,6 +17694,7 @@ MonoBehaviour:
     textContent: Not too much though, they notice.
     menuName: 
     encounterData: {fileID: 0}
+    npcAnimator: {fileID: 0}
     targetUIElements: []
     targetUIState: 0
     isTemporary: 0
@@ -17508,6 +17708,7 @@ MonoBehaviour:
     textContent: 
     menuName: 
     encounterData: {fileID: 0}
+    npcAnimator: {fileID: 0}
     targetUIElements: []
     targetUIState: 0
     isTemporary: 0
@@ -17537,6 +17738,7 @@ MonoBehaviour:
     textContent: Do not thank me yet.
     menuName: 
     encounterData: {fileID: 0}
+    npcAnimator: {fileID: 0}
     targetUIElements: []
     targetUIState: 0
     isTemporary: 0
@@ -17550,6 +17752,7 @@ MonoBehaviour:
     textContent: Just keep moving.
     menuName: 
     encounterData: {fileID: 0}
+    npcAnimator: {fileID: 0}
     targetUIElements: []
     targetUIState: 0
     isTemporary: 0
@@ -17563,6 +17766,7 @@ MonoBehaviour:
     textContent: Maybe.
     menuName: 
     encounterData: {fileID: 0}
+    npcAnimator: {fileID: 0}
     targetUIElements: []
     targetUIState: 0
     isTemporary: 0
@@ -17576,6 +17780,7 @@ MonoBehaviour:
     textContent: If I am still assigned to this floor.
     menuName: 
     encounterData: {fileID: 0}
+    npcAnimator: {fileID: 0}
     targetUIElements: []
     targetUIState: 0
     isTemporary: 0
@@ -17590,6 +17795,7 @@ MonoBehaviour:
       jobs.
     menuName: 
     encounterData: {fileID: 0}
+    npcAnimator: {fileID: 0}
     targetUIElements: []
     targetUIState: 0
     isTemporary: 0
@@ -17603,6 +17809,7 @@ MonoBehaviour:
     textContent: That makes them harder to hate.
     menuName: 
     encounterData: {fileID: 0}
+    npcAnimator: {fileID: 0}
     targetUIElements: []
     targetUIState: 0
     isTemporary: 0
@@ -17616,6 +17823,7 @@ MonoBehaviour:
     textContent: And harder to defeat.
     menuName: 
     encounterData: {fileID: 0}
+    npcAnimator: {fileID: 0}
     targetUIElements: []
     targetUIState: 0
     isTemporary: 0
@@ -17629,6 +17837,7 @@ MonoBehaviour:
     textContent: You do not have to be sure.
     menuName: 
     encounterData: {fileID: 0}
+    npcAnimator: {fileID: 0}
     targetUIElements: []
     targetUIState: 0
     isTemporary: 0
@@ -17642,6 +17851,7 @@ MonoBehaviour:
     textContent: You only have to be less useful to them than they expected.
     menuName: 
     encounterData: {fileID: 0}
+    npcAnimator: {fileID: 0}
     targetUIElements: []
     targetUIState: 0
     isTemporary: 0
@@ -17651,10 +17861,11 @@ MonoBehaviour:
   - stepID: mainstorysix
     jumpToAfterStep: 
     type: 0
-    speakerName: NARRATOR
+    speakerName: <color=#0953BA>NARRATOR
     textContent: <i>The Co-worker returns to the desk.</i>
     menuName: 
     encounterData: {fileID: 0}
+    npcAnimator: {fileID: 0}
     targetUIElements: []
     targetUIState: 0
     isTemporary: 0
@@ -17668,6 +17879,7 @@ MonoBehaviour:
     textContent: 'OBJECTIVE UPDATED: Go to the Stairs'
     menuName: 
     encounterData: {fileID: 0}
+    npcAnimator: {fileID: 0}
     targetUIElements: []
     targetUIState: 0
     isTemporary: 0
@@ -17711,7 +17923,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 90}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -0.07, y: -0.269}
+  m_AnchoredPosition: {x: -0.07, y: -0.417}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.50202674, y: 0.5}
 --- !u!222 &1588038726
@@ -17756,7 +17968,7 @@ BoxCollider2D:
   m_UsedByEffector: 0
   m_CompositeOperation: 0
   m_CompositeOrder: 0
-  m_Offset: {x: -0.5377643, y: -0.041551813}
+  m_Offset: {x: -0.1996367, y: -0.039782632}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0, y: 0}
@@ -17766,7 +17978,7 @@ BoxCollider2D:
     drawMode: 0
     adaptiveTiling: 0
   m_AutoTiling: 0
-  m_Size: {x: 3.299564, y: 0.14421487}
+  m_Size: {x: 2.6233087, y: 0.1088311}
   m_EdgeRadius: 0
 --- !u!114 &1588038728
 MonoBehaviour:
@@ -17787,11 +17999,12 @@ MonoBehaviour:
   - stepID: 
     jumpToAfterStep: 
     type: 0
-    speakerName: NARRATOR
-    textContent: The HR Office has the careful stillness of a room where decisions
+    speakerName: <color=#0953BA>NARRATOR
+    textContent: <i>The HR Office has the careful stillness of a room where decisions
       are made without raising voices.
     menuName: 
     encounterData: {fileID: 0}
+    npcAnimator: {fileID: 0}
     targetUIElements: []
     targetUIState: 1
     isTemporary: 0
@@ -17801,11 +18014,12 @@ MonoBehaviour:
   - stepID: 
     jumpToAfterStep: 
     type: 0
-    speakerName: NARRATOR
-    textContent: Nothing appears urgent. That is one of the advantages of systems.
+    speakerName: <color=#0953BA>NARRATOR
+    textContent: <i>Nothing appears urgent. That is one of the advantages of systems.
       They can make pressure look like procedure.
     menuName: 
     encounterData: {fileID: 0}
+    npcAnimator: {fileID: 0}
     targetUIElements: []
     targetUIState: 1
     isTemporary: 0
@@ -17815,11 +18029,12 @@ MonoBehaviour:
   - stepID: 
     jumpToAfterStep: 
     type: 0
-    speakerName: NARRATOR
-    textContent: The HR Representative looks up from the screen before the Applicant
+    speakerName: <color=#0953BA>NARRATOR
+    textContent: <i>The HR Representative looks up from the screen before the Applicant
       reaches the desk.
     menuName: 
     encounterData: {fileID: 0}
+    npcAnimator: {fileID: 0}
     targetUIElements: []
     targetUIState: 1
     isTemporary: 0
@@ -17833,6 +18048,7 @@ MonoBehaviour:
     textContent: Good morning, <b>{name}</b>.
     menuName: 
     encounterData: {fileID: 0}
+    npcAnimator: {fileID: 162715612}
     targetUIElements: []
     targetUIState: 1
     isTemporary: 0
@@ -17846,6 +18062,7 @@ MonoBehaviour:
     textContent: Reception has confirmed your arrival. You are on time.
     menuName: 
     encounterData: {fileID: 0}
+    npcAnimator: {fileID: 162715612}
     targetUIElements: []
     targetUIState: 1
     isTemporary: 0
@@ -17860,6 +18077,7 @@ MonoBehaviour:
       profile.
     menuName: 
     encounterData: {fileID: 0}
+    npcAnimator: {fileID: 162715612}
     targetUIElements: []
     targetUIState: 1
     isTemporary: 0
@@ -17873,6 +18091,7 @@ MonoBehaviour:
     textContent: 
     menuName: 
     encounterData: {fileID: 0}
+    npcAnimator: {fileID: 0}
     targetUIElements: []
     targetUIState: 1
     isTemporary: 0
@@ -17902,6 +18121,7 @@ MonoBehaviour:
     textContent: It is a standard part of onboarding candidates.
     menuName: 
     encounterData: {fileID: 0}
+    npcAnimator: {fileID: 162715612}
     targetUIElements: []
     targetUIState: 1
     isTemporary: 0
@@ -17917,6 +18137,7 @@ MonoBehaviour:
       to look for.
     menuName: 
     encounterData: {fileID: 0}
+    npcAnimator: {fileID: 162715612}
     targetUIElements: []
     targetUIState: 1
     isTemporary: 0
@@ -17930,6 +18151,7 @@ MonoBehaviour:
     textContent: It will.
     menuName: 
     encounterData: {fileID: 0}
+    npcAnimator: {fileID: 162715612}
     targetUIElements: []
     targetUIState: 1
     isTemporary: 0
@@ -17944,6 +18166,7 @@ MonoBehaviour:
       assumptions.
     menuName: 
     encounterData: {fileID: 0}
+    npcAnimator: {fileID: 162715612}
     targetUIElements: []
     targetUIState: 1
     isTemporary: 0
@@ -17953,10 +18176,11 @@ MonoBehaviour:
   - stepID: 
     jumpToAfterStep: 
     type: 0
-    speakerName: NARRATOR
-    textContent: Correct assumptions.
+    speakerName: <color=#0953BA>NARRATOR
+    textContent: <i>Correct assumptions.
     menuName: 
     encounterData: {fileID: 0}
+    npcAnimator: {fileID: 0}
     targetUIElements: []
     targetUIState: 1
     isTemporary: 0
@@ -17966,10 +18190,11 @@ MonoBehaviour:
   - stepID: 
     jumpToAfterStep: mainstory
     type: 0
-    speakerName: NARRATOR
-    textContent: The phrase arrives neatly dressed and carrying a clipboard.
+    speakerName: <color=#0953BA>NARRATOR
+    textContent: <i>The phrase arrives neatly dressed and carrying a clipboard.
     menuName: 
     encounterData: {fileID: 0}
+    npcAnimator: {fileID: 0}
     targetUIElements: []
     targetUIState: 1
     isTemporary: 0
@@ -17983,6 +18208,7 @@ MonoBehaviour:
     textContent: Please look at the screen in front of you.
     menuName: 
     encounterData: {fileID: 0}
+    npcAnimator: {fileID: 162715612}
     targetUIElements: []
     targetUIState: 1
     isTemporary: 0
@@ -17997,6 +18223,7 @@ MonoBehaviour:
       no incorrect answers, only profiles that produce different outcomes.
     menuName: 
     encounterData: {fileID: 0}
+    npcAnimator: {fileID: 162715612}
     targetUIElements: []
     targetUIState: 1
     isTemporary: 0
@@ -18010,6 +18237,7 @@ MonoBehaviour:
     textContent: Try to be accurate.
     menuName: 
     encounterData: {fileID: 0}
+    npcAnimator: {fileID: 162715612}
     targetUIElements: []
     targetUIState: 1
     isTemporary: 0
@@ -18019,10 +18247,11 @@ MonoBehaviour:
   - stepID: 
     jumpToAfterStep: 
     type: 0
-    speakerName: NARRATOR
-    textContent: The screen turns on.
+    speakerName: <color=#0953BA>NARRATOR
+    textContent: <i>The screen turns on.
     menuName: 
     encounterData: {fileID: 0}
+    npcAnimator: {fileID: 0}
     targetUIElements: []
     targetUIState: 1
     isTemporary: 0
@@ -18032,11 +18261,12 @@ MonoBehaviour:
   - stepID: 
     jumpToAfterStep: 
     type: 0
-    speakerName: NARRATOR
-    textContent: Six categories appear, each waiting to be assigned a value. They
+    speakerName: <color=#0953BA>NARRATOR
+    textContent: <i>Six categories appear, each waiting to be assigned a value. They
       are presented as professional qualities. They behave more like survival tools.
     menuName: 
     encounterData: {fileID: 0}
+    npcAnimator: {fileID: 0}
     targetUIElements: []
     targetUIState: 1
     isTemporary: 0
@@ -18050,6 +18280,7 @@ MonoBehaviour:
     textContent: 
     menuName: StatUI
     encounterData: {fileID: 0}
+    npcAnimator: {fileID: 0}
     targetUIElements: []
     targetUIState: 1
     isTemporary: 0
@@ -18063,6 +18294,7 @@ MonoBehaviour:
     textContent: Thank you.
     menuName: 
     encounterData: {fileID: 0}
+    npcAnimator: {fileID: 162715612}
     targetUIElements: []
     targetUIState: 1
     isTemporary: 0
@@ -18076,6 +18308,7 @@ MonoBehaviour:
     textContent: Your profile has been recorded.
     menuName: 
     encounterData: {fileID: 0}
+    npcAnimator: {fileID: 162715612}
     targetUIElements: []
     targetUIState: 1
     isTemporary: 0
@@ -18090,6 +18323,7 @@ MonoBehaviour:
       is closer to a pattern.
     menuName: 
     encounterData: {fileID: 0}
+    npcAnimator: {fileID: 162715612}
     targetUIElements: []
     targetUIState: 1
     isTemporary: 0
@@ -18103,6 +18337,7 @@ MonoBehaviour:
     textContent: 
     menuName: 
     encounterData: {fileID: 0}
+    npcAnimator: {fileID: 0}
     targetUIElements: []
     targetUIState: 1
     isTemporary: 0
@@ -18132,6 +18367,7 @@ MonoBehaviour:
     textContent: Yes.
     menuName: 
     encounterData: {fileID: 0}
+    npcAnimator: {fileID: 162715612}
     targetUIElements: []
     targetUIState: 1
     isTemporary: 0
@@ -18146,6 +18382,7 @@ MonoBehaviour:
       a candidate is likely to do under pressure.
     menuName: 
     encounterData: {fileID: 0}
+    npcAnimator: {fileID: 162715612}
     targetUIElements: []
     targetUIState: 1
     isTemporary: 0
@@ -18159,6 +18396,7 @@ MonoBehaviour:
     textContent: Not exactly.
     menuName: 
     encounterData: {fileID: 0}
+    npcAnimator: {fileID: 162715612}
     targetUIElements: []
     targetUIState: 1
     isTemporary: 0
@@ -18173,6 +18411,7 @@ MonoBehaviour:
       in what can be predicted.
     menuName: 
     encounterData: {fileID: 0}
+    npcAnimator: {fileID: 162715612}
     targetUIElements: []
     targetUIState: 1
     isTemporary: 0
@@ -18186,6 +18425,7 @@ MonoBehaviour:
     textContent: Good.
     menuName: 
     encounterData: {fileID: 0}
+    npcAnimator: {fileID: 162715612}
     targetUIElements: []
     targetUIState: 1
     isTemporary: 0
@@ -18199,6 +18439,7 @@ MonoBehaviour:
     textContent: Please continue.
     menuName: 
     encounterData: {fileID: 0}
+    npcAnimator: {fileID: 162715612}
     targetUIElements: []
     targetUIState: 1
     isTemporary: 0
@@ -18212,6 +18453,7 @@ MonoBehaviour:
     textContent: Yes.
     menuName: 
     encounterData: {fileID: 0}
+    npcAnimator: {fileID: 162715612}
     targetUIElements: []
     targetUIState: 1
     isTemporary: 0
@@ -18225,6 +18467,7 @@ MonoBehaviour:
     textContent: Incomplete profiles cannot proceed to interview.
     menuName: 
     encounterData: {fileID: 0}
+    npcAnimator: {fileID: 162715612}
     targetUIElements: []
     targetUIState: 1
     isTemporary: 0
@@ -18234,10 +18477,11 @@ MonoBehaviour:
   - stepID: 
     jumpToAfterStep: 
     type: 0
-    speakerName: NARRATOR
-    textContent: The second screen updates before the Applicant answers.
+    speakerName: <color=#0953BA>NARRATOR
+    textContent: <i>The second screen updates before the Applicant answers.
     menuName: 
     encounterData: {fileID: 0}
+    npcAnimator: {fileID: 0}
     targetUIElements: []
     targetUIState: 1
     isTemporary: 0
@@ -18247,10 +18491,12 @@ MonoBehaviour:
   - stepID: 
     jumpToAfterStep: mainstorytwo
     type: 0
-    speakerName: NARRATOR
-    textContent: Some questions wait to be asked. Others are only waiting to be confirmed.
+    speakerName: <color=#0953BA>NARRATOR
+    textContent: <i>Some questions wait to be asked. Others are only waiting to be
+      confirmed.
     menuName: 
     encounterData: {fileID: 0}
+    npcAnimator: {fileID: 0}
     targetUIElements: []
     targetUIState: 1
     isTemporary: 0
@@ -18264,6 +18510,7 @@ MonoBehaviour:
     textContent: 
     menuName: TraitUI
     encounterData: {fileID: 0}
+    npcAnimator: {fileID: 0}
     targetUIElements: []
     targetUIState: 1
     isTemporary: 0
@@ -18277,6 +18524,7 @@ MonoBehaviour:
     textContent: Your dominant pattern has been recorded.
     menuName: 
     encounterData: {fileID: 0}
+    npcAnimator: {fileID: 162715612}
     targetUIElements: []
     targetUIState: 1
     isTemporary: 0
@@ -18290,6 +18538,7 @@ MonoBehaviour:
     textContent: This profile will follow you through the rest of the process.
     menuName: 
     encounterData: {fileID: 0}
+    npcAnimator: {fileID: 162715612}
     targetUIElements: []
     targetUIState: 1
     isTemporary: 0
@@ -18299,10 +18548,11 @@ MonoBehaviour:
   - stepID: 
     jumpToAfterStep: 
     type: 0
-    speakerName: NARRATOR
-    textContent: Follow is an interesting choice of words.
+    speakerName: <color=#0953BA>NARRATOR
+    textContent: <i>Follow is an interesting choice of words.
     menuName: 
     encounterData: {fileID: 0}
+    npcAnimator: {fileID: 0}
     targetUIElements: []
     targetUIState: 1
     isTemporary: 0
@@ -18312,10 +18562,11 @@ MonoBehaviour:
   - stepID: 
     jumpToAfterStep: 
     type: 0
-    speakerName: NARRATOR
-    textContent: So is process.
+    speakerName: <color=#0953BA>NARRATOR
+    textContent: <i>So is process.
     menuName: 
     encounterData: {fileID: 0}
+    npcAnimator: {fileID: 0}
     targetUIElements: []
     targetUIState: 1
     isTemporary: 0
@@ -18329,6 +18580,7 @@ MonoBehaviour:
     textContent: That completes the preliminary profile.
     menuName: 
     encounterData: {fileID: 0}
+    npcAnimator: {fileID: 162715612}
     targetUIElements: []
     targetUIState: 1
     isTemporary: 0
@@ -18342,6 +18594,7 @@ MonoBehaviour:
     textContent: We may now proceed with the interview.
     menuName: 
     encounterData: {fileID: 0}
+    npcAnimator: {fileID: 162715612}
     targetUIElements: []
     targetUIState: 1
     isTemporary: 0
@@ -18355,6 +18608,7 @@ MonoBehaviour:
     textContent: Please answer honestly. There are no preferred responses.
     menuName: 
     encounterData: {fileID: 0}
+    npcAnimator: {fileID: 162715612}
     targetUIElements: []
     targetUIState: 1
     isTemporary: 0
@@ -18364,10 +18618,11 @@ MonoBehaviour:
   - stepID: 
     jumpToAfterStep: 
     type: 0
-    speakerName: NARRATOR
-    textContent: Sounds almost like a lie.
+    speakerName: <color=#0953BA>NARRATOR
+    textContent: <i>Sounds almost like a lie.
     menuName: 
     encounterData: {fileID: 0}
+    npcAnimator: {fileID: 0}
     targetUIElements: []
     targetUIState: 1
     isTemporary: 0
@@ -18381,6 +18636,7 @@ MonoBehaviour:
     textContent: As you know, DIYU Group is a cooperative organization.
     menuName: 
     encounterData: {fileID: 0}
+    npcAnimator: {fileID: 162715612}
     targetUIElements: []
     targetUIState: 1
     isTemporary: 0
@@ -18394,6 +18650,7 @@ MonoBehaviour:
     textContent: Our activities span multiple sectors and support functions.
     menuName: 
     encounterData: {fileID: 0}
+    npcAnimator: {fileID: 162715612}
     targetUIElements: []
     targetUIState: 1
     isTemporary: 0
@@ -18407,6 +18664,7 @@ MonoBehaviour:
     textContent: We provide solutions where solutions are required.
     menuName: 
     encounterData: {fileID: 0}
+    npcAnimator: {fileID: 162715612}
     targetUIElements: []
     targetUIState: 1
     isTemporary: 0
@@ -18420,6 +18678,7 @@ MonoBehaviour:
     textContent: 
     menuName: 
     encounterData: {fileID: 0}
+    npcAnimator: {fileID: 0}
     targetUIElements: []
     targetUIState: 1
     isTemporary: 0
@@ -18450,6 +18709,7 @@ MonoBehaviour:
       manufacturing, wellness, education, and several other areas.
     menuName: 
     encounterData: {fileID: 0}
+    npcAnimator: {fileID: 162715612}
     targetUIElements: []
     targetUIState: 1
     isTemporary: 0
@@ -18463,6 +18723,7 @@ MonoBehaviour:
     textContent: The exact scope changes according to demand.
     menuName: 
     encounterData: {fileID: 0}
+    npcAnimator: {fileID: 162715612}
     targetUIElements: []
     targetUIState: 1
     isTemporary: 0
@@ -18476,6 +18737,7 @@ MonoBehaviour:
     textContent: Adaptability is one of our strengths.
     menuName: 
     encounterData: {fileID: 0}
+    npcAnimator: {fileID: 162715612}
     targetUIElements: []
     targetUIState: 1
     isTemporary: 0
@@ -18485,10 +18747,11 @@ MonoBehaviour:
   - stepID: 
     jumpToAfterStep: 
     type: 0
-    speakerName: NARRATOR
-    textContent: The answer somehow manages to describe everything and nothing.
+    speakerName: <color=#0953BA>NARRATOR
+    textContent: <i>The answer somehow manages to describe everything and nothing.
     menuName: 
     encounterData: {fileID: 0}
+    npcAnimator: {fileID: 0}
     targetUIElements: []
     targetUIState: 1
     isTemporary: 0
@@ -18498,10 +18761,11 @@ MonoBehaviour:
   - stepID: 
     jumpToAfterStep: 
     type: 0
-    speakerName: NARRATOR
-    textContent: Like a business card with too many titles and no credentials.
+    speakerName: <color=#0953BA>NARRATOR
+    textContent: <i>Like a business card with too many titles and no credentials.
     menuName: 
     encounterData: {fileID: 0}
+    npcAnimator: {fileID: 0}
     targetUIElements: []
     targetUIState: 1
     isTemporary: 0
@@ -18515,6 +18779,7 @@ MonoBehaviour:
     textContent: Where do you see yourself in five years?
     menuName: 
     encounterData: {fileID: 0}
+    npcAnimator: {fileID: 162715612}
     targetUIElements: []
     targetUIState: 1
     isTemporary: 0
@@ -18528,6 +18793,7 @@ MonoBehaviour:
     textContent: 
     menuName: 
     encounterData: {fileID: 0}
+    npcAnimator: {fileID: 0}
     targetUIElements: []
     targetUIState: 1
     isTemporary: 0
@@ -18553,10 +18819,11 @@ MonoBehaviour:
   - stepID: 
     jumpToAfterStep: 
     type: 0
-    speakerName: NARRATOR
-    textContent: The answer is entered into the system.
+    speakerName: <color=#0953BA>NARRATOR
+    textContent: <i>The answer is entered into the system.
     menuName: 
     encounterData: {fileID: 0}
+    npcAnimator: {fileID: 0}
     targetUIElements: []
     targetUIState: 1
     isTemporary: 0
@@ -18570,6 +18837,7 @@ MonoBehaviour:
     textContent: How do you respond to stressful situations?
     menuName: 
     encounterData: {fileID: 0}
+    npcAnimator: {fileID: 162715612}
     targetUIElements: []
     targetUIState: 1
     isTemporary: 0
@@ -18583,6 +18851,7 @@ MonoBehaviour:
     textContent: 
     menuName: 
     encounterData: {fileID: 0}
+    npcAnimator: {fileID: 0}
     targetUIElements: []
     targetUIState: 1
     isTemporary: 0
@@ -18608,10 +18877,11 @@ MonoBehaviour:
   - stepID: 
     jumpToAfterStep: 
     type: 0
-    speakerName: NARRATOR
-    textContent: Another answer disappears into the screen.
+    speakerName: <color=#0953BA>NARRATOR
+    textContent: <i>Another answer disappears into the screen.
     menuName: 
     encounterData: {fileID: 0}
+    npcAnimator: {fileID: 0}
     targetUIElements: []
     targetUIState: 1
     isTemporary: 0
@@ -18621,10 +18891,11 @@ MonoBehaviour:
   - stepID: 
     jumpToAfterStep: 
     type: 0
-    speakerName: NARRATOR
-    textContent: The HR Representative does not nod.
+    speakerName: <color=#0953BA>NARRATOR
+    textContent: <i>The HR Representative does not nod.
     menuName: 
     encounterData: {fileID: 0}
+    npcAnimator: {fileID: 0}
     targetUIElements: []
     targetUIState: 1
     isTemporary: 0
@@ -18634,10 +18905,11 @@ MonoBehaviour:
   - stepID: 
     jumpToAfterStep: 
     type: 0
-    speakerName: NARRATOR
-    textContent: They do not frown either.
+    speakerName: <color=#0953BA>NARRATOR
+    textContent: <i>They do not frown either.
     menuName: 
     encounterData: {fileID: 0}
+    npcAnimator: {fileID: 0}
     targetUIElements: []
     targetUIState: 1
     isTemporary: 0
@@ -18647,10 +18919,11 @@ MonoBehaviour:
   - stepID: 
     jumpToAfterStep: 
     type: 0
-    speakerName: NARRATOR
-    textContent: "That ought to be \u201Cgood\u201D, right?"
+    speakerName: <color=#0953BA>NARRATOR
+    textContent: "<i>That ought to be \u201Cgood\u201D, right?"
     menuName: 
     encounterData: {fileID: 0}
+    npcAnimator: {fileID: 0}
     targetUIElements: []
     targetUIState: 1
     isTemporary: 0
@@ -18664,6 +18937,7 @@ MonoBehaviour:
     textContent: Why do you wish to work for DIYU Group?
     menuName: 
     encounterData: {fileID: 0}
+    npcAnimator: {fileID: 162715612}
     targetUIElements: []
     targetUIState: 1
     isTemporary: 0
@@ -18677,6 +18951,7 @@ MonoBehaviour:
     textContent: 
     menuName: 
     encounterData: {fileID: 0}
+    npcAnimator: {fileID: 0}
     targetUIElements: []
     targetUIState: 1
     isTemporary: 0
@@ -18702,10 +18977,11 @@ MonoBehaviour:
   - stepID: 
     jumpToAfterStep: 
     type: 0
-    speakerName: NARRATOR
-    textContent: So money, money, money or money?
+    speakerName: <color=#0953BA>NARRATOR
+    textContent: <i>So money, money, money or money?
     menuName: 
     encounterData: {fileID: 0}
+    npcAnimator: {fileID: 0}
     targetUIElements: []
     targetUIState: 1
     isTemporary: 0
@@ -18715,10 +18991,11 @@ MonoBehaviour:
   - stepID: 
     jumpToAfterStep: 
     type: 0
-    speakerName: NARRATOR
-    textContent: The cursor moves.
+    speakerName: <color=#0953BA>NARRATOR
+    textContent: <i>The cursor moves.
     menuName: 
     encounterData: {fileID: 0}
+    npcAnimator: {fileID: 0}
     targetUIElements: []
     targetUIState: 1
     isTemporary: 0
@@ -18732,6 +19009,7 @@ MonoBehaviour:
     textContent: Thank you.
     menuName: 
     encounterData: {fileID: 0}
+    npcAnimator: {fileID: 162715612}
     targetUIElements: []
     targetUIState: 1
     isTemporary: 0
@@ -18745,6 +19023,7 @@ MonoBehaviour:
     textContent: The interview has concluded.
     menuName: 
     encounterData: {fileID: 0}
+    npcAnimator: {fileID: 162715612}
     targetUIElements: []
     targetUIState: 1
     isTemporary: 0
@@ -18758,6 +19037,7 @@ MonoBehaviour:
     textContent: 
     menuName: 
     encounterData: {fileID: 0}
+    npcAnimator: {fileID: 0}
     targetUIElements: []
     targetUIState: 1
     isTemporary: 0
@@ -18787,6 +19067,7 @@ MonoBehaviour:
     textContent: Yes.
     menuName: 
     encounterData: {fileID: 0}
+    npcAnimator: {fileID: 162715612}
     targetUIElements: []
     targetUIState: 1
     isTemporary: 0
@@ -18800,6 +19081,7 @@ MonoBehaviour:
     textContent: Your application has been approved.
     menuName: 
     encounterData: {fileID: 0}
+    npcAnimator: {fileID: 162715612}
     targetUIElements: []
     targetUIState: 1
     isTemporary: 0
@@ -18813,6 +19095,7 @@ MonoBehaviour:
     textContent: Congratulations.
     menuName: 
     encounterData: {fileID: 0}
+    npcAnimator: {fileID: 162715612}
     targetUIElements: []
     targetUIState: 1
     isTemporary: 0
@@ -18822,10 +19105,11 @@ MonoBehaviour:
   - stepID: 
     jumpToAfterStep: 
     type: 0
-    speakerName: NARRATOR
-    textContent: No deliberation or discussion.
+    speakerName: <color=#0953BA>NARRATOR
+    textContent: <i>No deliberation or discussion.
     menuName: 
     encounterData: {fileID: 0}
+    npcAnimator: {fileID: 0}
     targetUIElements: []
     targetUIState: 1
     isTemporary: 0
@@ -18835,10 +19119,11 @@ MonoBehaviour:
   - stepID: 
     jumpToAfterStep: 
     type: 0
-    speakerName: NARRATOR
-    textContent: No moment where another candidate might have existed.
+    speakerName: <color=#0953BA>NARRATOR
+    textContent: <i>No moment where another candidate might have existed.
     menuName: 
     encounterData: {fileID: 0}
+    npcAnimator: {fileID: 0}
     targetUIElements: []
     targetUIState: 1
     isTemporary: 0
@@ -18848,10 +19133,11 @@ MonoBehaviour:
   - stepID: 
     jumpToAfterStep: 
     type: 0
-    speakerName: NARRATOR
-    textContent: The decision appears to have arrived before the interview.
+    speakerName: <color=#0953BA>NARRATOR
+    textContent: <i>The decision appears to have arrived before the interview.
     menuName: 
     encounterData: {fileID: 0}
+    npcAnimator: {fileID: 0}
     targetUIElements: []
     targetUIState: 1
     isTemporary: 0
@@ -18861,10 +19147,11 @@ MonoBehaviour:
   - stepID: 
     jumpToAfterStep: 
     type: 0
-    speakerName: NARRATOR
-    textContent: Only lucky and sometimes exceptional people make it this far.
+    speakerName: <color=#0953BA>NARRATOR
+    textContent: <i>Only lucky and sometimes exceptional people make it this far.
     menuName: 
     encounterData: {fileID: 0}
+    npcAnimator: {fileID: 0}
     targetUIElements: []
     targetUIState: 1
     isTemporary: 0
@@ -18874,10 +19161,11 @@ MonoBehaviour:
   - stepID: 
     jumpToAfterStep: 
     type: 0
-    speakerName: NARRATOR
-    textContent: Congratulations indeed.
+    speakerName: <color=#0953BA>NARRATOR
+    textContent: <i>Congratulations indeed.
     menuName: 
     encounterData: {fileID: 0}
+    npcAnimator: {fileID: 0}
     targetUIElements: []
     targetUIState: 1
     isTemporary: 0
@@ -18891,6 +19179,7 @@ MonoBehaviour:
     textContent: Your starting salary will be transferred monthly.
     menuName: 
     encounterData: {fileID: 0}
+    npcAnimator: {fileID: 162715612}
     targetUIElements: []
     targetUIState: 1
     isTemporary: 0
@@ -18905,6 +19194,7 @@ MonoBehaviour:
       requirements.
     menuName: 
     encounterData: {fileID: 0}
+    npcAnimator: {fileID: 162715612}
     targetUIElements: []
     targetUIState: 1
     isTemporary: 0
@@ -18918,6 +19208,7 @@ MonoBehaviour:
     textContent: You are entitled to annual leave in accordance with company policy.
     menuName: 
     encounterData: {fileID: 0}
+    npcAnimator: {fileID: 162715612}
     targetUIElements: []
     targetUIState: 1
     isTemporary: 0
@@ -18931,6 +19222,7 @@ MonoBehaviour:
     textContent: Unused days are retained until they are no longer applicable.
     menuName: 
     encounterData: {fileID: 0}
+    npcAnimator: {fileID: 162715612}
     targetUIElements: []
     targetUIState: 1
     isTemporary: 0
@@ -18944,6 +19236,7 @@ MonoBehaviour:
     textContent: 
     menuName: 
     encounterData: {fileID: 0}
+    npcAnimator: {fileID: 0}
     targetUIElements: []
     targetUIState: 1
     isTemporary: 0
@@ -18973,6 +19266,7 @@ MonoBehaviour:
     textContent: The employee handbook contains all relevant information.
     menuName: 
     encounterData: {fileID: 0}
+    npcAnimator: {fileID: 162715612}
     targetUIElements: []
     targetUIState: 1
     isTemporary: 0
@@ -18986,6 +19280,7 @@ MonoBehaviour:
     textContent: You will receive access after onboarding.
     menuName: 
     encounterData: {fileID: 0}
+    npcAnimator: {fileID: 162715612}
     targetUIElements: []
     targetUIState: 1
     isTemporary: 0
@@ -18999,6 +19294,7 @@ MonoBehaviour:
     textContent: There are several documents requiring your signature.
     menuName: 
     encounterData: {fileID: 0}
+    npcAnimator: {fileID: 162715612}
     targetUIElements: []
     targetUIState: 1
     isTemporary: 0
@@ -19013,6 +19309,7 @@ MonoBehaviour:
       emergency procedures, and consent forms.
     menuName: 
     encounterData: {fileID: 0}
+    npcAnimator: {fileID: 162715612}
     targetUIElements: []
     targetUIState: 1
     isTemporary: 0
@@ -19026,6 +19323,7 @@ MonoBehaviour:
     textContent: Please sign where indicated.
     menuName: 
     encounterData: {fileID: 0}
+    npcAnimator: {fileID: 162715612}
     targetUIElements: []
     targetUIState: 1
     isTemporary: 0
@@ -19035,10 +19333,11 @@ MonoBehaviour:
   - stepID: 
     jumpToAfterStep: 
     type: 0
-    speakerName: NARRATOR
-    textContent: The stack is thicker than expected.
+    speakerName: <color=#0953BA>NARRATOR
+    textContent: <i>The stack is thicker than expected.
     menuName: 
     encounterData: {fileID: 0}
+    npcAnimator: {fileID: 0}
     targetUIElements: []
     targetUIState: 1
     isTemporary: 0
@@ -19048,10 +19347,11 @@ MonoBehaviour:
   - stepID: 
     jumpToAfterStep: 
     type: 0
-    speakerName: NARRATOR
-    textContent: Some pages contain more blank space than text.
+    speakerName: <color=#0953BA>NARRATOR
+    textContent: <i>Some pages contain more blank space than text.
     menuName: 
     encounterData: {fileID: 0}
+    npcAnimator: {fileID: 0}
     targetUIElements: []
     targetUIState: 1
     isTemporary: 0
@@ -19061,10 +19361,11 @@ MonoBehaviour:
   - stepID: 
     jumpToAfterStep: 
     type: 0
-    speakerName: NARRATOR
-    textContent: Others contain more text than seems necessary.
+    speakerName: <color=#0953BA>NARRATOR
+    textContent: <i>Others contain more text than seems necessary.
     menuName: 
     encounterData: {fileID: 0}
+    npcAnimator: {fileID: 0}
     targetUIElements: []
     targetUIState: 1
     isTemporary: 0
@@ -19078,6 +19379,7 @@ MonoBehaviour:
     textContent: Excellent.
     menuName: 
     encounterData: {fileID: 0}
+    npcAnimator: {fileID: 162715612}
     targetUIElements: []
     targetUIState: 1
     isTemporary: 0
@@ -19091,6 +19393,7 @@ MonoBehaviour:
     textContent: Welcome to DIYU Group.
     menuName: 
     encounterData: {fileID: 0}
+    npcAnimator: {fileID: 162715612}
     targetUIElements: []
     targetUIState: 1
     isTemporary: 0
@@ -19104,6 +19407,7 @@ MonoBehaviour:
     textContent: Your orientation will continue at the open office area.
     menuName: 
     encounterData: {fileID: 0}
+    npcAnimator: {fileID: 162715612}
     targetUIElements: []
     targetUIState: 1
     isTemporary: 0
@@ -19118,6 +19422,7 @@ MonoBehaviour:
       be an appropriate time.
     menuName: 
     encounterData: {fileID: 0}
+    npcAnimator: {fileID: 162715612}
     targetUIElements: []
     targetUIState: 1
     isTemporary: 0
@@ -19127,10 +19432,11 @@ MonoBehaviour:
   - stepID: 
     jumpToAfterStep: 
     type: 0
-    speakerName: NARRATOR
-    textContent: Appropriate, at last.
+    speakerName: <color=#0953BA>NARRATOR
+    textContent: <i>Appropriate, at last.
     menuName: 
     encounterData: {fileID: 0}
+    npcAnimator: {fileID: 0}
     targetUIElements: []
     targetUIState: 1
     isTemporary: 0
@@ -19144,6 +19450,7 @@ MonoBehaviour:
     textContent: 'OBJECTIVE UPDATED: Go to the Restroom'
     menuName: 
     encounterData: {fileID: 0}
+    npcAnimator: {fileID: 0}
     targetUIElements: []
     targetUIState: 1
     isTemporary: 0
@@ -19578,7 +19885,7 @@ BoxCollider2D:
   m_UsedByEffector: 0
   m_CompositeOperation: 0
   m_CompositeOrder: 0
-  m_Offset: {x: -0.6951653, y: -0.0526022}
+  m_Offset: {x: -0.15943319, y: -0.044164777}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0, y: 0}
@@ -19588,7 +19895,7 @@ BoxCollider2D:
     drawMode: 0
     adaptiveTiling: 0
   m_AutoTiling: 0
-  m_Size: {x: 4.0270185, y: 0.8730199}
+  m_Size: {x: 2.9555545, y: 0.25347352}
   m_EdgeRadius: 0
 --- !u!114 &1615636517
 MonoBehaviour:
@@ -19609,11 +19916,12 @@ MonoBehaviour:
   - stepID: 
     jumpToAfterStep: 
     type: 0
-    speakerName: NARRATOR
-    textContent: The Receptionist looks up with the exact amount of warmth required
+    speakerName: <color=#0953BA>NARRATOR
+    textContent: <i>The Receptionist looks up with the exact amount of warmth required
       for the role.
     menuName: 
     encounterData: {fileID: 0}
+    npcAnimator: {fileID: 0}
     targetUIElements: []
     targetUIState: 1
     isTemporary: 0
@@ -19623,10 +19931,11 @@ MonoBehaviour:
   - stepID: 
     jumpToAfterStep: 
     type: 0
-    speakerName: NARRATOR
-    textContent: "Not unkind or personal. Just\u2026efficient."
+    speakerName: <color=#0953BA>NARRATOR
+    textContent: "<i>Not unkind or personal. Just\u2026efficient."
     menuName: 
     encounterData: {fileID: 0}
+    npcAnimator: {fileID: 0}
     targetUIElements: []
     targetUIState: 1
     isTemporary: 0
@@ -19640,6 +19949,7 @@ MonoBehaviour:
     textContent: Good morning. Welcome to DIYU Group.
     menuName: 
     encounterData: {fileID: 0}
+    npcAnimator: {fileID: 0}
     targetUIElements: []
     targetUIState: 1
     isTemporary: 0
@@ -19653,6 +19963,7 @@ MonoBehaviour:
     textContent: Do you have an appointment?
     menuName: 
     encounterData: {fileID: 0}
+    npcAnimator: {fileID: 0}
     targetUIElements: []
     targetUIState: 1
     isTemporary: 0
@@ -19666,6 +19977,7 @@ MonoBehaviour:
     textContent: 
     menuName: 
     encounterData: {fileID: 0}
+    npcAnimator: {fileID: 0}
     targetUIElements: []
     targetUIState: 1
     isTemporary: 0
@@ -19695,6 +20007,7 @@ MonoBehaviour:
     textContent: Of course. I will need your name before I can notify HR.
     menuName: 
     encounterData: {fileID: 0}
+    npcAnimator: {fileID: 0}
     targetUIElements: []
     targetUIState: 1
     isTemporary: 0
@@ -19705,9 +20018,10 @@ MonoBehaviour:
     jumpToAfterStep: 
     type: 1
     speakerName: Your Name
-    textContent: 
+    textContent: 'Please type your name:'
     menuName: 
     encounterData: {fileID: 0}
+    npcAnimator: {fileID: 0}
     targetUIElements: []
     targetUIState: 1
     isTemporary: 0
@@ -19721,6 +20035,7 @@ MonoBehaviour:
     textContent: Thank you, <b>{name}</b>.
     menuName: 
     encounterData: {fileID: 0}
+    npcAnimator: {fileID: 0}
     targetUIElements: []
     targetUIState: 1
     isTemporary: 0
@@ -19735,6 +20050,7 @@ MonoBehaviour:
       Someone will complete your preliminary profile before the interview begins.
     menuName: 
     encounterData: {fileID: 0}
+    npcAnimator: {fileID: 0}
     targetUIElements: []
     targetUIState: 1
     isTemporary: 0
@@ -19744,10 +20060,11 @@ MonoBehaviour:
   - stepID: 
     jumpToAfterStep: 
     type: 0
-    speakerName: NARRATOR
-    textContent: Preliminary profile.
+    speakerName: <color=#0953BA>NARRATOR
+    textContent: <i>Preliminary profile.
     menuName: 
     encounterData: {fileID: 0}
+    npcAnimator: {fileID: 0}
     targetUIElements: []
     targetUIState: 1
     isTemporary: 0
@@ -19757,11 +20074,12 @@ MonoBehaviour:
   - stepID: 
     jumpToAfterStep: 
     type: 0
-    speakerName: NARRATOR
-    textContent: Feels like a phrase with the professional advantage of sounding
+    speakerName: <color=#0953BA>NARRATOR
+    textContent: <i>Feels like a phrase with the professional advantage of sounding
       harmless.
     menuName: 
     encounterData: {fileID: 0}
+    npcAnimator: {fileID: 0}
     targetUIElements: []
     targetUIState: 1
     isTemporary: 0
@@ -19771,11 +20089,12 @@ MonoBehaviour:
   - stepID: 
     jumpToAfterStep: 
     type: 0
-    speakerName: NARRATOR
-    textContent: The corporation now knows what to call the Applicant. For the moment,
-      that is enough.
+    speakerName: <color=#0953BA>NARRATOR
+    textContent: <i>The corporation now knows what to call the Applicant. For the
+      moment, that is enough.
     menuName: 
     encounterData: {fileID: 0}
+    npcAnimator: {fileID: 0}
     targetUIElements: []
     targetUIState: 1
     isTemporary: 0
@@ -19789,6 +20108,7 @@ MonoBehaviour:
     textContent: 'OBJECTIVE UPDATED: Go to the HR Office'
     menuName: 
     encounterData: {fileID: 0}
+    npcAnimator: {fileID: 0}
     targetUIElements: []
     targetUIState: 1
     isTemporary: 0
@@ -21622,7 +21942,7 @@ SpriteRenderer:
   m_GlobalIlluminationMeshLod: 0
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 3
+  m_SortingOrder: 2
   m_MaskInteraction: 0
   m_Sprite: {fileID: 4693037870360884019, guid: 546f2810334b446349b681d3bec6edcc, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -21972,7 +22292,7 @@ SpriteRenderer:
   m_GlobalIlluminationMeshLod: 0
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 2
+  m_SortingOrder: 3
   m_MaskInteraction: 0
   m_Sprite: {fileID: -5988712203646216517, guid: 78718ffed12f54e808bc822ce9f1d511, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -22257,7 +22577,7 @@ SpriteRenderer:
   m_GlobalIlluminationMeshLod: 0
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 1
+  m_SortingOrder: 2
   m_MaskInteraction: 0
   m_Sprite: {fileID: 6675052541728665267, guid: ea98f4d4985264d668f70717f069f88d, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -22279,7 +22599,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: -0.07, y: 9.09, z: -0.03}
-  m_LocalScale: {x: 0.4, y: 0.4, z: 0.4}
+  m_LocalScale: {x: 0.35, y: 0.35, z: 0.35}
   m_ConstrainProportionsScale: 1
   m_Children:
   - {fileID: 1615636514}
@@ -23603,7 +23923,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 'Enter your name: '
+  m_text: 'Please type your name:'
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -23630,10 +23950,10 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 15
-  m_fontSizeBase: 36
+  m_fontSize: 12
+  m_fontSizeBase: 12
   m_fontWeight: 400
-  m_enableAutoSizing: 1
+  m_enableAutoSizing: 0
   m_fontSizeMin: 12
   m_fontSizeMax: 15
   m_fontStyle: 0
@@ -23669,7 +23989,7 @@ MonoBehaviour:
   m_VertexBufferAutoSizeReduction: 0
   m_useMaxVisibleDescender: 1
   m_pageToDisplay: 1
-  m_margin: {x: 0, y: 0, z: 10.096787, w: 14.009077}
+  m_margin: {x: 0, y: 0, z: -0.16797571, w: 0.32273147}
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
   m_hasFontAssetChanged: 0
@@ -29469,8 +29789,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 102.7687, y: 28.297}
-  m_SizeDelta: {x: 180.3417, y: 56.593}
+  m_AnchoredPosition: {x: 80.249, y: 46}
+  m_SizeDelta: {x: 135.3, y: 15.53397}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &4004223415978523471
 GameObject:

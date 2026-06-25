@@ -33,6 +33,8 @@ public class WorldTrigger : MonoBehaviour
         [TextArea(2, 5)] public string textContent; 
         public string menuName; 
         public EncounterData encounterData; 
+        [Header("Dialogue Animation")]
+        public Animator npcAnimator;
         
         [Header("For Toggle UI Elements Only")]
         [Tooltip("Drag all the UI GameObjects you want to affect into this list.")]
@@ -100,18 +102,25 @@ public class WorldTrigger : MonoBehaviour
         switch (step.type)
         {
             case StepType.Dialogue:
-                ui.ShowDialogue(step.textContent, step.speakerName, () => 
-                {
-                    if (!string.IsNullOrEmpty(step.jumpToAfterStep))
-                    {
-                        JumpToStep(step.jumpToAfterStep);
-                    }
-                    else
-                    {
-                        RunNextStep();
-                    }
-                });
-                break;
+
+    if (step.npcAnimator != null)
+    {
+        // Using a parameter called "IsTalking" - ensure your NPC Animator has this bool parameter!
+        step.npcAnimator.SetBool("IsTalking", true);
+    }
+
+    ui.ShowDialogue(step.textContent, step.speakerName, () => 
+    {
+        // Stop animation when dialogue finishes
+        if (step.npcAnimator != null)
+        {
+            step.npcAnimator.SetBool("IsTalking", false);
+        }
+
+        if (!string.IsNullOrEmpty(step.jumpToAfterStep)) JumpToStep(step.jumpToAfterStep);
+        else RunNextStep();
+    });
+    break;
 
             case StepType.NameInput:
                 ui.ShowNameInputPanel(step.textContent, step.speakerName);
