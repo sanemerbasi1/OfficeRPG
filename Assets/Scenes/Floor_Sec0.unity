@@ -16538,7 +16538,7 @@ MonoBehaviour:
   - stepID: 
     jumpToAfterStep: 
     type: 0
-    speakerName: NARRATOR
+    speakerName: <color=#0953BA>NARRATOR
     textContent: <i>The Co-worker notices you before you speak.</i>
     menuName: 
     encounterData: {fileID: 0}
@@ -16552,7 +16552,7 @@ MonoBehaviour:
   - stepID: 
     jumpToAfterStep: 
     type: 0
-    speakerName: NARRATOR
+    speakerName: <color=#0953BA>NARRATOR
     textContent: <i>There is no surprise in their expression.</i>
     menuName: 
     encounterData: {fileID: 0}
@@ -16708,7 +16708,7 @@ MonoBehaviour:
   - stepID: mainstory
     jumpToAfterStep: 
     type: 0
-    speakerName: NARRATOR
+    speakerName: <color=#0953BA>NARRATOR
     textContent: <i>The Co-worker lowers their voice.</i>
     menuName: 
     encounterData: {fileID: 0}
@@ -17134,7 +17134,7 @@ MonoBehaviour:
   - stepID: mainstorythree
     jumpToAfterStep: 
     type: 0
-    speakerName: NARRATOR
+    speakerName: <color=#0953BA>NARRATOR
     textContent: "<i>The Co-worker\u2019s hand moves to the edge of the desk.</i>"
     menuName: 
     encounterData: {fileID: 0}
@@ -17148,7 +17148,7 @@ MonoBehaviour:
   - stepID: 
     jumpToAfterStep: 
     type: 0
-    speakerName: NARRATOR
+    speakerName: <color=#0953BA>NARRATOR
     textContent: <i>A small photograph is half-hidden beneath a stack of compliance
       forms.</i>
     menuName: 
@@ -17163,7 +17163,7 @@ MonoBehaviour:
   - stepID: 
     jumpToAfterStep: 
     type: 0
-    speakerName: NARRATOR
+    speakerName: <color=#0953BA>NARRATOR
     textContent: <i>A photo of two children, smiling.</i>
     menuName: 
     encounterData: {fileID: 0}
@@ -17606,7 +17606,7 @@ MonoBehaviour:
   - stepID: mainstoryfive
     jumpToAfterStep: 
     type: 0
-    speakerName: NARRATOR
+    speakerName: <color=#0953BA>NARRATOR
     textContent: <i>The words settle into the room.</i>
     menuName: 
     encounterData: {fileID: 0}
@@ -17620,7 +17620,7 @@ MonoBehaviour:
   - stepID: 
     jumpToAfterStep: 
     type: 0
-    speakerName: NARRATOR
+    speakerName: <color=#0953BA>NARRATOR
     textContent: <i>Around them, the office continues.</i>
     menuName: 
     encounterData: {fileID: 0}
@@ -17634,7 +17634,7 @@ MonoBehaviour:
   - stepID: 
     jumpToAfterStep: 
     type: 0
-    speakerName: NARRATOR
+    speakerName: <color=#0953BA>NARRATOR
     textContent: <i>Forms move, keys press, screens glow.</i>
     menuName: 
     encounterData: {fileID: 0}
@@ -17861,7 +17861,7 @@ MonoBehaviour:
   - stepID: mainstorysix
     jumpToAfterStep: 
     type: 0
-    speakerName: NARRATOR
+    speakerName: <color=#0953BA>NARRATOR
     textContent: <i>The Co-worker returns to the desk.</i>
     menuName: 
     encounterData: {fileID: 0}
