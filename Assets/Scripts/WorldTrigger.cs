@@ -33,6 +33,7 @@ public class WorldTrigger : MonoBehaviour
         [TextArea(2, 5)] public string textContent; 
         public string menuName; 
         public EncounterData encounterData; 
+        
         [Header("Dialogue Animation")]
         public Animator npcAnimator;
         
@@ -54,6 +55,11 @@ public class WorldTrigger : MonoBehaviour
 
         [Header("For Choice Menus Only")]
         public List<DialogueChoice> choices = new List<DialogueChoice>();
+
+        // --- NEW: Audio settings for this specific step ---
+        [Header("Battle Audio (Optional)")]
+        public AudioClip battleStartSound;
+        public AudioClip battleLoopMusic;
     }
 
     [Header("Settings")]
@@ -73,6 +79,8 @@ public class WorldTrigger : MonoBehaviour
     [Header("Dependencies")]
     [SerializeField] private UIManager ui;
     [SerializeField] private BattleManager battleManager;
+
+    // --- NEW: Audio Sources to actually play the clips ---
 
     private void OnTriggerEnter2D(Collider2D other)
     {
@@ -102,25 +110,22 @@ public class WorldTrigger : MonoBehaviour
         switch (step.type)
         {
             case StepType.Dialogue:
+                if (step.npcAnimator != null)
+                {
+                    step.npcAnimator.SetBool("IsTalking", true);
+                }
 
-    if (step.npcAnimator != null)
-    {
-        // Using a parameter called "IsTalking" - ensure your NPC Animator has this bool parameter!
-        step.npcAnimator.SetBool("IsTalking", true);
-    }
+                ui.ShowDialogue(step.textContent, step.speakerName, () => 
+                {
+                    if (step.npcAnimator != null)
+                    {
+                        step.npcAnimator.SetBool("IsTalking", false);
+                    }
 
-    ui.ShowDialogue(step.textContent, step.speakerName, () => 
-    {
-        // Stop animation when dialogue finishes
-        if (step.npcAnimator != null)
-        {
-            step.npcAnimator.SetBool("IsTalking", false);
-        }
-
-        if (!string.IsNullOrEmpty(step.jumpToAfterStep)) JumpToStep(step.jumpToAfterStep);
-        else RunNextStep();
-    });
-    break;
+                    if (!string.IsNullOrEmpty(step.jumpToAfterStep)) JumpToStep(step.jumpToAfterStep);
+                    else RunNextStep();
+                });
+                break;
 
             case StepType.NameInput:
                 ui.ShowNameInputPanel(step.textContent, step.speakerName);
@@ -182,7 +187,6 @@ public class WorldTrigger : MonoBehaviour
                     }
                     else
                     {
-                        // Apply PERMANENTLY
                         foreach (GameObject uiElement in step.targetUIElements)
                         {
                             if (uiElement != null) uiElement.SetActive(step.targetUIState);
@@ -200,51 +204,72 @@ public class WorldTrigger : MonoBehaviour
                 break;
 
             case StepType.Battle:
-                if (step.encounterData != null)
-                {
-                    if (PlayerController.Instance != null)
-                    {
-                        PlayerController.Instance.isInBattle = true;
+    if (step.encounterData != null)
+    {
+        // 1. Setup Grid positions
+        if (PlayerController.Instance != null)
+        {
+            PlayerController.Instance.isInBattle = true;
+            GridUnit playerGridUnit = PlayerController.Instance.GetComponent<GridUnit>();
+            if (playerGridUnit != null && BattleGrid.Instance != null)
+            {
+                Vector2Int playerSnappedGrid = BattleGrid.Instance.WorldToGrid(PlayerController.Instance.transform.position);
+                playerGridUnit.SnapToGridPosition(playerSnappedGrid);
+                BattleGrid.Instance.RegisterUnitPosition(playerGridUnit);
+            }
+        }
 
-                        GridUnit playerGridUnit = PlayerController.Instance.GetComponent<GridUnit>();
-                        if (playerGridUnit != null && BattleGrid.Instance != null)
-                        {
-                            Vector2Int playerSnappedGrid = BattleGrid.Instance.WorldToGrid(PlayerController.Instance.transform.position);
-                            playerGridUnit.SnapToGridPosition(playerSnappedGrid);
-                            BattleGrid.Instance.RegisterUnitPosition(playerGridUnit);
-                        }
-                    }
+        if (fieldEnemyUnit != null && BattleGrid.Instance != null)
+        {
+            Vector2Int enemySnappedGrid = BattleGrid.Instance.WorldToGrid(fieldEnemyUnit.transform.position);
+            fieldEnemyUnit.SnapToGridPosition(enemySnappedGrid);
+            BattleGrid.Instance.RegisterUnitPosition(fieldEnemyUnit);
+        }
 
-                    if (fieldEnemyUnit != null && BattleGrid.Instance != null)
-                    {
-                        Vector2Int enemySnappedGrid = BattleGrid.Instance.WorldToGrid(fieldEnemyUnit.transform.position);
-                        fieldEnemyUnit.SnapToGridPosition(enemySnappedGrid);
-                        BattleGrid.Instance.RegisterUnitPosition(fieldEnemyUnit);
-                    }
+        // 2. Audio: Switch to Battle Theme using the MusicController singleton
+        if (MusicController.Instance != null)
+        {
+            MusicController.Instance.PauseBGM();
+            if (step.battleStartSound != null)
+{
+    MusicController.Instance.PlaySFX(step.battleStartSound);
+}
+            MusicController.Instance.PlayBattleMusic(step.battleLoopMusic);
+        }
 
-                    battleManager.StartBattle(step.encounterData, fieldEnemyUnit, () => 
-                    {
-                        if (PlayerController.Instance != null)
-                        {
-                            PlayerController.Instance.isInBattle = false;
-                        }
+        // 3. Start the Battle
+        battleManager.StartBattle(step.encounterData, fieldEnemyUnit, () => 
+        {
+            // --- POST-BATTLE LOGIC ---
+            if (PlayerController.Instance != null)
+            {
+                PlayerController.Instance.isInBattle = false;
+            }
 
-                        if (BattleGrid.Instance != null)
-                        {
-                            BattleGrid.Instance.ClearAllHighlights();
-                        }
+            if (BattleGrid.Instance != null)
+            {
+                BattleGrid.Instance.ClearAllHighlights();
+            }
 
-                        if (!string.IsNullOrEmpty(step.jumpToAfterStep)) JumpToStep(step.jumpToAfterStep);
-                        else RunNextStep();
-                    });
-                }
-                else
-                {
-                    Debug.LogWarning($"[TRIGGER: {triggerName}] Battle step reached but no EncounterData assigned!");
-                    if (!string.IsNullOrEmpty(step.jumpToAfterStep)) JumpToStep(step.jumpToAfterStep);
-                    else RunNextStep();
-                }
-                break;
+            // 4. Cleanup: Stop Battle Theme and Resume BGM
+            if (MusicController.Instance != null)
+            {
+                MusicController.Instance.StopBattleMusic();
+                MusicController.Instance.ResumeBGM();
+            }
+
+            // Continue the sequence
+            if (!string.IsNullOrEmpty(step.jumpToAfterStep)) JumpToStep(step.jumpToAfterStep);
+            else RunNextStep();
+        });
+    }
+    else
+    {
+        Debug.LogWarning($"[TRIGGER: {triggerName}] Battle step reached but no EncounterData assigned!");
+        if (!string.IsNullOrEmpty(step.jumpToAfterStep)) JumpToStep(step.jumpToAfterStep);
+        else RunNextStep();
+    }
+    break;
         }
     }
 
@@ -266,29 +291,24 @@ public class WorldTrigger : MonoBehaviour
 
     private System.Collections.IEnumerator HandleTemporaryUIGroup(TriggerStep step)
     {
-        // 1. Turn the temporary UI ON
         foreach (GameObject uiElement in step.targetUIElements)
         {
             if (uiElement != null) uiElement.SetActive(step.targetUIState);
         }
         
-        // 2. If unchecked, let the sequence keep moving immediately
         if (!step.waitToFinish)
         {
             if (!string.IsNullOrEmpty(step.jumpToAfterStep)) JumpToStep(step.jumpToAfterStep);
             else RunNextStep();
         }
 
-        // 3. Sit and hold the screen for the duration
         yield return new WaitForSeconds(step.activeDuration);
         
-        // 4. Turn the temporary UI OFF
         foreach (GameObject uiElement in step.targetUIElements)
         {
             if (uiElement != null) uiElement.SetActive(!step.targetUIState); 
         }
 
-        // 5. If checked, fire the next step ONLY NOW that it disappeared
         if (step.waitToFinish)
         {
             if (!string.IsNullOrEmpty(step.jumpToAfterStep)) JumpToStep(step.jumpToAfterStep);
