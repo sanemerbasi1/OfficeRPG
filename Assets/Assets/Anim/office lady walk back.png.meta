@@ -1,22 +1,31 @@
 fileFormatVersion: 2
-guid: 0af4fc95d85204b258eea6b0e9ce1693
+guid: 9a4706a1c5d8d4557aa83bd1809fd8ea
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: -7949446582266806286
-    second: HR-lady natural 1_0
+      213: -943759412898582468
+    second: office lady walk back_0
   - first:
-      213: -8693998453867162005
-    second: HR-lady natural 1_1
+      213: -6812690263260912442
+    second: office lady walk back_1
   - first:
-      213: 1661406657906593193
-    second: HR-lady natural 1_2
+      213: 3728232301660420963
+    second: office lady walk back_2
   - first:
-      213: 6978326842288353173
-    second: HR-lady natural 1_3
+      213: -7841396087885431688
+    second: office lady walk back_3
   - first:
-      213: 8673921559706347920
-    second: HR-lady natural 1_4
+      213: -533094145467499601
+    second: office lady walk back_4
+  - first:
+      213: 3578283810554698180
+    second: office lady walk back_5
+  - first:
+      213: 953051583291787827
+    second: office lady walk back_6
+  - first:
+      213: -4539157949132443850
+    second: office lady walk back_7
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -138,13 +147,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: HR-lady natural 1_0
+      name: office lady walk back_0
       rect:
         serializedVersion: 2
-        x: 20
-        y: 4
-        width: 24
-        height: 53
+        x: 27
+        y: 0
+        width: 31
+        height: 58
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -153,20 +162,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 2ff3b0f8374eda190800000000000000
-      internalID: -7949446582266806286
+      spriteID: c30bfb070d717e2f0800000000000000
+      internalID: -943759412898582468
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: HR-lady natural 1_1
+      name: office lady walk back_1
       rect:
         serializedVersion: 2
-        x: 80
-        y: 4
-        width: 24
-        height: 53
+        x: 107
+        y: 0
+        width: 31
+        height: 57
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -175,20 +184,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: b66d37f0876b85780800000000000000
-      internalID: -8693998453867162005
+      spriteID: 6c4229dfc467471a0800000000000000
+      internalID: -6812690263260912442
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: HR-lady natural 1_2
+      name: office lady walk back_2
       rect:
         serializedVersion: 2
-        x: 140
-        y: 4
-        width: 24
-        height: 53
+        x: 187
+        y: 0
+        width: 31
+        height: 57
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -197,20 +206,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 9adcdf78d808e0710800000000000000
-      internalID: 1661406657906593193
+      spriteID: 36b3b9c76875db330800000000000000
+      internalID: 3728232301660420963
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: HR-lady natural 1_3
+      name: office lady walk back_3
       rect:
         serializedVersion: 2
-        x: 200
-        y: 4
-        width: 24
-        height: 53
+        x: 267
+        y: 0
+        width: 31
+        height: 57
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -219,20 +228,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 59fab215a4ff7d060800000000000000
-      internalID: 6978326842288353173
+      spriteID: 87c7376bdc3cd2390800000000000000
+      internalID: -7841396087885431688
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: HR-lady natural 1_4
+      name: office lady walk back_4
       rect:
         serializedVersion: 2
-        x: 260
-        y: 4
-        width: 24
-        height: 53
+        x: 347
+        y: 0
+        width: 31
+        height: 58
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -241,8 +250,74 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 09926efb3b5ff5870800000000000000
-      internalID: 8673921559706347920
+      spriteID: fabb19bf2b11a98f0800000000000000
+      internalID: -533094145467499601
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: office lady walk back_5
+      rect:
+        serializedVersion: 2
+        x: 427
+        y: 0
+        width: 31
+        height: 57
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 4c9d4a9ca2e98a130800000000000000
+      internalID: 3578283810554698180
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: office lady walk back_6
+      rect:
+        serializedVersion: 2
+        x: 507
+        y: 0
+        width: 31
+        height: 57
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 33a0bb29d5be93d00800000000000000
+      internalID: 953051583291787827
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: office lady walk back_7
+      rect:
+        serializedVersion: 2
+        x: 587
+        y: 0
+        width: 31
+        height: 57
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 63fe19e05eba101c0800000000000000
+      internalID: -4539157949132443850
       vertices: []
       indices: 
       edges: []
@@ -261,11 +336,14 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      HR-lady natural 1_0: -7949446582266806286
-      HR-lady natural 1_1: -8693998453867162005
-      HR-lady natural 1_2: 1661406657906593193
-      HR-lady natural 1_3: 6978326842288353173
-      HR-lady natural 1_4: 8673921559706347920
+      office lady walk back_0: -943759412898582468
+      office lady walk back_1: -6812690263260912442
+      office lady walk back_2: 3728232301660420963
+      office lady walk back_3: -7841396087885431688
+      office lady walk back_4: -533094145467499601
+      office lady walk back_5: 3578283810554698180
+      office lady walk back_6: 953051583291787827
+      office lady walk back_7: -4539157949132443850
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

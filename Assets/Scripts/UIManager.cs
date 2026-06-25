@@ -186,13 +186,20 @@ public class UIManager : MonoBehaviour
 
     public void TogglePlayerMovement(bool canMove)
     {
-        GameObject player = GameObject.FindGameObjectWithTag("Player");
-        if (player != null)
+        // Since you made PlayerController a Singleton, we can access it cleanly!
+        if (PlayerController.Instance != null)
         {
-            var controller = player.GetComponent<PlayerController>();
-            if (controller != null) controller.enabled = canMove;
-            var rb = player.GetComponent<Rigidbody2D>();
+            PlayerController.Instance.enabled = canMove;
+            
+            var rb = PlayerController.Instance.GetComponent<Rigidbody2D>();
             if (rb != null) rb.linearVelocity = Vector2.zero;
+
+            // --- THE FIX: Force Animator to Idle when dialogue opens ---
+            if (!canMove)
+            {
+                var animator = PlayerController.Instance.GetComponentInChildren<Animator>();
+                if (animator != null) animator.SetFloat("Speed", 0f);
+            }
         }
     }
 

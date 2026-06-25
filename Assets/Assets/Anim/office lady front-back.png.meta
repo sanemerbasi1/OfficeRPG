@@ -1,22 +1,31 @@
 fileFormatVersion: 2
-guid: 0af4fc95d85204b258eea6b0e9ce1693
+guid: c6790f4a934814210b3181a31ba43de8
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: -7949446582266806286
-    second: HR-lady natural 1_0
+      213: -6498571585089893524
+    second: office lady front-back_0
   - first:
-      213: -8693998453867162005
-    second: HR-lady natural 1_1
+      213: 7227856736004983902
+    second: office lady front-back_1
   - first:
-      213: 1661406657906593193
-    second: HR-lady natural 1_2
+      213: 1685840375925880145
+    second: office lady front-back_2
   - first:
-      213: 6978326842288353173
-    second: HR-lady natural 1_3
+      213: -8322308616642920386
+    second: office lady front-back_3
   - first:
-      213: 8673921559706347920
-    second: HR-lady natural 1_4
+      213: 1865024750876529852
+    second: office lady front-back_4
+  - first:
+      213: -1897732956167535335
+    second: office lady front-back_5
+  - first:
+      213: 6710633630987811972
+    second: office lady front-back_6
+  - first:
+      213: -8944615153343499358
+    second: office lady front-back_7
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -138,13 +147,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: HR-lady natural 1_0
+      name: office lady front-back_0
       rect:
         serializedVersion: 2
-        x: 20
-        y: 4
-        width: 24
-        height: 53
+        x: 26
+        y: 0
+        width: 31
+        height: 58
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -153,20 +162,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 2ff3b0f8374eda190800000000000000
-      internalID: -7949446582266806286
+      spriteID: c6b0543039f60d5a0800000000000000
+      internalID: -6498571585089893524
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: HR-lady natural 1_1
+      name: office lady front-back_1
       rect:
         serializedVersion: 2
-        x: 80
-        y: 4
-        width: 24
-        height: 53
+        x: 106
+        y: 0
+        width: 31
+        height: 57
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -175,20 +184,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: b66d37f0876b85780800000000000000
-      internalID: -8693998453867162005
+      spriteID: e5ccdf418618e4460800000000000000
+      internalID: 7227856736004983902
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: HR-lady natural 1_2
+      name: office lady front-back_2
       rect:
         serializedVersion: 2
-        x: 140
-        y: 4
-        width: 24
-        height: 53
+        x: 186
+        y: 0
+        width: 31
+        height: 57
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -197,20 +206,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 9adcdf78d808e0710800000000000000
-      internalID: 1661406657906593193
+      spriteID: 155b213d3ee456710800000000000000
+      internalID: 1685840375925880145
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: HR-lady natural 1_3
+      name: office lady front-back_3
       rect:
         serializedVersion: 2
-        x: 200
-        y: 4
-        width: 24
-        height: 53
+        x: 266
+        y: 0
+        width: 31
+        height: 57
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -219,20 +228,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 59fab215a4ff7d060800000000000000
-      internalID: 6978326842288353173
+      spriteID: e3083d91868318c80800000000000000
+      internalID: -8322308616642920386
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: HR-lady natural 1_4
+      name: office lady front-back_4
       rect:
         serializedVersion: 2
-        x: 260
-        y: 4
-        width: 24
-        height: 53
+        x: 346
+        y: 0
+        width: 31
+        height: 58
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -241,8 +250,74 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 09926efb3b5ff5870800000000000000
-      internalID: 8673921559706347920
+      spriteID: cb49e4d2126e1e910800000000000000
+      internalID: 1865024750876529852
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: office lady front-back_5
+      rect:
+        serializedVersion: 2
+        x: 426
+        y: 0
+        width: 31
+        height: 57
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 91505155ee5e9a5e0800000000000000
+      internalID: -1897732956167535335
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: office lady front-back_6
+      rect:
+        serializedVersion: 2
+        x: 506
+        y: 0
+        width: 31
+        height: 57
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 48c71d0abb5f02d50800000000000000
+      internalID: 6710633630987811972
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: office lady front-back_7
+      rect:
+        serializedVersion: 2
+        x: 586
+        y: 0
+        width: 31
+        height: 57
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 2a3726c98e75ed380800000000000000
+      internalID: -8944615153343499358
       vertices: []
       indices: 
       edges: []
@@ -261,11 +336,14 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      HR-lady natural 1_0: -7949446582266806286
-      HR-lady natural 1_1: -8693998453867162005
-      HR-lady natural 1_2: 1661406657906593193
-      HR-lady natural 1_3: 6978326842288353173
-      HR-lady natural 1_4: 8673921559706347920
+      office lady front-back_0: -6498571585089893524
+      office lady front-back_1: 7227856736004983902
+      office lady front-back_2: 1685840375925880145
+      office lady front-back_3: -8322308616642920386
+      office lady front-back_4: 1865024750876529852
+      office lady front-back_5: -1897732956167535335
+      office lady front-back_6: 6710633630987811972
+      office lady front-back_7: -8944615153343499358
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
