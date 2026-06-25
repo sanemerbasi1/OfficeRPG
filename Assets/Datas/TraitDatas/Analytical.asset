@@ -10,10 +10,10 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 45ede9863d59d40dcb3dae27e60b648b, type: 3}
-  m_Name: WorkaholicTrait
+  m_Name: Analytical
   m_EditorClassIdentifier: Assembly-CSharp::TraitData
-  traitName: Workaholic
-  traitIcon: {fileID: 3396675160312199766, guid: 1206c217da1b04e7db9abd37abdfc8c2, type: 3}
+  traitName: Analytical
+  traitIcon: {fileID: 21300000, guid: 2d185d3fca503458b946a29add773c94, type: 3}
   description: 
   CommunicationBonus: 0
   CriticalThinkingBonus: 0

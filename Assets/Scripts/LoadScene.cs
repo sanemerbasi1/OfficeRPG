@@ -33,12 +33,12 @@ public class SceneLoader : MonoBehaviour
 
     IEnumerator StartGameRoutine()
     {
-        AsyncOperation load = SceneManager.LoadSceneAsync("Floor_01", LoadSceneMode.Additive);
+        AsyncOperation load = SceneManager.LoadSceneAsync("Floor_Sec0", LoadSceneMode.Additive);
         yield return load;
 
-        SceneManager.SetActiveScene(SceneManager.GetSceneByName("Floor_01"));
+        SceneManager.SetActiveScene(SceneManager.GetSceneByName("Floor_Sec0"));
         SceneManager.UnloadSceneAsync("MainMenu");
-        currentFloor = "Floor_01";
+        currentFloor = "Floor_Sec0";
 
         ResetPlayerTransform();
     }
