@@ -13,20 +13,20 @@ MonoBehaviour:
   m_Name: StartingPlayerStats
   m_EditorClassIdentifier: Assembly-CSharp::PlayerStats
   currentDay: 1
-  playerName: asd
-  portrait: {fileID: -1556092918280230627, guid: 1cfd6679c33a6474e8e63590170c336d, type: 3}
+  playerName: Applicant
+  portrait: {fileID: -6498571585089893524, guid: c6790f4a934814210b3181a31ba43de8, type: 3}
   communication: 1
   criticalThinking: 1
-  adaptability: 4
-  emotionalIntelligence: 4
+  adaptability: 1
+  emotionalIntelligence: 1
   sustainability: 1
   leadership: 1
-  currentMH: 0
-  maxMH: 0
+  currentMH: 2
+  maxMH: 3
   currentShield: 0
   actionPoints: 4
-  slot1: {fileID: 11400000, guid: dff61217a9f7d4084a851a8c6ea6b113, type: 2}
-  slot2: {fileID: 11400000, guid: cfd0dc38ce63b49838994f89492b0cf4, type: 2}
+  slot1: {fileID: 0}
+  slot2: {fileID: 0}
   playerSkills:
   - {fileID: 11400000, guid: 649cc0863736e441c944940f16ca437f, type: 2}
   - {fileID: 11400000, guid: 95e03863f4b914b70a116a4766d520d8, type: 2}

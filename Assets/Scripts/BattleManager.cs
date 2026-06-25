@@ -8,7 +8,6 @@ public class BattleManager : MonoBehaviour
 {
     public static BattleManager Instance;
     public BattleState currentState;
-    
     private bool isFirstTurn;
 
     [Header("Data References")]
@@ -29,6 +28,32 @@ public class BattleManager : MonoBehaviour
     private GridUnit playerGridUnit;
     private GridUnit enemyGridUnit;
     private List<Vector2Int> validMoveTiles = new List<Vector2Int>();
+
+    [System.Serializable]
+    public struct MCAnimationProfile
+    {
+        public AnimationClip idle;
+        public AnimationClip walkUp;
+        public AnimationClip walkGeneric; 
+        public AnimationClip attackUp;
+        public AnimationClip attackDown;
+        public AnimationClip attackLeft;
+        public AnimationClip specialAttack;
+    }
+
+    [System.Serializable]
+    public struct RivalAnimationProfile
+    {
+        public AnimationClip idle;
+        public AnimationClip walkUp;
+        public AnimationClip walkGeneric;
+        public AnimationClip attackSuccessful;
+        public AnimationClip attackMissed;
+    }
+
+    [Header("Sprite Animation Sets")]
+    [SerializeField] private MCAnimationProfile mcAnimations;
+    [SerializeField] private RivalAnimationProfile rivalAnimations;
 
     [Header("Read-Only Live Stats (Inspector Debug)")]
     public int playerCurrentMH;
@@ -55,7 +80,7 @@ public class BattleManager : MonoBehaviour
 
     public void StartBattle(EncounterData data, GridUnit enemyUnit, Action onComplete)
     {
-        CancelInvoke(); 
+        CancelInvoke();
         Instance = this;
         currentEncounter = data;
         onBattleComplete = onComplete;
@@ -83,14 +108,12 @@ public class BattleManager : MonoBehaviour
             Debug.LogError("[BATTLE MANAGER ERROR] 'PlayerPermanentStats' reference is missing!");
         }
 
-        // --- CLEANUP: HIDE MAIN UI ---
         if (battleCanvas != null) battleCanvas.SetActive(true);
-        if (mainCanvas != null) mainCanvas.SetActive(false); 
+        if (mainCanvas != null) mainCanvas.SetActive(false);
         if (battleUI.fullLogPanel != null) battleUI.fullLogPanel.SetActive(false);
 
         battleUI.ClearLog();
-        
-        // --- TIME & DAY SETUP ---
+
         int currentDay = playerPermanentStats != null ? playerPermanentStats.currentDay : 1;
 
         if (DayManager.Instance != null)
@@ -100,9 +123,8 @@ public class BattleManager : MonoBehaviour
         }
         else
         {
-            battleUI.SetTimeOfDay(TimeOfDay.Day, currentDay); 
+            battleUI.SetTimeOfDay(TimeOfDay.Day, currentDay);
         }
-        
         SetupBattle();
     }
 
@@ -113,14 +135,13 @@ public class BattleManager : MonoBehaviour
             enemyBrain.SetUnitReference(enemyGridUnit);
             enemyBrain.InitializeCooldowns(currentEncounter);
         }
-        
         battleUI.UpdateLog(currentEncounter.introText);
 
         PositionUnitsOnGrid();
 
         int totalSustain = playerPermanentStats.GetTotalStatValue(StatType.Sustainability);
         playerPermanentStats.maxMH = CombatLogic.CalculateMaxMentalHealth(totalSustain, combatData);
-        playerArmor = playerPermanentStats.GetTotalStatValue(StatType.EmotionalIntelligence);  
+        playerArmor = playerPermanentStats.GetTotalStatValue(StatType.EmotionalIntelligence);
 
         if (playerPermanentStats.currentMH <= 0)
         {
@@ -134,7 +155,7 @@ public class BattleManager : MonoBehaviour
         enemyShield = 0;
 
         if (playerGridUnit != null) playerGridUnit.Initialize(playerPermanentStats);
-        if (enemyGridUnit != null)  enemyGridUnit.Initialize(currentEncounter.npcStats);
+        if (enemyGridUnit != null) enemyGridUnit.Initialize(currentEncounter.npcStats);
 
         if (battleUI != null)
         {
@@ -145,10 +166,9 @@ public class BattleManager : MonoBehaviour
         int pAdapt = playerPermanentStats.GetTotalStatValue(StatType.Adaptability);
         bool playerFirst = pAdapt >= currentEncounter.npcStats.adaptability;
         battleUI.InitializeTurnDisplay(playerPermanentStats.portrait, currentEncounter.enemyPortrait, playerFirst);
-        
         isFirstTurn = true;
         if (playerFirst) StartPlayerTurn();
-        else             StartEnemyTurn();
+        else StartEnemyTurn();
     }
 
     public void UpdateUI()
@@ -179,10 +199,9 @@ public class BattleManager : MonoBehaviour
         currentState = BattleState.PLAYER_TURN;
         if (!isFirstTurn) battleUI.TickAllCooldowns();
         isFirstTurn = false;
-        
         battleUI.ToggleActionButtons(true);
         battleUI.UpdateTurnDisplay("YOUR TURN", Color.green);
-        battleUI.AdvanceTurnDisplay(); 
+        battleUI.AdvanceTurnDisplay();
 
         if (playerGridUnit != null)
         {
@@ -212,11 +231,10 @@ public class BattleManager : MonoBehaviour
                 if (battleUI != null && battleUI.IsSkillOnCooldown(skill)) continue;
 
                 int skillRange = skill.attackRange <= 0 ? 1 : skill.attackRange;
-                
                 if (distanceToEnemy <= skillRange)
                 {
                     canAttackEnemy = true;
-                    break; 
+                    break;
                 }
             }
         }
@@ -232,7 +250,7 @@ public class BattleManager : MonoBehaviour
     {
         if (Mouse.current == null) return;
 
-        if (Mouse.current.leftButton.wasPressedThisFrame) 
+        if (Mouse.current.leftButton.wasPressedThisFrame)
         {
             Vector2 screenPos2D = Mouse.current.position.ReadValue();
             Vector3 mouseScreenPosition = new Vector3(screenPos2D.x, screenPos2D.y, Mathf.Abs(Camera.main.transform.position.z));
@@ -242,23 +260,41 @@ public class BattleManager : MonoBehaviour
             if (validMoveTiles.Contains(clickedTile))
             {
                 int apCost = BattleGrid.Instance.GetManhattanDistance(playerGridUnit.gridPosition, clickedTile);
-                
+                Vector2Int direction = clickedTile - playerGridUnit.gridPosition;
+
                 playerGridUnit.MoveToGridPosition(clickedTile, apCost);
                 BattleGrid.Instance.RegisterUnitPosition(playerGridUnit);
                 BattleGrid.Instance.ClearAllHighlights();
 
                 if (battleUI != null) battleUI.UpdateAPDisplay(playerGridUnit.currentAP, playerGridUnit.maxAP);
 
+                Animator playerAnim = playerGridUnit.GetComponentInChildren<Animator>();
+                SpriteRenderer playerSr = playerGridUnit.GetComponentInChildren<SpriteRenderer>();
+
+                if (playerAnim != null)
+                {
+                    AnimationClip walkClip = (direction.y > 0 && Math.Abs(direction.y) >= Math.Abs(direction.x)) 
+                        ? mcAnimations.walkUp 
+                        : mcAnimations.walkGeneric;
+
+                    if (playerSr != null && Math.Abs(direction.x) > Math.Abs(direction.y))
+                    {
+                        playerSr.flipX = (direction.x > 0); 
+                    }
+
+                    StartCoroutine(PlayClipSequenceSafe(playerAnim, walkClip, mcAnimations.idle));
+                }
+
                 CheckWinCondition();
             }
-        } 
+        }
     }
 
     public void ExecutePlayerAction(SkillData skill)
     {
         if (currentState != BattleState.PLAYER_TURN || playerGridUnit == null) return;
 
-        int baseActionCost = skill.actionPointCost; 
+        int baseActionCost = skill.actionPointCost;
         if (playerGridUnit.currentAP < baseActionCost)
         {
             battleUI.UpdateLog("<color=orange>Not enough Action Points remaining to act!</color>");
@@ -268,9 +304,7 @@ public class BattleManager : MonoBehaviour
         battleUI.ToggleActionButtons(false);
         battleUI.NotifySkillUsed(skill);
         playerGridUnit.UseAP(baseActionCost);
-        
         if (battleUI != null) battleUI.UpdateAPDisplay(playerGridUnit.currentAP, playerGridUnit.maxAP);
-        
         BattleGrid.Instance.ClearAllHighlights();
 
         int val1 = playerPermanentStats.GetTotalStatValue(skill.primaryStat);
@@ -303,36 +337,68 @@ public class BattleManager : MonoBehaviour
         CheckWinCondition();
     }
 
-    private IEnumerator HandlePlayerAttackRoutine(SkillData skill, int damage)
+   private IEnumerator HandlePlayerAttackRoutine(SkillData skill, int damage)
+{
+    if (playerGridUnit == null || enemyGridUnit == null || BattleGrid.Instance == null) yield break;
+
+    int currentDistance = playerGridUnit.GetDistanceTo(enemyGridUnit);
+    int skillRange = skill.attackRange;
+
+    if (currentDistance > skillRange)
     {
-        if (playerGridUnit == null || enemyGridUnit == null || BattleGrid.Instance == null) yield break;
+        battleUI.UpdateLog($"<b>{skill.skillName}</b> failed! Target is out of range. (Distance: {currentDistance}/{skillRange})");
+        yield break;
+    }
 
-        int currentDistance = playerGridUnit.GetDistanceTo(enemyGridUnit);
-        int skillRange = skill.attackRange; 
+    int pAdapt = playerPermanentStats.GetTotalStatValue(StatType.Adaptability);
+    bool hit = CombatLogic.CheckIfHit(pAdapt, currentEncounter.npcStats.adaptability, combatData);
+    Vector2Int attackDir = enemyGridUnit.gridPosition - playerGridUnit.gridPosition;
 
-        if (currentDistance > skillRange)
+    Animator playerAnim = playerGridUnit.GetComponentInChildren<Animator>();
+    SpriteRenderer playerSr = playerGridUnit.GetComponentInChildren<SpriteRenderer>();
+
+    AnimationClip selectedClip = mcAnimations.attackDown;
+
+    if (skill.useSpecialAnimation)
+    {
+        selectedClip = mcAnimations.specialAttack;
+    }
+    else
+    {
+        if (Mathf.Abs(attackDir.x) >= Mathf.Abs(attackDir.y))
         {
-            battleUI.UpdateLog($"<b>{skill.skillName}</b> failed! Target is out of range. (Distance: {currentDistance}/{skillRange})");
-            yield break;
-        }
-
-        int pAdapt = playerPermanentStats.GetTotalStatValue(StatType.Adaptability);
-        bool hit = CombatLogic.CheckIfHit(pAdapt, currentEncounter.npcStats.adaptability, combatData);
-
-        if (hit)
-        {
-            battleUI.UpdateLog($"<b>{playerPermanentStats.playerName}</b> used <b>{skill.skillName}</b>!");
-            
-            yield return StartCoroutine(AnimateAttackBump(playerGridUnit.transform, enemyGridUnit.transform));
-
-            CombatLogic.ProcessDamage(damage, false, combatData, ref enemyCurrentMH, ref enemyArmor, ref enemyShield);
+            selectedClip = mcAnimations.attackLeft;
         }
         else
         {
-            battleUI.UpdateLog($"<b>{currentEncounter.encounterName}</b> has dodged!");
-            yield return StartCoroutine(AnimateAttackBump(playerGridUnit.transform, enemyGridUnit.transform));
+            selectedClip = (attackDir.y > 0) ? mcAnimations.attackUp : mcAnimations.attackDown;
         }
     }
+
+    // --- CLEAN FLIP SYSTEM ---
+    if (playerSr != null && attackDir.x != 0)
+    {
+        // Target is right -> Flip to face Right. Target is left -> Don't flip (stays Left).
+        playerSr.flipX = (attackDir.x > 0); 
+    }
+
+    if (hit)
+    {
+        battleUI.UpdateLog($"<b>{playerPermanentStats.playerName}</b> used <b>{skill.skillName}</b>!");
+        
+        if (playerAnim != null) StartCoroutine(PlayClipSequenceSafe(playerAnim, selectedClip, mcAnimations.idle));
+        yield return StartCoroutine(AnimateAttackBump(playerGridUnit.transform, enemyGridUnit.transform));
+
+        CombatLogic.ProcessDamage(damage, false, combatData, ref enemyCurrentMH, ref enemyArmor, ref enemyShield);
+    }
+    else
+    {
+        battleUI.UpdateLog($"<b>{currentEncounter.encounterName}</b> has dodged!");
+
+        if (playerAnim != null) StartCoroutine(PlayClipSequenceSafe(playerAnim, selectedClip, mcAnimations.idle));
+        yield return StartCoroutine(AnimateAttackBump(playerGridUnit.transform, enemyGridUnit.transform));
+    }
+}
 
     public void EndTurnButtonPressed()
     {
@@ -349,11 +415,9 @@ public class BattleManager : MonoBehaviour
         enemyBrain.TickCooldowns();
         battleUI.ToggleActionButtons(false);
         battleUI.UpdateTurnDisplay("ENEMY TURN", Color.red);
-        battleUI.AdvanceTurnDisplay(); 
+        battleUI.AdvanceTurnDisplay();
         battleUI.UpdateLog($"<b>{currentEncounter.encounterName}</b> is thinking...");
-        
         if (enemyGridUnit != null) enemyGridUnit.ResetAP();
-        
         StartCoroutine(EnemyTurnLoopRoutine());
     }
 
@@ -362,18 +426,19 @@ public class BattleManager : MonoBehaviour
         yield return new WaitForSeconds(combatData.enemyActionDelay);
 
         bool parsingTurn = true;
-        int safetyLoopGuard = 0; 
+        int safetyLoopGuard = 0;
 
         while (parsingTurn && currentState == BattleState.ENEMY_TURN && safetyLoopGuard < 10)
         {
             safetyLoopGuard++;
-            int playerAdapt = playerPermanentStats.GetTotalStatValue(StatType.Adaptability); 
+            int playerAdapt = playerPermanentStats.GetTotalStatValue(StatType.Adaptability);
+            Vector2Int oldEnemyPos = enemyGridUnit.gridPosition;
 
             EnemyActionResult action = enemyBrain.DecideAction(
                 currentEncounter, combatData,
                 enemyCurrentMH, enemyMaxMH,
                 playerPermanentStats.currentMH, playerPermanentStats.maxMH,
-                playerAdapt 
+                playerAdapt
             );
 
             if (action.isTurnEnd && string.IsNullOrEmpty(action.logMessage) && action.skillUsed == null && !action.hit)
@@ -382,8 +447,29 @@ public class BattleManager : MonoBehaviour
                 break;
             }
 
-            if (!string.IsNullOrEmpty(action.logMessage)) 
+            if (!string.IsNullOrEmpty(action.logMessage))
                 battleUI.UpdateLog(action.logMessage);
+
+            if (enemyGridUnit.gridPosition != oldEnemyPos)
+            {
+                Vector2Int walkDir = enemyGridUnit.gridPosition - oldEnemyPos;
+                Animator enemyAnim = enemyGridUnit.GetComponentInChildren<Animator>();
+                SpriteRenderer enemySr = enemyGridUnit.GetComponentInChildren<SpriteRenderer>();
+
+                if (enemyAnim != null)
+                {
+                    AnimationClip rivalWalk = (walkDir.y > 0 && Math.Abs(walkDir.y) >= Math.Abs(walkDir.x)) 
+                        ? rivalAnimations.walkUp 
+                        : rivalAnimations.walkGeneric;
+
+                    if (enemySr != null && Math.Abs(walkDir.x) > Math.Abs(walkDir.y))
+                    {
+                        enemySr.flipX = (walkDir.x > 0);
+                    }
+
+                    yield return StartCoroutine(PlayClipSequenceSafe(enemyAnim, rivalWalk, rivalAnimations.idle));
+                }
+            }
 
             if (action.hit)
             {
@@ -391,6 +477,10 @@ public class BattleManager : MonoBehaviour
 
                 if (actionType == SkillType.Attack)
                 {
+                    // --- FIX 1B: Assigned Rival's successful clip to its actual turn execution block ---
+                    Animator enemyAnim = enemyGridUnit.GetComponentInChildren<Animator>();
+                    if (enemyAnim != null) StartCoroutine(PlayClipSequenceSafe(enemyAnim, rivalAnimations.attackSuccessful, rivalAnimations.idle));
+
                     yield return StartCoroutine(AnimateAttackBump(enemyGridUnit.transform, playerGridUnit.transform));
                     CombatLogic.ProcessDamage(action.value, false, combatData, ref playerPermanentStats.currentMH, ref playerArmor, ref playerPermanentStats.currentShield);
                 }
@@ -405,6 +495,10 @@ public class BattleManager : MonoBehaviour
             }
             else if (action.skillUsed != null && action.skillUsed.type == SkillType.Attack)
             {
+                // --- FIX 1C: Assigned Rival's missed clip to its missed attack execution block ---
+                Animator enemyAnim = enemyGridUnit.GetComponentInChildren<Animator>();
+                if (enemyAnim != null) StartCoroutine(PlayClipSequenceSafe(enemyAnim, rivalAnimations.attackMissed, rivalAnimations.idle));
+
                 yield return StartCoroutine(AnimateAttackBump(enemyGridUnit.transform, playerGridUnit.transform));
             }
 
@@ -432,10 +526,10 @@ public class BattleManager : MonoBehaviour
     {
         Vector3 originalPosition = attacker.position;
         Vector3 direction = (target.position - attacker.position).normalized;
-        Vector3 peakBumpPosition = originalPosition + (direction * 0.5f); 
+        Vector3 peakBumpPosition = originalPosition + (direction * 0.5f);
 
         float elapsedTime = 0f;
-        float animationSpeed = 0.12f; 
+        float animationSpeed = 0.12f;
 
         while (elapsedTime < animationSpeed)
         {
@@ -445,7 +539,7 @@ public class BattleManager : MonoBehaviour
         }
         attacker.position = peakBumpPosition;
 
-        yield return new WaitForSeconds(0.04f); 
+        yield return new WaitForSeconds(0.04f);
 
         elapsedTime = 0f;
         while (elapsedTime < animationSpeed)
@@ -455,6 +549,27 @@ public class BattleManager : MonoBehaviour
             yield return null;
         }
         attacker.position = originalPosition;
+    }
+
+    private IEnumerator PlayClipSequenceSafe(Animator targetAnimator, AnimationClip targetClip, AnimationClip returnIdleClip)
+    {
+        if (targetAnimator == null || targetClip == null) yield break;
+
+        if (targetAnimator.HasState(0, Animator.StringToHash(targetClip.name)))
+        {
+            targetAnimator.Play(targetClip.name, -1, 0f); 
+        }
+        else
+        {
+            Debug.LogWarning($"[Animation Warning] State box named '{targetClip.name}' was not found inside your Animator window layout! Defaulting to fallback timer behavior.");
+        }
+
+        yield return new WaitForSeconds(targetClip.length);
+
+        if (returnIdleClip != null && targetAnimator.HasState(0, Animator.StringToHash(returnIdleClip.name)))
+        {
+            targetAnimator.Play(returnIdleClip.name, -1, 0f);
+        }
     }
 
     private void CheckWinCondition()
@@ -468,7 +583,7 @@ public class BattleManager : MonoBehaviour
                 if (playerGridUnit.currentAP > 0)
                 {
                     CalculateAndShowWalkableRange();
-                    battleUI.ToggleActionButtons(true);
+                    battleUI.ToggleActionButtons(true); 
                 }
                 else
                 {
@@ -484,7 +599,7 @@ public class BattleManager : MonoBehaviour
 
     private void EndBattle(BattleState result)
     {
-        StopAllCoroutines(); 
+        StopAllCoroutines();
         currentState = result;
         if (result == BattleState.WON)
         {
@@ -495,7 +610,7 @@ public class BattleManager : MonoBehaviour
         {
             battleUI.UpdateLog("You've reached your burnout limit...");
             if (gameOverUI != null) gameOverUI.SetActive(true);
-            if (mainCanvas != null) mainCanvas.SetActive(true); // Bring UI back for movement/gameover
+            if (mainCanvas != null) mainCanvas.SetActive(true); 
             MainUI.TogglePlayerMovement(true);
         }
     }
@@ -503,7 +618,18 @@ public class BattleManager : MonoBehaviour
     private void FinishBattle()
     {
         if (battleCanvas != null) battleCanvas.SetActive(false);
-        if (mainCanvas != null) mainCanvas.SetActive(true); // <--- RESTORE MAIN UI
+        if (mainCanvas != null) mainCanvas.SetActive(true); 
+
+        // --- NEW FIX: Reset the Animator to its default overworld state ---
+        if (playerGridUnit != null)
+        {
+            Animator playerAnim = playerGridUnit.GetComponentInChildren<Animator>();
+            if (playerAnim != null)
+            {
+                playerAnim.Rebind(); 
+                playerAnim.Update(0f); 
+            }
+        }
 
         if (DayManager.Instance != null)
         {
@@ -516,7 +642,18 @@ public class BattleManager : MonoBehaviour
     public void ForceEndBattle()
     {
         if (battleCanvas != null) battleCanvas.SetActive(false);
-        if (mainCanvas != null) mainCanvas.SetActive(true); // <--- RESTORE MAIN UI
+        if (mainCanvas != null) mainCanvas.SetActive(true); 
+        
+        if (playerGridUnit != null)
+        {
+            Animator playerAnim = playerGridUnit.GetComponentInChildren<Animator>();
+            if (playerAnim != null)
+            {
+                playerAnim.Rebind(); 
+                playerAnim.Update(0f); 
+            }
+        }
+
         currentState = BattleState.START;
     }
 
@@ -528,7 +665,7 @@ public class BattleManager : MonoBehaviour
         {
             Vector2Int playerSnappedTile = BattleGrid.Instance.WorldToGrid(playerGridUnit.transform.position);
             playerGridUnit.gridPosition = playerSnappedTile;
-            playerGridUnit.SnapToGridPosition(playerSnappedTile); 
+            playerGridUnit.SnapToGridPosition(playerSnappedTile);
             BattleGrid.Instance.RegisterUnitPosition(playerGridUnit);
         }
 
@@ -538,12 +675,12 @@ public class BattleManager : MonoBehaviour
 
             if (playerGridUnit != null && enemySnappedTile == playerGridUnit.gridPosition)
             {
-                enemySnappedTile += Vector2Int.right; 
+                enemySnappedTile += Vector2Int.right;
             }
 
             enemyGridUnit.gridPosition = enemySnappedTile;
             enemyGridUnit.SnapToGridPosition(enemySnappedTile);
             BattleGrid.Instance.RegisterUnitPosition(enemyGridUnit);
         }
-    }
+    }  
 }

@@ -7,7 +7,6 @@ public class SkillData : ScriptableObject
     public Sprite skillIcon;
     public SkillType type; 
     
-    
     [Header("Values")]
     public int baseDamageValue; 
     public int actionPointCost = 1;
@@ -20,6 +19,9 @@ public class SkillData : ScriptableObject
     public float secondaryWeight = 0.5f;
 
     [Header("CooldownTurn")]
-
     public int cooldownTurns = 0;
+
+    [Header("Visuals")]
+    [Tooltip("Check this if you want this specific skill to use the MC's Special Attack animation!")]
+    public bool useSpecialAnimation = false; // <-- This is the missing piece!
 }

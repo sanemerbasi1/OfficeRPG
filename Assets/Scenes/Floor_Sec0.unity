@@ -435,7 +435,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: -1556092918280230627, guid: 1cfd6679c33a6474e8e63590170c336d, type: 3}
+  m_Sprite: {fileID: -6498571585089893524, guid: c6790f4a934814210b3181a31ba43de8, type: 3}
   m_Type: 0
   m_PreserveAspect: 1
   m_FillCenter: 1
@@ -2132,7 +2132,7 @@ BoxCollider2D:
   m_UsedByEffector: 0
   m_CompositeOperation: 0
   m_CompositeOrder: 0
-  m_Offset: {x: -0.07117295, y: -0.3024851}
+  m_Offset: {x: 0.02743721, y: -0.16865683}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0, y: 0}
@@ -2142,7 +2142,7 @@ BoxCollider2D:
     drawMode: 0
     adaptiveTiling: 0
   m_AutoTiling: 0
-  m_Size: {x: 1.1423459, y: 0.5759289}
+  m_Size: {x: 0.24076843, y: 0.30827236}
   m_EdgeRadius: 0
 --- !u!1 &213699268
 GameObject:
@@ -9525,7 +9525,7 @@ MonoBehaviour:
   m_HandleRect: {fileID: 1242439194}
   m_Direction: 0
   m_Value: 0
-  m_Size: 1
+  m_Size: 0.99999976
   m_NumberOfSteps: 0
   m_OnValueChanged:
     m_PersistentCalls:
@@ -12986,8 +12986,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 282.90735, y: -2}
-  m_SizeDelta: {x: 561.8147, y: 0}
+  m_AnchoredPosition: {x: 282.86737, y: -2}
+  m_SizeDelta: {x: 561.73474, y: 0}
   m_Pivot: {x: 0.5, y: 1}
 --- !u!114 &1035162603
 MonoBehaviour:
@@ -13128,6 +13128,20 @@ MonoBehaviour:
   battleCanvas: {fileID: 160142075}
   gameOverUI: {fileID: 1768304634}
   mainCanvas: {fileID: 1825049887}
+  mcAnimations:
+    idle: {fileID: 7400000, guid: cf123692f6a794f06b76338df80b8783, type: 2}
+    walkUp: {fileID: 7400000, guid: d613820d4625c4d32ba6142a9a10af8e, type: 2}
+    walkGeneric: {fileID: 0}
+    attackUp: {fileID: 7400000, guid: e03d794adb52144c893459a585b6df80, type: 2}
+    attackDown: {fileID: 7400000, guid: 951b09fd144be4f1588a97e851639f1b, type: 2}
+    attackLeft: {fileID: 7400000, guid: 35a48497b992349c9b88fdbbdd90e31e, type: 2}
+    specialAttack: {fileID: 7400000, guid: 406c9619868794c219a01331d6d796f1, type: 2}
+  rivalAnimations:
+    idle: {fileID: 7400000, guid: 5d814498c99bc4caab6746cc56eba446, type: 2}
+    walkUp: {fileID: 7400000, guid: 993159dd07da14385ac0ec937524ff71, type: 2}
+    walkGeneric: {fileID: 7400000, guid: 9aa8e60b9ff164079b258f1c23c2f63c, type: 2}
+    attackSuccessful: {fileID: 7400000, guid: 67353e1b8d26d4dd597f24576568da2d, type: 2}
+    attackMissed: {fileID: 7400000, guid: 340df056ed94d483caf0ba8af903c1bd, type: 2}
   playerCurrentMH: 0
   playerMaxMH: 0
   playerArmor: 0
