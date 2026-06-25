@@ -15,6 +15,7 @@ MonoBehaviour:
   skillName: Shout
   skillIcon: {fileID: 293477771514721185, guid: 95b6030b417d646aabdb08b65e979102, type: 3}
   type: 0
+  skillSFX: {fileID: 8300000, guid: ca237528c71c54e3d9c331f7591fcc3e, type: 3}
   baseDamageValue: 2
   actionPointCost: 1
   attackRange: 2
@@ -23,3 +24,4 @@ MonoBehaviour:
   secondaryStat: 0
   secondaryWeight: 0
   cooldownTurns: 3
+  useSpecialAnimation: 0

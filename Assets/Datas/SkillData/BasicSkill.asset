@@ -15,6 +15,7 @@ MonoBehaviour:
   skillName: Oppose
   skillIcon: {fileID: 6423251990513538551, guid: 6aa760a6af98447d78efdec297999d6a, type: 3}
   type: 0
+  skillSFX: {fileID: 8300000, guid: ca237528c71c54e3d9c331f7591fcc3e, type: 3}
   baseDamageValue: 1
   actionPointCost: 1
   attackRange: 1
@@ -23,3 +24,4 @@ MonoBehaviour:
   secondaryStat: 0
   secondaryWeight: 0
   cooldownTurns: 0
+  useSpecialAnimation: 0

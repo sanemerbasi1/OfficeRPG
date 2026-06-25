@@ -15,9 +15,13 @@ MonoBehaviour:
   skillName: Resist
   skillIcon: {fileID: -6395016670076421558, guid: 8c6637819dcb944c0a0f14d114b9c669, type: 3}
   type: 1
+  skillSFX: {fileID: 8300000, guid: df7d4b7dc44c5468bbe7ba1d37355b06, type: 3}
   baseDamageValue: 0
+  actionPointCost: 1
+  attackRange: 1
   primaryStat: 0
   primaryWeight: 1
   secondaryStat: 0
   secondaryWeight: 0
   cooldownTurns: 3
+  useSpecialAnimation: 0

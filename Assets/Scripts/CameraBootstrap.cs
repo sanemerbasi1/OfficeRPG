@@ -41,7 +41,17 @@ public class GameBootstrap
             
             Object.DontDestroyOnLoad(eventSystem);
         }
-
+GameObject musicPrefab = Resources.Load<GameObject>("Prefabs/MusicController");
+    if (musicPrefab != null)
+    {
+        GameObject musicObj = Object.Instantiate(musicPrefab);
+        musicObj.name = "MusicController_System";
+        Object.DontDestroyOnLoad(musicObj);
+    }
+    else
+    {
+        Debug.LogWarning("<color=yellow>Bootstrap:</color> MusicController prefab not found in Resources/Prefabs/. No background music will play.");
+    }
         // --- PLAYER ---
         GameObject playerPrefab = Resources.Load<GameObject>("Prefabs/Player");
 

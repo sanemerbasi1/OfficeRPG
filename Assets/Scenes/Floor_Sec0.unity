@@ -435,7 +435,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: -1556092918280230627, guid: 1cfd6679c33a6474e8e63590170c336d, type: 3}
+  m_Sprite: {fileID: -6498571585089893524, guid: c6790f4a934814210b3181a31ba43de8, type: 3}
   m_Type: 0
   m_PreserveAspect: 1
   m_FillCenter: 1
@@ -1073,7 +1073,6 @@ GameObject:
   - component: {fileID: 141954062}
   - component: {fileID: 141954061}
   - component: {fileID: 141954060}
-  - component: {fileID: 141954063}
   m_Layer: 0
   m_Name: FirstNarrativeTrigger
   m_TagString: Untagged
@@ -1111,6 +1110,8 @@ MonoBehaviour:
     activeDuration: 0
     waitToFinish: 1
     choices: []
+    battleStartSound: {fileID: 0}
+    battleLoopMusic: {fileID: 0}
   - stepID: 
     jumpToAfterStep: 
     type: 0
@@ -1125,6 +1126,8 @@ MonoBehaviour:
     activeDuration: 0
     waitToFinish: 1
     choices: []
+    battleStartSound: {fileID: 0}
+    battleLoopMusic: {fileID: 0}
   - stepID: 
     jumpToAfterStep: 
     type: 0
@@ -1141,6 +1144,8 @@ MonoBehaviour:
     activeDuration: 0
     waitToFinish: 1
     choices: []
+    battleStartSound: {fileID: 0}
+    battleLoopMusic: {fileID: 0}
   - stepID: 
     jumpToAfterStep: 
     type: 0
@@ -1156,6 +1161,8 @@ MonoBehaviour:
     activeDuration: 0
     waitToFinish: 1
     choices: []
+    battleStartSound: {fileID: 0}
+    battleLoopMusic: {fileID: 0}
   - stepID: 
     jumpToAfterStep: 
     type: 0
@@ -1172,6 +1179,8 @@ MonoBehaviour:
     activeDuration: 0
     waitToFinish: 1
     choices: []
+    battleStartSound: {fileID: 0}
+    battleLoopMusic: {fileID: 0}
   - stepID: 
     jumpToAfterStep: 
     type: 0
@@ -1186,6 +1195,8 @@ MonoBehaviour:
     activeDuration: 0
     waitToFinish: 1
     choices: []
+    battleStartSound: {fileID: 0}
+    battleLoopMusic: {fileID: 0}
   - stepID: 
     jumpToAfterStep: 
     type: 0
@@ -1200,6 +1211,8 @@ MonoBehaviour:
     activeDuration: 0
     waitToFinish: 1
     choices: []
+    battleStartSound: {fileID: 0}
+    battleLoopMusic: {fileID: 0}
   - stepID: 
     jumpToAfterStep: 
     type: 8
@@ -1214,6 +1227,8 @@ MonoBehaviour:
     activeDuration: 0
     waitToFinish: 1
     choices: []
+    battleStartSound: {fileID: 0}
+    battleLoopMusic: {fileID: 0}
   ui: {fileID: 1655853756}
   battleManager: {fileID: 1036568086}
 --- !u!61 &141954061
@@ -1277,21 +1292,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 424749706}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &141954063
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 141954059}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3c33831679d944a52823057dc0e3bdb2, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::TriggerSound
-  triggerSound: {fileID: 8300000, guid: 80772090da30649498f203a1c776986c, type: 3}
-  volume: 1
-  playOnlyOnce: 0
 --- !u!1 &156145832
 GameObject:
   m_ObjectHideFlags: 0
@@ -2132,7 +2132,7 @@ BoxCollider2D:
   m_UsedByEffector: 0
   m_CompositeOperation: 0
   m_CompositeOrder: 0
-  m_Offset: {x: -0.07117295, y: -0.3024851}
+  m_Offset: {x: 0.02743721, y: -0.16865683}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0, y: 0}
@@ -2142,7 +2142,7 @@ BoxCollider2D:
     drawMode: 0
     adaptiveTiling: 0
   m_AutoTiling: 0
-  m_Size: {x: 1.1423459, y: 0.5759289}
+  m_Size: {x: 0.24076843, y: 0.30827236}
   m_EdgeRadius: 0
 --- !u!1 &213699268
 GameObject:
@@ -7829,6 +7829,8 @@ MonoBehaviour:
     activeDuration: 0
     waitToFinish: 1
     choices: []
+    battleStartSound: {fileID: 0}
+    battleLoopMusic: {fileID: 0}
   - stepID: 
     jumpToAfterStep: 
     type: 0
@@ -7843,6 +7845,8 @@ MonoBehaviour:
     activeDuration: 0
     waitToFinish: 1
     choices: []
+    battleStartSound: {fileID: 0}
+    battleLoopMusic: {fileID: 0}
   - stepID: 
     jumpToAfterStep: 
     type: 9
@@ -7873,6 +7877,8 @@ MonoBehaviour:
       statReward: 0
       rewardAmount: 0
       targetStepID: 
+    battleStartSound: {fileID: 0}
+    battleLoopMusic: {fileID: 0}
   - stepID: 
     jumpToAfterStep: 
     type: 0
@@ -7887,6 +7893,8 @@ MonoBehaviour:
     activeDuration: 0
     waitToFinish: 1
     choices: []
+    battleStartSound: {fileID: 0}
+    battleLoopMusic: {fileID: 0}
   - stepID: 
     jumpToAfterStep: 
     type: 0
@@ -7901,6 +7909,8 @@ MonoBehaviour:
     activeDuration: 0
     waitToFinish: 1
     choices: []
+    battleStartSound: {fileID: 0}
+    battleLoopMusic: {fileID: 0}
   - stepID: 
     jumpToAfterStep: 
     type: 0
@@ -7915,6 +7925,8 @@ MonoBehaviour:
     activeDuration: 0
     waitToFinish: 1
     choices: []
+    battleStartSound: {fileID: 0}
+    battleLoopMusic: {fileID: 0}
   - stepID: 
     jumpToAfterStep: 
     type: 0
@@ -7930,6 +7942,8 @@ MonoBehaviour:
     activeDuration: 0
     waitToFinish: 1
     choices: []
+    battleStartSound: {fileID: 0}
+    battleLoopMusic: {fileID: 0}
   - stepID: 
     jumpToAfterStep: 
     type: 0
@@ -7944,6 +7958,8 @@ MonoBehaviour:
     activeDuration: 0
     waitToFinish: 1
     choices: []
+    battleStartSound: {fileID: 0}
+    battleLoopMusic: {fileID: 0}
   - stepID: 
     jumpToAfterStep: 
     type: 9
@@ -7974,6 +7990,8 @@ MonoBehaviour:
       statReward: 0
       rewardAmount: 0
       targetStepID: 
+    battleStartSound: {fileID: 0}
+    battleLoopMusic: {fileID: 0}
   - stepID: 
     jumpToAfterStep: 
     type: 0
@@ -7988,6 +8006,8 @@ MonoBehaviour:
     activeDuration: 0
     waitToFinish: 1
     choices: []
+    battleStartSound: {fileID: 0}
+    battleLoopMusic: {fileID: 0}
   - stepID: 
     jumpToAfterStep: 
     type: 0
@@ -8002,6 +8022,8 @@ MonoBehaviour:
     activeDuration: 0
     waitToFinish: 1
     choices: []
+    battleStartSound: {fileID: 0}
+    battleLoopMusic: {fileID: 0}
   - stepID: 
     jumpToAfterStep: 
     type: 0
@@ -8016,6 +8038,8 @@ MonoBehaviour:
     activeDuration: 0
     waitToFinish: 1
     choices: []
+    battleStartSound: {fileID: 0}
+    battleLoopMusic: {fileID: 0}
   - stepID: 
     jumpToAfterStep: 
     type: 0
@@ -8031,6 +8055,8 @@ MonoBehaviour:
     activeDuration: 0
     waitToFinish: 1
     choices: []
+    battleStartSound: {fileID: 0}
+    battleLoopMusic: {fileID: 0}
   - stepID: 
     jumpToAfterStep: 
     type: 0
@@ -8046,6 +8072,8 @@ MonoBehaviour:
     activeDuration: 0
     waitToFinish: 1
     choices: []
+    battleStartSound: {fileID: 0}
+    battleLoopMusic: {fileID: 0}
   - stepID: 
     jumpToAfterStep: 
     type: 0
@@ -8060,6 +8088,8 @@ MonoBehaviour:
     activeDuration: 0
     waitToFinish: 1
     choices: []
+    battleStartSound: {fileID: 0}
+    battleLoopMusic: {fileID: 0}
   - stepID: 
     jumpToAfterStep: 
     type: 0
@@ -8075,6 +8105,8 @@ MonoBehaviour:
     activeDuration: 0
     waitToFinish: 1
     choices: []
+    battleStartSound: {fileID: 0}
+    battleLoopMusic: {fileID: 0}
   - stepID: 
     jumpToAfterStep: 
     type: 0
@@ -8089,6 +8121,8 @@ MonoBehaviour:
     activeDuration: 0
     waitToFinish: 1
     choices: []
+    battleStartSound: {fileID: 0}
+    battleLoopMusic: {fileID: 0}
   - stepID: 
     jumpToAfterStep: 
     type: 0
@@ -8103,6 +8137,8 @@ MonoBehaviour:
     activeDuration: 0
     waitToFinish: 1
     choices: []
+    battleStartSound: {fileID: 0}
+    battleLoopMusic: {fileID: 0}
   - stepID: 
     jumpToAfterStep: 
     type: 0
@@ -8117,6 +8153,8 @@ MonoBehaviour:
     activeDuration: 0
     waitToFinish: 1
     choices: []
+    battleStartSound: {fileID: 0}
+    battleLoopMusic: {fileID: 0}
   - stepID: 
     jumpToAfterStep: 
     type: 0
@@ -8131,6 +8169,8 @@ MonoBehaviour:
     activeDuration: 0
     waitToFinish: 1
     choices: []
+    battleStartSound: {fileID: 0}
+    battleLoopMusic: {fileID: 0}
   - stepID: 
     jumpToAfterStep: 
     type: 9
@@ -8161,6 +8201,8 @@ MonoBehaviour:
       statReward: 0
       rewardAmount: 0
       targetStepID: fourth
+    battleStartSound: {fileID: 0}
+    battleLoopMusic: {fileID: 0}
   - stepID: first
     jumpToAfterStep: 
     type: 0
@@ -8175,6 +8217,8 @@ MonoBehaviour:
     activeDuration: 0
     waitToFinish: 1
     choices: []
+    battleStartSound: {fileID: 0}
+    battleLoopMusic: {fileID: 0}
   - stepID: 
     jumpToAfterStep: 
     type: 0
@@ -8189,6 +8233,8 @@ MonoBehaviour:
     activeDuration: 0
     waitToFinish: 1
     choices: []
+    battleStartSound: {fileID: 0}
+    battleLoopMusic: {fileID: 0}
   - stepID: 
     jumpToAfterStep: mainstory
     type: 0
@@ -8203,6 +8249,8 @@ MonoBehaviour:
     activeDuration: 0
     waitToFinish: 1
     choices: []
+    battleStartSound: {fileID: 0}
+    battleLoopMusic: {fileID: 0}
   - stepID: second
     jumpToAfterStep: 
     type: 0
@@ -8217,6 +8265,8 @@ MonoBehaviour:
     activeDuration: 0
     waitToFinish: 1
     choices: []
+    battleStartSound: {fileID: 0}
+    battleLoopMusic: {fileID: 0}
   - stepID: 
     jumpToAfterStep: mainstory
     type: 0
@@ -8231,6 +8281,8 @@ MonoBehaviour:
     activeDuration: 0
     waitToFinish: 1
     choices: []
+    battleStartSound: {fileID: 0}
+    battleLoopMusic: {fileID: 0}
   - stepID: third
     jumpToAfterStep: 
     type: 0
@@ -8245,6 +8297,8 @@ MonoBehaviour:
     activeDuration: 0
     waitToFinish: 1
     choices: []
+    battleStartSound: {fileID: 0}
+    battleLoopMusic: {fileID: 0}
   - stepID: 
     jumpToAfterStep: mainstory
     type: 0
@@ -8259,6 +8313,8 @@ MonoBehaviour:
     activeDuration: 0
     waitToFinish: 1
     choices: []
+    battleStartSound: {fileID: 0}
+    battleLoopMusic: {fileID: 0}
   - stepID: fourth
     jumpToAfterStep: mainstory
     type: 0
@@ -8273,6 +8329,8 @@ MonoBehaviour:
     activeDuration: 0
     waitToFinish: 1
     choices: []
+    battleStartSound: {fileID: 0}
+    battleLoopMusic: {fileID: 0}
   - stepID: mainstory
     jumpToAfterStep: 
     type: 0
@@ -8288,6 +8346,8 @@ MonoBehaviour:
     activeDuration: 0
     waitToFinish: 1
     choices: []
+    battleStartSound: {fileID: 0}
+    battleLoopMusic: {fileID: 0}
   - stepID: 
     jumpToAfterStep: 
     type: 0
@@ -8302,6 +8362,8 @@ MonoBehaviour:
     activeDuration: 0
     waitToFinish: 1
     choices: []
+    battleStartSound: {fileID: 0}
+    battleLoopMusic: {fileID: 0}
   - stepID: 
     jumpToAfterStep: 
     type: 0
@@ -8316,6 +8378,8 @@ MonoBehaviour:
     activeDuration: 0
     waitToFinish: 1
     choices: []
+    battleStartSound: {fileID: 0}
+    battleLoopMusic: {fileID: 0}
   - stepID: 
     jumpToAfterStep: 
     type: 0
@@ -8331,6 +8395,8 @@ MonoBehaviour:
     activeDuration: 0
     waitToFinish: 1
     choices: []
+    battleStartSound: {fileID: 0}
+    battleLoopMusic: {fileID: 0}
   - stepID: 
     jumpToAfterStep: 
     type: 0
@@ -8345,6 +8411,8 @@ MonoBehaviour:
     activeDuration: 0
     waitToFinish: 1
     choices: []
+    battleStartSound: {fileID: 0}
+    battleLoopMusic: {fileID: 0}
   - stepID: 
     jumpToAfterStep: 
     type: 9
@@ -8375,6 +8443,8 @@ MonoBehaviour:
       statReward: 0
       rewardAmount: 0
       targetStepID: four
+    battleStartSound: {fileID: 0}
+    battleLoopMusic: {fileID: 0}
   - stepID: one
     jumpToAfterStep: 
     type: 0
@@ -8389,6 +8459,8 @@ MonoBehaviour:
     activeDuration: 0
     waitToFinish: 1
     choices: []
+    battleStartSound: {fileID: 0}
+    battleLoopMusic: {fileID: 0}
   - stepID: 
     jumpToAfterStep: mainstorytwo
     type: 0
@@ -8403,6 +8475,8 @@ MonoBehaviour:
     activeDuration: 0
     waitToFinish: 1
     choices: []
+    battleStartSound: {fileID: 0}
+    battleLoopMusic: {fileID: 0}
   - stepID: two
     jumpToAfterStep: 
     type: 0
@@ -8417,6 +8491,8 @@ MonoBehaviour:
     activeDuration: 0
     waitToFinish: 1
     choices: []
+    battleStartSound: {fileID: 0}
+    battleLoopMusic: {fileID: 0}
   - stepID: 
     jumpToAfterStep: mainstorytwo
     type: 0
@@ -8431,6 +8507,8 @@ MonoBehaviour:
     activeDuration: 0
     waitToFinish: 1
     choices: []
+    battleStartSound: {fileID: 0}
+    battleLoopMusic: {fileID: 0}
   - stepID: three
     jumpToAfterStep: 
     type: 0
@@ -8445,6 +8523,8 @@ MonoBehaviour:
     activeDuration: 0
     waitToFinish: 1
     choices: []
+    battleStartSound: {fileID: 0}
+    battleLoopMusic: {fileID: 0}
   - stepID: 
     jumpToAfterStep: 
     type: 0
@@ -8459,6 +8539,8 @@ MonoBehaviour:
     activeDuration: 0
     waitToFinish: 1
     choices: []
+    battleStartSound: {fileID: 0}
+    battleLoopMusic: {fileID: 0}
   - stepID: 
     jumpToAfterStep: mainstorytwo
     type: 0
@@ -8473,6 +8555,8 @@ MonoBehaviour:
     activeDuration: 0
     waitToFinish: 1
     choices: []
+    battleStartSound: {fileID: 0}
+    battleLoopMusic: {fileID: 0}
   - stepID: four
     jumpToAfterStep: mainstorytwo
     type: 0
@@ -8487,6 +8571,8 @@ MonoBehaviour:
     activeDuration: 0
     waitToFinish: 1
     choices: []
+    battleStartSound: {fileID: 0}
+    battleLoopMusic: {fileID: 0}
   - stepID: mainstorytwo
     jumpToAfterStep: 
     type: 0
@@ -8501,6 +8587,8 @@ MonoBehaviour:
     activeDuration: 0
     waitToFinish: 1
     choices: []
+    battleStartSound: {fileID: 0}
+    battleLoopMusic: {fileID: 0}
   - stepID: 
     jumpToAfterStep: 
     type: 0
@@ -8515,6 +8603,8 @@ MonoBehaviour:
     activeDuration: 0
     waitToFinish: 1
     choices: []
+    battleStartSound: {fileID: 0}
+    battleLoopMusic: {fileID: 0}
   - stepID: 
     jumpToAfterStep: 
     type: 7
@@ -8529,6 +8619,8 @@ MonoBehaviour:
     activeDuration: 0
     waitToFinish: 1
     choices: []
+    battleStartSound: {fileID: 8300000, guid: 20583a82be7a24c2c9d45a0c58e6c856, type: 3}
+    battleLoopMusic: {fileID: 8300000, guid: 00bc2db61a22d45479b347a12297dcb3, type: 3}
   - stepID: 
     jumpToAfterStep: 
     type: 0
@@ -8543,6 +8635,8 @@ MonoBehaviour:
     activeDuration: 0
     waitToFinish: 1
     choices: []
+    battleStartSound: {fileID: 0}
+    battleLoopMusic: {fileID: 0}
   - stepID: 
     jumpToAfterStep: 
     type: 0
@@ -8557,6 +8651,8 @@ MonoBehaviour:
     activeDuration: 0
     waitToFinish: 1
     choices: []
+    battleStartSound: {fileID: 0}
+    battleLoopMusic: {fileID: 0}
   - stepID: 
     jumpToAfterStep: 
     type: 0
@@ -8571,6 +8667,8 @@ MonoBehaviour:
     activeDuration: 0
     waitToFinish: 1
     choices: []
+    battleStartSound: {fileID: 0}
+    battleLoopMusic: {fileID: 0}
   - stepID: 
     jumpToAfterStep: 
     type: 0
@@ -8585,6 +8683,8 @@ MonoBehaviour:
     activeDuration: 0
     waitToFinish: 1
     choices: []
+    battleStartSound: {fileID: 0}
+    battleLoopMusic: {fileID: 0}
   - stepID: 
     jumpToAfterStep: 
     type: 0
@@ -8599,6 +8699,8 @@ MonoBehaviour:
     activeDuration: 0
     waitToFinish: 1
     choices: []
+    battleStartSound: {fileID: 0}
+    battleLoopMusic: {fileID: 0}
   - stepID: 
     jumpToAfterStep: 
     type: 0
@@ -8613,6 +8715,8 @@ MonoBehaviour:
     activeDuration: 0
     waitToFinish: 1
     choices: []
+    battleStartSound: {fileID: 0}
+    battleLoopMusic: {fileID: 0}
   - stepID: 
     jumpToAfterStep: 
     type: 8
@@ -8627,6 +8731,8 @@ MonoBehaviour:
     activeDuration: 0
     waitToFinish: 1
     choices: []
+    battleStartSound: {fileID: 0}
+    battleLoopMusic: {fileID: 0}
   ui: {fileID: 1655853756}
   battleManager: {fileID: 1036568086}
 --- !u!224 &330239000
@@ -9525,7 +9631,7 @@ MonoBehaviour:
   m_HandleRect: {fileID: 1242439194}
   m_Direction: 0
   m_Value: 0
-  m_Size: 1
+  m_Size: 0.99999976
   m_NumberOfSteps: 0
   m_OnValueChanged:
     m_PersistentCalls:
@@ -12986,8 +13092,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 282.90735, y: -2}
-  m_SizeDelta: {x: 561.8147, y: 0}
+  m_AnchoredPosition: {x: 282.86737, y: -2}
+  m_SizeDelta: {x: 561.73474, y: 0}
   m_Pivot: {x: 0.5, y: 1}
 --- !u!114 &1035162603
 MonoBehaviour:
@@ -13128,6 +13234,20 @@ MonoBehaviour:
   battleCanvas: {fileID: 160142075}
   gameOverUI: {fileID: 1768304634}
   mainCanvas: {fileID: 1825049887}
+  mcAnimations:
+    idle: {fileID: 7400000, guid: cf123692f6a794f06b76338df80b8783, type: 2}
+    walkUp: {fileID: 7400000, guid: d613820d4625c4d32ba6142a9a10af8e, type: 2}
+    walkGeneric: {fileID: 0}
+    attackUp: {fileID: 7400000, guid: e03d794adb52144c893459a585b6df80, type: 2}
+    attackDown: {fileID: 7400000, guid: 951b09fd144be4f1588a97e851639f1b, type: 2}
+    attackLeft: {fileID: 7400000, guid: 35a48497b992349c9b88fdbbdd90e31e, type: 2}
+    specialAttack: {fileID: 7400000, guid: 406c9619868794c219a01331d6d796f1, type: 2}
+  rivalAnimations:
+    idle: {fileID: 7400000, guid: 5d814498c99bc4caab6746cc56eba446, type: 2}
+    walkUp: {fileID: 7400000, guid: 993159dd07da14385ac0ec937524ff71, type: 2}
+    walkGeneric: {fileID: 7400000, guid: 9aa8e60b9ff164079b258f1c23c2f63c, type: 2}
+    attackSuccessful: {fileID: 7400000, guid: 67353e1b8d26d4dd597f24576568da2d, type: 2}
+    attackMissed: {fileID: 7400000, guid: 340df056ed94d483caf0ba8af903c1bd, type: 2}
   playerCurrentMH: 0
   playerMaxMH: 0
   playerArmor: 0
@@ -13211,6 +13331,8 @@ MonoBehaviour:
     activeDuration: 0
     waitToFinish: 1
     choices: []
+    battleStartSound: {fileID: 0}
+    battleLoopMusic: {fileID: 0}
   - stepID: 
     jumpToAfterStep: 
     type: 0
@@ -13225,6 +13347,8 @@ MonoBehaviour:
     activeDuration: 0
     waitToFinish: 1
     choices: []
+    battleStartSound: {fileID: 0}
+    battleLoopMusic: {fileID: 0}
   - stepID: 
     jumpToAfterStep: 
     type: 0
@@ -13240,6 +13364,8 @@ MonoBehaviour:
     activeDuration: 0
     waitToFinish: 1
     choices: []
+    battleStartSound: {fileID: 0}
+    battleLoopMusic: {fileID: 0}
   - stepID: 
     jumpToAfterStep: 
     type: 0
@@ -13254,6 +13380,8 @@ MonoBehaviour:
     activeDuration: 0
     waitToFinish: 1
     choices: []
+    battleStartSound: {fileID: 0}
+    battleLoopMusic: {fileID: 0}
   - stepID: 
     jumpToAfterStep: 
     type: 0
@@ -13268,6 +13396,8 @@ MonoBehaviour:
     activeDuration: 0
     waitToFinish: 1
     choices: []
+    battleStartSound: {fileID: 0}
+    battleLoopMusic: {fileID: 0}
   - stepID: 
     jumpToAfterStep: 
     type: 0
@@ -13282,6 +13412,8 @@ MonoBehaviour:
     activeDuration: 0
     waitToFinish: 1
     choices: []
+    battleStartSound: {fileID: 0}
+    battleLoopMusic: {fileID: 0}
   - stepID: 
     jumpToAfterStep: 
     type: 0
@@ -13297,6 +13429,8 @@ MonoBehaviour:
     activeDuration: 0
     waitToFinish: 1
     choices: []
+    battleStartSound: {fileID: 0}
+    battleLoopMusic: {fileID: 0}
   - stepID: 
     jumpToAfterStep: 
     type: 9
@@ -13327,6 +13461,8 @@ MonoBehaviour:
       statReward: 0
       rewardAmount: 0
       targetStepID: fourth
+    battleStartSound: {fileID: 0}
+    battleLoopMusic: {fileID: 0}
   - stepID: first
     jumpToAfterStep: 
     type: 0
@@ -13341,6 +13477,8 @@ MonoBehaviour:
     activeDuration: 0
     waitToFinish: 1
     choices: []
+    battleStartSound: {fileID: 0}
+    battleLoopMusic: {fileID: 0}
   - stepID: 
     jumpToAfterStep: mainstory
     type: 0
@@ -13355,6 +13493,8 @@ MonoBehaviour:
     activeDuration: 0
     waitToFinish: 1
     choices: []
+    battleStartSound: {fileID: 0}
+    battleLoopMusic: {fileID: 0}
   - stepID: second
     jumpToAfterStep: 
     type: 0
@@ -13369,6 +13509,8 @@ MonoBehaviour:
     activeDuration: 0
     waitToFinish: 1
     choices: []
+    battleStartSound: {fileID: 0}
+    battleLoopMusic: {fileID: 0}
   - stepID: 
     jumpToAfterStep: mainstory
     type: 0
@@ -13383,6 +13525,8 @@ MonoBehaviour:
     activeDuration: 0
     waitToFinish: 1
     choices: []
+    battleStartSound: {fileID: 0}
+    battleLoopMusic: {fileID: 0}
   - stepID: third
     jumpToAfterStep: 
     type: 0
@@ -13397,6 +13541,8 @@ MonoBehaviour:
     activeDuration: 0
     waitToFinish: 1
     choices: []
+    battleStartSound: {fileID: 0}
+    battleLoopMusic: {fileID: 0}
   - stepID: 
     jumpToAfterStep: mainstory
     type: 0
@@ -13411,6 +13557,8 @@ MonoBehaviour:
     activeDuration: 0
     waitToFinish: 1
     choices: []
+    battleStartSound: {fileID: 0}
+    battleLoopMusic: {fileID: 0}
   - stepID: fourth
     jumpToAfterStep: 
     type: 0
@@ -13425,6 +13573,8 @@ MonoBehaviour:
     activeDuration: 0
     waitToFinish: 1
     choices: []
+    battleStartSound: {fileID: 0}
+    battleLoopMusic: {fileID: 0}
   - stepID: 
     jumpToAfterStep: mainstory
     type: 0
@@ -13440,6 +13590,8 @@ MonoBehaviour:
     activeDuration: 0
     waitToFinish: 1
     choices: []
+    battleStartSound: {fileID: 0}
+    battleLoopMusic: {fileID: 0}
   - stepID: mainstory
     jumpToAfterStep: 
     type: 0
@@ -13454,6 +13606,8 @@ MonoBehaviour:
     activeDuration: 0
     waitToFinish: 1
     choices: []
+    battleStartSound: {fileID: 0}
+    battleLoopMusic: {fileID: 0}
   - stepID: 
     jumpToAfterStep: 
     type: 10
@@ -13469,6 +13623,8 @@ MonoBehaviour:
     activeDuration: 2
     waitToFinish: 1
     choices: []
+    battleStartSound: {fileID: 0}
+    battleLoopMusic: {fileID: 0}
   - stepID: 
     jumpToAfterStep: 
     type: 10
@@ -13485,6 +13641,8 @@ MonoBehaviour:
     activeDuration: 0
     waitToFinish: 0
     choices: []
+    battleStartSound: {fileID: 0}
+    battleLoopMusic: {fileID: 0}
   - stepID: 
     jumpToAfterStep: 
     type: 0
@@ -13501,6 +13659,8 @@ MonoBehaviour:
     activeDuration: 0
     waitToFinish: 1
     choices: []
+    battleStartSound: {fileID: 0}
+    battleLoopMusic: {fileID: 0}
   - stepID: 
     jumpToAfterStep: 
     type: 0
@@ -13518,6 +13678,8 @@ MonoBehaviour:
     activeDuration: 0
     waitToFinish: 1
     choices: []
+    battleStartSound: {fileID: 0}
+    battleLoopMusic: {fileID: 0}
   - stepID: 
     jumpToAfterStep: 
     type: 8
@@ -13534,6 +13696,8 @@ MonoBehaviour:
     activeDuration: 0
     waitToFinish: 1
     choices: []
+    battleStartSound: {fileID: 0}
+    battleLoopMusic: {fileID: 0}
   ui: {fileID: 1655853756}
   battleManager: {fileID: 1036568086}
 --- !u!61 &1066338866
@@ -13706,6 +13870,8 @@ MonoBehaviour:
     activeDuration: 0
     waitToFinish: 1
     choices: []
+    battleStartSound: {fileID: 0}
+    battleLoopMusic: {fileID: 0}
   ui: {fileID: 1655853756}
   battleManager: {fileID: 1036568086}
 --- !u!222 &1082404614
@@ -14382,6 +14548,8 @@ MonoBehaviour:
     activeDuration: 0
     waitToFinish: 1
     choices: []
+    battleStartSound: {fileID: 0}
+    battleLoopMusic: {fileID: 0}
   - stepID: 
     jumpToAfterStep: 
     type: 7
@@ -14396,6 +14564,8 @@ MonoBehaviour:
     activeDuration: 0
     waitToFinish: 1
     choices: []
+    battleStartSound: {fileID: 0}
+    battleLoopMusic: {fileID: 0}
   - stepID: 
     jumpToAfterStep: 
     type: 0
@@ -14410,6 +14580,8 @@ MonoBehaviour:
     activeDuration: 0
     waitToFinish: 1
     choices: []
+    battleStartSound: {fileID: 0}
+    battleLoopMusic: {fileID: 0}
   ui: {fileID: 1655853756}
   battleManager: {fileID: 1036568086}
 --- !u!1 &1228551183
@@ -14534,6 +14706,8 @@ MonoBehaviour:
     activeDuration: 0
     waitToFinish: 1
     choices: []
+    battleStartSound: {fileID: 0}
+    battleLoopMusic: {fileID: 0}
   - stepID: 
     jumpToAfterStep: 
     type: 7
@@ -14548,6 +14722,8 @@ MonoBehaviour:
     activeDuration: 0
     waitToFinish: 1
     choices: []
+    battleStartSound: {fileID: 0}
+    battleLoopMusic: {fileID: 0}
   - stepID: 
     jumpToAfterStep: 
     type: 0
@@ -14562,6 +14738,8 @@ MonoBehaviour:
     activeDuration: 0
     waitToFinish: 1
     choices: []
+    battleStartSound: {fileID: 0}
+    battleLoopMusic: {fileID: 0}
   ui: {fileID: 1655853756}
   battleManager: {fileID: 1036568086}
 --- !u!1 &1242439193
@@ -16549,6 +16727,8 @@ MonoBehaviour:
     activeDuration: 0
     waitToFinish: 0
     choices: []
+    battleStartSound: {fileID: 0}
+    battleLoopMusic: {fileID: 0}
   - stepID: 
     jumpToAfterStep: 
     type: 0
@@ -16563,6 +16743,8 @@ MonoBehaviour:
     activeDuration: 0
     waitToFinish: 0
     choices: []
+    battleStartSound: {fileID: 0}
+    battleLoopMusic: {fileID: 0}
   - stepID: 
     jumpToAfterStep: 
     type: 0
@@ -16577,6 +16759,8 @@ MonoBehaviour:
     activeDuration: 0
     waitToFinish: 0
     choices: []
+    battleStartSound: {fileID: 0}
+    battleLoopMusic: {fileID: 0}
   - stepID: 
     jumpToAfterStep: 
     type: 0
@@ -16591,6 +16775,8 @@ MonoBehaviour:
     activeDuration: 0
     waitToFinish: 0
     choices: []
+    battleStartSound: {fileID: 0}
+    battleLoopMusic: {fileID: 0}
   - stepID: 
     jumpToAfterStep: 
     type: 9
@@ -16621,6 +16807,8 @@ MonoBehaviour:
       statReward: 0
       rewardAmount: 0
       targetStepID: unique
+    battleStartSound: {fileID: 0}
+    battleLoopMusic: {fileID: 0}
   - stepID: normal
     jumpToAfterStep: 
     type: 0
@@ -16635,6 +16823,8 @@ MonoBehaviour:
     activeDuration: 0
     waitToFinish: 0
     choices: []
+    battleStartSound: {fileID: 0}
+    battleLoopMusic: {fileID: 0}
   - stepID: 
     jumpToAfterStep: mainstory
     type: 0
@@ -16649,6 +16839,8 @@ MonoBehaviour:
     activeDuration: 0
     waitToFinish: 0
     choices: []
+    battleStartSound: {fileID: 0}
+    battleLoopMusic: {fileID: 0}
   - stepID: unique
     jumpToAfterStep: 
     type: 0
@@ -16663,6 +16855,8 @@ MonoBehaviour:
     activeDuration: 0
     waitToFinish: 0
     choices: []
+    battleStartSound: {fileID: 0}
+    battleLoopMusic: {fileID: 0}
   - stepID: 
     jumpToAfterStep: 
     type: 0
@@ -16677,6 +16871,8 @@ MonoBehaviour:
     activeDuration: 0
     waitToFinish: 0
     choices: []
+    battleStartSound: {fileID: 0}
+    battleLoopMusic: {fileID: 0}
   - stepID: 
     jumpToAfterStep: 
     type: 0
@@ -16691,6 +16887,8 @@ MonoBehaviour:
     activeDuration: 0
     waitToFinish: 0
     choices: []
+    battleStartSound: {fileID: 0}
+    battleLoopMusic: {fileID: 0}
   - stepID: 
     jumpToAfterStep: mainstory
     type: 0
@@ -16705,6 +16903,8 @@ MonoBehaviour:
     activeDuration: 0
     waitToFinish: 0
     choices: []
+    battleStartSound: {fileID: 0}
+    battleLoopMusic: {fileID: 0}
   - stepID: mainstory
     jumpToAfterStep: 
     type: 0
@@ -16719,6 +16919,8 @@ MonoBehaviour:
     activeDuration: 0
     waitToFinish: 0
     choices: []
+    battleStartSound: {fileID: 0}
+    battleLoopMusic: {fileID: 0}
   - stepID: 
     jumpToAfterStep: 
     type: 0
@@ -16733,6 +16935,8 @@ MonoBehaviour:
     activeDuration: 0
     waitToFinish: 0
     choices: []
+    battleStartSound: {fileID: 0}
+    battleLoopMusic: {fileID: 0}
   - stepID: 
     jumpToAfterStep: 
     type: 0
@@ -16747,6 +16951,8 @@ MonoBehaviour:
     activeDuration: 0
     waitToFinish: 0
     choices: []
+    battleStartSound: {fileID: 0}
+    battleLoopMusic: {fileID: 0}
   - stepID: 
     jumpToAfterStep: 
     type: 0
@@ -16761,6 +16967,8 @@ MonoBehaviour:
     activeDuration: 0
     waitToFinish: 0
     choices: []
+    battleStartSound: {fileID: 0}
+    battleLoopMusic: {fileID: 0}
   - stepID: 
     jumpToAfterStep: 
     type: 9
@@ -16791,6 +16999,8 @@ MonoBehaviour:
       statReward: 0
       rewardAmount: 0
       targetStepID: fourth
+    battleStartSound: {fileID: 0}
+    battleLoopMusic: {fileID: 0}
   - stepID: first
     jumpToAfterStep: mainstorytwo
     type: 0
@@ -16805,6 +17015,8 @@ MonoBehaviour:
     activeDuration: 0
     waitToFinish: 0
     choices: []
+    battleStartSound: {fileID: 0}
+    battleLoopMusic: {fileID: 0}
   - stepID: second
     jumpToAfterStep: 
     type: 0
@@ -16819,6 +17031,8 @@ MonoBehaviour:
     activeDuration: 0
     waitToFinish: 0
     choices: []
+    battleStartSound: {fileID: 0}
+    battleLoopMusic: {fileID: 0}
   - stepID: 
     jumpToAfterStep: mainstorytwo
     type: 0
@@ -16833,6 +17047,8 @@ MonoBehaviour:
     activeDuration: 0
     waitToFinish: 0
     choices: []
+    battleStartSound: {fileID: 0}
+    battleLoopMusic: {fileID: 0}
   - stepID: third
     jumpToAfterStep: 
     type: 0
@@ -16847,6 +17063,8 @@ MonoBehaviour:
     activeDuration: 0
     waitToFinish: 0
     choices: []
+    battleStartSound: {fileID: 0}
+    battleLoopMusic: {fileID: 0}
   - stepID: 
     jumpToAfterStep: 
     type: 0
@@ -16861,6 +17079,8 @@ MonoBehaviour:
     activeDuration: 0
     waitToFinish: 0
     choices: []
+    battleStartSound: {fileID: 0}
+    battleLoopMusic: {fileID: 0}
   - stepID: 
     jumpToAfterStep: mainstorytwo
     type: 0
@@ -16875,6 +17095,8 @@ MonoBehaviour:
     activeDuration: 0
     waitToFinish: 0
     choices: []
+    battleStartSound: {fileID: 0}
+    battleLoopMusic: {fileID: 0}
   - stepID: fourth
     jumpToAfterStep: 
     type: 0
@@ -16889,6 +17111,8 @@ MonoBehaviour:
     activeDuration: 0
     waitToFinish: 0
     choices: []
+    battleStartSound: {fileID: 0}
+    battleLoopMusic: {fileID: 0}
   - stepID: 
     jumpToAfterStep: mainstorytwo
     type: 0
@@ -16903,6 +17127,8 @@ MonoBehaviour:
     activeDuration: 0
     waitToFinish: 0
     choices: []
+    battleStartSound: {fileID: 0}
+    battleLoopMusic: {fileID: 0}
   - stepID: mainstorytwo
     jumpToAfterStep: 
     type: 0
@@ -16917,6 +17143,8 @@ MonoBehaviour:
     activeDuration: 0
     waitToFinish: 0
     choices: []
+    battleStartSound: {fileID: 0}
+    battleLoopMusic: {fileID: 0}
   - stepID: 
     jumpToAfterStep: 
     type: 0
@@ -16931,6 +17159,8 @@ MonoBehaviour:
     activeDuration: 0
     waitToFinish: 0
     choices: []
+    battleStartSound: {fileID: 0}
+    battleLoopMusic: {fileID: 0}
   - stepID: 
     jumpToAfterStep: 
     type: 0
@@ -16945,6 +17175,8 @@ MonoBehaviour:
     activeDuration: 0
     waitToFinish: 0
     choices: []
+    battleStartSound: {fileID: 0}
+    battleLoopMusic: {fileID: 0}
   - stepID: 
     jumpToAfterStep: 
     type: 0
@@ -16959,6 +17191,8 @@ MonoBehaviour:
     activeDuration: 0
     waitToFinish: 0
     choices: []
+    battleStartSound: {fileID: 0}
+    battleLoopMusic: {fileID: 0}
   - stepID: 
     jumpToAfterStep: 
     type: 9
@@ -16989,6 +17223,8 @@ MonoBehaviour:
       statReward: 0
       rewardAmount: 0
       targetStepID: four
+    battleStartSound: {fileID: 0}
+    battleLoopMusic: {fileID: 0}
   - stepID: one
     jumpToAfterStep: 
     type: 0
@@ -17003,6 +17239,8 @@ MonoBehaviour:
     activeDuration: 0
     waitToFinish: 0
     choices: []
+    battleStartSound: {fileID: 0}
+    battleLoopMusic: {fileID: 0}
   - stepID: 
     jumpToAfterStep: 
     type: 0
@@ -17018,6 +17256,8 @@ MonoBehaviour:
     activeDuration: 0
     waitToFinish: 0
     choices: []
+    battleStartSound: {fileID: 0}
+    battleLoopMusic: {fileID: 0}
   - stepID: 
     jumpToAfterStep: mainstorythree
     type: 0
@@ -17032,6 +17272,8 @@ MonoBehaviour:
     activeDuration: 0
     waitToFinish: 0
     choices: []
+    battleStartSound: {fileID: 0}
+    battleLoopMusic: {fileID: 0}
   - stepID: two
     jumpToAfterStep: 
     type: 0
@@ -17046,6 +17288,8 @@ MonoBehaviour:
     activeDuration: 0
     waitToFinish: 0
     choices: []
+    battleStartSound: {fileID: 0}
+    battleLoopMusic: {fileID: 0}
   - stepID: 
     jumpToAfterStep: mainstorythree
     type: 0
@@ -17060,6 +17304,8 @@ MonoBehaviour:
     activeDuration: 0
     waitToFinish: 0
     choices: []
+    battleStartSound: {fileID: 0}
+    battleLoopMusic: {fileID: 0}
   - stepID: three
     jumpToAfterStep: 
     type: 0
@@ -17074,6 +17320,8 @@ MonoBehaviour:
     activeDuration: 0
     waitToFinish: 0
     choices: []
+    battleStartSound: {fileID: 0}
+    battleLoopMusic: {fileID: 0}
   - stepID: 
     jumpToAfterStep: 
     type: 0
@@ -17088,6 +17336,8 @@ MonoBehaviour:
     activeDuration: 0
     waitToFinish: 0
     choices: []
+    battleStartSound: {fileID: 0}
+    battleLoopMusic: {fileID: 0}
   - stepID: 
     jumpToAfterStep: mainstorythree
     type: 0
@@ -17102,6 +17352,8 @@ MonoBehaviour:
     activeDuration: 0
     waitToFinish: 0
     choices: []
+    battleStartSound: {fileID: 0}
+    battleLoopMusic: {fileID: 0}
   - stepID: four
     jumpToAfterStep: 
     type: 0
@@ -17116,6 +17368,8 @@ MonoBehaviour:
     activeDuration: 0
     waitToFinish: 0
     choices: []
+    battleStartSound: {fileID: 0}
+    battleLoopMusic: {fileID: 0}
   - stepID: 
     jumpToAfterStep: mainstorythree
     type: 0
@@ -17131,6 +17385,8 @@ MonoBehaviour:
     activeDuration: 0
     waitToFinish: 0
     choices: []
+    battleStartSound: {fileID: 0}
+    battleLoopMusic: {fileID: 0}
   - stepID: mainstorythree
     jumpToAfterStep: 
     type: 0
@@ -17145,6 +17401,8 @@ MonoBehaviour:
     activeDuration: 0
     waitToFinish: 0
     choices: []
+    battleStartSound: {fileID: 0}
+    battleLoopMusic: {fileID: 0}
   - stepID: 
     jumpToAfterStep: 
     type: 0
@@ -17160,6 +17418,8 @@ MonoBehaviour:
     activeDuration: 0
     waitToFinish: 0
     choices: []
+    battleStartSound: {fileID: 0}
+    battleLoopMusic: {fileID: 0}
   - stepID: 
     jumpToAfterStep: 
     type: 0
@@ -17174,6 +17434,8 @@ MonoBehaviour:
     activeDuration: 0
     waitToFinish: 0
     choices: []
+    battleStartSound: {fileID: 0}
+    battleLoopMusic: {fileID: 0}
   - stepID: 
     jumpToAfterStep: 
     type: 0
@@ -17188,6 +17450,8 @@ MonoBehaviour:
     activeDuration: 0
     waitToFinish: 0
     choices: []
+    battleStartSound: {fileID: 0}
+    battleLoopMusic: {fileID: 0}
   - stepID: 
     jumpToAfterStep: 
     type: 0
@@ -17202,6 +17466,8 @@ MonoBehaviour:
     activeDuration: 0
     waitToFinish: 0
     choices: []
+    battleStartSound: {fileID: 0}
+    battleLoopMusic: {fileID: 0}
   - stepID: 
     jumpToAfterStep: 
     type: 0
@@ -17216,6 +17482,8 @@ MonoBehaviour:
     activeDuration: 0
     waitToFinish: 0
     choices: []
+    battleStartSound: {fileID: 0}
+    battleLoopMusic: {fileID: 0}
   - stepID: 
     jumpToAfterStep: 
     type: 9
@@ -17246,6 +17514,8 @@ MonoBehaviour:
       statReward: 0
       rewardAmount: 0
       targetStepID: optionfour
+    battleStartSound: {fileID: 0}
+    battleLoopMusic: {fileID: 0}
   - stepID: optionone
     jumpToAfterStep: 
     type: 0
@@ -17260,6 +17530,8 @@ MonoBehaviour:
     activeDuration: 0
     waitToFinish: 0
     choices: []
+    battleStartSound: {fileID: 0}
+    battleLoopMusic: {fileID: 0}
   - stepID: 
     jumpToAfterStep: mainstoryfour
     type: 0
@@ -17274,6 +17546,8 @@ MonoBehaviour:
     activeDuration: 0
     waitToFinish: 0
     choices: []
+    battleStartSound: {fileID: 0}
+    battleLoopMusic: {fileID: 0}
   - stepID: optiontwo
     jumpToAfterStep: 
     type: 0
@@ -17288,6 +17562,8 @@ MonoBehaviour:
     activeDuration: 0
     waitToFinish: 0
     choices: []
+    battleStartSound: {fileID: 0}
+    battleLoopMusic: {fileID: 0}
   - stepID: 
     jumpToAfterStep: mainstoryfour
     type: 0
@@ -17302,6 +17578,8 @@ MonoBehaviour:
     activeDuration: 0
     waitToFinish: 0
     choices: []
+    battleStartSound: {fileID: 0}
+    battleLoopMusic: {fileID: 0}
   - stepID: optionthree
     jumpToAfterStep: 
     type: 0
@@ -17317,6 +17595,8 @@ MonoBehaviour:
     activeDuration: 0
     waitToFinish: 0
     choices: []
+    battleStartSound: {fileID: 0}
+    battleLoopMusic: {fileID: 0}
   - stepID: 
     jumpToAfterStep: mainstoryfour
     type: 0
@@ -17331,6 +17611,8 @@ MonoBehaviour:
     activeDuration: 0
     waitToFinish: 0
     choices: []
+    battleStartSound: {fileID: 0}
+    battleLoopMusic: {fileID: 0}
   - stepID: optionfour
     jumpToAfterStep: 
     type: 0
@@ -17345,6 +17627,8 @@ MonoBehaviour:
     activeDuration: 0
     waitToFinish: 0
     choices: []
+    battleStartSound: {fileID: 0}
+    battleLoopMusic: {fileID: 0}
   - stepID: 
     jumpToAfterStep: mainstoryfour
     type: 0
@@ -17359,6 +17643,8 @@ MonoBehaviour:
     activeDuration: 0
     waitToFinish: 0
     choices: []
+    battleStartSound: {fileID: 0}
+    battleLoopMusic: {fileID: 0}
   - stepID: mainstoryfour
     jumpToAfterStep: 
     type: 0
@@ -17374,6 +17660,8 @@ MonoBehaviour:
     activeDuration: 0
     waitToFinish: 0
     choices: []
+    battleStartSound: {fileID: 0}
+    battleLoopMusic: {fileID: 0}
   - stepID: 
     jumpToAfterStep: 
     type: 0
@@ -17388,6 +17676,8 @@ MonoBehaviour:
     activeDuration: 0
     waitToFinish: 0
     choices: []
+    battleStartSound: {fileID: 0}
+    battleLoopMusic: {fileID: 0}
   - stepID: 
     jumpToAfterStep: 
     type: 0
@@ -17403,6 +17693,8 @@ MonoBehaviour:
     activeDuration: 0
     waitToFinish: 0
     choices: []
+    battleStartSound: {fileID: 0}
+    battleLoopMusic: {fileID: 0}
   - stepID: 
     jumpToAfterStep: 
     type: 0
@@ -17418,6 +17710,8 @@ MonoBehaviour:
     activeDuration: 0
     waitToFinish: 0
     choices: []
+    battleStartSound: {fileID: 0}
+    battleLoopMusic: {fileID: 0}
   - stepID: 
     jumpToAfterStep: 
     type: 0
@@ -17432,6 +17726,8 @@ MonoBehaviour:
     activeDuration: 0
     waitToFinish: 0
     choices: []
+    battleStartSound: {fileID: 0}
+    battleLoopMusic: {fileID: 0}
   - stepID: 
     jumpToAfterStep: 
     type: 9
@@ -17462,6 +17758,8 @@ MonoBehaviour:
       statReward: 0
       rewardAmount: 0
       targetStepID: branchfour
+    battleStartSound: {fileID: 0}
+    battleLoopMusic: {fileID: 0}
   - stepID: branchone
     jumpToAfterStep: 
     type: 0
@@ -17476,6 +17774,8 @@ MonoBehaviour:
     activeDuration: 0
     waitToFinish: 0
     choices: []
+    battleStartSound: {fileID: 0}
+    battleLoopMusic: {fileID: 0}
   - stepID: 
     jumpToAfterStep: mainstoryfive
     type: 0
@@ -17491,6 +17791,8 @@ MonoBehaviour:
     activeDuration: 0
     waitToFinish: 0
     choices: []
+    battleStartSound: {fileID: 0}
+    battleLoopMusic: {fileID: 0}
   - stepID: branchtwo
     jumpToAfterStep: 
     type: 0
@@ -17505,6 +17807,8 @@ MonoBehaviour:
     activeDuration: 0
     waitToFinish: 0
     choices: []
+    battleStartSound: {fileID: 0}
+    battleLoopMusic: {fileID: 0}
   - stepID: 
     jumpToAfterStep: mainstoryfive
     type: 0
@@ -17519,6 +17823,8 @@ MonoBehaviour:
     activeDuration: 0
     waitToFinish: 0
     choices: []
+    battleStartSound: {fileID: 0}
+    battleLoopMusic: {fileID: 0}
   - stepID: branchthree
     jumpToAfterStep: 
     type: 0
@@ -17533,6 +17839,8 @@ MonoBehaviour:
     activeDuration: 0
     waitToFinish: 0
     choices: []
+    battleStartSound: {fileID: 0}
+    battleLoopMusic: {fileID: 0}
   - stepID: 
     jumpToAfterStep: mainstoryfive
     type: 0
@@ -17547,6 +17855,8 @@ MonoBehaviour:
     activeDuration: 0
     waitToFinish: 0
     choices: []
+    battleStartSound: {fileID: 0}
+    battleLoopMusic: {fileID: 0}
   - stepID: branchfour
     jumpToAfterStep: 
     type: 0
@@ -17561,6 +17871,8 @@ MonoBehaviour:
     activeDuration: 0
     waitToFinish: 0
     choices: []
+    battleStartSound: {fileID: 0}
+    battleLoopMusic: {fileID: 0}
   - stepID: 
     jumpToAfterStep: 
     type: 0
@@ -17575,6 +17887,8 @@ MonoBehaviour:
     activeDuration: 0
     waitToFinish: 0
     choices: []
+    battleStartSound: {fileID: 0}
+    battleLoopMusic: {fileID: 0}
   - stepID: 
     jumpToAfterStep: 
     type: 0
@@ -17589,6 +17903,8 @@ MonoBehaviour:
     activeDuration: 0
     waitToFinish: 0
     choices: []
+    battleStartSound: {fileID: 0}
+    battleLoopMusic: {fileID: 0}
   - stepID: 
     jumpToAfterStep: mainstoryfive
     type: 0
@@ -17603,6 +17919,8 @@ MonoBehaviour:
     activeDuration: 0
     waitToFinish: 0
     choices: []
+    battleStartSound: {fileID: 0}
+    battleLoopMusic: {fileID: 0}
   - stepID: mainstoryfive
     jumpToAfterStep: 
     type: 0
@@ -17617,6 +17935,8 @@ MonoBehaviour:
     activeDuration: 0
     waitToFinish: 0
     choices: []
+    battleStartSound: {fileID: 0}
+    battleLoopMusic: {fileID: 0}
   - stepID: 
     jumpToAfterStep: 
     type: 0
@@ -17631,6 +17951,8 @@ MonoBehaviour:
     activeDuration: 0
     waitToFinish: 0
     choices: []
+    battleStartSound: {fileID: 0}
+    battleLoopMusic: {fileID: 0}
   - stepID: 
     jumpToAfterStep: 
     type: 0
@@ -17645,6 +17967,8 @@ MonoBehaviour:
     activeDuration: 0
     waitToFinish: 0
     choices: []
+    battleStartSound: {fileID: 0}
+    battleLoopMusic: {fileID: 0}
   - stepID: 
     jumpToAfterStep: 
     type: 0
@@ -17659,6 +17983,8 @@ MonoBehaviour:
     activeDuration: 0
     waitToFinish: 0
     choices: []
+    battleStartSound: {fileID: 0}
+    battleLoopMusic: {fileID: 0}
   - stepID: 
     jumpToAfterStep: 
     type: 0
@@ -17673,6 +17999,8 @@ MonoBehaviour:
     activeDuration: 0
     waitToFinish: 0
     choices: []
+    battleStartSound: {fileID: 0}
+    battleLoopMusic: {fileID: 0}
   - stepID: 
     jumpToAfterStep: 
     type: 0
@@ -17687,6 +18015,8 @@ MonoBehaviour:
     activeDuration: 0
     waitToFinish: 0
     choices: []
+    battleStartSound: {fileID: 0}
+    battleLoopMusic: {fileID: 0}
   - stepID: 
     jumpToAfterStep: 
     type: 0
@@ -17701,6 +18031,8 @@ MonoBehaviour:
     activeDuration: 0
     waitToFinish: 0
     choices: []
+    battleStartSound: {fileID: 0}
+    battleLoopMusic: {fileID: 0}
   - stepID: 
     jumpToAfterStep: 
     type: 9
@@ -17731,6 +18063,8 @@ MonoBehaviour:
       statReward: 0
       rewardAmount: 0
       targetStepID: fourthchoice
+    battleStartSound: {fileID: 0}
+    battleLoopMusic: {fileID: 0}
   - stepID: firstchoice
     jumpToAfterStep: 
     type: 0
@@ -17745,6 +18079,8 @@ MonoBehaviour:
     activeDuration: 0
     waitToFinish: 0
     choices: []
+    battleStartSound: {fileID: 0}
+    battleLoopMusic: {fileID: 0}
   - stepID: 
     jumpToAfterStep: mainstorysix
     type: 0
@@ -17759,6 +18095,8 @@ MonoBehaviour:
     activeDuration: 0
     waitToFinish: 0
     choices: []
+    battleStartSound: {fileID: 0}
+    battleLoopMusic: {fileID: 0}
   - stepID: secondchoice
     jumpToAfterStep: 
     type: 0
@@ -17773,6 +18111,8 @@ MonoBehaviour:
     activeDuration: 0
     waitToFinish: 0
     choices: []
+    battleStartSound: {fileID: 0}
+    battleLoopMusic: {fileID: 0}
   - stepID: 
     jumpToAfterStep: mainstorysix
     type: 0
@@ -17787,6 +18127,8 @@ MonoBehaviour:
     activeDuration: 0
     waitToFinish: 0
     choices: []
+    battleStartSound: {fileID: 0}
+    battleLoopMusic: {fileID: 0}
   - stepID: thirdchoice
     jumpToAfterStep: 
     type: 0
@@ -17802,6 +18144,8 @@ MonoBehaviour:
     activeDuration: 0
     waitToFinish: 0
     choices: []
+    battleStartSound: {fileID: 0}
+    battleLoopMusic: {fileID: 0}
   - stepID: 
     jumpToAfterStep: 
     type: 0
@@ -17816,6 +18160,8 @@ MonoBehaviour:
     activeDuration: 0
     waitToFinish: 0
     choices: []
+    battleStartSound: {fileID: 0}
+    battleLoopMusic: {fileID: 0}
   - stepID: 
     jumpToAfterStep: mainstorysix
     type: 0
@@ -17830,6 +18176,8 @@ MonoBehaviour:
     activeDuration: 0
     waitToFinish: 0
     choices: []
+    battleStartSound: {fileID: 0}
+    battleLoopMusic: {fileID: 0}
   - stepID: fourthchoice
     jumpToAfterStep: 
     type: 0
@@ -17844,6 +18192,8 @@ MonoBehaviour:
     activeDuration: 0
     waitToFinish: 0
     choices: []
+    battleStartSound: {fileID: 0}
+    battleLoopMusic: {fileID: 0}
   - stepID: 
     jumpToAfterStep: mainstorysix
     type: 0
@@ -17858,6 +18208,8 @@ MonoBehaviour:
     activeDuration: 0
     waitToFinish: 0
     choices: []
+    battleStartSound: {fileID: 0}
+    battleLoopMusic: {fileID: 0}
   - stepID: mainstorysix
     jumpToAfterStep: 
     type: 0
@@ -17872,6 +18224,8 @@ MonoBehaviour:
     activeDuration: 0
     waitToFinish: 0
     choices: []
+    battleStartSound: {fileID: 0}
+    battleLoopMusic: {fileID: 0}
   - stepID: 
     jumpToAfterStep: 
     type: 8
@@ -17886,6 +18240,8 @@ MonoBehaviour:
     activeDuration: 0
     waitToFinish: 0
     choices: []
+    battleStartSound: {fileID: 0}
+    battleLoopMusic: {fileID: 0}
   ui: {fileID: 1655853756}
   battleManager: {fileID: 1036568086}
 --- !u!1 &1588038724
@@ -18011,6 +18367,8 @@ MonoBehaviour:
     activeDuration: 0
     waitToFinish: 1
     choices: []
+    battleStartSound: {fileID: 0}
+    battleLoopMusic: {fileID: 0}
   - stepID: 
     jumpToAfterStep: 
     type: 0
@@ -18026,6 +18384,8 @@ MonoBehaviour:
     activeDuration: 0
     waitToFinish: 1
     choices: []
+    battleStartSound: {fileID: 0}
+    battleLoopMusic: {fileID: 0}
   - stepID: 
     jumpToAfterStep: 
     type: 0
@@ -18041,6 +18401,8 @@ MonoBehaviour:
     activeDuration: 0
     waitToFinish: 1
     choices: []
+    battleStartSound: {fileID: 0}
+    battleLoopMusic: {fileID: 0}
   - stepID: 
     jumpToAfterStep: 
     type: 0
@@ -18055,6 +18417,8 @@ MonoBehaviour:
     activeDuration: 0
     waitToFinish: 1
     choices: []
+    battleStartSound: {fileID: 0}
+    battleLoopMusic: {fileID: 0}
   - stepID: 
     jumpToAfterStep: 
     type: 0
@@ -18069,6 +18433,8 @@ MonoBehaviour:
     activeDuration: 0
     waitToFinish: 1
     choices: []
+    battleStartSound: {fileID: 0}
+    battleLoopMusic: {fileID: 0}
   - stepID: 
     jumpToAfterStep: 
     type: 0
@@ -18084,6 +18450,8 @@ MonoBehaviour:
     activeDuration: 0
     waitToFinish: 1
     choices: []
+    battleStartSound: {fileID: 0}
+    battleLoopMusic: {fileID: 0}
   - stepID: 
     jumpToAfterStep: 
     type: 9
@@ -18114,6 +18482,8 @@ MonoBehaviour:
       statReward: 0
       rewardAmount: 0
       targetStepID: branchone
+    battleStartSound: {fileID: 0}
+    battleLoopMusic: {fileID: 0}
   - stepID: branchone
     jumpToAfterStep: 
     type: 0
@@ -18128,6 +18498,8 @@ MonoBehaviour:
     activeDuration: 0
     waitToFinish: 1
     choices: []
+    battleStartSound: {fileID: 0}
+    battleLoopMusic: {fileID: 0}
   - stepID: 
     jumpToAfterStep: mainstory
     type: 0
@@ -18144,6 +18516,8 @@ MonoBehaviour:
     activeDuration: 0
     waitToFinish: 1
     choices: []
+    battleStartSound: {fileID: 0}
+    battleLoopMusic: {fileID: 0}
   - stepID: branchtwo
     jumpToAfterStep: 
     type: 0
@@ -18158,6 +18532,8 @@ MonoBehaviour:
     activeDuration: 0
     waitToFinish: 1
     choices: []
+    battleStartSound: {fileID: 0}
+    battleLoopMusic: {fileID: 0}
   - stepID: 
     jumpToAfterStep: 
     type: 0
@@ -18173,6 +18549,8 @@ MonoBehaviour:
     activeDuration: 0
     waitToFinish: 1
     choices: []
+    battleStartSound: {fileID: 0}
+    battleLoopMusic: {fileID: 0}
   - stepID: 
     jumpToAfterStep: 
     type: 0
@@ -18187,6 +18565,8 @@ MonoBehaviour:
     activeDuration: 0
     waitToFinish: 1
     choices: []
+    battleStartSound: {fileID: 0}
+    battleLoopMusic: {fileID: 0}
   - stepID: 
     jumpToAfterStep: mainstory
     type: 0
@@ -18201,6 +18581,8 @@ MonoBehaviour:
     activeDuration: 0
     waitToFinish: 1
     choices: []
+    battleStartSound: {fileID: 0}
+    battleLoopMusic: {fileID: 0}
   - stepID: mainstory
     jumpToAfterStep: 
     type: 0
@@ -18215,6 +18597,8 @@ MonoBehaviour:
     activeDuration: 0
     waitToFinish: 1
     choices: []
+    battleStartSound: {fileID: 0}
+    battleLoopMusic: {fileID: 0}
   - stepID: 
     jumpToAfterStep: 
     type: 0
@@ -18230,6 +18614,8 @@ MonoBehaviour:
     activeDuration: 0
     waitToFinish: 1
     choices: []
+    battleStartSound: {fileID: 0}
+    battleLoopMusic: {fileID: 0}
   - stepID: 
     jumpToAfterStep: 
     type: 0
@@ -18244,6 +18630,8 @@ MonoBehaviour:
     activeDuration: 0
     waitToFinish: 1
     choices: []
+    battleStartSound: {fileID: 0}
+    battleLoopMusic: {fileID: 0}
   - stepID: 
     jumpToAfterStep: 
     type: 0
@@ -18258,6 +18646,8 @@ MonoBehaviour:
     activeDuration: 0
     waitToFinish: 1
     choices: []
+    battleStartSound: {fileID: 0}
+    battleLoopMusic: {fileID: 0}
   - stepID: 
     jumpToAfterStep: 
     type: 0
@@ -18273,6 +18663,8 @@ MonoBehaviour:
     activeDuration: 0
     waitToFinish: 1
     choices: []
+    battleStartSound: {fileID: 0}
+    battleLoopMusic: {fileID: 0}
   - stepID: 
     jumpToAfterStep: 
     type: 3
@@ -18287,6 +18679,8 @@ MonoBehaviour:
     activeDuration: 0
     waitToFinish: 1
     choices: []
+    battleStartSound: {fileID: 0}
+    battleLoopMusic: {fileID: 0}
   - stepID: 
     jumpToAfterStep: 
     type: 0
@@ -18301,6 +18695,8 @@ MonoBehaviour:
     activeDuration: 0
     waitToFinish: 1
     choices: []
+    battleStartSound: {fileID: 0}
+    battleLoopMusic: {fileID: 0}
   - stepID: 
     jumpToAfterStep: 
     type: 0
@@ -18315,6 +18711,8 @@ MonoBehaviour:
     activeDuration: 0
     waitToFinish: 1
     choices: []
+    battleStartSound: {fileID: 0}
+    battleLoopMusic: {fileID: 0}
   - stepID: 
     jumpToAfterStep: 
     type: 0
@@ -18330,6 +18728,8 @@ MonoBehaviour:
     activeDuration: 0
     waitToFinish: 1
     choices: []
+    battleStartSound: {fileID: 0}
+    battleLoopMusic: {fileID: 0}
   - stepID: 
     jumpToAfterStep: 
     type: 9
@@ -18360,6 +18760,8 @@ MonoBehaviour:
       statReward: 0
       rewardAmount: 0
       targetStepID: fourth
+    battleStartSound: {fileID: 0}
+    battleLoopMusic: {fileID: 0}
   - stepID: first
     jumpToAfterStep: 
     type: 0
@@ -18374,6 +18776,8 @@ MonoBehaviour:
     activeDuration: 0
     waitToFinish: 1
     choices: []
+    battleStartSound: {fileID: 0}
+    battleLoopMusic: {fileID: 0}
   - stepID: 
     jumpToAfterStep: mainstorytwo
     type: 0
@@ -18389,6 +18793,8 @@ MonoBehaviour:
     activeDuration: 0
     waitToFinish: 1
     choices: []
+    battleStartSound: {fileID: 0}
+    battleLoopMusic: {fileID: 0}
   - stepID: second
     jumpToAfterStep: 
     type: 0
@@ -18403,6 +18809,8 @@ MonoBehaviour:
     activeDuration: 0
     waitToFinish: 1
     choices: []
+    battleStartSound: {fileID: 0}
+    battleLoopMusic: {fileID: 0}
   - stepID: 
     jumpToAfterStep: mainstorytwo
     type: 0
@@ -18418,6 +18826,8 @@ MonoBehaviour:
     activeDuration: 0
     waitToFinish: 1
     choices: []
+    battleStartSound: {fileID: 0}
+    battleLoopMusic: {fileID: 0}
   - stepID: third
     jumpToAfterStep: 
     type: 0
@@ -18432,6 +18842,8 @@ MonoBehaviour:
     activeDuration: 0
     waitToFinish: 1
     choices: []
+    battleStartSound: {fileID: 0}
+    battleLoopMusic: {fileID: 0}
   - stepID: 
     jumpToAfterStep: mainstorytwo
     type: 0
@@ -18446,6 +18858,8 @@ MonoBehaviour:
     activeDuration: 0
     waitToFinish: 1
     choices: []
+    battleStartSound: {fileID: 0}
+    battleLoopMusic: {fileID: 0}
   - stepID: fourth
     jumpToAfterStep: 
     type: 0
@@ -18460,6 +18874,8 @@ MonoBehaviour:
     activeDuration: 0
     waitToFinish: 1
     choices: []
+    battleStartSound: {fileID: 0}
+    battleLoopMusic: {fileID: 0}
   - stepID: 
     jumpToAfterStep: 
     type: 0
@@ -18474,6 +18890,8 @@ MonoBehaviour:
     activeDuration: 0
     waitToFinish: 1
     choices: []
+    battleStartSound: {fileID: 0}
+    battleLoopMusic: {fileID: 0}
   - stepID: 
     jumpToAfterStep: 
     type: 0
@@ -18488,6 +18906,8 @@ MonoBehaviour:
     activeDuration: 0
     waitToFinish: 1
     choices: []
+    battleStartSound: {fileID: 0}
+    battleLoopMusic: {fileID: 0}
   - stepID: 
     jumpToAfterStep: mainstorytwo
     type: 0
@@ -18503,6 +18923,8 @@ MonoBehaviour:
     activeDuration: 0
     waitToFinish: 1
     choices: []
+    battleStartSound: {fileID: 0}
+    battleLoopMusic: {fileID: 0}
   - stepID: mainstorytwo
     jumpToAfterStep: 
     type: 4
@@ -18517,6 +18939,8 @@ MonoBehaviour:
     activeDuration: 0
     waitToFinish: 1
     choices: []
+    battleStartSound: {fileID: 0}
+    battleLoopMusic: {fileID: 0}
   - stepID: 
     jumpToAfterStep: 
     type: 0
@@ -18531,6 +18955,8 @@ MonoBehaviour:
     activeDuration: 0
     waitToFinish: 1
     choices: []
+    battleStartSound: {fileID: 0}
+    battleLoopMusic: {fileID: 0}
   - stepID: 
     jumpToAfterStep: 
     type: 0
@@ -18545,6 +18971,8 @@ MonoBehaviour:
     activeDuration: 0
     waitToFinish: 1
     choices: []
+    battleStartSound: {fileID: 0}
+    battleLoopMusic: {fileID: 0}
   - stepID: 
     jumpToAfterStep: 
     type: 0
@@ -18559,6 +18987,8 @@ MonoBehaviour:
     activeDuration: 0
     waitToFinish: 1
     choices: []
+    battleStartSound: {fileID: 0}
+    battleLoopMusic: {fileID: 0}
   - stepID: 
     jumpToAfterStep: 
     type: 0
@@ -18573,6 +19003,8 @@ MonoBehaviour:
     activeDuration: 0
     waitToFinish: 1
     choices: []
+    battleStartSound: {fileID: 0}
+    battleLoopMusic: {fileID: 0}
   - stepID: 
     jumpToAfterStep: 
     type: 0
@@ -18587,6 +19019,8 @@ MonoBehaviour:
     activeDuration: 0
     waitToFinish: 1
     choices: []
+    battleStartSound: {fileID: 0}
+    battleLoopMusic: {fileID: 0}
   - stepID: 
     jumpToAfterStep: 
     type: 0
@@ -18601,6 +19035,8 @@ MonoBehaviour:
     activeDuration: 0
     waitToFinish: 1
     choices: []
+    battleStartSound: {fileID: 0}
+    battleLoopMusic: {fileID: 0}
   - stepID: 
     jumpToAfterStep: 
     type: 0
@@ -18615,6 +19051,8 @@ MonoBehaviour:
     activeDuration: 0
     waitToFinish: 1
     choices: []
+    battleStartSound: {fileID: 0}
+    battleLoopMusic: {fileID: 0}
   - stepID: 
     jumpToAfterStep: 
     type: 0
@@ -18629,6 +19067,8 @@ MonoBehaviour:
     activeDuration: 0
     waitToFinish: 1
     choices: []
+    battleStartSound: {fileID: 0}
+    battleLoopMusic: {fileID: 0}
   - stepID: 
     jumpToAfterStep: 
     type: 0
@@ -18643,6 +19083,8 @@ MonoBehaviour:
     activeDuration: 0
     waitToFinish: 1
     choices: []
+    battleStartSound: {fileID: 0}
+    battleLoopMusic: {fileID: 0}
   - stepID: 
     jumpToAfterStep: 
     type: 0
@@ -18657,6 +19099,8 @@ MonoBehaviour:
     activeDuration: 0
     waitToFinish: 1
     choices: []
+    battleStartSound: {fileID: 0}
+    battleLoopMusic: {fileID: 0}
   - stepID: 
     jumpToAfterStep: 
     type: 0
@@ -18671,6 +19115,8 @@ MonoBehaviour:
     activeDuration: 0
     waitToFinish: 1
     choices: []
+    battleStartSound: {fileID: 0}
+    battleLoopMusic: {fileID: 0}
   - stepID: 
     jumpToAfterStep: 
     type: 9
@@ -18701,6 +19147,8 @@ MonoBehaviour:
       statReward: 0
       rewardAmount: 0
       targetStepID: 
+    battleStartSound: {fileID: 0}
+    battleLoopMusic: {fileID: 0}
   - stepID: 
     jumpToAfterStep: 
     type: 0
@@ -18716,6 +19164,8 @@ MonoBehaviour:
     activeDuration: 0
     waitToFinish: 1
     choices: []
+    battleStartSound: {fileID: 0}
+    battleLoopMusic: {fileID: 0}
   - stepID: 
     jumpToAfterStep: 
     type: 0
@@ -18730,6 +19180,8 @@ MonoBehaviour:
     activeDuration: 0
     waitToFinish: 1
     choices: []
+    battleStartSound: {fileID: 0}
+    battleLoopMusic: {fileID: 0}
   - stepID: 
     jumpToAfterStep: 
     type: 0
@@ -18744,6 +19196,8 @@ MonoBehaviour:
     activeDuration: 0
     waitToFinish: 1
     choices: []
+    battleStartSound: {fileID: 0}
+    battleLoopMusic: {fileID: 0}
   - stepID: 
     jumpToAfterStep: 
     type: 0
@@ -18758,6 +19212,8 @@ MonoBehaviour:
     activeDuration: 0
     waitToFinish: 1
     choices: []
+    battleStartSound: {fileID: 0}
+    battleLoopMusic: {fileID: 0}
   - stepID: 
     jumpToAfterStep: 
     type: 0
@@ -18772,6 +19228,8 @@ MonoBehaviour:
     activeDuration: 0
     waitToFinish: 1
     choices: []
+    battleStartSound: {fileID: 0}
+    battleLoopMusic: {fileID: 0}
   - stepID: 
     jumpToAfterStep: 
     type: 0
@@ -18786,6 +19244,8 @@ MonoBehaviour:
     activeDuration: 0
     waitToFinish: 1
     choices: []
+    battleStartSound: {fileID: 0}
+    battleLoopMusic: {fileID: 0}
   - stepID: 
     jumpToAfterStep: 
     type: 9
@@ -18816,6 +19276,8 @@ MonoBehaviour:
       statReward: 0
       rewardAmount: 0
       targetStepID: 
+    battleStartSound: {fileID: 0}
+    battleLoopMusic: {fileID: 0}
   - stepID: 
     jumpToAfterStep: 
     type: 0
@@ -18830,6 +19292,8 @@ MonoBehaviour:
     activeDuration: 0
     waitToFinish: 1
     choices: []
+    battleStartSound: {fileID: 0}
+    battleLoopMusic: {fileID: 0}
   - stepID: 
     jumpToAfterStep: 
     type: 0
@@ -18844,6 +19308,8 @@ MonoBehaviour:
     activeDuration: 0
     waitToFinish: 1
     choices: []
+    battleStartSound: {fileID: 0}
+    battleLoopMusic: {fileID: 0}
   - stepID: 
     jumpToAfterStep: 
     type: 9
@@ -18874,6 +19340,8 @@ MonoBehaviour:
       statReward: 0
       rewardAmount: 0
       targetStepID: 
+    battleStartSound: {fileID: 0}
+    battleLoopMusic: {fileID: 0}
   - stepID: 
     jumpToAfterStep: 
     type: 0
@@ -18888,6 +19356,8 @@ MonoBehaviour:
     activeDuration: 0
     waitToFinish: 1
     choices: []
+    battleStartSound: {fileID: 0}
+    battleLoopMusic: {fileID: 0}
   - stepID: 
     jumpToAfterStep: 
     type: 0
@@ -18902,6 +19372,8 @@ MonoBehaviour:
     activeDuration: 0
     waitToFinish: 1
     choices: []
+    battleStartSound: {fileID: 0}
+    battleLoopMusic: {fileID: 0}
   - stepID: 
     jumpToAfterStep: 
     type: 0
@@ -18916,6 +19388,8 @@ MonoBehaviour:
     activeDuration: 0
     waitToFinish: 1
     choices: []
+    battleStartSound: {fileID: 0}
+    battleLoopMusic: {fileID: 0}
   - stepID: 
     jumpToAfterStep: 
     type: 0
@@ -18930,6 +19404,8 @@ MonoBehaviour:
     activeDuration: 0
     waitToFinish: 1
     choices: []
+    battleStartSound: {fileID: 0}
+    battleLoopMusic: {fileID: 0}
   - stepID: 
     jumpToAfterStep: 
     type: 0
@@ -18944,6 +19420,8 @@ MonoBehaviour:
     activeDuration: 0
     waitToFinish: 1
     choices: []
+    battleStartSound: {fileID: 0}
+    battleLoopMusic: {fileID: 0}
   - stepID: 
     jumpToAfterStep: 
     type: 9
@@ -18974,6 +19452,8 @@ MonoBehaviour:
       statReward: 0
       rewardAmount: 0
       targetStepID: 
+    battleStartSound: {fileID: 0}
+    battleLoopMusic: {fileID: 0}
   - stepID: 
     jumpToAfterStep: 
     type: 0
@@ -18988,6 +19468,8 @@ MonoBehaviour:
     activeDuration: 0
     waitToFinish: 1
     choices: []
+    battleStartSound: {fileID: 0}
+    battleLoopMusic: {fileID: 0}
   - stepID: 
     jumpToAfterStep: 
     type: 0
@@ -19002,6 +19484,8 @@ MonoBehaviour:
     activeDuration: 0
     waitToFinish: 1
     choices: []
+    battleStartSound: {fileID: 0}
+    battleLoopMusic: {fileID: 0}
   - stepID: 
     jumpToAfterStep: 
     type: 0
@@ -19016,6 +19500,8 @@ MonoBehaviour:
     activeDuration: 0
     waitToFinish: 1
     choices: []
+    battleStartSound: {fileID: 0}
+    battleLoopMusic: {fileID: 0}
   - stepID: 
     jumpToAfterStep: 
     type: 0
@@ -19030,6 +19516,8 @@ MonoBehaviour:
     activeDuration: 0
     waitToFinish: 1
     choices: []
+    battleStartSound: {fileID: 0}
+    battleLoopMusic: {fileID: 0}
   - stepID: 
     jumpToAfterStep: 
     type: 9
@@ -19060,6 +19548,8 @@ MonoBehaviour:
       statReward: 0
       rewardAmount: 0
       targetStepID: 
+    battleStartSound: {fileID: 0}
+    battleLoopMusic: {fileID: 0}
   - stepID: 
     jumpToAfterStep: 
     type: 0
@@ -19074,6 +19564,8 @@ MonoBehaviour:
     activeDuration: 0
     waitToFinish: 1
     choices: []
+    battleStartSound: {fileID: 0}
+    battleLoopMusic: {fileID: 0}
   - stepID: 
     jumpToAfterStep: 
     type: 0
@@ -19088,6 +19580,8 @@ MonoBehaviour:
     activeDuration: 0
     waitToFinish: 1
     choices: []
+    battleStartSound: {fileID: 0}
+    battleLoopMusic: {fileID: 0}
   - stepID: 
     jumpToAfterStep: 
     type: 0
@@ -19102,6 +19596,8 @@ MonoBehaviour:
     activeDuration: 0
     waitToFinish: 1
     choices: []
+    battleStartSound: {fileID: 0}
+    battleLoopMusic: {fileID: 0}
   - stepID: 
     jumpToAfterStep: 
     type: 0
@@ -19116,6 +19612,8 @@ MonoBehaviour:
     activeDuration: 0
     waitToFinish: 1
     choices: []
+    battleStartSound: {fileID: 0}
+    battleLoopMusic: {fileID: 0}
   - stepID: 
     jumpToAfterStep: 
     type: 0
@@ -19130,6 +19628,8 @@ MonoBehaviour:
     activeDuration: 0
     waitToFinish: 1
     choices: []
+    battleStartSound: {fileID: 0}
+    battleLoopMusic: {fileID: 0}
   - stepID: 
     jumpToAfterStep: 
     type: 0
@@ -19144,6 +19644,8 @@ MonoBehaviour:
     activeDuration: 0
     waitToFinish: 1
     choices: []
+    battleStartSound: {fileID: 0}
+    battleLoopMusic: {fileID: 0}
   - stepID: 
     jumpToAfterStep: 
     type: 0
@@ -19158,6 +19660,8 @@ MonoBehaviour:
     activeDuration: 0
     waitToFinish: 1
     choices: []
+    battleStartSound: {fileID: 0}
+    battleLoopMusic: {fileID: 0}
   - stepID: 
     jumpToAfterStep: 
     type: 0
@@ -19172,6 +19676,8 @@ MonoBehaviour:
     activeDuration: 0
     waitToFinish: 1
     choices: []
+    battleStartSound: {fileID: 0}
+    battleLoopMusic: {fileID: 0}
   - stepID: 
     jumpToAfterStep: 
     type: 0
@@ -19186,6 +19692,8 @@ MonoBehaviour:
     activeDuration: 0
     waitToFinish: 1
     choices: []
+    battleStartSound: {fileID: 0}
+    battleLoopMusic: {fileID: 0}
   - stepID: 
     jumpToAfterStep: 
     type: 0
@@ -19201,6 +19709,8 @@ MonoBehaviour:
     activeDuration: 0
     waitToFinish: 1
     choices: []
+    battleStartSound: {fileID: 0}
+    battleLoopMusic: {fileID: 0}
   - stepID: 
     jumpToAfterStep: 
     type: 0
@@ -19215,6 +19725,8 @@ MonoBehaviour:
     activeDuration: 0
     waitToFinish: 1
     choices: []
+    battleStartSound: {fileID: 0}
+    battleLoopMusic: {fileID: 0}
   - stepID: 
     jumpToAfterStep: 
     type: 0
@@ -19229,6 +19741,8 @@ MonoBehaviour:
     activeDuration: 0
     waitToFinish: 1
     choices: []
+    battleStartSound: {fileID: 0}
+    battleLoopMusic: {fileID: 0}
   - stepID: 
     jumpToAfterStep: 
     type: 9
@@ -19259,6 +19773,8 @@ MonoBehaviour:
       statReward: 0
       rewardAmount: 0
       targetStepID: 
+    battleStartSound: {fileID: 0}
+    battleLoopMusic: {fileID: 0}
   - stepID: 
     jumpToAfterStep: 
     type: 0
@@ -19273,6 +19789,8 @@ MonoBehaviour:
     activeDuration: 0
     waitToFinish: 1
     choices: []
+    battleStartSound: {fileID: 0}
+    battleLoopMusic: {fileID: 0}
   - stepID: 
     jumpToAfterStep: 
     type: 0
@@ -19287,6 +19805,8 @@ MonoBehaviour:
     activeDuration: 0
     waitToFinish: 1
     choices: []
+    battleStartSound: {fileID: 0}
+    battleLoopMusic: {fileID: 0}
   - stepID: 
     jumpToAfterStep: 
     type: 0
@@ -19301,6 +19821,8 @@ MonoBehaviour:
     activeDuration: 0
     waitToFinish: 1
     choices: []
+    battleStartSound: {fileID: 0}
+    battleLoopMusic: {fileID: 0}
   - stepID: 
     jumpToAfterStep: 
     type: 0
@@ -19316,6 +19838,8 @@ MonoBehaviour:
     activeDuration: 0
     waitToFinish: 1
     choices: []
+    battleStartSound: {fileID: 0}
+    battleLoopMusic: {fileID: 0}
   - stepID: 
     jumpToAfterStep: 
     type: 0
@@ -19330,6 +19854,8 @@ MonoBehaviour:
     activeDuration: 0
     waitToFinish: 1
     choices: []
+    battleStartSound: {fileID: 0}
+    battleLoopMusic: {fileID: 0}
   - stepID: 
     jumpToAfterStep: 
     type: 0
@@ -19344,6 +19870,8 @@ MonoBehaviour:
     activeDuration: 0
     waitToFinish: 1
     choices: []
+    battleStartSound: {fileID: 0}
+    battleLoopMusic: {fileID: 0}
   - stepID: 
     jumpToAfterStep: 
     type: 0
@@ -19358,6 +19886,8 @@ MonoBehaviour:
     activeDuration: 0
     waitToFinish: 1
     choices: []
+    battleStartSound: {fileID: 0}
+    battleLoopMusic: {fileID: 0}
   - stepID: 
     jumpToAfterStep: 
     type: 0
@@ -19372,6 +19902,8 @@ MonoBehaviour:
     activeDuration: 0
     waitToFinish: 1
     choices: []
+    battleStartSound: {fileID: 0}
+    battleLoopMusic: {fileID: 0}
   - stepID: 
     jumpToAfterStep: 
     type: 0
@@ -19386,6 +19918,8 @@ MonoBehaviour:
     activeDuration: 0
     waitToFinish: 1
     choices: []
+    battleStartSound: {fileID: 0}
+    battleLoopMusic: {fileID: 0}
   - stepID: 
     jumpToAfterStep: 
     type: 0
@@ -19400,6 +19934,8 @@ MonoBehaviour:
     activeDuration: 0
     waitToFinish: 1
     choices: []
+    battleStartSound: {fileID: 0}
+    battleLoopMusic: {fileID: 0}
   - stepID: 
     jumpToAfterStep: 
     type: 0
@@ -19414,6 +19950,8 @@ MonoBehaviour:
     activeDuration: 0
     waitToFinish: 1
     choices: []
+    battleStartSound: {fileID: 0}
+    battleLoopMusic: {fileID: 0}
   - stepID: 
     jumpToAfterStep: 
     type: 0
@@ -19429,6 +19967,8 @@ MonoBehaviour:
     activeDuration: 0
     waitToFinish: 1
     choices: []
+    battleStartSound: {fileID: 0}
+    battleLoopMusic: {fileID: 0}
   - stepID: 
     jumpToAfterStep: 
     type: 0
@@ -19443,6 +19983,8 @@ MonoBehaviour:
     activeDuration: 0
     waitToFinish: 1
     choices: []
+    battleStartSound: {fileID: 0}
+    battleLoopMusic: {fileID: 0}
   - stepID: 
     jumpToAfterStep: 
     type: 8
@@ -19457,6 +19999,8 @@ MonoBehaviour:
     activeDuration: 0
     waitToFinish: 1
     choices: []
+    battleStartSound: {fileID: 0}
+    battleLoopMusic: {fileID: 0}
   ui: {fileID: 1655853756}
   battleManager: {fileID: 1036568086}
 --- !u!1 &1591939401
@@ -19928,6 +20472,8 @@ MonoBehaviour:
     activeDuration: 0
     waitToFinish: 1
     choices: []
+    battleStartSound: {fileID: 0}
+    battleLoopMusic: {fileID: 0}
   - stepID: 
     jumpToAfterStep: 
     type: 0
@@ -19942,6 +20488,8 @@ MonoBehaviour:
     activeDuration: 0
     waitToFinish: 1
     choices: []
+    battleStartSound: {fileID: 0}
+    battleLoopMusic: {fileID: 0}
   - stepID: 
     jumpToAfterStep: 
     type: 0
@@ -19956,6 +20504,8 @@ MonoBehaviour:
     activeDuration: 0
     waitToFinish: 1
     choices: []
+    battleStartSound: {fileID: 0}
+    battleLoopMusic: {fileID: 0}
   - stepID: 
     jumpToAfterStep: 
     type: 0
@@ -19970,6 +20520,8 @@ MonoBehaviour:
     activeDuration: 0
     waitToFinish: 1
     choices: []
+    battleStartSound: {fileID: 0}
+    battleLoopMusic: {fileID: 0}
   - stepID: 
     jumpToAfterStep: 
     type: 9
@@ -20000,6 +20552,8 @@ MonoBehaviour:
       statReward: 0
       rewardAmount: 0
       targetStepID: 
+    battleStartSound: {fileID: 0}
+    battleLoopMusic: {fileID: 0}
   - stepID: 
     jumpToAfterStep: 
     type: 0
@@ -20014,6 +20568,8 @@ MonoBehaviour:
     activeDuration: 0
     waitToFinish: 1
     choices: []
+    battleStartSound: {fileID: 0}
+    battleLoopMusic: {fileID: 0}
   - stepID: 
     jumpToAfterStep: 
     type: 1
@@ -20028,6 +20584,8 @@ MonoBehaviour:
     activeDuration: 0
     waitToFinish: 1
     choices: []
+    battleStartSound: {fileID: 0}
+    battleLoopMusic: {fileID: 0}
   - stepID: 
     jumpToAfterStep: 
     type: 0
@@ -20042,6 +20600,8 @@ MonoBehaviour:
     activeDuration: 0
     waitToFinish: 1
     choices: []
+    battleStartSound: {fileID: 0}
+    battleLoopMusic: {fileID: 0}
   - stepID: 
     jumpToAfterStep: 
     type: 0
@@ -20057,6 +20617,8 @@ MonoBehaviour:
     activeDuration: 0
     waitToFinish: 1
     choices: []
+    battleStartSound: {fileID: 0}
+    battleLoopMusic: {fileID: 0}
   - stepID: 
     jumpToAfterStep: 
     type: 0
@@ -20071,6 +20633,8 @@ MonoBehaviour:
     activeDuration: 0
     waitToFinish: 1
     choices: []
+    battleStartSound: {fileID: 0}
+    battleLoopMusic: {fileID: 0}
   - stepID: 
     jumpToAfterStep: 
     type: 0
@@ -20086,6 +20650,8 @@ MonoBehaviour:
     activeDuration: 0
     waitToFinish: 1
     choices: []
+    battleStartSound: {fileID: 0}
+    battleLoopMusic: {fileID: 0}
   - stepID: 
     jumpToAfterStep: 
     type: 0
@@ -20101,6 +20667,8 @@ MonoBehaviour:
     activeDuration: 0
     waitToFinish: 1
     choices: []
+    battleStartSound: {fileID: 0}
+    battleLoopMusic: {fileID: 0}
   - stepID: 
     jumpToAfterStep: 
     type: 8
@@ -20115,6 +20683,8 @@ MonoBehaviour:
     activeDuration: 0
     waitToFinish: 1
     choices: []
+    battleStartSound: {fileID: 0}
+    battleLoopMusic: {fileID: 0}
   ui: {fileID: 1655853756}
   battleManager: {fileID: 1036568086}
 --- !u!1 &1615942407
@@ -21575,7 +22145,7 @@ TilemapRenderer:
   m_GlobalIlluminationMeshLod: 0
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 1
   m_MaskInteraction: 0
   m_ChunkSize: {x: 32, y: 32, z: 32}
   m_ChunkCullingBounds: {x: 0, y: 0, z: 0}
@@ -21792,7 +22362,7 @@ TilemapRenderer:
   m_GlobalIlluminationMeshLod: 0
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 1
   m_MaskInteraction: 0
   m_ChunkSize: {x: 32, y: 32, z: 32}
   m_ChunkCullingBounds: {x: 0, y: 0, z: 0}
