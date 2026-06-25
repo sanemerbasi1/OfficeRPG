@@ -30,4 +30,9 @@ public class MusicController : MonoBehaviour
             sfxSource.PlayOneShot(clip);
         }
     }
+    public void RestartBGM()
+{
+    bgmSource.Stop();
+    bgmSource.Play();
+}
 }

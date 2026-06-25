@@ -255,7 +255,7 @@ public class WorldTrigger : MonoBehaviour
             if (MusicController.Instance != null)
             {
                 MusicController.Instance.StopBattleMusic();
-                MusicController.Instance.ResumeBGM();
+                MusicController.Instance.RestartBGM();
             }
 
             // Continue the sequence

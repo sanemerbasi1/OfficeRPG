@@ -319,10 +319,18 @@ public class BattleManager : MonoBehaviour
         switch (skill.type)
         {
             case SkillType.Attack:
+            if (skill.skillSFX != null)
+    {
+        MusicController.Instance.PlaySFX(skill.skillSFX);
+    }
                 yield return StartCoroutine(HandlePlayerAttackRoutine(skill, finalValue));
                 break;
 
             case SkillType.Defend:
+            if (skill.skillSFX != null)
+    {
+        MusicController.Instance.PlaySFX(skill.skillSFX);
+    }
                 playerPermanentStats.currentShield += finalValue;
                 battleUI.UpdateLog($"<b>{playerPermanentStats.playerName}</b> uses <b>{skill.skillName}</b>! (+{finalValue} Shield)");
                 break;

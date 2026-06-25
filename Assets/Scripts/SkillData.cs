@@ -6,6 +6,7 @@ public class SkillData : ScriptableObject
     public string skillName;
     public Sprite skillIcon;
     public SkillType type; 
+    public AudioClip skillSFX;
     
     [Header("Values")]
     public int baseDamageValue; 
@@ -23,5 +24,5 @@ public class SkillData : ScriptableObject
 
     [Header("Visuals")]
     [Tooltip("Check this if you want this specific skill to use the MC's Special Attack animation!")]
-    public bool useSpecialAnimation = false; // <-- This is the missing piece!
+    public bool useSpecialAnimation = false; 
 }
