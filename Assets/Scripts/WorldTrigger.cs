@@ -35,7 +35,6 @@ public class WorldTrigger : MonoBehaviour
         public EncounterData encounterData; 
         [Header("Dialogue Animation")]
         public Animator npcAnimator;
-        public AnimationClip talkAnimation;
         
         [Header("For Toggle UI Elements Only")]
         [Tooltip("Drag all the UI GameObjects you want to affect into this list.")]
@@ -104,7 +103,7 @@ public class WorldTrigger : MonoBehaviour
         {
             case StepType.Dialogue:
 
-    if (step.npcAnimator != null && step.talkAnimation != null)
+    if (step.npcAnimator != null)
     {
         // Using a parameter called "IsTalking" - ensure your NPC Animator has this bool parameter!
         step.npcAnimator.SetBool("IsTalking", true);

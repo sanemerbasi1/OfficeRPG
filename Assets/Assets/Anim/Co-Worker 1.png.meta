@@ -1,0 +1,1859 @@
+fileFormatVersion: 2
+guid: 9ec4d313a4bc943efbc321778ab7df58
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: -8460066740494448593
+    second: Co-Worker_0
+  - first:
+      213: 5215307090715790823
+    second: Co-Worker_1
+  - first:
+      213: 5248760680319762364
+    second: Co-Worker_2
+  - first:
+      213: -4410912656260048836
+    second: Co-Worker_3
+  - first:
+      213: -4743790564432477060
+    second: Co-Worker_4
+  - first:
+      213: 474277579457995683
+    second: Co-Worker_5
+  - first:
+      213: 8825605336966855709
+    second: Co-Worker_6
+  - first:
+      213: -3093073856325837627
+    second: Co-Worker_7
+  - first:
+      213: -5747258044100629771
+    second: Co-Worker_8
+  - first:
+      213: -7244625987356582129
+    second: Co-Worker_9
+  - first:
+      213: -7547932840300130665
+    second: Co-Worker_10
+  - first:
+      213: -7612879479275679406
+    second: Co-Worker_11
+  - first:
+      213: 7973306287474012729
+    second: Co-Worker_12
+  - first:
+      213: 2127838921721851049
+    second: Co-Worker_13
+  - first:
+      213: -3724491528126415683
+    second: Co-Worker_14
+  - first:
+      213: -3272554230067825410
+    second: Co-Worker_15
+  - first:
+      213: 3098189378614461748
+    second: Co-Worker_16
+  - first:
+      213: 5432775148703778703
+    second: Co-Worker_17
+  - first:
+      213: 8101391457357937739
+    second: Co-Worker_18
+  - first:
+      213: -2966645213868949543
+    second: Co-Worker_19
+  - first:
+      213: 638344178251486285
+    second: Co-Worker_20
+  - first:
+      213: 1713390118172170641
+    second: Co-Worker_21
+  - first:
+      213: -7859819722389839231
+    second: Co-Worker_22
+  - first:
+      213: 7972474416072981328
+    second: Co-Worker_23
+  - first:
+      213: 8141920852238551189
+    second: Co-Worker_24
+  - first:
+      213: -1896874679036566308
+    second: Co-Worker_25
+  - first:
+      213: -1328323225306673370
+    second: Co-Worker_26
+  - first:
+      213: 5083926246532326549
+    second: Co-Worker_27
+  - first:
+      213: -1418210972957805383
+    second: Co-Worker_28
+  - first:
+      213: 3865234855764804740
+    second: Co-Worker_29
+  - first:
+      213: -2041576802420034805
+    second: Co-Worker_30
+  - first:
+      213: -7527694008109695239
+    second: Co-Worker_31
+  - first:
+      213: -9175288942287621975
+    second: Co-Worker_32
+  - first:
+      213: -4159289155314753342
+    second: Co-Worker_33
+  - first:
+      213: -4720238431925610314
+    second: Co-Worker_34
+  - first:
+      213: -8818163170798465107
+    second: Co-Worker_35
+  - first:
+      213: -4902879402288315743
+    second: Co-Worker_36
+  - first:
+      213: -9084434000124407771
+    second: Co-Worker_37
+  - first:
+      213: 4610173961169064501
+    second: Co-Worker_38
+  - first:
+      213: 4924842231888390531
+    second: Co-Worker_39
+  - first:
+      213: 3870033652477557572
+    second: Co-Worker_40
+  - first:
+      213: -6545777575861503228
+    second: Co-Worker_41
+  - first:
+      213: 3457178062058311263
+    second: Co-Worker_42
+  - first:
+      213: 5157217378702055531
+    second: Co-Worker_43
+  - first:
+      213: 7181744429937588990
+    second: Co-Worker_44
+  - first:
+      213: -7217450800149460904
+    second: Co-Worker_45
+  - first:
+      213: 2326499401655341779
+    second: Co-Worker_46
+  - first:
+      213: -2256806906623712790
+    second: Co-Worker_47
+  - first:
+      213: -4959814675427408421
+    second: Co-Worker_48
+  - first:
+      213: 7621464706786827375
+    second: Co-Worker_49
+  - first:
+      213: 5286329406727200030
+    second: Co-Worker_50
+  - first:
+      213: 8373615794141394926
+    second: Co-Worker_51
+  - first:
+      213: 8674650297739367775
+    second: Co-Worker_52
+  - first:
+      213: 1758059326827690487
+    second: Co-Worker_53
+  - first:
+      213: 6568443612394687455
+    second: Co-Worker_54
+  - first:
+      213: -7130206610633337320
+    second: Co-Worker_55
+  - first:
+      213: 1254927405696070742
+    second: Co-Worker_56
+  - first:
+      213: 4260285354606810117
+    second: Co-Worker_57
+  - first:
+      213: -7941807848098792789
+    second: Co-Worker_58
+  - first:
+      213: -1370759585014621016
+    second: Co-Worker_59
+  - first:
+      213: 7057482833722636332
+    second: Co-Worker_60
+  - first:
+      213: 3884585489933986210
+    second: Co-Worker_61
+  - first:
+      213: 3463347291065014710
+    second: Co-Worker_62
+  - first:
+      213: -966290961899127573
+    second: Co-Worker_63
+  - first:
+      213: 1847641526366483321
+    second: Co-Worker_64
+  - first:
+      213: 1446549971417264546
+    second: Co-Worker_65
+  externalObjects: {}
+  serializedVersion: 13
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+    flipGreenChannel: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMipmapLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 0
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 100
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  swizzle: 50462976
+  cookieLightType: 0
+  platformSettings:
+  - serializedVersion: 4
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 0
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Android
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: iOS
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: Co-Worker_0
+      rect:
+        serializedVersion: 2
+        x: 20
+        y: 359
+        width: 23
+        height: 60
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: f284bb47f1ec79a80800000000000000
+      internalID: -8460066740494448593
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Co-Worker_1
+      rect:
+        serializedVersion: 2
+        x: 20
+        y: 299
+        width: 23
+        height: 60
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 7edc0b8ca2e706840800000000000000
+      internalID: 5215307090715790823
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Co-Worker_2
+      rect:
+        serializedVersion: 2
+        x: 80
+        y: 359
+        width: 23
+        height: 60
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: cbf3f75970857d840800000000000000
+      internalID: 5248760680319762364
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Co-Worker_3
+      rect:
+        serializedVersion: 2
+        x: 80
+        y: 299
+        width: 23
+        height: 60
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: c3858542f4a49c2c0800000000000000
+      internalID: -4410912656260048836
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Co-Worker_4
+      rect:
+        serializedVersion: 2
+        x: 140
+        y: 359
+        width: 24
+        height: 60
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: c7407268d9baa2eb0800000000000000
+      internalID: -4743790564432477060
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Co-Worker_5
+      rect:
+        serializedVersion: 2
+        x: 140
+        y: 299
+        width: 23
+        height: 60
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 3a3a68812f8f49600800000000000000
+      internalID: 474277579457995683
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Co-Worker_6
+      rect:
+        serializedVersion: 2
+        x: 200
+        y: 359
+        width: 26
+        height: 60
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: d1c73bd3b49da7a70800000000000000
+      internalID: 8825605336966855709
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Co-Worker_7
+      rect:
+        serializedVersion: 2
+        x: 200
+        y: 299
+        width: 23
+        height: 60
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 5cc96a927b13315d0800000000000000
+      internalID: -3093073856325837627
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Co-Worker_8
+      rect:
+        serializedVersion: 2
+        x: 260
+        y: 359
+        width: 26
+        height: 60
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 5fa20e85243ad30b0800000000000000
+      internalID: -5747258044100629771
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Co-Worker_9
+      rect:
+        serializedVersion: 2
+        x: 260
+        y: 299
+        width: 23
+        height: 60
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: f0f1c055c0be57b90800000000000000
+      internalID: -7244625987356582129
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Co-Worker_10
+      rect:
+        serializedVersion: 2
+        x: 320
+        y: 359
+        width: 26
+        height: 60
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 79ec769821b504790800000000000000
+      internalID: -7547932840300130665
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Co-Worker_11
+      rect:
+        serializedVersion: 2
+        x: 320
+        y: 299
+        width: 23
+        height: 60
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 25199e7c27e995690800000000000000
+      internalID: -7612879479275679406
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Co-Worker_12
+      rect:
+        serializedVersion: 2
+        x: 380
+        y: 359
+        width: 26
+        height: 60
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 932f646f2dfd6ae60800000000000000
+      internalID: 7973306287474012729
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Co-Worker_13
+      rect:
+        serializedVersion: 2
+        x: 380
+        y: 299
+        width: 23
+        height: 60
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 9ac2b7cb93a978d10800000000000000
+      internalID: 2127838921721851049
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Co-Worker_14
+      rect:
+        serializedVersion: 2
+        x: 440
+        y: 359
+        width: 26
+        height: 60
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: dbcb21930b2ff4cc0800000000000000
+      internalID: -3724491528126415683
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Co-Worker_15
+      rect:
+        serializedVersion: 2
+        x: 440
+        y: 299
+        width: 23
+        height: 60
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: ef4fa98344d8592d0800000000000000
+      internalID: -3272554230067825410
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Co-Worker_16
+      rect:
+        serializedVersion: 2
+        x: 500
+        y: 359
+        width: 26
+        height: 60
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 435043f23dafefa20800000000000000
+      internalID: 3098189378614461748
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Co-Worker_17
+      rect:
+        serializedVersion: 2
+        x: 560
+        y: 359
+        width: 26
+        height: 60
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: f870f03b638156b40800000000000000
+      internalID: 5432775148703778703
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Co-Worker_18
+      rect:
+        serializedVersion: 2
+        x: 620
+        y: 359
+        width: 24
+        height: 60
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: b4c34328b9ced6070800000000000000
+      internalID: 8101391457357937739
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Co-Worker_19
+      rect:
+        serializedVersion: 2
+        x: 680
+        y: 359
+        width: 23
+        height: 60
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 9df7abc55eb54d6d0800000000000000
+      internalID: -2966645213868949543
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Co-Worker_20
+      rect:
+        serializedVersion: 2
+        x: 20
+        y: 239
+        width: 23
+        height: 60
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: d445e15e5aadbd800800000000000000
+      internalID: 638344178251486285
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Co-Worker_21
+      rect:
+        serializedVersion: 2
+        x: 20
+        y: 179
+        width: 23
+        height: 60
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 199115b0c3f27c710800000000000000
+      internalID: 1713390118172170641
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Co-Worker_22
+      rect:
+        serializedVersion: 2
+        x: 80
+        y: 239
+        width: 23
+        height: 60
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 18228580b9f4ce290800000000000000
+      internalID: -7859819722389839231
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Co-Worker_23
+      rect:
+        serializedVersion: 2
+        x: 80
+        y: 179
+        width: 23
+        height: 60
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 05b7beecd3be3ae60800000000000000
+      internalID: 7972474416072981328
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Co-Worker_24
+      rect:
+        serializedVersion: 2
+        x: 140
+        y: 239
+        width: 23
+        height: 60
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 598460b90e9edf070800000000000000
+      internalID: 8141920852238551189
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Co-Worker_25
+      rect:
+        serializedVersion: 2
+        x: 140
+        y: 179
+        width: 23
+        height: 60
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: cd4a79c8782fca5e0800000000000000
+      internalID: -1896874679036566308
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Co-Worker_26
+      rect:
+        serializedVersion: 2
+        x: 200
+        y: 239
+        width: 28
+        height: 60
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 62fc1b87019d09de0800000000000000
+      internalID: -1328323225306673370
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Co-Worker_27
+      rect:
+        serializedVersion: 2
+        x: 200
+        y: 179
+        width: 28
+        height: 60
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 59428d44cfbbd8640800000000000000
+      internalID: 5083926246532326549
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Co-Worker_28
+      rect:
+        serializedVersion: 2
+        x: 260
+        y: 239
+        width: 28
+        height: 60
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 9b4f94452a0815ce0800000000000000
+      internalID: -1418210972957805383
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Co-Worker_29
+      rect:
+        serializedVersion: 2
+        x: 260
+        y: 179
+        width: 28
+        height: 60
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 484c1575f9214a530800000000000000
+      internalID: 3865234855764804740
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Co-Worker_30
+      rect:
+        serializedVersion: 2
+        x: 320
+        y: 239
+        width: 23
+        height: 60
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: b03731607bcdaa3e0800000000000000
+      internalID: -2041576802420034805
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Co-Worker_31
+      rect:
+        serializedVersion: 2
+        x: 320
+        y: 179
+        width: 25
+        height: 60
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 9fef8ccde22488790800000000000000
+      internalID: -7527694008109695239
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Co-Worker_32
+      rect:
+        serializedVersion: 2
+        x: 364
+        y: 239
+        width: 39
+        height: 60
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 9a0706bd153daa080800000000000000
+      internalID: -9175288942287621975
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Co-Worker_33
+      rect:
+        serializedVersion: 2
+        x: 364
+        y: 179
+        width: 39
+        height: 60
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 2c06453dc8c3746c0800000000000000
+      internalID: -4159289155314753342
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Co-Worker_34
+      rect:
+        serializedVersion: 2
+        x: 20
+        y: 59
+        width: 23
+        height: 60
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 6b85de1b7285e7eb0800000000000000
+      internalID: -4720238431925610314
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Co-Worker_35
+      rect:
+        serializedVersion: 2
+        x: 21
+        y: 119
+        width: 23
+        height: 60
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: daf002911579f9580800000000000000
+      internalID: -8818163170798465107
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Co-Worker_36
+      rect:
+        serializedVersion: 2
+        x: 80
+        y: 59
+        width: 23
+        height: 60
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 1a28602092975fbb0800000000000000
+      internalID: -4902879402288315743
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Co-Worker_37
+      rect:
+        serializedVersion: 2
+        x: 81
+        y: 119
+        width: 23
+        height: 60
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 5209a15886b9de180800000000000000
+      internalID: -9084434000124407771
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Co-Worker_38
+      rect:
+        serializedVersion: 2
+        x: 138
+        y: 59
+        width: 26
+        height: 60
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 532dc3cbac0aaff30800000000000000
+      internalID: 4610173961169064501
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Co-Worker_39
+      rect:
+        serializedVersion: 2
+        x: 141
+        y: 119
+        width: 23
+        height: 60
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 389ac8ebaed885440800000000000000
+      internalID: 4924842231888390531
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Co-Worker_40
+      rect:
+        serializedVersion: 2
+        x: 198
+        y: 59
+        width: 28
+        height: 60
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 44b7bb44a1f15b530800000000000000
+      internalID: 3870033652477557572
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Co-Worker_41
+      rect:
+        serializedVersion: 2
+        x: 201
+        y: 119
+        width: 23
+        height: 60
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 40bbe0cc9f9b825a0800000000000000
+      internalID: -6545777575861503228
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Co-Worker_42
+      rect:
+        serializedVersion: 2
+        x: 258
+        y: 59
+        width: 28
+        height: 60
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: f5e424a612d5aff20800000000000000
+      internalID: 3457178062058311263
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Co-Worker_43
+      rect:
+        serializedVersion: 2
+        x: 261
+        y: 119
+        width: 23
+        height: 60
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: b68d10fb1ed129740800000000000000
+      internalID: 5157217378702055531
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Co-Worker_44
+      rect:
+        serializedVersion: 2
+        x: 318
+        y: 59
+        width: 28
+        height: 60
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: efaf11e228eaaa360800000000000000
+      internalID: 7181744429937588990
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Co-Worker_45
+      rect:
+        serializedVersion: 2
+        x: 321
+        y: 119
+        width: 23
+        height: 60
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 8588b39acb676db90800000000000000
+      internalID: -7217450800149460904
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Co-Worker_46
+      rect:
+        serializedVersion: 2
+        x: 378
+        y: 59
+        width: 28
+        height: 60
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 3d253d521e2694020800000000000000
+      internalID: 2326499401655341779
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Co-Worker_47
+      rect:
+        serializedVersion: 2
+        x: 381
+        y: 119
+        width: 23
+        height: 60
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: ae1ab0453163ea0e0800000000000000
+      internalID: -2256806906623712790
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Co-Worker_48
+      rect:
+        serializedVersion: 2
+        x: 438
+        y: 59
+        width: 28
+        height: 60
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: bd54167b4d23b2bb0800000000000000
+      internalID: -4959814675427408421
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Co-Worker_49
+      rect:
+        serializedVersion: 2
+        x: 441
+        y: 119
+        width: 23
+        height: 60
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: f6c943445c1e4c960800000000000000
+      internalID: 7621464706786827375
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Co-Worker_50
+      rect:
+        serializedVersion: 2
+        x: 498
+        y: 59
+        width: 28
+        height: 60
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: e1d1da55690dc5940800000000000000
+      internalID: 5286329406727200030
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Co-Worker_51
+      rect:
+        serializedVersion: 2
+        x: 558
+        y: 59
+        width: 28
+        height: 60
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: ee7f56f033f053470800000000000000
+      internalID: 8373615794141394926
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Co-Worker_52
+      rect:
+        serializedVersion: 2
+        x: 618
+        y: 59
+        width: 28
+        height: 60
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: f55dd7b4c7c826870800000000000000
+      internalID: 8674650297739367775
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Co-Worker_53
+      rect:
+        serializedVersion: 2
+        x: 678
+        y: 59
+        width: 28
+        height: 60
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 7f970a5a4a1e56810800000000000000
+      internalID: 1758059326827690487
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Co-Worker_54
+      rect:
+        serializedVersion: 2
+        x: 20
+        y: 0
+        width: 23
+        height: 59
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: fdb08f31aacc72b50800000000000000
+      internalID: 6568443612394687455
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Co-Worker_55
+      rect:
+        serializedVersion: 2
+        x: 80
+        y: 0
+        width: 23
+        height: 59
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 816de067dda6c0d90800000000000000
+      internalID: -7130206610633337320
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Co-Worker_56
+      rect:
+        serializedVersion: 2
+        x: 138
+        y: 0
+        width: 26
+        height: 59
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 654ba6b93d56a6110800000000000000
+      internalID: 1254927405696070742
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Co-Worker_57
+      rect:
+        serializedVersion: 2
+        x: 198
+        y: 0
+        width: 26
+        height: 59
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 504532345f29f1b30800000000000000
+      internalID: 4260285354606810117
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Co-Worker_58
+      rect:
+        serializedVersion: 2
+        x: 258
+        y: 0
+        width: 25
+        height: 59
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: baa79a3f6d709c190800000000000000
+      internalID: -7941807848098792789
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Co-Worker_59
+      rect:
+        serializedVersion: 2
+        x: 318
+        y: 0
+        width: 25
+        height: 59
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 8acddb68b651afce0800000000000000
+      internalID: -1370759585014621016
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Co-Worker_60
+      rect:
+        serializedVersion: 2
+        x: 378
+        y: 0
+        width: 25
+        height: 59
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: c287470ce3731f160800000000000000
+      internalID: 7057482833722636332
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Co-Worker_61
+      rect:
+        serializedVersion: 2
+        x: 438
+        y: 0
+        width: 25
+        height: 59
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 2a9e623fbe1d8e530800000000000000
+      internalID: 3884585489933986210
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Co-Worker_62
+      rect:
+        serializedVersion: 2
+        x: 498
+        y: 0
+        width: 25
+        height: 59
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 6b9ddb9f208401030800000000000000
+      internalID: 3463347291065014710
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Co-Worker_63
+      rect:
+        serializedVersion: 2
+        x: 558
+        y: 0
+        width: 26
+        height: 59
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: becf4526d7b0792f0800000000000000
+      internalID: -966290961899127573
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Co-Worker_64
+      rect:
+        serializedVersion: 2
+        x: 618
+        y: 0
+        width: 26
+        height: 59
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 973b553dd2424a910800000000000000
+      internalID: 1847641526366483321
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Co-Worker_65
+      rect:
+        serializedVersion: 2
+        x: 678
+        y: 0
+        width: 25
+        height: 59
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 2a17d2ce88d231410800000000000000
+      internalID: 1446549971417264546
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    customData: 
+    physicsShape: []
+    bones: []
+    spriteID: 
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    spriteCustomMetadata:
+      entries: []
+    nameFileIdTable:
+      Co-Worker_0: -8460066740494448593
+      Co-Worker_1: 5215307090715790823
+      Co-Worker_10: -7547932840300130665
+      Co-Worker_11: -7612879479275679406
+      Co-Worker_12: 7973306287474012729
+      Co-Worker_13: 2127838921721851049
+      Co-Worker_14: -3724491528126415683
+      Co-Worker_15: -3272554230067825410
+      Co-Worker_16: 3098189378614461748
+      Co-Worker_17: 5432775148703778703
+      Co-Worker_18: 8101391457357937739
+      Co-Worker_19: -2966645213868949543
+      Co-Worker_2: 5248760680319762364
+      Co-Worker_20: 638344178251486285
+      Co-Worker_21: 1713390118172170641
+      Co-Worker_22: -7859819722389839231
+      Co-Worker_23: 7972474416072981328
+      Co-Worker_24: 8141920852238551189
+      Co-Worker_25: -1896874679036566308
+      Co-Worker_26: -1328323225306673370
+      Co-Worker_27: 5083926246532326549
+      Co-Worker_28: -1418210972957805383
+      Co-Worker_29: 3865234855764804740
+      Co-Worker_3: -4410912656260048836
+      Co-Worker_30: -2041576802420034805
+      Co-Worker_31: -7527694008109695239
+      Co-Worker_32: -9175288942287621975
+      Co-Worker_33: -4159289155314753342
+      Co-Worker_34: -4720238431925610314
+      Co-Worker_35: -8818163170798465107
+      Co-Worker_36: -4902879402288315743
+      Co-Worker_37: -9084434000124407771
+      Co-Worker_38: 4610173961169064501
+      Co-Worker_39: 4924842231888390531
+      Co-Worker_4: -4743790564432477060
+      Co-Worker_40: 3870033652477557572
+      Co-Worker_41: -6545777575861503228
+      Co-Worker_42: 3457178062058311263
+      Co-Worker_43: 5157217378702055531
+      Co-Worker_44: 7181744429937588990
+      Co-Worker_45: -7217450800149460904
+      Co-Worker_46: 2326499401655341779
+      Co-Worker_47: -2256806906623712790
+      Co-Worker_48: -4959814675427408421
+      Co-Worker_49: 7621464706786827375
+      Co-Worker_5: 474277579457995683
+      Co-Worker_50: 5286329406727200030
+      Co-Worker_51: 8373615794141394926
+      Co-Worker_52: 8674650297739367775
+      Co-Worker_53: 1758059326827690487
+      Co-Worker_54: 6568443612394687455
+      Co-Worker_55: -7130206610633337320
+      Co-Worker_56: 1254927405696070742
+      Co-Worker_57: 4260285354606810117
+      Co-Worker_58: -7941807848098792789
+      Co-Worker_59: -1370759585014621016
+      Co-Worker_6: 8825605336966855709
+      Co-Worker_60: 7057482833722636332
+      Co-Worker_61: 3884585489933986210
+      Co-Worker_62: 3463347291065014710
+      Co-Worker_63: -966290961899127573
+      Co-Worker_64: 1847641526366483321
+      Co-Worker_65: 1446549971417264546
+      Co-Worker_7: -3093073856325837627
+      Co-Worker_8: -5747258044100629771
+      Co-Worker_9: -7244625987356582129
+  mipmapLimitGroupName: 
+  pSDRemoveMatte: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
